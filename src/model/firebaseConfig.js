@@ -11,7 +11,22 @@ var firebaseConfig = {
     appId: "1:418211670011:web:38f96f43a16020a416cd5e",
     measurementId: "G-TXX9Q3017X"
   };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  export default db;
+    let firebaseInitApp;
+
+    // Initialize Firebase
+    if (!firebase.apps.length) firebaseInitApp = firebase.initializeApp(firebaseConfig);
+    // if already initialized, use that one
+    else firebaseInitApp = firebase.app();
+
+
+    // Auth factor
+    export const firebaseAppAuth = firebaseInitApp.auth();
+    export const providers = {
+        googleProvider: new firebase.auth.GoogleAuthProvider(),
+    };
+
+    // DB firestorage
+    export const db = firebase.firestore();
+
+    export default firebaseConfig;
+
