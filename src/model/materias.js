@@ -1,37 +1,43 @@
-import db from "./firebaseConfig"
+import {db} from "./firebaseConfig"
 
 class Materias{
-    constructor(id_materia, Nombre){
-        this.id_materia = id_materia
-
-    }
-
-     /**
+    static _DBdisplayCollection = db.collection("MATERIAS_DISPLAY")
+    static _DBsearchCollection = db.collection("MATERIAS_SEARCH")
+    
+    /**
      * Crea la materia en la coleccion Materias_Search
      * @param  {String} id_materia id de la materia que se va a crear
      * @param  {String} nombre nombre de la materia que se va a crear    
      */
-    #createMateriaSearch(id_materia){
+    static _createMateriaSearch(id_materia, nombre){                        
+        this._DBsearchCollection.add({
+            id_materia: id_materia,
+            nombre: nombre
+        }).catch(function(err){
+            console.log(`error with createMateriaSearch: ${err}`)
+        })
+    }
+    
+     /**
+     * Crea la materia en la coleccion Materias_Display y ry en la coleccion Materias_Search
+     * @param  {String} nombre Nombre de la materia que se va a crear    
+     */
+    static CreateMateria = (nombre)=>{        
+        this._DBdisplayCollection.add({
+            nombre: nombre,
+            categorias: {},
+            profesores: {},
+            semestres:{}
+        }).then(function(docRef){            
+            Materias._createMateriaSearch(docRef.id, nombre)            
+        }).catch(function(err){
+            console.log(`error with createMateriaDisplay: ${err}`)
+        })        
+    }
+    
+    
 
-    }
     
-    /**
-     * Crea la materia en la coleccion Materias_Display y retorna el ID de esta
-     * @param  {String} nombre Nombre de la materia que se va a crear
-     * @return {String}      id de la materia que se acaba de crear
-     */
-    #createMateriaDisplay(){
-        
-    }
-    
-    /**
-     * Crea una materia nueva en la base de datos a partir del nombre de esta 
-     * @param  {String} nombre nombre de la materia a añadir    
-     */
-    static CreateMateria(nombre){
-        //creamos una materia en display 
-        id_materia = this.#createMateriaDisplay(nombre)
-        //creamos materia en search con ese mismo id
-        this.#createMateriaSearch(id_materia)        
-    }
 }
+
+export default Materias
