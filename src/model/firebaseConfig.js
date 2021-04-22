@@ -1,3 +1,6 @@
+import firebase from "firebase/app"
+import "firebase/firestore"
+
 var firebaseConfig = {
     apiKey: "AIzaSyD8TsjByeLBm65H3RyrJ11gyiucmceI0YE",
     authDomain: "red-board-70d99.firebaseapp.com",
@@ -9,5 +12,6 @@ var firebaseConfig = {
     measurementId: "G-TXX9Q3017X"
   };
   // Initialize Firebase
-  const db = firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
   export default db;
