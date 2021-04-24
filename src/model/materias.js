@@ -1,5 +1,5 @@
 import {db} from "./firebaseConfig"
-
+import FullTextSearch from "../Controler/FullTextSearch"
 class Materias{
     static _DBdisplayCollection = db.collection("MATERIAS_DISPLAY")
     static _DBsearchMateriasCallection = db.collection("MATERIAS_SEARCH").doc("UNIVERSIDAD_NACIONAL")    
@@ -38,14 +38,18 @@ class Materias{
     
     
     /**
-     * Retorna todas las materias disponibles
+     * Retorna todas las materias disponibles junto con su ID
      * @return {Promise(Obj)}   promesa con un map con todas las materias dispoibles en forma id:materia
      */
     static async getMateriasList(){        
         return (await this._DBsearchMateriasCallection.get()).data().Materias                        
     }
 
-    
+    static async initSearcher(){
+        this.getMateriasList().then((data)=>{            
+            return new FullTextSearch(data)
+        })
+    }
 }
 
 export default Materias

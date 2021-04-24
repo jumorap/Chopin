@@ -18,7 +18,10 @@ function App() {
   
 
   let materiasSearch = new FullTextSearch(data)
-  console.log(materiasSearch.queryData("i"))
+  console.log(materiasSearch.queryData("soft"))
+  //let materiasSearch = Materias.initSearcher()
+  
+  //console.log(materiasSearch.queryData("i"))
 
   return (
     <div className="App">
