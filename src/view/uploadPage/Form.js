@@ -5,56 +5,37 @@ const Form = () => {
   const [selectedTipo, setSelectedTipo] = useState(undefined);
   const [selectedSemestre, setSelectedSemestre] = useState(undefined);
   let select = (src) => src.target.innerHTML;
-  /* SEMESTRES */
-  /*<div className="semestres">
-<div className="semestresRectangle"></div>
-<h2 id="flush-headingThree">
-  <div
-    className="collapsed"
-    data-bs-toggle="collapse"
-    data-bs-target="#flush-collapseThree"
-    aria-expanded="false"
-    aria-controls="flush-collapseThree"
-  >
-    {selectedSemestre || "SEMESTRES"}
-  </div>
-</h2>
-<div
-  id="flush-collapseThree"
-  className="accordion-collapse collapse"
-  aria-labelledby="flush-headingThree"
-  data-bs-parent="#accordionFlushExample"
->
-  <div>{renderSemestres}</div>
-</div>
-</div>*/
   return (
-    <div className="form">
+    <div className="form col-4 col-md-12 border">
       <DropDown
-        selectedTipo={selectedTipo}
+        selected={selectedTipo}
         title="TIPO"
-        setSelectedTipo={setSelectedTipo}
-        arr={[1, 2, 3, 4, 5]}
+        setSelected={setSelectedTipo}
+        arr={["Parcial", "Notas de clase", "Taller"]}
         select={select}
       />
       <DropDown
-        selectedSemestre={selectedSemestre}
-        setSelectedSemestre={setSelectedSemestre}
+        selected={selectedSemestre}
+        setSelected={setSelectedSemestre}
         title="SEMESTRE"
         arr={[1, 2, 3, 4, 5]}
         select={select}
       />
-      <div className="profesor">
-        <div className="profRectangle"></div>
-        <input type="text" className="profText" Value="Nombre del profesor" />
+      <div className="block">
+        <input
+          type="text"
+          className="blockText ul"
+          Value="Nombre del profesor"
+        />
       </div>
-      <div className="materia">
-        <div className="materiaRectangle"></div>
-        <input type="text" className="materiaText" Value="Materia" />
+      <div className="block">
+        <input type="text" className="blockText ul" Value="Materia" />
       </div>
-      <div className="recomendaciones">
-        <div className="recomendacionesRectangle"></div>
-        <h1 className="recomendacionesText">Recomendaciones</h1>
+      <div className="block">
+        <h1 className="blockText">Recomendaciones</h1>
+      </div>
+      <div className="block subir">
+        <h1 className="blockText">Subir</h1>
       </div>
     </div>
   );
