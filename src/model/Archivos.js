@@ -33,8 +33,8 @@ class Archivos{
             semestre:semestre,
             categorias:categorias,
             id_usuario:id_usuario
-        }).then((docRef)=>{
-            Archivos._uploadImg(id_materia, docRef.id, file)
+        }).then(( docRef)=>{
+            Archivos._uploadFile(id_materia, docRef.id, file)
         }).catch((err)=>{
             console.log(`error in crear archivo: ${err}`)
         })
