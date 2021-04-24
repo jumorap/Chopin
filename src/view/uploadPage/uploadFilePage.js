@@ -1,17 +1,20 @@
-import React from "react";
-import Navbar from "navbar";
+import Navbar from "./Navbar";
 import Dnd from "./Dnd";
 import Form from "./Form";
+import React, { Component } from "react";
 
-const uploadFilePage = () => {
-  return (
-    <>
-      <Navbar />
-      <h1>Nombre de la materia</h1>
-      <Dnd />
-      <Form />
-    </>
-  );
-};
-
-export default uploadFilePage;
+export default class uploadFilePage extends Component {
+  render() {
+    return (
+      <div className="container-fluid">
+        <h1>UploadPage component</h1>
+        {/* <Navbar />
+        <h1>Nombre de la materia</h1>
+        <div className="row">
+          <Form />
+          <Dnd />
+        </div> */}
+      </div>
+    );
+  }
+}
