@@ -9,9 +9,7 @@ import {
     Link
 } from "react-router-dom";
 
-
 function App() {
-
 
     testSomething(); //In this function you test your new features
 
@@ -29,7 +27,6 @@ function App() {
                     <UploadFileView/>
                 </Route>
             </Switch>
-
         </Router>
     );
 }
