@@ -1,5 +1,6 @@
 import {db, storage} from "./firebaseConfig"
 
+
 class Archivos{
     static _DBdisplayCollection = db.collection("MATERIAS_DISPLAY")
     static _storageRef = storage.ref()
@@ -38,10 +39,39 @@ class Archivos{
         }).catch((err)=>{
             console.log(`error in crear archivo: ${err}`)
         })
+    }
 
-
+    //Recibe el nombre exacto de una materia y retorna su id
+    // (Solo el primer resultado del querySnapshot).
+    static getIdMateria(nombre){
+        const docRef = this._DBdisplayCollection.where("nombre","==",nombre).get()
+            .then(querySnapshot =>{
+                if(!querySnapshot.empty)console.log(querySnapshot.docs[0].id);
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
 
     }
+
+
+
+    //Función provisional para probar el subir archivo
+    static crearArchivo(nombreMateria, nombreProfesor, descripcion, semestre, file){
+        const idMateria = this.getIdMateria(nombreMateria);
+        this._DBdisplayCollection.doc(idMateria).collection("ARCHIVOS").add({
+            descripcion:descripcion,
+            profesor:nombreProfesor,
+            semestre:semestre
+        }).then(( docRef)=>{
+            Archivos._uploadFile(idMateria, docRef.id, file)
+        }).catch((err)=>{
+            console.log(`error in crear archivo: ${err}`)
+        })
+    }
+
+
+
 }
 
 export default Archivos

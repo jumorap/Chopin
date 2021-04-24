@@ -2,6 +2,9 @@ import FullTextSearch from "../Controler/FullTextSearch";
 
 //use the testSomething function for testing new functionalities.
 
+
+
+
 export default  function testSomething() {
     console.log("Inicio")
     //Materias.CreateMateria("Ingesoft")
@@ -17,5 +20,5 @@ export default  function testSomething() {
 
 
     let materiasSearch = new FullTextSearch(data)
-    console.log(materiasSearch.queryData("i"))
+    console.log(materiasSearch.queryData("Pepita"))
 }
