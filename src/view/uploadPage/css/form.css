@@ -1,0 +1,233 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 600px;
+  height: 860px;
+  left: 67px;
+  top: 213px;
+}
+
+.tipos {
+  position: static;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 86.05%;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 28px 0px;
+}
+
+.tipos > .tiposRectangle {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 86.05%;
+
+  background: #404b57;
+  border-radius: 30px;
+}
+
+.tipos > h2 {
+  position: absolute;
+  left: 24.5%;
+  right: 24.67%;
+  top: 4.3%;
+  bottom: 89.98%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.semestres {
+  position: static;
+  left: 0%;
+  right: 0%;
+  top: 17.21%;
+  bottom: 68.84%;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 28px 0px;
+}
+
+.semestres > .semestresRectangle {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 17.21%;
+  bottom: 68.84%;
+
+  background: #404b57;
+  border-radius: 30px;
+}
+
+.semestres > h2 {
+  position: absolute;
+  left: 12.33%;
+  right: 12.33%;
+  top: 21.86%;
+  bottom: 73.37%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.profesor {
+  /* Profesor */
+
+  position: static;
+  left: 0%;
+  right: 0%;
+  top: 34.42%;
+  bottom: 51.63%;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 28px 0px;
+}
+
+.profesor > .profRectangle {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 34.42%;
+  bottom: 51.63%;
+
+  background: #404b57;
+  border-radius: 30px;
+}
+
+.profesor > .profText {
+  outline: none;
+  background-color: inherit;
+  border: none;
+  position: absolute;
+  top: 39.07%;
+  bottom: 56.16%;
+  width: 100%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.materia {
+  position: static;
+  left: 0%;
+  right: 0%;
+  top: 51.63%;
+  bottom: 34.42%;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  margin: 28px 0px;
+}
+
+.materiaRectangle {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 51.63%;
+  bottom: 34.42%;
+
+  background: #404b57;
+  border-radius: 30px;
+}
+
+.materiaText {
+  outline: none;
+  background-color: inherit;
+  border: none;
+  width: 100%;
+  position: absolute;
+  top: 56.28%;
+  bottom: 38.95%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.recomendaciones {
+  position: static;
+  left: 0%;
+  right: 0%;
+  top: 68.84%;
+  bottom: 17.21%;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 4;
+  flex-grow: 0;
+  margin: 28px 0px;
+}
+
+.recomendacionesRectangle {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 68.84%;
+  bottom: 17.21%;
+
+  background: #404b57;
+  border-radius: 30px;
+}
+
+.recomendacionesText {
+  position: absolute;
+  left: 20.83%;
+  right: 21%;
+  top: 73.14%;
+  bottom: 21.51%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+
+  color: #ffffff;
+}

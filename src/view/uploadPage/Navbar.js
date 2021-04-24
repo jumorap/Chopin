@@ -2,8 +2,8 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="row">
-      <div className="col-12">Navbar component</div>
+    <div className="navigation border">
+      <div className="">Navbar component</div>
     </div>
   );
 };
