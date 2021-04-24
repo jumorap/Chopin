@@ -1,0 +1,12 @@
+.contain{
+    position: absolute;
+    width: 1808px;
+    height: 80px;
+    left: 67px;
+    top: 25px;
+    background-color: #15202B;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
