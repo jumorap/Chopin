@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const DropDown = ({ selected, setSelected, arr, select, title, type }) => {
   const handleClick = (ev) => {
@@ -11,7 +11,6 @@ const DropDown = ({ selected, setSelected, arr, select, title, type }) => {
       className="blockElement"
       data-bs-toggle="collapse"
       data-bs-target={`#flush-${type === "list" ? title : ""}`}
-      aria-expanded="false"
       aria-controls={`flush-${type === "list" ? title : ""}`}
       onClick={(ev) => handleClick(ev)}
     >
@@ -26,7 +25,6 @@ const DropDown = ({ selected, setSelected, arr, select, title, type }) => {
         className="collapsed blockText"
         data-bs-toggle="collapse"
         data-bs-target={`#flush-${title}`}
-        aria-expanded="false"
         aria-controls={`flush-${title}`}
       >
         {type === "list" ? selected || title : title}

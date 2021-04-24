@@ -1,6 +1,21 @@
 .uploadDocument {
-  position: relative;
-  width: 1920px;
-  height: 1300px;
+  align-items: center;
   background: #15202b;
+}
+
+.nombreMateria {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 991px) {
+  .nombreMateria {
+    font-size: 24px;
+    line-height: 31px;
+  }
 }

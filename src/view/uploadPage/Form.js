@@ -35,7 +35,7 @@ const Form = () => {
   };
   let select = (src) => src.target.innerHTML;
   return (
-    <div className="form col-12 m-0 col-md-4">
+    <div className="form col-10 col-offset-1 m-0 col-lg-4 col-lg-offset-0">
       {/* TIPO */}
       <DropDown
         selected={selectedTipo}
@@ -82,7 +82,6 @@ const Form = () => {
             rows="10"
             style={{
               background: "inherit",
-              border: "none",
               color: "#fff",
               width: "100%",
               border: "1px solid #fff",
@@ -98,6 +97,7 @@ const Form = () => {
       <button className="block subir">
         <img
           className="blockText"
+          alt="upload icon"
           src={subir}
           style={{ width: "100px", height: "65px" }}
           onClick={handleSubmit}
