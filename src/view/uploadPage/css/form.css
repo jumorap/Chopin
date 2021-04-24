@@ -5,8 +5,8 @@
   padding: 0px;
 
   position: absolute;
-  width: 600px;
-  height: 860px;
+  width: inherit;
+  height: auto;
   left: 67px;
   top: 213px;
 }
@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  width: 100%;
   background: #404b57;
   border-radius: 30px;
   margin-bottom: 25px;
@@ -27,6 +27,7 @@
 
 .subir {
   background: #5c1a1a;
+  border: none;
 }
 
 .block > .blockText {

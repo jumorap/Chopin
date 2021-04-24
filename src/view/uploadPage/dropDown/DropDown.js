@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 
-const DropDown = ({ selected, setSelected, arr, select, title }) => {
+const DropDown = ({ selected, setSelected, arr, select, title, type }) => {
+  const handleClick = (ev) => {
+    if (type === "list") setSelected(select(ev));
+  };
+
   let render = arr.map((el, index) => (
     <div
       key={index}
       className="blockElement"
-      onClick={(ev) => setSelected(select(ev))}
+      data-bs-toggle="collapse"
+      data-bs-target={`#flush-${type === "list" ? title : ""}`}
+      aria-expanded="false"
+      aria-controls={`flush-${type === "list" ? title : ""}`}
+      onClick={(ev) => handleClick(ev)}
     >
       {el}
     </div>
@@ -21,7 +29,7 @@ const DropDown = ({ selected, setSelected, arr, select, title }) => {
         aria-expanded="false"
         aria-controls={`flush-${title}`}
       >
-        {selected || title}
+        {type === "list" ? selected || title : title}
       </h2>
       <div
         id={`flush-${title}`}

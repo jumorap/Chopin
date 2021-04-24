@@ -9,7 +9,7 @@ const UploadFilePage = () => {
     <div className="uploadDocument">
       <Navbar />
       <span className="nombreMateria">Nombre de la materia</span>
-      <div className="row">
+      <div className="row m-0">
         <Form />
         <Dnd />
       </div>
