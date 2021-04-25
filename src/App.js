@@ -1,13 +1,13 @@
 import './App.css';
 import Login from "./view/login";
-import {testReadMaterias} from "./testing/testSomething";
 import UploadFileView from "./view/updloadFileView";
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
+import Testing from "./view/testingView";
+
 
 function App() {
         
@@ -24,6 +24,9 @@ function App() {
                 </Route>
                 <Route path="/uploadFile">
                     <UploadFileView/>
+                </Route>
+                <Route path="/testing">
+                    <Testing/>
                 </Route>
             </Switch>
         </Router>

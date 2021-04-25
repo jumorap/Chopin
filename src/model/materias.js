@@ -58,6 +58,21 @@ class Materias{
             return new FullTextSearch(data)
         })
     }
+
+
+    //Recibe el nombre exacto de una materia y retorna su id
+    // (Solo el primer resultado del querySnapshot).
+    static getIdMateria(nombre){
+        const docRef = this._DBmateriasDisplay.where("nombre","==",nombre).get()
+            .then(querySnapshot =>{
+                if(!querySnapshot.empty)console.log(querySnapshot.docs[0].id);
+                else throw new Error("warning,not subject found");
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+    }
+
 }
 
 export default Materias
