@@ -1,4 +1,5 @@
 import {db, storage} from "./firebaseConfig"
+import Materias from "./materias";
 
 
 class Archivos{
@@ -15,7 +16,7 @@ class Archivos{
         const fileRef = this._storageRef.child(`/Materias/${id_materia}/${id_archivo}`);
         fileRef.put(file).then((snpaShot)=>{
             console.log("file added succesfully")
-        })
+        }).catch("Error uploading file")
     }
 
     /**
@@ -41,23 +42,12 @@ class Archivos{
         })
     }
 
-    //Recibe el nombre exacto de una materia y retorna su id
-    // (Solo el primer resultado del querySnapshot).
-    static getIdMateria(nombre){
-        const docRef = this._DBmateriasDisplay.where("nombre","==",nombre).get()
-            .then(querySnapshot =>{
-                if(!querySnapshot.empty)console.log(querySnapshot.docs[0].id);
-            })
-            .catch(function(error) {
-                console.log("Error getting documents: ", error);
-            });
-    }
-
 
 
     //Función provisional para probar el subir archivo
     static crearArchivo(nombreMateria, nombreProfesor, tipoDocumento, semestre, comentarios, file){
-        const idMateria = "qMCzWfu5b33NEcfxRnpk"
+        const idMateria = Materias.getIdMateria(nombreMateria);
+        if(!idMateria)return
         this._DBmateriasDisplay.doc(idMateria).collection("ARCHIVOS").add({
             tipo:tipoDocumento,
             profesor:nombreProfesor,
