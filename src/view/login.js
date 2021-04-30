@@ -1,12 +1,12 @@
 import 'firebase/auth';
 import withFirebaseAuth from "react-with-firebase-auth";
-import {firebaseAppAuth, providers} from "../model/firebaseConfig";
+import {firebaseAppAuth, providers} from "../Model/firebaseConfig";
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
-import '../css/login.css';
-import principalNameLogo from '../assets/principal-slogan-logo.png';
+import "./css/login.css";
+import principalNameLogo from "./assets/principal-slogan-logo.png";
 
 var isUnalUser;
 

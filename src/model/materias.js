@@ -1,5 +1,4 @@
 import {db} from "./firebaseConfig"
-import FullTextSearch from "../Controler/FullTextSearch"
 class Materias{    
     static _DBmateriasDisplay = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS").collection("DISPLAY")
     static _DBmateriasSeach = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS")
@@ -9,10 +8,14 @@ class Materias{
      * @param  {String} id_materia id de la materia que se va a crear
      * @param  {String} nombre nombre de la materia que se va a crear    
      */    
-    static _createMateriaList(id_materia, nombre){                        
+    static _createMateriaList(id_materia, nombre){                                    
         this._DBmateriasSeach.update({
-            id_materia:[`Materias.${nombre}`]
-        }).catch(function(err){
+            [`${id_materia}`]:nombre,            
+        })        
+        .then(
+            console.log(`materia created correctly at materias search`)
+        )
+        .catch(function(err){
             console.log(`error with createMateriaSearch: ${err}`)
         })
     }
@@ -23,20 +26,22 @@ class Materias{
      * Crea la materia en la Base de datos colleccion Universidad/Materias/Display
      * @param  {String} nombre Nombre de la materia que se va a crear    
      */
-    static CreateMateria = (nombre)=>{            
+    static CreateMaterias = (nombre)=>{         
         this._DBmateriasDisplay.add({
             nombre: nombre,
             tipos: {},
             profesores: {},
-            semestres: {}
-        }).then(function (docRef) {            
-            Materias._createMateriaList(docRef.id, nombre)
+            semestres: {},
+            trabajos:{}
+        }).then(function (docRef) {                    
+            console.log(`correctly created ${docRef.id} in Db Dysplay`)    
+            Materias._createMateriaList(docRef.id, nombre)            
         }).catch(function (err) {
             console.log(`error with CreateMateria: ${err}`)
-        })
+        })        
     }
     
-    
+
     /**
      * Retorna todas las materias disponibles junto con su ID
      * @return {Promise(Map)}   promesa con un map con todas las materias dispoibles en forma id:materia
@@ -45,19 +50,7 @@ class Materias{
         return (await this._DBmateriasSeach.get()).data()                        
     }
 
-        /**
-     * Dado un Id, Retorna la materias correspindiete
-     * @return {Promise(Obj)}   promesa con un objeto con los datos nombre,tipos, profesores, semestres
-     */
-    static async getMateriaById(ID_materia){
-        return (await this._DBmateriasDisplay.doc(ID_materia).get()).data()
-    }
-    
-    static async initSearcher(){
-        this.getMateriasList().then((data)=>{            
-            return new FullTextSearch(data)
-        })
-    }
+
 }
 
 export default Materias

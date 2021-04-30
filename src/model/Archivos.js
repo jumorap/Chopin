@@ -1,10 +1,11 @@
 import {db, storage} from "./firebaseConfig"
+import Materias from "./Materias";
 
 
-class Archivos{
-    static _DBdisplayCollection = db.collection("MATERIAS_DISPLAY")
+class Archivos{    
     static _storageRef = storage.ref().child("/UNIVERSIDAD_NACIONAL")
     static _DBmateriasDisplay = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS").collection("DISPLAY")
+
     /**
      * Sube el archivo a la base de datos en el storage con el ID que se creo en el firestore
      * @param  {String} id_materia ID de la materia a la cual pertenece el archivo
@@ -16,6 +17,26 @@ class Archivos{
         fileRef.put(file).then((snpaShot)=>{
             console.log("file added succesfully")
         })
+    }
+
+    
+     /**
+     * Sube el archivo a el map trabajos de la coleccion materias display
+     * @param  {String} id_materia ID de la materia a la cual pertenece el archivo
+     * @param  {String} id_archivo ID del archivo que se acaba de subir
+     * @param  {map} valores mapa con los valores que se desea conservar del archivo para ser mostrados
+     */
+    static _updateMateriasTrabajos(id_materia, id_archivo, nombreProfesor, tipoDocumento, semestre, comentarios){
+        this._DBmateriasDisplay.doc(id_materia).update({
+            [`trabajos.${id_archivo}`]:{
+                profesor: nombreProfesor,
+                tipo: tipoDocumento,
+                semestre:semestre, 
+                comentarios:comentarios
+            }            
+        })
+        .then(()=>{console.log("Documento actualizado con exito")})
+        .catch((err)=>{console.log(`error en la actualizacion de archivo ${err}`)})
     }
 
     /**
@@ -41,19 +62,7 @@ class Archivos{
         })
     }
 
-    //Recibe el nombre exacto de una materia y retorna su id
-    // (Solo el primer resultado del querySnapshot).
-    static getIdMateria(nombre){
-        const docRef = this._DBmateriasDisplay.where("nombre","==",nombre).get()
-            .then(querySnapshot =>{
-                if(!querySnapshot.empty)console.log(querySnapshot.docs[0].id);
-            })
-            .catch(function(error) {
-                console.log("Error getting documents: ", error);
-            });
-    }
-
-
+    
 
     //Función provisional para probar el subir archivo
     static crearArchivo(nombreMateria, nombreProfesor, tipoDocumento, semestre, comentarios, file){
@@ -65,6 +74,7 @@ class Archivos{
             comentarios:comentarios
         }).then(( docRef)=>{
             Archivos._uploadFile(idMateria, docRef.id, file)
+            Archivos._updateMateriasTrabajos(idMateria, docRef.id, nombreProfesor, tipoDocumento, semestre, comentarios)
         }).catch((err)=>{
             console.log(`error in crear archivo: ${err}`)
         })

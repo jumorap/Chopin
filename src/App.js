@@ -1,6 +1,6 @@
 import './App.css';
-import Login from "./view/login";
-import {testReadMaterias} from "./testing/testSomething";
+import Login from "./view/Login";
+
 import UploadFileView from "./view/updloadFileView";
 import {
     BrowserRouter as Router,
@@ -8,10 +8,11 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import { useEffect } from 'react';
+import Admin from './view/Admin';
 
 function App() {
-        
-
+            
     return (
         <Router>
             <Switch>
@@ -24,6 +25,9 @@ function App() {
                 </Route>
                 <Route path="/uploadFile">
                     <UploadFileView/>
+                </Route>
+                <Route path="/Admin">
+                    <Admin/>
                 </Route>
             </Switch>
         </Router>

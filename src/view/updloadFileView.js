@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Archivos from "../model/Archivos";
-import Materias from '../model/Materias';
+import Archivos from "../Model/Archivos";
+
 
 class UploadFileView extends Component {
 
