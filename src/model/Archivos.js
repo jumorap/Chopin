@@ -1,5 +1,4 @@
-import {db, storage} from "./firebaseConfig"
-import Materias from "./Materias";
+import {db, storage} from "./Firebase/firebaseConfig"
 
 
 class Archivos{    

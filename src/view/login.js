@@ -1,6 +1,6 @@
 import 'firebase/auth';
 import withFirebaseAuth from "react-with-firebase-auth";
-import {firebaseAppAuth, providers} from "../Model/firebaseConfig";
+import {firebaseAppAuth, providers} from "../Model/Firebase/firebaseConfig";
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -1,14 +1,6 @@
 import './App.css';
 import Login from "./view/Login";
-
-import UploadFileView from "./view/updloadFileView";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-import { useEffect } from 'react';
+import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import Admin from './view/Admin';
 
 function App() {
@@ -22,10 +14,7 @@ function App() {
                             <Login/>
                         </header>
                     </div>
-                </Route>
-                <Route path="/uploadFile">
-                    <UploadFileView/>
-                </Route>
+                </Route>                
                 <Route path="/Admin">
                     <Admin/>
                 </Route>

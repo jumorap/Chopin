@@ -3,10 +3,10 @@ import elasticlunr from "elasticlunr"
 class FullTextSearch{
     /**
      * Crea un objeto para realizar la busqueda de texto en este
-     * @param  {Map} Map mapa que contiene los datos en la forma ID:data    
+     * @param  {Obj} data Objeto que contiene los datos en la forma ID:data    
      */
-    constructor(map){
-        this.data = map
+    constructor(data){
+        this.data = data
         this.index = elasticlunr();
         this._createReverseIndex(this.data)  
         elasticlunr.clearStopWords();      
@@ -14,12 +14,12 @@ class FullTextSearch{
 
     /**
      * Crea los indices para la busqueda de texto completa con la libreria elasticlunr
-     * @param  {Map} map objeto que contiene los datos en la forma ID:data    
+     * @param  {Obj} data objeto que contiene los datos en la forma ID:data    
      */
-    _createReverseIndex(map){        
+    _createReverseIndex(data){        
         this.index.addField("data")
         this.index.setRef("id")
-        for(let [key, value] of map){
+        for(let [key, value] of Object.entries(data)){
             this.index.addDoc({id:key, data: value})
         }                
     }
@@ -36,7 +36,7 @@ class FullTextSearch{
         })
         let results = []
         serch_results.forEach((obj)=>{
-            results.push({id: obj.ref, data: this.data.get(obj.ref)})
+            results.push({id: obj.ref, data: this.data[obj.ref]})
         })
         return results
     }
