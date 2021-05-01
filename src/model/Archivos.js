@@ -14,9 +14,11 @@ class Archivos{
      */
     static _uploadFile(id_materia, id_archivo, file){
         const fileRef = this._storageRef.child(`/Materias/${id_materia}/${id_archivo}`);
-        fileRef.put(file).then((snpaShot)=>{
+        fileRef.put(file)
+        .then((snpaShot)=>{
             console.log("file added succesfully")
         })
+        .catch(err=>"error ading the file "+ err)
     }
 
     
@@ -32,11 +34,28 @@ class Archivos{
                 profesor: nombreProfesor,
                 tipo: tipoDocumento,
                 semestre:semestre, 
-                comentarios:comentarios
+                comentarios:comentarios,
+                ID_archivo: id_archivo
             }            
         })
         .then(()=>{console.log("Documento actualizado con exito")})
         .catch((err)=>{console.log(`error en la actualizacion de archivo ${err}`)})
+    }
+
+    
+         /**
+     * crea un registro en la materia con id_materia, con el parametro (profesor, semestre, categoria) 
+     * @param  {String} id_materia ID de la materia a la cual pertenece el archivo
+     * @param  {String} id_archivo ID del archivo que se acaba de subir
+     * @param  {String} nombreFiltro nombre de la categoria del filtro que se le va a añadir el registro ("profesores, categorias, semestre")
+     * @param  {String} valorFiltro filtro que se le va a añadir ej ("NombreProfesor(Korgi), Semestre(2021-1), Categoria(parcial 1)"
+     */
+    static _updateMateriasFiltro(id_materia, id_archivo, nombreFiltro, valorFiltro){
+        this._DBmateriasDisplay.doc(id_materia).update({
+            [`${nombreFiltro}.${valorFiltro}.${id_archivo}`]:1
+        })
+        .then(()=>{console.log("Documento profesor actualizado con exito")})
+        .catch((err)=>{console.log(`Error actualizando el documento en ${nombreFiltro}`)})
     }
 
     /**
@@ -57,6 +76,10 @@ class Archivos{
             id_usuario:id_usuario
         }).then((docRef)=>{
             Archivos._uploadFile(id_materia, docRef.id, file)
+            Archivos._updateMateriasTrabajos(id_materia, docRef.id, profesor, categorias, semestre, descripcion)            
+            Archivos._updateMateriasFiltro(id_materia,docRef.id,"profesores",profesor)
+            Archivos._updateMateriasFiltro(id_materia,docRef.id,"semestres",semestre)
+            Archivos._updateMateriasFiltro(id_materia,docRef.id,"tipos",categorias)
         }).catch((err)=>{
             console.log(`error in crear archivo: ${err}`)
         })

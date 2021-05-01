@@ -10,7 +10,7 @@ class Materias{
      */    
     static _createMateriaList(id_materia, nombre){                                    
         this._DBmateriasSeach.update({
-            [`${id_materia}`]:nombre,            
+            [`MATERIAS_LIST.${id_materia}`]:nombre,            
         })        
         .then(
             console.log(`materia created correctly at materias search`)
@@ -47,9 +47,17 @@ class Materias{
      * @return {Promise(Map)}   promesa con un map con todas las materias dispoibles en forma id:materia
      */
     static async getMateriasList(){        
-        return (await this._DBmateriasSeach.get()).data()                        
+        return (await this._DBmateriasSeach.get()).data().MATERIAS_LIST                        
     }
 
+
+    /**
+     * Retorna todas la materia correspondiente a su ID
+     * @return {Promise(Map)}   promesa con un map con todas las materias dispoibles en forma id:materia
+     */
+    static async getMateria(id_materia){
+
+    }
 
 }
 
