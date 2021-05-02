@@ -3,6 +3,7 @@ import Login from "./view/Login";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import Admin from './view/Admin';
 
+
 function App() {
             
     return (

@@ -1,4 +1,6 @@
 import {db, storage} from "./Firebase/firebaseConfig"
+import Materias from "./Materias";
+
 
 
 class Archivos{    
@@ -88,7 +90,8 @@ class Archivos{
 
     //Función provisional para probar el subir archivo
     static crearArchivo(nombreMateria, nombreProfesor, tipoDocumento, semestre, comentarios, file){
-        const idMateria = "qMCzWfu5b33NEcfxRnpk"
+        const idMateria = Materias.getIdMateria(nombreMateria);
+        if(!idMateria)return
         this._DBmateriasDisplay.doc(idMateria).collection("ARCHIVOS").add({
             tipo:tipoDocumento,
             profesor:nombreProfesor,
