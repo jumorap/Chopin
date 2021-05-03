@@ -1,0 +1,94 @@
+.div-general{
+    background-color: #15202B;
+    width: 100%;
+    height: 100vh;
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    flex-direction: row-reverse;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.div-left{
+    background-image: url("../assets/principal-logo-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 103%;
+    flex: 1;
+}
+
+.div-right{
+    background-color: #fff;
+    color: #555;
+}
+
+.div-half-screen{
+    float: left;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    align-items: center;
+    vertical-align: middle;
+}
+
+@media only screen and (max-width: 500px){
+    .container-div-right{
+        width: 50vh;
+    }
+
+    .div-left{
+        width: 100vw;
+        height: 20vh;
+        display: table;
+    }
+
+    .div-general{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.slogan-img{
+    max-width: 70%;
+    min-width: 30%;
+}
+
+.legal{
+    align-content: center;
+    align-items: center;
+    alignment: center;
+    font-size: 9px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    max-width: 50%;
+    min-width: 30%;
+}
+
+.politics{
+    display: block;
+    text-decoration: blink;
+    color: #000;
+    font-weight: bold;
+}
+
+.google-sign{
+    color: rgb(0, 0, 0);
+    height: 48px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 3px 5px 2px;
+}
+
+.non-unal-msg{
+    color: #f30000;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+    margin-block-start: 0.3em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}

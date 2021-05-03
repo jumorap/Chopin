@@ -1,0 +1,138 @@
+import React, { useEffect, useRef, useState } from 'react'
+import FullTextSearch from '../Controler/FullTextSearch'
+import FullTextSeachMaterias from '../Controler/FullTextSearchMaterias'
+import Archivos from '../Model/Archivos'
+import Materias from "../Model/Materias"
+
+
+const Admin = () => {
+    
+    //estado para mostrar la lista de todas las materias disonibles y su codig
+    const [listaMaterias, setlistaMaterias] = useState([])
+
+    //estado para guardar el objeto FullTextSearch                 
+    const ref = useRef("")    
+    
+    useEffect(() => {
+        Materias.getMateriasList()
+        .then(value => {
+            setlistaMaterias(value)            
+        })                      
+        ref.current = new FullTextSeachMaterias()          
+    }, [])
+
+    
+
+    
+    //create materia form
+    const [materia, setmateria] = useState("")
+    //upload file form
+    const [id_materia, setid_materia] = useState("")
+    const [descripcion, setdescripcion] = useState("")
+    const [profesor, setprofesor] = useState("")
+    const [semestre, setsemestre] = useState("")
+    const [categorias, setcategorias] = useState("")
+    const [usuario, setusuario] = useState("")
+    const [file, setfile] = useState()
+
+    //full text search materias
+    const [materiaSearch, setmateriaSearch] = useState("")
+    
+    //getMateria
+    const [materiaClass, setmateriaClass] = useState(new Materias("xmLGdb0H239zeZGezOje"))
+
+
+    //Crea una materia en la base de datos
+    const handleSumbitMateria = () =>{           
+        Materias.CreateMaterias(materia)     
+    }
+
+    
+    //handle file obtained in the form
+    const handleFileChange = (e) => {
+            let file = e.target.files[0];
+            setfile(file)                
+    }
+
+    //sube un archivo a la base de datos
+    const handleSsubmitArchivo = () =>{
+        Archivos.crearArchivos(id_materia, descripcion, profesor, semestre, usuario, categorias, file)
+    }
+
+    
+    //funcion que crea un nuevo objeto Materia, esta tiene los atributos id_materia, descripcion, profesor, semestre, usuario, categorias
+    const handleMateriaCreation = ()=>{                        
+        console.log(new Materias(id_materia))
+    }
+
+    const handleSearchClick = ()=>{
+        console.log(ref.current.queryData(materiaSearch))
+    }
+    
+    const handleTypeSearch = (e)=>{        
+        setmateriaSearch(e.target.value)
+        
+    }
+
+    return (
+        <div>
+            <h2>Crear materia</h2>
+            <form action="submit">
+                <label htmlFor="materia"></label>
+                <input type="text" name="" id="materia" placeholder ="Nombre de la materia" onChange = {e=>{setmateria(e.target.value)}}/>                
+                <input type="button" value="Crear materia" on onClick = {handleSumbitMateria}/>
+            </form>
+            <br/>
+            
+            <h2>Materias disponibles</h2>
+            {Object.entries(listaMaterias).map((val) => {
+                return <pre>{`${val} `}</pre>
+            })}
+            
+            <h2>Subir archivo</h2>
+            <form>
+                <label htmlFor="Materia"></label>
+                <input type="text" name="" id="Materia" placeholder = "ID_Materia" onChange = {e=>{setid_materia(e.target.value)}}/>
+                
+
+                <label htmlFor="Profesor"></label>
+                <input type="text" name="" id="Profesor" placeholder = "Profesor" onChange = {e=>{setprofesor(e.target.value)}}/>
+
+                <label htmlFor="Semestre"></label>
+                <input type="text" name="" id="Semestre" placeholder ="Semestre" onChange = {e=>{setsemestre(e.target.value)}}/>
+
+                <label htmlFor="Categorias"></label>
+                <input type="text" name="" id="Categorias" placeholder = "Categorias" onChange = {e=>{setcategorias(e.target.value)}}/>
+
+                <label htmlFor="Descripcion"></label>
+                <input type="text" name="" id="Descripcion" placeholder = "Descripcion" onChange = {e=>{setdescripcion(e.target.value)}}/>
+                
+                <label htmlFor="ID_usuario"></label>
+                <input type="text" name="" id="ID_usuario" placeholder = "ID_usuario" onChange = {e=>{setusuario(e.target.value)}}/>
+
+                <input type="file" name="" id="File"  onChange = {handleFileChange}/>
+                
+
+                <input type="button" value="Subir archivo" onClick = {handleSsubmitArchivo}/>
+            </form>
+
+            <br/>
+
+            <h2>Buscar materia</h2>
+            <form action="">
+                <input type="text" placeholder = "ID Materia" onChange = {e=>{setid_materia(e.target.value)}}/>
+                <input type="button" value="Crear clase Materia" onClick = {handleMateriaCreation}/>
+            </form>
+
+            
+            <h2>Full Text Search Materias</h2>
+            <form action="">
+                <input type="text" placeholder = "ID Materia" value = {materiaSearch} onChange = {handleTypeSearch}/>                
+                <input type="button" value="Crear clase Materia" onClick = {handleSearchClick}/>
+            </form>
+                                    
+        </div>
+    )
+}
+
+export default Admin
