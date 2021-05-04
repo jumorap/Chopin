@@ -1,0 +1,21 @@
+.modal {
+    position: absolute;
+    width: 80%;
+    height: 88%;
+    background-color: #fff;
+    border: 0 solid #000;
+    box-shadow: 10px 15px 15px #555;
+    padding: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    text-align: center;
+}
+
+.pdf-container {
+    height: 100%;
+}
+
