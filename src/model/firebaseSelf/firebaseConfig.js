@@ -15,7 +15,7 @@ var firebaseConfig = {
   };
     let firebaseInitApp;
 
-    // Initialize Firebase
+    // Initialize firebaseSelf
     if (!firebase.apps.length) firebaseInitApp = firebase.initializeApp(firebaseConfig);
     // if already initialized, use that one
     else firebaseInitApp = firebase.app();

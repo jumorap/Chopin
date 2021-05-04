@@ -1,19 +1,19 @@
-import Materias from "../Model/Materias.js"
+import Materias from "../model/materias.js"
 import FullTextSearch from "./FullTextSearch"
 
-class FullTextSeachMaterias{
-    constructor(){
+class FullTextSeachMaterias {
+    constructor() {
         this._intializeData()    
         
     }
 
-    _intializeData(){              
-        Materias.getMateriasList().then(value =>{            
+    _intializeData() {
+        Materias.getMateriasList().then(value => {
             this.searcher = new FullTextSearch(value)
         })
     }
 
-    queryData(query){        
+    queryData(query) {
         return this.searcher.queryData(query)
     }
     
