@@ -9,7 +9,7 @@ class FullTextSeachMaterias{
 
     _intializeData(){              
         Materias.getMateriasList().then(value =>{            
-            this.searcher = new FullTextSearch(value)
+            this.searcher = new FullTextSearch(value)            
         })
     }
 

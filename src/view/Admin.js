@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import FullTextSearch from '../Controler/FullTextSearch'
 import FullTextSeachMaterias from '../Controler/FullTextSearchMaterias'
 import Archivos from '../Model/Archivos'
 import Materias from "../Model/Materias"
@@ -44,7 +43,7 @@ const Admin = () => {
 
     //Crea una materia en la base de datos
     const handleSumbitMateria = () =>{           
-        Materias.CreateMaterias(materia)     
+        Materias.CreateMaterias(materia)                          
     }
 
     
@@ -63,6 +62,7 @@ const Admin = () => {
     //funcion que crea un nuevo objeto Materia, esta tiene los atributos id_materia, descripcion, profesor, semestre, usuario, categorias
     const handleMateriaCreation = ()=>{                        
         console.log(new Materias(id_materia))
+        
     }
 
     const handleSearchClick = ()=>{
