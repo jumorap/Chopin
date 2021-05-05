@@ -26,7 +26,7 @@ class FullTextSearch{
 
     
     /**
-     * Crea los indices para la busqueda de texto completa con la libreria elasticlunr
+     * Busca dentro de los datos disponibles la string search y retorna un arreglo con los resultados dado un String "search" que se va a buscar
      * @param  {String} search texto que desea buscar
      * @return {Array}      arreglo que contiene los resultados de la busqueda en la fomra {id, data}
      */

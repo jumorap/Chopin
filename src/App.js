@@ -1,8 +1,9 @@
 import './App.css';
-import Login from "./view/login";
+import Login from "./view/Login";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
-import Admin from './view/admin';
-import { FilesByProgramme } from "./view/filesByProgramme";
+import Admin from './view/Admin';
+import { FilesByProgramme } from "./view/FilesByProgramme";
+import Home from './view/Home';
 
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
                 </Route>
                 <Route path="/Admin">
                     <Admin/>
+                </Route>
+                <Route path="/home">
+                    <Home/>
                 </Route>
                 <Route path="/pdfview">
                     <FilesByProgramme/>

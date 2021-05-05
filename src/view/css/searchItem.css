@@ -1,0 +1,11 @@
+.searchItem_container{    
+    background-color: var(--secondaryColor);       
+    height: 2rem;
+    color: whitesmoke;
+    padding: 0 1rem;
+    
+}
+
+.searchItem_container:hover{
+    background-color: var(--selectedElement);    
+}
