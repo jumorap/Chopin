@@ -23,6 +23,10 @@ class Materias{
     }
     
     
+    /**
+     * 
+     * @param {String} id_materia id of the subject which will bring the information
+     */
     constructor(id_materia){
         this._intilializeValues(id_materia)        
     }

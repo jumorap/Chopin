@@ -31,7 +31,7 @@ function Searcher() {
     
     /**side effect que actualiza la searchResults cada vez que cambia la input */
     useEffect(() => {        
-        if(firstRender.current == true){
+        if(firstRender.current === true){
             firstRender.current = false
         }else{
             setsearchResults(searcherEngine.current.queryData(searchText))                

@@ -6,6 +6,12 @@
     
 }
 
+.searchItme_link{
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
+}
+
 .searchItem_container:hover{
     background-color: var(--selectedElement);    
 }
