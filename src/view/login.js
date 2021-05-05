@@ -1,7 +1,7 @@
 import 'firebase/auth';
 import withFirebaseAuth from "react-with-firebase-auth";
-import {firebaseAppAuth, providers} from "../Model/Firebase/firebaseConfig";
-import React, { Component, useState } from "react";
+import { firebaseAppAuth, providers } from "../model/firebaseSelf/firebaseConfig";
+import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
@@ -22,8 +22,8 @@ class Login extends Component {
 
         return (
             <div className={'div-general'}>
-                <div className={['div-left', 'div-half-screen'].join(' ')} />
-                <div className={['div-right', 'div-half-screen'].join(' ')}>
+                <div className={'div-left div-half-screen'} />
+                <div className={'div-right div-half-screen'}>
                     <div className={'container-div-right'}>
 
                         {

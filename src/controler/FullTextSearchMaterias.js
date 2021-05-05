@@ -1,8 +1,8 @@
-import Materias from "../Model/Materias.js"
+import Materias from "../model/Materias.js"
 import FullTextSearch from "./FullTextSearch"
 
-class FullTextSeachMaterias{
-    constructor(){
+class FullTextSeachMaterias {
+    constructor() {
         this._intializeData()    
         
     }
@@ -13,7 +13,7 @@ class FullTextSeachMaterias{
         })
     }
 
-    queryData(query){        
+    queryData(query) {
         return this.searcher.queryData(query)
     }
     

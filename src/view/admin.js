@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import FullTextSeachMaterias from '../Controler/FullTextSearchMaterias'
-import Archivos from '../Model/Archivos'
-import Materias from "../Model/Materias"
+import FullTextSeachMaterias from '../controler/FullTextSearchMaterias'
+import Archivos from '../model/Archivos'
+import Materias from "../model/Materias"
 
 
 const Admin = () => {
@@ -78,7 +78,7 @@ const Admin = () => {
         <div>
             <h2>Crear materia</h2>
             <form action="submit">
-                <label htmlFor="materia"></label>
+                <label htmlFor="materia"/>
                 <input type="text" name="" id="materia" placeholder ="Nombre de la materia" onChange = {e=>{setmateria(e.target.value)}}/>                
                 <input type="button" value="Crear materia" on onClick = {handleSumbitMateria}/>
             </form>
@@ -91,23 +91,23 @@ const Admin = () => {
             
             <h2>Subir archivo</h2>
             <form>
-                <label htmlFor="Materia"></label>
+                <label htmlFor="Materia"/>
                 <input type="text" name="" id="Materia" placeholder = "ID_Materia" onChange = {e=>{setid_materia(e.target.value)}}/>
                 
 
-                <label htmlFor="Profesor"></label>
+                <label htmlFor="Profesor"/>
                 <input type="text" name="" id="Profesor" placeholder = "Profesor" onChange = {e=>{setprofesor(e.target.value)}}/>
 
-                <label htmlFor="Semestre"></label>
+                <label htmlFor="Semestre"/>
                 <input type="text" name="" id="Semestre" placeholder ="Semestre" onChange = {e=>{setsemestre(e.target.value)}}/>
 
-                <label htmlFor="Categorias"></label>
+                <label htmlFor="Categorias"/>
                 <input type="text" name="" id="Categorias" placeholder = "Categorias" onChange = {e=>{setcategorias(e.target.value)}}/>
 
-                <label htmlFor="Descripcion"></label>
+                <label htmlFor="Descripcion"/>
                 <input type="text" name="" id="Descripcion" placeholder = "Descripcion" onChange = {e=>{setdescripcion(e.target.value)}}/>
                 
-                <label htmlFor="ID_usuario"></label>
+                <label htmlFor="ID_usuario"/>
                 <input type="text" name="" id="ID_usuario" placeholder = "ID_usuario" onChange = {e=>{setusuario(e.target.value)}}/>
 
                 <input type="file" name="" id="File"  onChange = {handleFileChange}/>

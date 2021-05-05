@@ -1,11 +1,10 @@
-import {db, storage} from "./Firebase/firebaseConfig"
-import Materias from "./Materias";
+import { db, storage } from "./firebaseSelf/firebaseConfig"
 
 
-
-class Archivos{    
+class Archivos {
     static _storageRef = storage.ref().child("/UNIVERSIDAD_NACIONAL")
     static _DBmateriasDisplay = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS").collection("DISPLAY")
+    
 
     /**
      * Crea el archivo en la subColeccion Archivos de cada materia añadiendo los datos que se requieren para su filtrado\n
@@ -16,7 +15,7 @@ class Archivos{
      * @param  {String} id_usuario ID del usuario que suibio el documeno
      * @param  {String} categorias categorias del documento
      */
-    static crearArchivos(id_materia, descripcion, profesor, semestre, id_usuario, categorias, file){
+    static crearArchivos(id_materia, descripcion, profesor, semestre, id_usuario, categorias, file){        
         this._DBmateriasDisplay.doc(id_materia).collection("TRABAJOS").add({
             descripcion:descripcion,
             profesor:profesor,
@@ -41,13 +40,13 @@ class Archivos{
      * @param  {String} id_archivo ID unico del archivo que se va a subir, debe coincidir con el que se encuentra en la db            
      * @param  {File} file Archivo que se va a subir
      */
-    static _uploadFile(id_materia, id_archivo, file){
+    static _uploadFile(id_materia, id_archivo, file) {
         const fileRef = this._storageRef.child(`/Materias/${id_materia}/${id_archivo}`);
         fileRef.put(file)
-        .then((snpaShot)=>{
+        .then((snpaShot)=> {
             console.log("file added succesfully")
         })
-        .catch(err=>"error ading the file "+ err)
+        .catch(err=> "error ading the file " + err)
     }
 
     
@@ -57,7 +56,7 @@ class Archivos{
      * @param  {String} id_archivo ID del archivo que se acaba de subir
      * @param  {map} valores mapa con los valores que se desea conservar del archivo para ser mostrados
      */
-    static _updateMateriasTrabajos(id_materia, id_archivo, nombreProfesor, tipoDocumento, semestre, comentarios){
+    static _updateMateriasTrabajos(id_materia, id_archivo, nombreProfesor, tipoDocumento, semestre, comentarios) {
         this._DBmateriasDisplay.doc(id_materia).update({
             [`trabajos.${id_archivo}`]:{
                 profesor: nombreProfesor,
@@ -67,8 +66,8 @@ class Archivos{
                 ID_archivo: id_archivo
             }            
         })
-        .then(()=>{console.log("Documento actualizado con exito")})
-        .catch((err)=>{console.log(`error en la actualizacion de archivo ${err}`)})
+        .then(()=> {console.log("Documento actualizado con exito")})
+        .catch((err)=> {console.log(`error en la actualizacion de archivo ${err}`)})
     }
 
     
@@ -79,14 +78,13 @@ class Archivos{
      * @param  {String} nombreFiltro nombre de la categoria del filtro que se le va a añadir el registro ("profesores, categorias, semestre")
      * @param  {String} valorFiltro filtro que se le va a añadir ej ("NombreProfesor(Korgi), Semestre(2021-1), Categoria(parcial 1)"
      */
-    static _updateMateriasFiltro(id_materia, id_archivo, nombreFiltro, valorFiltro){
+    static _updateMateriasFiltro(id_materia, id_archivo, nombreFiltro, valorFiltro) {
         this._DBmateriasDisplay.doc(id_materia).update({
             [`${nombreFiltro}.${valorFiltro}.${id_archivo}`]:1
         })
-        .then(()=>{console.log("Documento profesor actualizado con exito")})
-        .catch((err)=>{console.log(`Error actualizando el documento en ${nombreFiltro}`)})
+        .then(() => {console.log("Documento profesor actualizado con exito")})
+        .catch((err) => {console.log(`Error actualizando el documento en ${nombreFiltro}`)})
     }
-
 
 }
 
