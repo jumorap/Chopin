@@ -94,7 +94,7 @@ const Form = () => {
         select={select}
       />
       {/* SUBIR */}
-      <button className="block subir">
+      <button id="subir" className="block subir">
         <img
           className="blockText"
           alt="upload icon"
