@@ -1,36 +1,25 @@
-import React from "react";
+import { colors } from "@material-ui/core";
+import React, { useState } from "react";
+import logo from '../../assets/react_logo.png';
 import './css/NBar.css';
-import logo from '../../assets/react_logo.png'
-import uicon from '../../assets/User.png'
+import Boton from './NavBar/SimpleMenu';
 
 
 const Navbar = () => {
   return (
-    <div className = "contain">
-    <button>
-
-        <img src={logo}  style = {{ 
-          position: "absolute",
-          width: "303px",
-          height: "auto",
-          marginLeft: "10px",
-          marginTop: "15px",
-        }}
-        onClick={""}
-        />
-
-      </button>
-    
-      <button>
-        <img src={uicon}  style = {{ 
-          position: "absolute",
-          width: "200px",
-          height: "auto",
-          marginLeft: "1610px",
-          marginTop: "0px",
-          }}/>
-        </button>
+  <nav>
+    <div className = "Nivbar">
+          <img src ={logo} className = 'responsive'/>
     </div>
+
+      <div className = "rightSide">
+         <Boton /> 
+      </div>
+
+    </nav>
+
+        
+ 
   );
 };
 
