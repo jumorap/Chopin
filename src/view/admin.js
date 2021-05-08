@@ -43,7 +43,7 @@ const Admin = () => {
 
     //Crea una materia en la base de datos
     const handleSumbitMateria = () =>{           
-        Materias.CreateMaterias(materia)                          
+        Materias.CreateMaterias(materia)                                  
     }
 
     
@@ -56,6 +56,7 @@ const Admin = () => {
     //sube un archivo a la base de datos
     const handleSsubmitArchivo = () =>{
         Archivos.crearArchivos(id_materia, descripcion, profesor, semestre, usuario, categorias, file)
+        
     }
 
     

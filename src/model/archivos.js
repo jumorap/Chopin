@@ -1,3 +1,4 @@
+import Materia from "../view/Materia"
 import { db, storage } from "./firebaseSelf/firebaseConfig"
 
 
@@ -44,11 +45,21 @@ class Archivos {
         const fileRef = this._storageRef.child(`/Materias/${id_materia}/${id_archivo}`);
         fileRef.put(file)
         .then((snpaShot)=> {
-            console.log("file added succesfully")
+            snpaShot.ref.getDownloadURL().then((url)=>{
+                Archivos._updateArchivoUrl(id_materia,id_archivo, url)
+            })
         })
         .catch(err=> "error ading the file " + err)
     }
 
+
+    static _updateArchivoUrl(id_materia,id_archivo, url){
+        this._DBmateriasDisplay.doc(id_materia).update({
+            [`trabajos.${id_archivo}.url`] : url            
+        }).catch(
+            console.log("error subiendo url")
+        )
+    }
     
      /**
      * Sube el archivo a el map trabajos de la coleccion materias display
@@ -85,6 +96,42 @@ class Archivos {
         .then(() => {console.log("Documento profesor actualizado con exito")})
         .catch((err) => {console.log(`Error actualizando el documento en ${nombreFiltro}`)})
     }
+
+    //_________________________________________________________________________________________________________
+
+    static async crearArchivo2(id_materia, descripcion, profesor, semestre, id_usuario, categorias, file){
+        //upload the data of the file in the subcolection Archivos
+        const idArchivo = await  this._addArchivo(id_materia, descripcion, profesor, semestre, id_usuario, categorias, "hvyuvyurl")                
+        //upload file to the storage service and get the URL
+        const url = await this._uploadFile2(id_materia, idArchivo, file)
+        //update the materias doc with all the data
+        this._updateMateriasTrabajos(id_materia, idArchivo, url, profesor, categorias, semestre, descripcion)
+        //update the filters
+        this._updateMateriasFiltro(id_materia,idArchivo,"profesores",profesor)
+        this._updateMateriasFiltro(id_materia,idArchivo,"semestres",semestre)
+        this._updateMateriasFiltro(id_materia,idArchivo,"tipos",categorias)
+    }
+
+    static async _uploadFile2(id_materia, id_archivo, file){
+        const fileRef =  this._storageRef.child(`/Materias/${id_materia}/${id_archivo}`);        
+        const  snapshot = await (fileRef.put(file))
+        const url = snapshot.ref.getDownloadURL()  
+        return url        
+    }
+
+    static async _addArchivo(id_materia, descripcion, profesor, semestre, id_usuario, categorias, url){        
+        const doc = await this._DBmateriasDisplay.doc(id_materia).collection("TRABAJOS").add({
+            descripcion:descripcion,
+            profesor:profesor,
+            semestre:semestre,
+            categorias:categorias,
+            id_usuario:id_usuario,
+            url:url
+        })
+
+        return doc.id
+    }
+
 
 }
 
