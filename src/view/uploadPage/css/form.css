@@ -64,6 +64,7 @@
 
 @media only screen and (max-width: 991px) {
   .form {
+    position: relative;
     padding-top: 1rem;
     padding-bottom: 0;
     border: 1px solid white;
@@ -84,8 +85,16 @@
     width: 60%;
   }
 
-  .subir {
-    visibility: hidden;
-    position: absolute;
-  }
+
+
+  /*.subir {
+    position: fixed;
+    bottom:-20px;
+    right: 0;
+    background-color: #15202b;
+    width: 50%;
+    height: 12%;
+    justify-content: flex-start;
+
+  }*/
 }

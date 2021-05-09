@@ -8,9 +8,8 @@ import Boton from './NavBar/SimpleMenu';
 const Navbar = () => {
   return (
   <nav>
-    <div className = "Nivbar">
           <img src ={logo} className = 'responsive'/>
-    </div>
+
 
       <div className = "rightSide">
          <Boton /> 
