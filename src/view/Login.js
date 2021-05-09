@@ -8,7 +8,6 @@ import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 import "./css/login.css";
 import principalNameLogo from "./assets/principal-slogan-logo.png";
 
-var isUnalUser;
 
 class Login extends Component {
     render() {
@@ -16,9 +15,11 @@ class Login extends Component {
             user,
             signOut,
             signInWithGoogle,
-        } = this.props;                
+        } = this.props;
 
-        if (user) isUnalUser = !!user.email.toString().includes('unal.edu.co')
+        let isUnalUser;
+
+        if (user) isUnalUser = !!user.email.toString().split('@')[1].includes('unal.edu.co')
 
         return (
             <div className={'div-general'}>

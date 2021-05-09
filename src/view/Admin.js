@@ -9,8 +9,8 @@ const Admin = () => {
     //estado para mostrar la lista de todas las materias disonibles y su codig
     const [listaMaterias, setlistaMaterias] = useState([])
 
-    //estado para guardar el objeto FullTextSearch                 
-    const ref = useRef("")    
+    //estado para guardar el objeto FullTextSearch
+    const ref = useRef("")
     
     useEffect(() => {
         Materias.getMateriasList()
@@ -42,7 +42,7 @@ const Admin = () => {
 
 
     //Crea una materia en la base de datos
-    const handleSumbitMateria = () =>{           
+    const handleSumbitMateria = () => {
         Materias.CreateMaterias(materia)                          
     }
 
@@ -54,22 +54,22 @@ const Admin = () => {
     }
 
     //sube un archivo a la base de datos
-    const handleSsubmitArchivo = () =>{
+    const handleSsubmitArchivo = () => {
         Archivos.crearArchivos(id_materia, descripcion, profesor, semestre, usuario, categorias, file)
     }
 
     
     //funcion que crea un nuevo objeto Materia, esta tiene los atributos id_materia, descripcion, profesor, semestre, usuario, categorias
-    const handleMateriaCreation = ()=>{                        
+    const handleMateriaCreation = () => {
         console.log(new Materias(id_materia))
         
     }
 
-    const handleSearchClick = ()=>{
+    const handleSearchClick = () => {
         console.log(ref.current.queryData(materiaSearch))
     }
     
-    const handleTypeSearch = (e)=>{        
+    const handleTypeSearch = (e) => {
         setmateriaSearch(e.target.value)
         
     }

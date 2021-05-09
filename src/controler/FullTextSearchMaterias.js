@@ -3,12 +3,11 @@ import FullTextSearch from "./FullTextSearch"
 
 class FullTextSeachMaterias {
     constructor() {
-        this._intializeData()    
-        
+        this._intializeData()
     }
 
-    _intializeData(){              
-        Materias.getMateriasList().then(value =>{            
+    _intializeData() {
+        Materias.getMateriasList().then(value => {
             this.searcher = new FullTextSearch(value)            
         })
     }
