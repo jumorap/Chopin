@@ -1,0 +1,144 @@
+.modal {
+    position: absolute;
+    width: 80%;
+    height: 88%;
+    background-color: #fff;
+    border: none;
+    box-shadow: 10px 15px 15px rgba(170, 0, 0, 0.31);
+    padding: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-container {
+    text-align: center;
+    width: 20%;
+    margin: 5px;
+    height: 180px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 1000px) {
+    .card-container {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .card-container {
+        width: 90%;
+    }
+}
+
+.pdf-container {
+    height: 100%;
+}
+
+.files-programme {
+    background-image: url("../assets/principal-logo-blue.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50%;
+    border-radius: 50px 5px;
+    background-color: rgb(64, 75, 87);
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px 30px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.files-programme:hover {
+    background-color: rgb(80, 93, 106);
+    transition-duration: 300ms;
+}
+
+.files-programme:active {
+    background-color: rgb(63, 74, 85);
+}
+
+.like {
+    background-image: url("../assets/min-logo-likes-gray.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    cursor: pointer;
+}
+
+.like:hover {
+    background-image: url("../assets/min-logo-likes.png");
+    transition-duration: 300ms;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+}
+
+.star-component {
+    color: #fff;
+}
+
+.star-component:hover {
+    color: #FDCC0D;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.file-by-type {
+    font-weight: bold;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    height: 50px;
+    float: left;
+    width: 100%;
+}
+
+.file-by-description {
+    color: #ddd;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 90px;
+    float: right;
+    width: 100%;
+}
+
+.file-by-teacher {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: lighter;
+    text-overflow: ellipsis;
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    position: absolute;
+    bottom: 8px;
+    left: 2px;
+}
+
+.load-spinner {
+    color: #15202B;
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    font-size: 40px;
+}
+
