@@ -150,7 +150,7 @@
     }
 }
 
-@media screen and (max-width: 341px) {
+@media screen and (max-width: 420px) {
 	.hamburger-menu-clicked {
         font-size: 25px;
     }

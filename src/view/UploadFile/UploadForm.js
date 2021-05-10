@@ -51,7 +51,7 @@ const categorias = [
 
 const useStyles = makeStyles((theme) => ({
     uploadButton : {
-        backgroundColor: "#B85454",
+        backgroundColor: "#AA0000",
         color: "white",
         borderRadius : "50px",
         width : "80%",
@@ -104,24 +104,26 @@ const UploadForm = () => {
         } */
     }
 
+
     return (
-        <div className = "container">
-            <div className="title">                
-                Comparte 
+        <div className="container">
+            <div className="title">
+                Comparte
             </div>
-            
+
             <div className="upload_form">
            
                 <MyDropzone>
 
                 </MyDropzone>
+
                 <Autocomplete
                     id="combo-box-materias"
                     options={materias}
                     getOptionLabel={(option) => option.title}                    
                     style={{ width: 300 }}                    
                     renderInput={(params) => <TextField {...params}   error = {materiaError} helperText = {materiaError?"Este campo no puede estar vacio":""} label="Materia" variant="outlined"/>}
-                    className = "TextField"
+                    className="TextField"
                     onChange={(event, newValue) => {setmateriaText(newValue);setmateriaError(false)}}
                 />
                 <Autocomplete
@@ -130,7 +132,7 @@ const UploadForm = () => {
                     getOptionLabel={(option) => option.title}
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} error = {profesorError} helperText = {profesorError?"Este campo no puede estar vacio":""} label="Profesor" variant="outlined" />}
-                    className = "TextField"
+                    className="TextField"
                     onChange={(event, newValue) => {setProfesorText(newValue);setProfesorError(false)}}
                 />                
                 <Autocomplete
@@ -139,7 +141,7 @@ const UploadForm = () => {
                     getOptionLabel={(option) => option}
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} error = {semestreError} helperText = {semestreError?"Este campo no puede estar vacio":""} label="Semestre" variant="outlined" />}
-                    className = "TextField"
+                    className="TextField"
                     onChange={(event, newValue) => {setSemestreText(newValue); setSemestreError(false)}}
                 />
                 <Autocomplete
@@ -148,10 +150,15 @@ const UploadForm = () => {
                     getOptionLabel={(option) => option}
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} error = {categoriaError} helperText = {categoriaError?"Este campo no puede estar vacio":""} label="Categoria" variant="outlined"/>}
-                    className = "TextField"
+                    className="TextField"
                     onChange={(event, newValue) => {setcategoriaText(newValue); setcategoriaError(false)}}
                 />                
-            <Button variant="contained" className = {classes.uploadButton} onClick = {handleSubmit}>Compartir</Button>
+            <Button style={{
+                background: '#AA0000',
+                borderRadius: 30,
+                border: 0,
+                padding: '5px 20px',
+            }} className={classes.uploadButton} onClick={handleSubmit}>Compartir</Button>
             
             </div>
 

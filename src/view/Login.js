@@ -8,6 +8,7 @@ import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 import "./css/login.css";
 import principalNameLogo from "./assets/principal-slogan-logo.png";
 import Searcher from "./components/Searcher";
+import UploadFile from "./UploadFile/UploadFile";
 
 
 class Login extends Component {
@@ -64,7 +65,7 @@ class Login extends Component {
                         }
                         {
                             isUnalUser && user
-                                ? <center><Searcher/></center>
+                                ? <center><Searcher/><UploadFile/></center>
                                 : <center>
                                     <span className={'legal'}>
                                         AL INGRESAR ESTÁS ACEPTANDO NUESTROS

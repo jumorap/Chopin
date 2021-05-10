@@ -32,8 +32,8 @@ function MyDropzone() {
       <input {...getInputProps()} />
       {
         isDragActive ?
-          <p>Suelta el PDF aca ...</p> :
-          <p>Arrastra el documento aca, o da click para buscarlo</p>
+          <center>Suelta el PDF aca ...</center> :
+          <center>Arrastra el documento aca, o da click para buscarlo</center>
       }
     </div>
   )
