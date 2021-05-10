@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Materias from '../model/Materias'
+import "./css/materia.css"
 
 function Materia({match}) {
     
@@ -8,12 +9,16 @@ function Materia({match}) {
 
     return (
         <div>
-            <h1>
+{/*             <h1>
                 {materiasValues.current.nombre}
             </h1>
             <p>
                 {match.params.idMateria}
-            </p>
+            </p> */}
+            <div className="materias_filro">
+                
+            </div>
+
 
         </div>
     )

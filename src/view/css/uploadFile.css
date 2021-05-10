@@ -1,0 +1,21 @@
+
+
+
+.openButton{
+    position:fixed;
+    bottom: 3rem;
+    right: 4rem;
+    background-color: #A01111;
+}
+
+.openIcon{
+    color: white;
+}
+
+.ModalWindow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+    backdrop-filter: blur(5px);    
+}
