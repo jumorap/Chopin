@@ -1,17 +1,18 @@
-.searchItem_container{    
-    background-color: var(--secondaryColor);       
+.search-item-container{
+    background-color: var(--secondaryColor);
     height: 2rem;
     color: whitesmoke;
     padding: 0 1rem;
-    
+    font-size: 18px;
+    border-radius: 150px;
 }
 
-.searchItme_link{
+.search-item-link{
     color: inherit;
     text-decoration: inherit;
     cursor: inherit;
 }
 
-.searchItem_container:hover{
-    background-color: var(--selectedElement);    
+.search-item-container:hover{
+    background-color: var(--selectedElement);
 }

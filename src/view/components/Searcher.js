@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import FullTextSearchMaterias from '../controler/FullTextSearchMaterias'
+import FullTextSearchMaterias from '../../controler/FullTextSearchMaterias'
 import SearchItem from './SearchItem'
-import "./css/searcher.css"
+import "../css/searcher.css"
 
 //icons
 import SearchIcon from '@material-ui/icons/Search';
@@ -42,24 +42,22 @@ function Searcher() {
     const handleCloseButton = () =>{
         setsearchText("")
     }
-    
 
     return (        
-        <div className = "Searcher_container" >    
-            <div className="Searcher_container_input ">                
-                <input type="text" name="search" id="search" className ="searcher_input" placeholder = "Escribe el nombre de la materia" value = {searchText}onChange = {handleInputTextChange}/>                                
-                <div className="searcher_icons faic">
-                    <IconButton onClick = {handleCloseButton}>
-                        <ClearIcon className = "icon"/>
+        <div className = "searcher-container" >
+            <div className="searcher-container-input ">
+                <input type="text" name="search" id="search" className="searcher-input" placeholder="Escribe el nombre de la materia" value={searchText} onChange={handleInputTextChange} autocomplete="off"/>
+                <div className="searcher-icons faic">
+                    <IconButton onClick={handleCloseButton}>
+                        <ClearIcon className="icon"/>
                     </IconButton>
-                    <SearchIcon className = "icon"/>                
+                    <SearchIcon className="icon"/>
                 </div>
-            </div>    
-            <hr style = {{"color":"withe"}}/>   
+            </div>
 
             {/* Diplay search results */} 
-            {searchResults.map((val)=>(<SearchItem nombre = {val.data} link = {val.id} key = {val.id}/>))}
-                                    
+            {searchResults.map((val)=>(<SearchItem nombre={val.data} link={val.id} key={val.id}/>))}
+
         </div>        
     )
 }
