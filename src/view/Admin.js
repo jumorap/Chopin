@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import FullTextSeachMaterias from '../controler/FullTextSearchMaterias'
 import Archivos from '../model/Archivos'
 import Materias from "../model/Materias"
+import Profesores from "../model/Profesores"
 
 
 const Admin = () => {
@@ -15,7 +16,8 @@ const Admin = () => {
     useEffect(() => {
         Materias.getMateriasList()
         .then(value => {
-            setlistaMaterias(value)            
+            setlistaMaterias(value)  
+            console.log(value)          
         })                      
         ref.current = new FullTextSeachMaterias()          
     }, [])
@@ -34,6 +36,8 @@ const Admin = () => {
     const [usuario, setusuario] = useState("")
     const [file, setfile] = useState()
 
+
+
     //full text search materias
     const [materiaSearch, setmateriaSearch] = useState("")
     
@@ -44,6 +48,10 @@ const Admin = () => {
     //Crea una materia en la base de datos
     const handleSumbitMateria = () =>{           
         Materias.CreateMaterias(materia)                                  
+    }
+
+    const handleSubitProfesor = ()=>{        
+        Profesores.CreateProfesor(profesor)
     }
 
     
@@ -129,9 +137,17 @@ const Admin = () => {
             <h2>Full Text Search Materias</h2>
             <form action="">
                 <input type="text" placeholder = "ID Materia" value = {materiaSearch} onChange = {handleTypeSearch}/>                
-                <input type="button" value="Crear clase Materia" onClick = {handleSearchClick}/>
+                <input type="button" value="Buscar materia" onClick = {handleSearchClick}/>
             </form>
-                                    
+
+            <h2>lista profesores</h2>
+            <button onClick = {()=>{console.log(Profesores.getProfesoresList())}}>Obtener profesores</button>
+            
+            <h2>Añadir profesor</h2>
+            <form>
+                <input type="text" name="" id="Profesor" placeholder = "Profesor" onChange = {e=>{setprofesor(e.target.value)}}/>
+                <input type="button" value="Buscar materia" onClick = {handleSubitProfesor}/>            
+            </form>
         </div>
     )
 }

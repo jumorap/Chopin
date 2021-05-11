@@ -1,4 +1,5 @@
-//esta no la he provado att Jahel
+import {db} from "./firebaseSelf/firebaseConfig"
+import firebase from "firebase/app"
 
 class Profesores{
     /**
@@ -30,7 +31,7 @@ class Profesores{
        this._DBprofesoresDisplay.add({
            nombre: nombre
        }).then((doc)=>{
-           __createProfesorList()
+           Profesores.__createProfesorList(doc.id, nombre)
        })
    }  
 
@@ -40,15 +41,17 @@ class Profesores{
      * @param  {String} id_materia id of the "materia" to be created
      * @param  {String} nombre "nombre" of the "materia" to be created
      */    
-    static _createMateriaList(id_materia, nombre){                                            
-        this._DBmateriasSeach.update({
-            [`MATERIAS_LIST.${id_materia}`]:nombre,            
+    static __createProfesorList(id_profesor, nombre){                                            
+        this._DBprofesoresSeach.update({
+            PROFESORES_LIST: firebase.firestore.FieldValue.arrayUnion({id: id_profesor, profesor:nombre})        
         })        
         .then(
-            console.log(`materia created correctly at materias search`)
+            console.log(`profesor created correctly at materias search`)
         )
         .catch(function(err){
-            console.log(`error with createMateriaSearch: ${err}`)
+            console.log(`error with createProfesorSearch: ${err}`)
         })
     }
 }
+
+export default Profesores

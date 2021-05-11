@@ -30,7 +30,7 @@ const InputText = ({label, options, optionLabel, setOption, errorState, setError
 
     return (
         <Autocomplete
-            id="combo-box-materias"
+            id = {`combo-box-${String(optionLabel)}`}
             options={options}
             getOptionLabel={(option) => option[optionLabel]}                    
             style={{ width: 300 }}                    

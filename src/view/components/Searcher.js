@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import FullTextSearchMaterias from '../../controler/FullTextSearchMaterias'
 import SearchItem from './SearchItem'
 import "../css/searcher.css"
 
@@ -7,6 +6,8 @@ import "../css/searcher.css"
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
+import FullTextSearch from '../../controler/FullTextSearch';
+import {useMaterias} from '../ContextProvider';
 
 
 function Searcher() {
@@ -19,10 +20,11 @@ function Searcher() {
 
     const firstRender = useRef(true)
     
+    /**Traemos la lista de materias de el context */
+    const listaMaterias = useMaterias()
+    
     /**Usado para realizar busqueda de texto completo */    
-    const searcherEngine = useRef(new FullTextSearchMaterias())               
-    
-    
+    const searcherEngine = useRef(new FullTextSearch(listaMaterias))                       
         
     /**Modifica el texto de input y los resultados que este arroja */
     const  handleInputTextChange =  (e) =>{

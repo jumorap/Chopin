@@ -1,4 +1,4 @@
-.searchItem_container{    
+.search-item-container{    
     background-color: var(--secondaryColor);       
     height: 2rem;
     color: whitesmoke;
@@ -8,11 +8,11 @@
     cursor: pointer;
 }
 
-.searchItme_link{
+.search-item-link{
     color: inherit;
     text-decoration: inherit;    
 }
 
-.searchItem_container:hover{
+.search-item-container:hover{
     background-color: var(--selectedElement);    
 }

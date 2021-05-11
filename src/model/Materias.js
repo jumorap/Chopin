@@ -1,4 +1,6 @@
 import {db} from "./firebaseSelf/firebaseConfig"
+import firebase from "firebase/app"
+
 class Materias{    
     
     /**

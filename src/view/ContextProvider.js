@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import Materias from '../model/Materias'
+import Profesores from '../model/Profesores'
 
 
 //create the context object 
@@ -8,35 +9,41 @@ import Materias from '../model/Materias'
 
 
 
-const dataContext = createContext()
+const materiasContext = createContext()
+const profesoresContext = createContext()
 
 export function useMaterias(){
-    return useContext(dataContext)        
+    return useContext(materiasContext)        
+}
+
+export function useProfesores(){
+    return useContext(profesoresContext)    
 }
 
 const ContextProvider = ({ children }) => {
 
     const [listaMaterias, setlistaMaterias] = useState([])
+    const [listProfesores, setlistProfesores] = useState([])
+            
 
-
-    
-    useEffect(() => {
+    useEffect(() => {        
         Materias.getMateriasList()
         .then(value => {
             setlistaMaterias(value)                
         })                              
+        Profesores.getProfesoresList()
+        .then(value=>{
+            setlistProfesores(value)
+        })
     }, [])
-
-    const contextValue = {
-        materias : listaMaterias,
-        profesores : ""
-    }
-    
+        
         
     return (
-        <dataContext.Provider value = {listaMaterias}>
+        <profesoresContext.Provider value = {listProfesores}>
+        <materiasContext.Provider value = {listaMaterias}>
             {children}
-        </dataContext.Provider>
+        </materiasContext.Provider>
+        </profesoresContext.Provider>
     )
 }
 

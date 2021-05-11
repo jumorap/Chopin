@@ -7,9 +7,9 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import MyDropzone from "./DropZone"
 import InputText from './InputText';
-import {useMaterias} from ".././ContextProvider"
+import {useMaterias, useProfesores} from ".././ContextProvider"
 
-const materias = 
+const materiasProv = 
 [
     {title: "Ingnieria de software", ID:"19283y"},
     {title: "Arquitectura de software", ID:"19283y"},
@@ -62,9 +62,9 @@ const useStyles = makeStyles((theme) => ({
 const UploadForm = () => {
     
     
-    const context = useMaterias()
-    console.log(context)
-    
+    const materias = useMaterias()
+    const profesores = useProfesores()
+            
     const classes = useStyles()
 
     const [materiaText, setmateriaText] = useState("")
@@ -124,15 +124,15 @@ const UploadForm = () => {
                 <InputText 
                     label = {"Materias"}
                     options = {materias}
-                    optionLabel = {"title"}
+                    optionLabel = {"materia"}
                     setOption = {setmateriaText}
                     errorState = {materiaError}
                     setError = {setmateriaError}
                 />
                 <InputText 
                     label = {"Profesor"}
-                    options = {materias}
-                    optionLabel = {"title"}
+                    options = {profesores}
+                    optionLabel = {"profesor"}
                     setOption = {setProfesorText}
                     errorState = {profesorError}
                     setError = {setProfesorError}
