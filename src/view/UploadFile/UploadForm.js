@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import "../css/uploadForm.css"
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
-import Materias from '../../model/Materias';
 import MyDropzone from "./DropZone"
+import InputText from './InputText';
+import {useMaterias} from ".././ContextProvider"
 
 const materias = 
 [
@@ -19,33 +20,33 @@ const materias =
 ]
 
 const semestres = [
-    "2021-2",
-    "2021-1",
-    "2020-2",
-    "2019-1",
-    "2018-2",
-    "2017-1",
-    "2016-2",
-    "2015-1",
+    {semestre : "2021-2"},
+    {semestre : "2021-1"},
+    {semestre : "2020-2"},
+    {semestre : "2019-1"},
+    {semestre : "2018-2"},
+    {semestre : "2017-1"},
+    {semestre : "2016-2"},
+    {semestre : "2015-1"},
 ]
 
 const categorias = [
-    "Parcial 1",
-    "Parcial 2",
-    "Parcial 3",
-    "Parcial 4",
-    "Parcial 5",
-    "Parcial 7",
-    "Parcial 8",
-    "Parcial 9",
-    "Taller 1",
-    "Taller 2",
-    "Taller 3",
-    "Taller 4",
-    "Taller 5",
-    "Taller 6",
-    "Taller 7",
-    "Taller 8",
+    {categoria: "Parcial 1"},
+    {categoria: "Parcial 2"},
+    {categoria: "Parcial 3"},
+    {categoria: "Parcial 4"},
+    {categoria: "Parcial 5"},
+    {categoria: "Parcial 7"},
+    {categoria: "Parcial 8"},
+    {categoria: "Parcial 9"},
+    {categoria: "Taller 1"},
+    {categoria: "Taller 2"},
+    {categoria: "Taller 3"},
+    {categoria: "Taller 4"},
+    {categoria: "Taller 5"},
+    {categoria: "Taller 6"},
+    {categoria: "Taller 7"},
+    {categoria: "Taller 8"},
 ]
 
 
@@ -59,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const UploadForm = () => {
+    
+    
+    const context = useMaterias()
+    console.log(context)
     
     const classes = useStyles()
 
@@ -115,42 +120,41 @@ const UploadForm = () => {
                 <MyDropzone>
 
                 </MyDropzone>
-                <Autocomplete
-                    id="combo-box-materias"
-                    options={materias}
-                    getOptionLabel={(option) => option.title}                    
-                    style={{ width: 300 }}                    
-                    renderInput={(params) => <TextField {...params}   error = {materiaError} helperText = {materiaError?"Este campo no puede estar vacio":""} label="Materia" variant="outlined"/>}
-                    className = "TextField"
-                    onChange={(event, newValue) => {setmateriaText(newValue);setmateriaError(false)}}
+                <InputText 
+                    label = {"Materias"}
+                    options = {materias}
+                    optionLabel = {"title"}
+                    setOption = {setmateriaText}
+                    errorState = {materiaError}
+                    setError = {setmateriaError}
                 />
-                <Autocomplete
-                    id="combo-box-profesor"
-                    options={materias}
-                    getOptionLabel={(option) => option.title}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} error = {profesorError} helperText = {profesorError?"Este campo no puede estar vacio":""} label="Profesor" variant="outlined" />}
-                    className = "TextField"
-                    onChange={(event, newValue) => {setProfesorText(newValue);setProfesorError(false)}}
-                />                
-                <Autocomplete
-                    id="combo-box-semestre"
-                    options={semestres}
-                    getOptionLabel={(option) => option}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} error = {semestreError} helperText = {semestreError?"Este campo no puede estar vacio":""} label="Semestre" variant="outlined" />}
-                    className = "TextField"
-                    onChange={(event, newValue) => {setSemestreText(newValue); setSemestreError(false)}}
+                <InputText 
+                    label = {"Profesor"}
+                    options = {materias}
+                    optionLabel = {"title"}
+                    setOption = {setProfesorText}
+                    errorState = {profesorError}
+                    setError = {setProfesorError}
                 />
-                <Autocomplete
-                    id="combo-box-categoria"
-                    options={categorias}
-                    getOptionLabel={(option) => option}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} error = {categoriaError} helperText = {categoriaError?"Este campo no puede estar vacio":""} label="Categoria" variant="outlined"/>}
-                    className = "TextField"
-                    onChange={(event, newValue) => {setcategoriaText(newValue); setcategoriaError(false)}}
-                />                
+                <InputText 
+                    label = {"Semestre"}
+                    options = {semestres}
+                    optionLabel = {"semestre"}
+                    setOption = {setSemestreText}
+                    errorState = {semestreError}
+                    setError = {setSemestreError}
+                />
+                <InputText 
+                    label = {"Categoria"}
+                    options = {categorias}
+                    optionLabel = {"categoria"}
+                    setOption = {setcategoriaText}
+                    errorState = {categoriaError}
+                    setError = {setcategoriaError}
+                />
+                
+                
+
             <Button variant="contained" className = {classes.uploadButton} onClick = {handleSubmit}>Compartir</Button>
             
             </div>

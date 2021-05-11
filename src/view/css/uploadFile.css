@@ -3,8 +3,8 @@
 
 .openButton{
     position:fixed;
-    bottom: 3rem;
-    right: 4rem;
+    bottom: 5vh;
+    right: 10vw;
     background-color: #A01111;
 }
 
@@ -18,4 +18,5 @@
     justify-content: center;
     padding: 10%;
     backdrop-filter: blur(5px);    
+    
 }

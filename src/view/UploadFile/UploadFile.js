@@ -9,8 +9,8 @@ const UploadFile = () => {
     const styles = {
         openButton: {            
             position:'fixed',
-            bottom: "3rem",
-            right: "4rem",
+            bottom: "5vh",
+            right: "5vh",
             backgroundColor: "#A01111"                    
         },        
         openIcon: {color : "white"}

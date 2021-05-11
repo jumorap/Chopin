@@ -44,9 +44,8 @@ class Materias{
             this.nombre = atributosMateria.nombre
             this.profesores = atributosMateria.profesores
             this.semestres = atributosMateria.semestres
-            this.tipos = atributosMateria.tipo
+            this.tipos = atributosMateria.tipos
             this.trabajos = atributosMateria.trabajos
-
         })
         .catch(e=>`error leyendo la materia: ${e}`)
     }
