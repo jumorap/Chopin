@@ -7,7 +7,6 @@ function Materia({match}) {
     const materiasValues = useRef(new Materias(match.params.idMateria))    
     console.log(materiasValues.current)
 
-
     return (
         <div>
 {/*             <h1>

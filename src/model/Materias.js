@@ -78,7 +78,7 @@ class Materias{
      */    
     static _createMateriaList(id_materia, nombre){                                            
         this._DBmateriasSeach.update({
-            [`MATERIAS_LIST.${id_materia}`]:nombre,            
+            MATERIAS_LIST: firebase.firestore.FieldValue.arrayUnion({id: id_materia, materia:nombre})
         })        
         .then(
             console.log(`materia created correctly at materias search`)

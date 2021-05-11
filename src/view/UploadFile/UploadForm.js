@@ -52,7 +52,7 @@ const categorias = [
 
 const useStyles = makeStyles((theme) => ({
     uploadButton : {
-        backgroundColor: "#B85454",
+        backgroundColor: "#AA0000",
         color: "white",
         borderRadius : "50px",
         width : "80%",
@@ -109,12 +109,13 @@ const UploadForm = () => {
         } */
     }
 
+
     return (
-        <div className = "container">
-            <div className="title">                
-                Comparte 
+        <div className="container">
+            <div className="title">
+                Comparte
             </div>
-            
+
             <div className="upload_form">
            
                 <MyDropzone>

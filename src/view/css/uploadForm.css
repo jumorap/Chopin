@@ -1,49 +1,46 @@
-.container{        
+.container {
     height: fit-content;
     background-color: #F0F4F6;
     border-radius: 1rem;
-    margin: 1em;   
-    padding-bottom: 5px;
-    
-    
+    margin: 1em;
+    padding-bottom: 15px;
+
 }
 
-.title{
+.title {
     height: fit-content;
     max-width: fit-content;
-    padding: 0 0.2em;
+    padding: 0.3rem 0.5em;
     background-color: black;
     color: white;
-    font-size: 2rem;
+    font-size: 25px;
     border-radius: 1.5rem;
     position: relative;
     top: -1.5rem;
     left: -1.5rem;    
-    white-space: nowrap;             
+    white-space: nowrap;
 }
 
-.form_columna{
+.form_columna {
     display: flex;            
 }
 
-.upload_form{
+.upload_form {
     display: flex;
     align-items: center;
     flex-direction: column;    
 }
 
-.TextField{
-    margin: 10px;        
+.TextField {
+    margin: 7px;
 }
 
-.compartir_button{
+.compartir_button {
     background-color: #B85454;
     color: white;
-    border-radius: 50px;
-    
 }
 
-.dragFile{
+.dragFile {
     width: 250px;
     height: 150px;
     background-color: #B85454;
@@ -61,7 +58,7 @@
     display: none;
 }
 
-.upload_form::-webkit-scrollbar:horizonta  {
+.upload_form::-webkit-scrollbar  {
     height: 10px;
 }
 .upload_form::-webkit-scrollbar-thumb {
@@ -73,3 +70,4 @@
 .upload_form::-webkit-scrollbar-track {
     border-radius: 10px;
 }
+

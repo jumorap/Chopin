@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./css/searchItem.css"
+import "../css/searchItem.css"
 
 function SearchItem({nombre, link}) {
     return (
-        <Link to = {`/materias/${link}`} className = "searchItme_link">
-            <div className = "searchItem_container">
+        <Link to = {`/materias/${link}`} className="search-item-link">
+            <div className="search-item-container">
                 {nombre}
             </div>
         </Link>

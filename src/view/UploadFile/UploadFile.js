@@ -16,8 +16,7 @@ const UploadFile = () => {
         openIcon: {color : "white"}
     }
 
-    
-        
+
     const [open, setopen] = useState(false)
 
     const handleOpen = () => {
@@ -32,15 +31,15 @@ const UploadFile = () => {
     return (
         <div >
             <Modal
-                open = {open}
-                onClose = {handleClose} 
-                className = "ModalWindow"               
+                open={open}
+                onClose={handleClose}
+                className={"ModalWindow"}
             >
                 <UploadForm/>
             </Modal>
             
-            <IconButton style = {styles.openButton} className = "openButton" onClick = {handleOpen}> 
-                <AddIcon fontSize = "large"  className = "openIcon"/>
+            <IconButton style={styles.openButton} className={"openButton"} onClick={handleOpen}>
+                <AddIcon fontSize={"large"}  className={"openIcon"}/>
             </IconButton>
         </div>
     )

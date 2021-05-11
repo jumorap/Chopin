@@ -1,11 +1,10 @@
 import React from 'react'
-import Searcher from '../Searcher'
+import Searcher from './Searcher'
 
 function NavBar() {
     return (
         <div>
-            <div className="logo"/>            
-
+            <div className="logo"/>
             <Searcher/>
         </div>
     )

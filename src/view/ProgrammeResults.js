@@ -4,6 +4,7 @@ import "./css/programmeResults.css"
 import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaHamburger } from "react-icons/all";
 import Slide from 'react-reveal/Slide';
+import UploadFile from "./UploadFile/UploadFile";
 
 const items = [
     {
@@ -89,6 +90,7 @@ function ProgrammeResults() {
                 ? programme("files-section-non-clicked", "hamburger-menu hamburger-menu-clicked", "red-bar")
                 : programme("files-section-clicked", "hamburger-menu")
             }
+            <UploadFile/>
         </div>
     )
 }

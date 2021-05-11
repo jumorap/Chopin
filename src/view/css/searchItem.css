@@ -2,11 +2,10 @@
     background-color: var(--secondaryColor);       
     height: 2rem;
     color: whitesmoke;
-    padding: 0rem 1rem;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     cursor: pointer;
-    
 }
 
 .searchItme_link{
