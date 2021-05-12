@@ -9,6 +9,7 @@ import MyDropzone from "./DropZone"
 import InputText from './InputText';
 import {useMaterias, useProfesores} from ".././ContextProvider"
 import UploadedFile from './UploadedFile';
+import Archivos from '../../model/Archivos';
 
 const materiasProv = 
 [
@@ -83,11 +84,6 @@ const UploadForm = () => {
     
     
     const handleSubmit = () => {
-        console.log(materiaText)
-        console.log(profesorText)
-        console.log(semestreText)
-        console.log(categoriaText)
-        console.log(file)
 
         let errors = false
 
@@ -114,7 +110,7 @@ const UploadForm = () => {
 
 
         if(!errors){
-            console.log("no hay erroes")            
+            Archivos.crearArchivos(materiaText.id, "descripcion", profesorText.profesor, semestreText.semestre, "usuario", categoriaText.categoria, file)             
         }
 
     }

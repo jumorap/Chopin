@@ -30,19 +30,27 @@ function MyDropzone({setFile}) {
   const classes = useStyles()
   
   
-    const onDrop = useCallback(acceptedFiles => {
-    setFile(acceptedFiles[0])
+    const onDrop = useCallback(acceptedFiles => {          
+      const file = acceptedFiles[0]
+      if(file.type === "application/pdf"){
+        setFile(file)
+      }else{
+        alert("Solo se acepta pdf Parcero")
+      }
+
+      
+      
     }, [])
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
-    <div {...getRootProps()} className = {classes.container}>
+    <div {...getRootProps()} className = {classes.container}>      
       <input {...getInputProps()} />
       {
         isDragActive ?
           <DropFIeldDesactive/>:
-          <DropFieldActive/>
-          
+          <DropFieldActive/>          
       }
     </div>
   )
