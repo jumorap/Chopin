@@ -25,13 +25,13 @@ const useStyles = makeStyles((teme)=>({
 
 
 
-function MyDropzone() {
+function MyDropzone({setFile}) {
   
   const classes = useStyles()
   
   
     const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles)
+    setFile(acceptedFiles[0])
     }, [])
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 

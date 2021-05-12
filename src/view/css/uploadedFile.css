@@ -1,0 +1,23 @@
+.pdf-circle{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 3rem;    
+    border: 1px solid brown;
+    margin-right: 1rem;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.uploaded-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.close-icon{
+    color: gray;
+    cursor: pointer;
+}

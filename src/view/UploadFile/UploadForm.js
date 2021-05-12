@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MyDropzone from "./DropZone"
 import InputText from './InputText';
 import {useMaterias, useProfesores} from ".././ContextProvider"
+import UploadedFile from './UploadedFile';
 
 const materiasProv = 
 [
@@ -71,11 +72,13 @@ const UploadForm = () => {
     const [profesorText, setProfesorText] = useState("")
     const [semestreText, setSemestreText] = useState("")
     const [categoriaText, setcategoriaText] = useState("")
+    const [file, setfile] = useState(null)
 
     const [materiaError, setmateriaError] = useState(false)
     const [profesorError, setProfesorError] = useState(false)
     const [semestreError, setSemestreError] = useState(false)
     const [categoriaError, setcategoriaError] = useState(false)
+    const [fileError, setfileError] = useState(false)
 
     
     
@@ -84,6 +87,7 @@ const UploadForm = () => {
         console.log(profesorText)
         console.log(semestreText)
         console.log(categoriaText)
+        console.log(file)
 
         let errors = false
 
@@ -103,10 +107,16 @@ const UploadForm = () => {
             setcategoriaError(true)
             errors = true
         }
+        if(file === null){
+            setfileError(true)
+            errors = true
+        }
 
-/*         if(!errors){
 
-        } */
+        if(!errors){
+            console.log("no hay erroes")            
+        }
+
     }
 
 
@@ -118,9 +128,13 @@ const UploadForm = () => {
 
             <div className="upload_form">
            
-                <MyDropzone>
+                {
+                file === null?
+                <MyDropzone setFile = {setfile}/>:
+                <UploadedFile file = {file} setFile = {setfile}/>            
+                }
 
-                </MyDropzone>
+                
                 <InputText 
                     label = {"Materias"}
                     options = {materias}
