@@ -1,0 +1,40 @@
+.Main-navbar{
+    background-color: #021e38;
+    height: 65px;
+    padding-top: 2px;
+    width: auto;
+}
+
+
+.Navbar .responsive{
+    width: 60px;
+    height: 60px;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-right: 100px;
+    float: left;
+    
+}
+
+@media only screen and (max-width: 600px){
+    .responsive{
+        display: none;    
+    }
+
+    .Navbar{
+        padding-left: 35px;
+    }
+    
+}
+
+@media only screen and (max-width: 370px){
+    .Navbar{
+        padding-left: 15px;
+    }
+}
+
+@media only screen and (max-width: 310px){
+    .Navbar{
+        padding-left: 0;
+    }
+}

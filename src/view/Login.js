@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 import "./css/login.css";
 import principalNameLogo from "./assets/principal-slogan-logo.png";
-import Searcher from "./components/Searcher";
-import UploadFile from "./UploadFile/UploadFile";
 
 
 class Login extends Component {
@@ -29,19 +27,21 @@ class Login extends Component {
                 <div className={'div-right div-half-screen'}>
                     <div className={'container-div-right'}>
 
-                        <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'}/></p>
-
+                        {
+                            isUnalUser && user
+                                ? <p>Hello, {user.displayName} {user.email}</p>
+                                : <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'}/></p>
+                        }
                         {
                             isUnalUser && user
                                 ? <Button onClick={signOut}
-                                          className={'google-sign google-out'}
+                                          className={'google-sign'}
                                           style={{
                                               background: 'linear-gradient(45deg, #525A6E 30%, #525A6E 90%)',
                                               color: '#FFF',
                                               borderRadius: 30,
                                               border: 0,
-                                              padding: '0 20px',
-                                              position: "absolute",
+                                              padding: '0 30px',
                                           }}
                                           startIcon={
                                               <FontAwesomeIcon icon={faGoogle} />
@@ -52,7 +52,7 @@ class Login extends Component {
                                               background: 'linear-gradient(45deg, #FFF 30%, #FFF 90%)',
                                               borderRadius: 30,
                                               border: 0,
-                                              padding: '0 20px',
+                                              padding: '0 30px',
                                           }}
                                           startIcon={
                                               <FontAwesomeIcon icon={faGoogle} />
@@ -61,11 +61,11 @@ class Login extends Component {
                         {
                             !isUnalUser && user
                                 ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas institucionales UNAL</p>
-                                : <p/>
+                                : <p />
                         }
                         {
                             isUnalUser && user
-                                ? <center><Searcher/><UploadFile/></center>
+                                ? <p />
                                 : <center>
                                     <span className={'legal'}>
                                         AL INGRESAR ESTÁS ACEPTANDO NUESTROS
