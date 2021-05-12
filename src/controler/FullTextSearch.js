@@ -8,9 +8,9 @@ class FullTextSearch{
     constructor(data) {
         this.data = data
         this.index = elasticlunr();
+        elasticlunr.clearStopWords();          
         this.idMateriaMap = new Map()
-        this._createReverseIndex(this.data)  
-        elasticlunr.clearStopWords();      
+        this._createReverseIndex(this.data)          
     }
 
     /**
@@ -24,6 +24,7 @@ class FullTextSearch{
             this.index.addDoc(materia)            
             this.idMateriaMap.set(materia.id, materia.materia)            
         })        
+        
     }
 
     
@@ -35,7 +36,8 @@ class FullTextSearch{
     queryData(search) {
         let serch_results = this.index.search(search, {
             expand: true
-        })
+        })        
+        console.log(`Search reuslts${serch_results}`)
         let results = []        
         serch_results.forEach((obj) => {
             results.push({id: obj.ref, data: this.idMateriaMap.get(obj.ref)})

@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import FullTextSearch from '../../controler/FullTextSearch';
-import {useMaterias} from '../ContextProvider';
+import {useFullTextSearch, useMaterias} from '../ContextProvider';
 
 
 function Searcher() {
@@ -21,22 +21,24 @@ function Searcher() {
     const firstRender = useRef(true)
     
     /**Traemos la lista de materias de el context */
-    const listaMaterias = useMaterias()
+    const listaMaterias = useMaterias()        
+
+    /**Traemos el full textSearch del context*/
+    const searcherEngine = useFullTextSearch()
     
-    /**Usado para realizar busqueda de texto completo */    
-    const searcherEngine = useRef(new FullTextSearch(listaMaterias))                       
-        
+                
     /**Modifica el texto de input y los resultados que este arroja */
     const  handleInputTextChange =  (e) =>{
-        setsearchText(e.target.value)                
+        setsearchText(e.target.value)                        
     }
     
     /**side effect que actualiza la searchResults cada vez que cambia la input */
     useEffect(() => {        
         if(firstRender.current === true){
+            
             firstRender.current = false
         }else{
-            setsearchResults(searcherEngine.current.queryData(searchText))                
+            setsearchResults(searcherEngine.queryData(searchText))                            
         }
     }, [searchText])
     
