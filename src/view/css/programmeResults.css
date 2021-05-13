@@ -1,0 +1,168 @@
+.principal-menu-bar {
+    width: 25%;
+    background-color: #15202B;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0 20px 102px 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    float: left;
+    transition-duration: 300ms;
+}
+
+body {
+    overflow: hidden;
+}
+
+.principal-menu-bar::-webkit-scrollbar, .files-section::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.principal-menu-bar::-webkit-scrollbar:vertical, .files-section::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.principal-menu-bar::-webkit-scrollbar-button:increment, .principal-menu-bar::-webkit-scrollbar-button {
+    display: none;
+}
+
+.principal-menu-bar::-webkit-scrollbar:horizontal, .files-section::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.principal-menu-bar::-webkit-scrollbar-thumb, .files-section::-webkit-scrollbar-thumb {
+    background-color: rgb(80, 93, 106);
+    border-radius: 20px;
+    border: 1px solid rgb(80, 93, 106);
+}
+
+.principal-menu-bar::-webkit-scrollbar-track, .files-section::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.general {
+    background-color: #eee;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    transition-duration: 300ms;
+    padding-top: 51px;
+    box-sizing: border-box;
+}
+
+.files-section {
+    padding: 0 0 102px 0;
+    box-sizing: border-box;
+    height: 100vh;
+    float:left;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.files-section-non-clicked {
+    width: 75%;
+}
+
+.files-section-clicked {
+    width: 100%;
+}
+
+.for-each-programme {
+    width: 100%;
+
+    /*add flexbox style*/
+    display: flex;
+    flex-direction : row;
+    justify-content : space-around;
+    flex-flow : wrap;
+}
+
+.title-programme {
+    color: #FFF;
+    background-color: #AA0000;
+    border-radius: 0 0 150px 0;
+    box-sizing: border-box;
+    padding: 20px 60px 20px 20px;
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.hamburger-menu {
+    color: #FFF;
+    font-size: 40px;
+    margin-right: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .title-programme {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .title-programme {
+        font-size: 20px;
+    }
+
+    .principal-menu-bar {
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        float: right;
+        right: 0;
+        top: 0;
+        padding-left: 20%;
+    }
+
+    .general {
+        display: flex;
+        flex-direction: column;
+        transition-duration: 300ms;
+    }
+
+    .files-section {
+        width: 100%;
+        transition-duration: 300ms;
+    }
+
+    .hamburger-menu {
+        cursor: pointer;
+        font-size: 28px;
+        margin-right: 5px;
+    }
+
+    .hamburger-menu-clicked {
+        cursor: pointer;
+        font-size: 40px;
+        position: absolute;
+        right: 5px;
+        transition-duration: 300ms;
+    }
+
+    .red-bar {
+        z-index: 2;
+        position: absolute;
+        transition-duration: 300ms;
+        width: 12%;
+        height: 100%;
+        padding: 20px 40px 20px 0;
+        align-content: center;
+        align-self: center;
+        align-items: center;
+        font-size: 0;
+        top: 0;
+        color: transparent;
+    }
+}
+
+@media screen and (max-width: 420px) {
+	.hamburger-menu-clicked {
+        font-size: 25px;
+    }
+}
+

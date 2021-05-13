@@ -31,6 +31,7 @@
     height: 100vh;
     align-items: center;
     vertical-align: middle;
+    position: relative;
 }
 
 @media only screen and (max-width: 500px){
@@ -48,6 +49,12 @@
         display: flex;
         flex-direction: column;
     }
+}
+
+.google-out {
+    position: absolute;
+    bottom: 5vh;
+    left: 5vh;
 }
 
 .slogan-img{
@@ -92,3 +99,6 @@
     margin-inline-start: 0;
     margin-inline-end: 0;
 }
+
+
+

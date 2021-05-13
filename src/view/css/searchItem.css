@@ -1,0 +1,20 @@
+.search-item-container{
+    background-color: var(--secondaryColor);
+    height: 2rem;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 150px;
+    font-size: 20px;
+    padding: 0 1rem 3px;
+}
+
+.search-item-link{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.search-item-container:hover{
+    background-color: var(--selectedElement);
+}

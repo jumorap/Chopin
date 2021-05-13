@@ -1,0 +1,23 @@
+.openButton{
+    position:fixed;
+    bottom: 5vh;
+    right: 10vw;
+    background-color: #AA0000;
+}
+
+.openButton:hover {
+    background-color: #800000;
+}
+
+.openIcon{
+    color: white;
+}
+
+.ModalWindow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+    backdrop-filter: blur(5px);    
+    
+}

@@ -1,25 +1,39 @@
 import {db} from "./firebaseSelf/firebaseConfig"
+import firebase from "firebase/app"
+
 class Materias{    
     
-    /**
-     * Used to create new "Materias" in the collection display as well as a retrive it, here it is the priamary location of the "materias"
-     * @type {firestore.CollectionReference}
-     */
-    static _DBmateriasDisplay = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS").collection("DISPLAY")
-
     /**
-     * used to create new "Materias" in the document Search, which is used to get all the "materias" in one DB call
-     * @type {firestore.DocumentReference}
-     */
+     * Used to create new "Materias" in the collection display as well as a retrive it, here it is the priamary location of the "materias"
+     * @type {firestore.CollectionReference}
+     */
+    static _DBmateriasDisplay = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS").collection("DISPLAY")
+    
+    /**
+     * used to create new "Materias" in the document Search, which is used to get all the "materias" in one DB call
+     * @type {firestore.DocumentReference}
+     */
     static _DBmateriasSeach = db.collection("UNIVERSIDAD_NACIONAL").doc("MATERIAS")    
     
-    
-    
-    constructor(id_materia){
-        this._intilializeValues(id_materia)        
+    /**
+     * Bring all the Subjects in the entire university
+     * @async 
+     * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
+     */
+    static  async getMateriasList(){        
+        console.log("materia redner")
+        return (await this._DBmateriasSeach.get()).data().MATERIAS_LIST                                
     }
     
     
+    /**
+     * 
+     * @param {String} id_materia id of the subject which will bring the information
+     */
+    constructor(id_materia){
+        this._intilializeValues(id_materia)        
+    }
+        
     
     /**
      * 
@@ -33,13 +47,33 @@ class Materias{
             this.nombre = atributosMateria.nombre
             this.profesores = atributosMateria.profesores
             this.semestres = atributosMateria.semestres
-            this.tipos = atributosMateria.tipo
+            this.tipos = atributosMateria.tipos
             this.trabajos = atributosMateria.trabajos
-
         })
         .catch(e=>`error leyendo la materia: ${e}`)
     }
     
+    /**
+    * Create the "materia" in the Data base
+    * @param  {String} nombre name of the "Materia" to be created
+    */
+   static CreateMaterias = (nombre)=>{         
+       this._DBmateriasDisplay.add({
+           nombre: nombre,
+           tipos: {},
+           profesores: {},
+           semestres: {},
+           trabajos:{}
+       }).then(function (docRef) {                    
+           console.log(`correctly created ${docRef.id} in Db Dysplay`)    
+           Materias._createMateriaList(docRef.id, nombre)            
+       }).catch(function (err) {
+           console.log(`error with CreateMateria: ${err}`)
+       })        
+   }
+
+
+   
     /**
      * Creates the "Materia" in the collection "UNIVERSIDAD_NACIONAL" in the doc "MATERIAS" in the parameter "MATERIAS_LIST", for fast searching purpuses    
      * @param  {String} id_materia id of the "materia" to be created
@@ -47,7 +81,7 @@ class Materias{
      */    
     static _createMateriaList(id_materia, nombre){                                            
         this._DBmateriasSeach.update({
-            [`MATERIAS_LIST.${id_materia}`]:nombre,            
+            MATERIAS_LIST: firebase.firestore.FieldValue.arrayUnion({id: id_materia, materia:nombre})
         })        
         .then(
             console.log(`materia created correctly at materias search`)
@@ -59,34 +93,8 @@ class Materias{
 
 
     
-     /**
-     * Create the "materia" in the Data base
-     * @param  {String} nombre name of the "Materia" to be created
-     */
-    static CreateMaterias = (nombre)=>{         
-        this._DBmateriasDisplay.add({
-            nombre: nombre,
-            tipos: {},
-            profesores: {},
-            semestres: {},
-            trabajos:{}
-        }).then(function (docRef) {                    
-            console.log(`correctly created ${docRef.id} in Db Dysplay`)    
-            Materias._createMateriaList(docRef.id, nombre)            
-        }).catch(function (err) {
-            console.log(`error with CreateMateria: ${err}`)
-        })        
-    }
     
 
-    /**
-     * Bring all the Subjects in the entire university
-     * @async 
-     * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
-     */
-    static  async getMateriasList(){        
-        return (await this._DBmateriasSeach.get()).data().MATERIAS_LIST                                
-    }
 
 }
 

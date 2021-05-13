@@ -1,0 +1,57 @@
+import {db} from "./firebaseSelf/firebaseConfig"
+import firebase from "firebase/app"
+
+class Profesores{
+    /**
+     * Used to create new "Profesores" in the collection display as well as a retrive it, here it is the priamary location of the "materias"
+     * @type {firestore.CollectionReference}
+     */
+    static _DBprofesoresDisplay = db.collection("UNIVERSIDAD_NACIONAL").doc("PROFESORES").collection("DISPLAY")
+
+    /**
+     * used to create new "Materias" in the document Search, which is used to get all the "materias" in one DB call
+     * @type {firestore.DocumentReference}
+     */
+     static _DBprofesoresSeach = db.collection("UNIVERSIDAD_NACIONAL").doc("PROFESORES")    
+    
+    /**
+     * Bring all the "Profesores" in the entire university
+     * @async 
+     * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
+     */
+    static  async getProfesoresList(){        
+        return (await this._DBprofesoresSeach.get()).data().PROFESORES_LIST                                
+    }
+
+    /**
+    * Create the "profesor" in the Data base
+    * @param  {String} nombre name of the "Profesor" to be created
+    */
+   static CreateProfesor = (nombre)=>{
+       this._DBprofesoresDisplay.add({
+           nombre: nombre
+       }).then((doc)=>{
+           Profesores.__createProfesorList(doc.id, nombre)
+       })
+   }  
+
+
+       /**
+     * Creates the "Materia" in the collection "UNIVERSIDAD_NACIONAL" in the doc "MATERIAS" in the parameter "MATERIAS_LIST", for fast searching purpuses    
+     * @param  {String} id_materia id of the "materia" to be created
+     * @param  {String} nombre "nombre" of the "materia" to be created
+     */    
+    static __createProfesorList(id_profesor, nombre){                                            
+        this._DBprofesoresSeach.update({
+            PROFESORES_LIST: firebase.firestore.FieldValue.arrayUnion({id: id_profesor, profesor:nombre})        
+        })        
+        .then(
+            console.log(`profesor created correctly at materias search`)
+        )
+        .catch(function(err){
+            console.log(`error with createProfesorSearch: ${err}`)
+        })
+    }
+}
+
+export default Profesores

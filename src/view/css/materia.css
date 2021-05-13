@@ -1,0 +1,9 @@
+.materias_filro{
+    height: 100vh;
+    width: 20%;
+    background-color: var(--sideBar);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;    
+}
+
