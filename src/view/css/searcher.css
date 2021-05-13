@@ -9,7 +9,7 @@
     margin: 5px;
     padding-bottom: 0;
     position: relative;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .searcher-container:hover{
@@ -23,18 +23,18 @@
     justify-content: space-between;
     align-items: center;
     margin: 0 1rem;
-    width: 90%;
+    width: auto;
 }
 
 .searcher-input{
     flex: 1;
-    background:none;
+    background: none;
     border: none;
     padding: 8px 0;
     font: inherit;
 	outline: inherit;
-    font-size: 18px;
-    color:whitesmoke;
+    font-size: 17px;
+    color: whitesmoke;
     width: 90%;
 }
 

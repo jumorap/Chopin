@@ -1,12 +1,10 @@
 import { makeStyles } from '@material-ui/core'
 import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
-import FolderIcon from '@material-ui/icons/Folder';
 import DropFieldActive from './DropFieldActive';
 import DropFIeldDesactive from './DropFIeldDesactive';
 
-const useStyles = makeStyles((teme)=>({
+const useStyles = makeStyles(() => ({
     container : {
         width : "90%",
         height : "150px",
@@ -16,14 +14,8 @@ const useStyles = makeStyles((teme)=>({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "white"
     }
 }))
-
-
 
 function MyDropzone({setFile}) {
   
@@ -35,11 +27,10 @@ function MyDropzone({setFile}) {
       if(file.type === "application/pdf"){
         setFile(file)
       }else{
-        alert("Solo se acepta pdf Parcero")
+        alert("Solo se acepta pdf parcero")
       }
 
-      
-      
+
     }, [])
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})

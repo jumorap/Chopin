@@ -6,8 +6,7 @@ import "../css/searcher.css"
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
-import FullTextSearch from '../../controler/FullTextSearch';
-import {useFullTextSearch, useMaterias} from '../ContextProvider';
+import { useFullTextSearch, useMaterias } from '../ContextProvider';
 
 
 function Searcher() {
@@ -51,8 +50,14 @@ function Searcher() {
         <div className = "searcher-container" >
             <div className="searcher-container-input ">
                 <input type="text" name="search" id="search" className="searcher-input" placeholder="Escribe el nombre de la materia" value={searchText} onChange={handleInputTextChange} autocomplete="off"/>
-                <div className="searcher-icons faic">
-                    <IconButton onClick={handleCloseButton}>
+                <div className="faic">
+                    <IconButton
+                        onClick={handleCloseButton}
+                        style={{
+                            margin:0,
+                            padding: 0,
+                            marginRight: "5px",}}
+                    >
                         <ClearIcon className="icon"/>
                     </IconButton>
                     <SearchIcon className="icon"/>

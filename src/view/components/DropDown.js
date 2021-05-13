@@ -56,7 +56,6 @@ function DropDown({ title, items = [], muliSelect: multiSelect = false}) {
 
             {open && (
                 <p className={"no-click"}>
-                    <hr className={"hr-cut"}/>
                     {items.map(item => (
                         <span>
                             {!isItemInSelection(item)

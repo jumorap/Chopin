@@ -9,12 +9,16 @@ const UploadedFile = ({file, setFile}) => {
     }
 
     return (
-        <div className = "uploaded-container">
+        <div className={"uploaded-container"}>
             <div className="pdf-circle">
                 PDF
             </div>
-            {file.name}
-            <IconButton onClick = {handleClose}>
+
+            <span className={"text-max-pdf"}>
+                {file.name}
+            </span>
+
+            <IconButton onClick={handleClose}>
                 <CloseIcon className = "close-icon"/>
             </IconButton>
         </div>

@@ -45,7 +45,7 @@ export function FilesByProgramme({items = []}) {
                                     {item.description}
                                 </div>
                                 <div className={"file-by-teacher"}>
-                                    {item.teacher}
+                                    <b>{item.semester}</b> - {item.teacher}
                                 </div>
 
                             <div className={"like"} />

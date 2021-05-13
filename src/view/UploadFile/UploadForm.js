@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react'
-
+import React, { useState } from 'react'
 import "../css/uploadForm.css"
 import { Button } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import MyDropzone from "./DropZone"
 import InputText from './InputText';
-import {useMaterias, useProfesores} from ".././ContextProvider"
+import { useMaterias, useProfesores } from "../ContextProvider"
 import UploadedFile from './UploadedFile';
 import Archivos from '../../model/Archivos';
+
 
 const materiasProv = 
 [
@@ -52,12 +50,18 @@ const categorias = [
 ]
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     uploadButton : {
-        backgroundColor: "#AA0000",
-        color: "white",
-        borderRadius : "50px",
-        width : "80%",
+        background: '#AA0000',
+        "&:hover": {
+            backgroundColor: "#800000"
+        },
+        color: '#FFF',
+        borderRadius: 30,
+        border: 0,
+        padding: '5px 20px',
+        width: "80%",
+        marginTop: "20px",
     }
 }))
 

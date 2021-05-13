@@ -15,7 +15,7 @@
     text-align: center;
     width: 20%;
     margin: 5px;
-    height: 180px;
+    height: 185px;
     box-sizing: border-box;
 }
 
@@ -105,6 +105,7 @@ ul {
     font-weight: bold;
     font-size: 18px;
     text-overflow: ellipsis;
+    overflow: hidden;
     height: 50px;
     float: left;
     width: 100%;
@@ -123,14 +124,16 @@ ul {
 .file-by-teacher {
     color: #ccc;
     font-size: 12px;
-    font-weight: lighter;
     text-overflow: ellipsis;
-    width: 100%;
+    overflow: hidden;
+    font-weight: lighter;
+    width: 80%;
     align-self: center;
     align-items: center;
     position: absolute;
     bottom: 8px;
-    left: 2px;
+    left: 10%;
+    height: 17px;
 }
 
 .load-spinner {

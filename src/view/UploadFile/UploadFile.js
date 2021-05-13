@@ -11,11 +11,15 @@ const UploadFile = () => {
             position:'fixed',
             bottom: "5vh",
             right: "5vh",
-            backgroundColor: "#A01111"                    
+            backgroundColor: "#AA0000",
+            "&:hover": {
+                backgroundColor: "#800000"
+            },
         },        
-        openIcon: {color : "white"}
+        openIcon: {
+            color: "#FFF"
+        }
     }
-
 
     const [open, setopen] = useState(false)
 
@@ -27,7 +31,6 @@ const UploadFile = () => {
         setopen(false)
     }
 
-    
     return (
         <div >
             <Modal

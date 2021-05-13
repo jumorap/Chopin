@@ -5,6 +5,8 @@ import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaHamburger } from "react-icons/all";
 import Slide from 'react-reveal/Slide';
 import UploadFile from "./UploadFile/UploadFile";
+import NavBar from "./components/NavBar";
+
 
 const items = [
     {
@@ -27,28 +29,32 @@ const items = [
 
 const itemsFiles = [
     {
-        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2FxmLGdb0H239zeZGezOje%2F0hMDLqhQxOTX3rps8Bnd?alt=media&token=4ce282f3-fa1b-49ae-b5ae-19e23a36789a',
-        name: 'Fundamentos de mecánica',
+        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce',
+        name: 'Parcial 1',
         description: 'El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio',
-        teacher: 'Ovidio Almanza'
+        teacher: 'Ovidio Almanza',
+        semester: '2019-1'
     },
     {
-        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2FxmLGdb0H239zeZGezOje%2F0hMDLqhQxOTX3rps8Bnd?alt=media&token=4ce282f3-fa1b-49ae-b5ae-19e23a36789a',
-        name: 'Fundamentos de mecánica',
+        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce',
+        name: 'Parcial 1',
         description: 'El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio',
-        teacher: 'Ovidio Almanza'
+        teacher: 'Ovidio Almanza',
+        semester: '2019-1'
     },
     {
-        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2FxmLGdb0H239zeZGezOje%2F0hMDLqhQxOTX3rps8Bnd?alt=media&token=4ce282f3-fa1b-49ae-b5ae-19e23a36789a',
-        name: 'Fundamentos de mecánica',
+        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce',
+        name: 'Parcial 1',
         description: 'El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio',
-        teacher: 'Ovidio Almanza'
+        teacher: 'Ovidio Almanza',
+        semester: '2019-1'
     },
     {
-        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2FxmLGdb0H239zeZGezOje%2F0hMDLqhQxOTX3rps8Bnd?alt=media&token=4ce282f3-fa1b-49ae-b5ae-19e23a36789a',
-        name: 'Fundamentos de mecánica',
-        description: 'El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio',
-        teacher: 'Ovidio Almanza'
+        url: 'https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce',
+        name: 'Parcial 1 donde la muerte te llama, vas a llorar',
+        description: 'El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudioEl ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudioEl ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudioEl ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio',
+        teacher: 'Ovidio Almanza de la rosa castañeda',
+        semester: '2019-1'
     }
 ]
 
@@ -76,7 +82,9 @@ function ProgrammeResults() {
     }
 
     return (
+
         <div className={"general"}>
+            <NavBar/>
             {open &&
                 <Slide left>
                     <div className={"principal-menu-bar"}>

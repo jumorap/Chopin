@@ -1,12 +1,11 @@
-import { Button, Container, makeStyles } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core'
 import React from 'react'
-import FolderIcon from '@material-ui/icons/Folder';
+import { FaFolderPlus } from "react-icons/all";
 
-const useStyles = makeStyles((temes)=>({
+const useStyles = makeStyles(() => ({
     text: {
-        color: "#959aa2",
+        color: "#959595",
         fontWeight: "bold"
-                
     },
     container: {
         display: "flex",
@@ -14,20 +13,31 @@ const useStyles = makeStyles((temes)=>({
         justifyContent:"center",
         flexDirection: "column",        
     },
-    icon:{
-        
-    }    
+    icon: {
+        fontSize: "60px",
+    },
+    searchFile: {
+        background: '#AA0000',
+        "&:hover": {
+            backgroundColor: "#800000"
+        },
+        color: '#FFF',
+        borderRadius: 30,
+        border: 0,
+        padding: '5px 20px',
+    },
 }))
 const DropFieldActive = () => {    
     const classes = useStyles()
+
     return (
-        <div className = {classes.container}>
-            <FolderIcon fontSize = "large"/>            
-            <Button variant ="contained" color = "primary" className = {classes.button}>
-                Buscalo
+        <div className={classes.container}>
+            <FaFolderPlus className={classes.icon}/>
+            <Button variant="contained" color="primary" className={classes.searchFile}>
+                Búscalo
             </Button>   
             <p className = {classes.text}>
-                O suelta el archivo aca    
+                O suelta tu archivo aquí
             </p>         
         </div>
     )

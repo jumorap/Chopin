@@ -1,12 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core'
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import { FaFilePdf } from "react-icons/all";
 
-const useStyles = makeStyles((temes)=>({
+
+const useStyles = makeStyles(() => ({
     text: {
-        color: "#959aa2",
+        color: "#FFF",
         fontWeight: "bold"
-                
     },
     container: {
         display: "flex",
@@ -16,18 +16,21 @@ const useStyles = makeStyles((temes)=>({
         backgroundColor: "#B85454",
         width: "100%",
         height: "100%",
-        borderRadius: "inherit",                     
+        borderRadius: "22px",
+        color: "#FFF",
     },
     icon:{
-        
+        color: "#FFF",
+        fontSize: "60px",
     }    
 }))
 
 const DropFIeldDesactive = () => {
     const classes = useStyles()
+
     return (
-        <div className = {classes.container}>
-            <PictureAsPdfIcon className = {classes.icon}/>
+        <div className={classes.container}>
+            <FaFilePdf className={classes.icon}/>
             <p className = {classes.text}>
                 Suelta el archivo
             </p>
