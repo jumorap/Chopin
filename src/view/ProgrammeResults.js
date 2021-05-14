@@ -9,22 +9,22 @@ import NavBar from "./components/NavBar";
 
 const categories = [
   {
-    id: 1,
+    id: 11,
     value: "Parcial 1",
     type: "category",
   },
   {
-    id: 2,
+    id: 12,
     value: "Parcial 2",
     type: "category",
   },
   {
-    id: 3,
+    id: 13,
     value: "Parcial 3",
     type: "category",
   },
   {
-    id: 4,
+    id: 14,
     value: "Parcial 4",
     type: "category",
   },
@@ -32,50 +32,50 @@ const categories = [
 
 const professors = [
   {
-    id: 5,
+    id: 21,
     value: "Ovidio Almanza",
     type: "prof",
   },
   {
-    id: 6,
+    id: 22,
     value: "Pepito perez",
     type: "prof",
   },
   {
-    id: 7,
+    id: 23,
     value: "Ovidio Almanza de la rosa castañeda",
     type: "prof",
   },
   {
-    id: 8,
+    id: 24,
     value: "Joselito Carnaval",
     type: "prof",
   },
   {
-    id: 19,
-    value: "Joselito Carnaval",
+    id: 25,
+    value: "Joselito Carnaval 2.0",
     type: "prof",
   },
 ];
 
 const semester = [
   {
-    id: 9,
+    id: 31,
     value: "2019-1",
     type: "semester",
   },
   {
-    id: 10,
+    id: 32,
     value: "2019-2",
     type: "semester",
   },
   {
-    id: 11,
+    id: 33,
     value: "2020-1",
     type: "semester",
   },
   {
-    id: 12,
+    id: 34,
     value: "2020-2",
     type: "semester",
   },

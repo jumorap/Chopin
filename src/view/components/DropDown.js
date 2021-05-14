@@ -66,13 +66,13 @@ function DropDown({
 
       {open && (
         <p
-          className={"no-click"}
+          className="no-click"
           style={{
             display: "flex",
-            flexDirection: "column",
-            width: "100%",
+            flexWrap: "wrap",
+            alignContent: "center",
             justifyContent: "center",
-            alignItems: "center",
+            width: "100%",
           }}
         >
           {items.map((item) => (
