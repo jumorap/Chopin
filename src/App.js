@@ -57,7 +57,7 @@ function App() {
                         <Route path="/pdfview">
                             <FilesByProgramme/>
                         </Route>
-                        <Route exact path="/materias/:idMateria" component={Materia}/>
+                        <Route exact path="/materias/:idMateria" component={ProgrammeResults}/>
                         <Route path="/results">
                             <ProgrammeResults/>
                         </Route>
