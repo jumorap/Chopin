@@ -29,7 +29,7 @@ function DropDown({
   }
 
   function isItemInSelection(item) {
-    return !!selection.find((current) => current.id === item.id);
+    return selection.find((current) => current.id === item.id);
   }
 
   function optionsSelected(properties, item) {
