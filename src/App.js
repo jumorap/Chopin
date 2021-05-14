@@ -16,8 +16,8 @@ export const contextProvider = createContext(undefined)
 function App() {
 
     return (
-        <ContextProvider>
-            <AuthProvider>
+        <AuthProvider>
+            <ContextProvider>
                 <Router>
                     <PrivateRoute exact path="/materias/:idMateria" component={Materia} />
                     <PrivateRoute exact path="/results" component={ProgrammeResults} />
@@ -26,8 +26,8 @@ function App() {
 
                     <Route exact path="/" component={Login} />
                 </Router>
-            </AuthProvider>
-        </ContextProvider>
+            </ContextProvider>
+        </AuthProvider>
     )
 }
 
