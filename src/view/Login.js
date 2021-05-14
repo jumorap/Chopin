@@ -18,9 +18,9 @@ class Login extends Component {
             user,
             signOut,
             signInWithGoogle,
-        } = this.props;
+        } = this.props
 
-        let isUnalUser;
+        let isUnalUser
 
         if (user) isUnalUser = !!user.email.toString().split('@')[1].includes('unal.edu.co')
 
@@ -58,31 +58,32 @@ class Login extends Component {
                 <div className={'div-left div-half-screen'} />
                 <div className={'div-right div-half-screen'}>
                     <div className={'container-div-right'}>
+                        <center>
+                            <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'}/></p>
 
-                        <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'}/></p>
-
-                        {
-                            isUnalUser && user
-                                ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '')
-                                : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL')
-                        }
-                        {
-                            !isUnalUser && user
-                                ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas institucionales UNAL</p>
-                                : <p/>
-                        }
-                        {
-                            isUnalUser && user
-                                ? <center><Searcher/><UploadFile/></center>
-                                : <center>
-                                    <span className={'legal'}>
-                                        AL INGRESAR ESTÁS ACEPTANDO NUESTROS
-                                        <a className={'politics'} href={'https://www.github.com'} target={"_blank"} rel="noreferrer">
-                                            TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
-                                        </a>
-                                    </span>
-                                </center>
-                        }
+                            {
+                                isUnalUser && user
+                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '')
+                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL')
+                            }
+                            {
+                                !isUnalUser && user
+                                    ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas institucionales UNAL</p>
+                                    : <p/>
+                            }
+                            {
+                                isUnalUser && user
+                                    ? <center><Searcher/><UploadFile/></center>
+                                    : <center>
+                                        <span className={'legal'}>
+                                            AL INGRESAR ESTÁS ACEPTANDO NUESTROS
+                                            <a className={'politics'} href={'https://www.github.com'} target={"_blank"} rel="noreferrer">
+                                                TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
+                                            </a>
+                                        </span>
+                                    </center>
+                            }
+                        </center>
                     </div>
                 </div>
             </div>
