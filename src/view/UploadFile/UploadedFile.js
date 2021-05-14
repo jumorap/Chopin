@@ -1,24 +1,24 @@
-import React from 'react'
-import "../css/uploadedFile.css"
-import CloseIcon from '@material-ui/icons/Close';
-import { IconButton } from '@material-ui/core';
+import React from "react";
+import "../css/uploadedFile.css";
+import CloseIcon from "@material-ui/icons/Close";
+import { IconButton } from "@material-ui/core";
 
-const UploadedFile = ({file, setFile}) => {
-    const handleClose = ()=>{
-        setFile(null)
-    }
+const UploadedFile = ({ file, setFile }) => {
+  const handleClose = () => {
+    setFile(null);
+  };
 
-    return (
-        <div className = "uploaded-container">
-            <div className="pdf-circle">
-                PDF
-            </div>
-            {file.name}
-            <IconButton onClick = {handleClose}>
-                <CloseIcon className = "close-icon"/>
-            </IconButton>
-        </div>
-    )
-}
+  return (
+    <div className={"uploaded-container"}>
+      <div className="pdf-circle">PDF</div>
 
-export default UploadedFile
+      <span className={"text-max-pdf"}>{file.name}</span>
+
+      <IconButton onClick={handleClose}>
+        <CloseIcon className="close-icon" />
+      </IconButton>
+    </div>
+  );
+};
+
+export default UploadedFile;

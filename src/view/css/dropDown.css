@@ -5,6 +5,7 @@
     align-items: center;
     align-self: center;
     color: #fff;
+    padding-bottom: 10px;
 }
 
 .dd-wrapper {
@@ -57,5 +58,6 @@
 
 .no-click {
     cursor: default;
+    padding-top: 10px;
 }
 

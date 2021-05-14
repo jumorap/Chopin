@@ -1,0 +1,70 @@
+.main-navbar{
+    background-color: #15202B;
+    width: 100%;
+    padding: 0 2px 4px;
+    position: absolute;
+    box-sizing: border-box;
+    height: 52px;
+    top: 0;
+}
+
+.logo-image{
+    width: 72%;
+    padding-top: 14%;
+}
+
+.logo-container-nav {
+    width: 54px;
+    float: left;
+    height: 10%;
+    padding: 0 20px 0 10px;
+    z-index: 2;
+    position: relative;
+}
+
+.searcher-container-nav {
+    width: 50%;
+    position: absolute;
+    left: 25%;
+}
+
+.log-out-container-nav {
+    width: 54px;
+    float: right;
+    height: 100%;
+    padding: 0 5px 0 10px;
+    z-index: 2;
+    position: relative;
+}
+
+.sign-out {
+    background: transparent;
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+    border: 0;
+    padding: 0 5px;
+    position: absolute;
+    height: 100%;
+    cursor: pointer;
+    font-size: 21px;
+    float: right;
+}
+
+@media only screen and (max-width: 600px){
+    .logo-image{
+        display: none;
+    }
+
+    .searcher-container-nav {
+        width: 85%;
+        left: 0;
+    }
+
+    .log-out-container-nav {
+        width: 10%;
+    }
+
+    .log-out-container-nav {
+        padding: 0 0 0 10px;
+    }
+}

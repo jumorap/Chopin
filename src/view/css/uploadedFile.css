@@ -7,7 +7,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
 .uploaded-container{
@@ -18,9 +17,17 @@
     background-color: white;
     border-radius: 1rem;
     padding: 0 5px;
-    -webkit-box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
+    box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
+}
+
+.text-max-pdf {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 200px;
+    max-height: 20px;
+
 }
 
 .close-icon{

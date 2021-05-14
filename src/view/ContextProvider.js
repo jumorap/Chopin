@@ -17,7 +17,7 @@ const fullTextSearchContext = createContext()
 /**Returns a list with al the "Materias"
  * @returns Array[{id: <string>, materias: <string>}]
 */
-export function useMaterias(){
+export function useMaterias() {
     return useContext(materiasContext)        
 }
 
@@ -25,7 +25,7 @@ export function useMaterias(){
  * Returns a list with al the "Profesores"
  * @returns Array[{id: <string>, profesor: <string>}]
  */
-export function useProfesores(){
+export function useProfesores() {
     return useContext(profesoresContext)    
 }
 
@@ -34,7 +34,7 @@ export function useProfesores(){
  * @returns FullTextSearch
  */
 
-export function useFullTextSearch(){
+export function useFullTextSearch() {
     return useContext(fullTextSearchContext)
 }
 
@@ -67,9 +67,9 @@ const ContextProvider = ({ children }) => {
         
         
     return (
-        <fullTextSearchContext.Provider value = {fullTextSearchMaterias}>        
-        <profesoresContext.Provider value = {listProfesores}>
-        <materiasContext.Provider value = {listaMaterias}>
+        <fullTextSearchContext.Provider value={fullTextSearchMaterias}>
+        <profesoresContext.Provider value={listProfesores}>
+        <materiasContext.Provider value={listaMaterias}>
             {children}
         </materiasContext.Provider>
         </profesoresContext.Provider>

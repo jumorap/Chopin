@@ -1,11 +1,12 @@
-
-
-
 .openButton{
     position:fixed;
     bottom: 5vh;
     right: 10vw;
-    background-color: #A01111;
+    background-color: #AA0000;
+}
+
+.openButton:hover {
+    background-color: #800000;
 }
 
 .openIcon{
