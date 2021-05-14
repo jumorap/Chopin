@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function FiltroMateria({titulo, }) {
-    return (
-        <div>
-            
-        </div>
-    )
+function FiltroMateria({ titulo }) {
+  return <div></div>;
 }
 
-export default FiltroMateria
+export default FiltroMateria;
