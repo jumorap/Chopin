@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import DropDown from "./components/DropDown";
 import "./css/programmeResults.css"
 import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaHamburger } from "react-icons/all";
 import Slide from 'react-reveal/Slide';
 import UploadFile from "./UploadFile/UploadFile";
+import Materias from "../model/Materias";
 
-const items = [
+
+
+const items = [    
     {
         id: 1,
         value: 'Parcial 1',
@@ -54,9 +57,14 @@ const itemsFiles = [
 
 const programmeName = "Fundamentos de Electricidad y Magnetísmo"
 
-function ProgrammeResults() {
+function ProgrammeResults({match}) {
 
     const [open, setOpen] = useState(true)
+
+
+    const materiaValue = useRef(new Materias(match.params.idMateria))
+    
+    console.log(materiaValue.current)
 
     function programme(properties, propertiesHamburger, redBar) {
         return (
@@ -65,8 +73,8 @@ function ProgrammeResults() {
                     <FaHamburger
                         className={propertiesHamburger}
                         onClick={() => setOpen(!open)}
-                    />
-                    {programmeName}
+                    />                    
+                    {materiaValue.current.nombre} 
                 </div>
                 <div className={"for-each-programme"}>
                     <FilesByProgramme items={itemsFiles}/>
