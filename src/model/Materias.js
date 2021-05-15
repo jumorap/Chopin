@@ -48,7 +48,7 @@ class Materias{
             this.profesores = atributosMateria.profesores
             this.semestres = atributosMateria.semestres
             this.tipos = atributosMateria.tipos
-            this.trabajos = atributosMateria.trabajos
+            this.trabajos = this._getArrayFromObject(atributosMateria.trabajos)                        
         })
         .catch(e=>`error leyendo la materia: ${e}`)
     }
@@ -91,6 +91,14 @@ class Materias{
         })
     }
 
+    _getArrayFromObject(object){
+        const objectArray = []
+        Object.keys(object).map((key)=>{
+            objectArray.push(object[key])
+        })
+        console.log(objectArray)
+        return objectArray
+    }
 
     
     
