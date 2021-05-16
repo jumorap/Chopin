@@ -6,8 +6,8 @@ import DropFIeldDesactive from "./DropFIeldDesactive";
 
 const useStyles = makeStyles(() => ({
   container: {
-    width: "100%",
-    height: "140px",
+    width: "90%",
+    height: "150px",
     backgroundColor: "withe",
     borderRadius: "25px",
     borderStyle: "dashed",

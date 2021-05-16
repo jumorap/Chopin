@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
   rightDiv:{
     paddingRight: "10px",
     width: "50%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    padding: "15px"
   },
 
   sharemessage: {
@@ -91,13 +95,18 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "inherit",
     fontSize: "20px",
   },
-  descript: {
+  
+  descriptionBox: {
     marginTop: "13px",
     width: "105%",
     backgroundColor:"#fff"
+  },
+
+  warningDropText:{
+    color: "#f44336",
+    fontSize: "0.75rem"
   }
 }));
-
 const UploadForm = ({handleClose}) => {
   const materias = useMaterias();
   const profesores = useProfesores();
@@ -122,6 +131,7 @@ const UploadForm = ({handleClose}) => {
   };
 
   const handleSubmit = () => {
+    
     let errors = false;
 
     if (materiaText === null || materiaText.length === 0) {
@@ -141,6 +151,7 @@ const UploadForm = ({handleClose}) => {
       errors = true;
     }
     if (file === null) {
+      alert("Ponga un arhcivo parce");
       setfileError(true);
       errors = true;
     }
@@ -206,11 +217,17 @@ const UploadForm = ({handleClose}) => {
               />
             </div>  
             <div className={classes.rightDiv}> 
+
+            <div>
               {file === null ? (
                 <MyDropzone setFile={setfile} />
               ) : (
                 <UploadedFile file={file} setFile={setfile} />
               )}
+              {fileError === true ? (<p
+                className={classes.warningDropText}
+              >Parce, coloque un archivo</p> ) : ("")}
+            </div>
 
               <TextField
                 id="outlined-multiline-static"
@@ -219,7 +236,7 @@ const UploadForm = ({handleClose}) => {
                 rows={4}
                 defaultValue=""
                 variant="outlined"
-                className={classes.descript}
+                className={classes.descriptionBox}
                 value={descripcionText}
                 onChange={handleChange}
               />
