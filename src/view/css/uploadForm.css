@@ -8,6 +8,10 @@
     padding-right: 20px;
 }
 
+.subContainer{
+    display: flex;
+}
+
 .title {
     height: fit-content;
     max-width: fit-content;
@@ -23,7 +27,8 @@
 }
 
 .form_columna {
-    display: flex;            
+    display: flex;   
+          
 }
 
 .upload_form {

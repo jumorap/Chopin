@@ -6,14 +6,16 @@ import DropFIeldDesactive from "./DropFIeldDesactive";
 
 const useStyles = makeStyles(() => ({
   container: {
-    width: "90%",
-    height: "150px",
+    width: "100%",
+    height: "140px",
     backgroundColor: "withe",
     borderRadius: "25px",
     borderStyle: "dashed",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
+    marginTop:"15px"
   },
 }));
 
