@@ -14,6 +14,8 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
+    marginTop:"15px"
   },
 }));
 

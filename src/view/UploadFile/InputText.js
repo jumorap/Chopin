@@ -39,7 +39,7 @@ const InputText = ({
       id={`combo-box-${String(optionLabel)}`}
       options={options}
       getOptionLabel={(option) => option[optionLabel]}
-      style={{ width: 300 }}
+      style={{ width: "100%" }}
       renderInput={(params) => (
         <TextField
           className={classes.textField}
