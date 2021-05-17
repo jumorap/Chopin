@@ -5,16 +5,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 
-#This test will evaluate the restriction to only UNAL students
-def accessWithoutPermission(driver, url):
-    driver.get(url)
-    time.sleep(1)
-    if(driver.current_url==url):
-        print("Test Failed: access without permission")
-    else:
-        print("Test Succeeded: can't access without permission")
-
-
 def accessWithPermission(driver, url):
     driver.get("https://accounts.google.com/login")
     time.sleep(1)
@@ -32,7 +22,24 @@ def accessWithPermission(driver, url):
     button.click()
 
 
+def searchSubject():
+    time.sleep(2)
+    text_field = driver.find_element_by_id("search")
+    text_field.send_keys("In"+Keys.ARROW_DOWN)
+    option = driver.find_element_by_class_name("search-item-container")
+    option.click()
+
+
+def reviewDocument():
+    card = driver.find_elements_by_class_name("files-programme")[0]
+    card.click()
+
+
 driver = webdriver.Chrome(ChromeDriverManager().install())
 url_test = "http://localhost:3000/results"
-accessWithoutPermission(driver,url_test)
 accessWithPermission(driver,url_test)
+time.sleep(2)
+searchSubject()
+time.sleep(2)
+reviewDocument()
+print("Integration Test Succeeded!!")
