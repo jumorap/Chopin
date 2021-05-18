@@ -1,4 +1,4 @@
-import { db, storage } from "./firebaseSelf/firebaseConfig";
+import {db, storage} from "./firebaseSelf/firebaseConfig";
 
 class Archivos {
   static _storageRef = storage.ref().child("/UNIVERSIDAD_NACIONAL");
@@ -95,7 +95,7 @@ class Archivos {
       .update({
         [`trabajos.${id_archivo}.url`]: url,
       })
-      .catch(console.log("error subiendo url"));
+      .catch(() => console.log("error subiendo url"));
   }
 
   /**
@@ -152,7 +152,7 @@ class Archivos {
       .then(() => {
         console.log("Documento profesor actualizado con exito");
       })
-      .catch((err) => {
+      .catch(() => {
         console.log(`Error actualizando el documento en ${nombreFiltro}`);
       });
   }
@@ -201,8 +201,7 @@ class Archivos {
       `/Materias/${id_materia}/${id_archivo}`
     );
     const snapshot = await fileRef.put(file);
-    const url = snapshot.ref.getDownloadURL();
-    return url;
+    return snapshot.ref.getDownloadURL();
   }
 
   static async _addArchivo(

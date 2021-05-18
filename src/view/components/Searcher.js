@@ -35,7 +35,7 @@ function Searcher() {
     } else {
       setsearchResults(searcherEngine.queryData(searchText));
     }
-  }, [searchText]);
+  }, [searchText, searcherEngine]);
 
   /**activated when the close button is pressed */
   const handleCloseButton = () => {

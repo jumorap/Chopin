@@ -95,7 +95,7 @@ class Materias {
           materia: nombre,
         }),
       })
-      .then(console.log(`materia created correctly at materias search`))
+      .then(() => console.log(`materia created correctly at materias search`))
       .catch(function (err) {
         console.log(`error with createMateriaSearch: ${err}`);
       });
