@@ -65,7 +65,7 @@ function ProgrammeResults({ match }) {
   let filteredFiles = materiaValues.trabajos.map((file) => {
     let check = 0;
     ["category", "prof", "semester"].forEach((type) => {
-      let choosen = selection.filter((filt) => filt.type == type);
+      let choosen = selection.filter((filt) => filt.type === type);
       /* console.log(type, "foo", choosen); */
       if (choosen.length) {
         if (

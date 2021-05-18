@@ -4,9 +4,10 @@ import { useDropzone } from "react-dropzone";
 import DropFieldActive from "./DropFieldActive";
 import DropFIeldDesactive from "./DropFIeldDesactive";
 
+
 const useStyles = makeStyles(() => ({
   container: {
-    width: "90%",
+    width: "100%",
     height: "150px",
     backgroundColor: "withe",
     borderRadius: "25px",
@@ -15,7 +16,6 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    marginTop:"15px"
   },
 }));
 
@@ -29,7 +29,7 @@ function MyDropzone({ setFile }) {
     } else {
       alert("Solo se acepta pdf parcero");
     }
-  }, []);
+  }, [setFile]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

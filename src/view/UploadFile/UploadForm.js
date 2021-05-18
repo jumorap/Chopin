@@ -52,7 +52,7 @@ const categorias = [
   { categoria: "Taller 8" },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   uploadButton: {
     background: "#AA0000",
     "&:hover": {
@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
   closeButton: {
     position: "relative",
     left:"90%",
-    top: "-20px",
+    top: "-5px",
+    padding: 0,
   },
 
   leftDiv:{
@@ -76,7 +77,8 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     display: "flex",
     flexFlow: "column wrap",
-    marginBlockEnd: "20px"
+    marginBlockEnd: "15px",
+    justifyContent: "space-between",
   },
 
   rightDiv:{
@@ -84,8 +86,7 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-    padding: "15px"
+    padding: "15px",
   },
 
   sharemessage: {
@@ -97,9 +98,9 @@ const useStyles = makeStyles((theme) => ({
   },
   
   descriptionBox: {
-    marginTop: "13px",
     width: "105%",
-    backgroundColor:"#fff"
+    backgroundColor:"#fff",
+    marginTop: "15px",
   },
 
   warningDropText:{
@@ -151,9 +152,9 @@ const UploadForm = ({handleClose}) => {
       errors = true;
     }
     if (file === null) {
-      alert("Ponga un arhcivo parce");
       setfileError(true);
       errors = true;
+      alert("Ponga un arhcivo parce");
     }
 
     if (!errors) {
@@ -180,7 +181,7 @@ const UploadForm = ({handleClose}) => {
           <CloseIcon/>
         </IconButton>
 
-        <div className="upload_form">     
+        <div className="upload-form">
           <div className="subContainer"> 
             <div className={classes.leftDiv}>     
               <InputText
@@ -218,28 +219,28 @@ const UploadForm = ({handleClose}) => {
             </div>  
             <div className={classes.rightDiv}> 
 
-            <div>
-              {file === null ? (
-                <MyDropzone setFile={setfile} />
-              ) : (
-                <UploadedFile file={file} setFile={setfile} />
-              )}
-              {fileError === true ? (<p
-                className={classes.warningDropText}
-              >Parce, coloque un archivo</p> ) : ("")}
-            </div>
+              <div>
+                {file === null ? (
+                  <MyDropzone setFile={setfile} />
+                ) : (
+                  <UploadedFile file={file} setFile={setfile} />
+                )}
+                {fileError === true ? (<p
+                  className={classes.warningDropText}
+                >Parce, coloque un archivo</p> ) : ("")}
+              </div>
 
-              <TextField
-                id="outlined-multiline-static"
-                label="Descripción"
-                multiline
-                rows={4}
-                defaultValue=""
-                variant="outlined"
-                className={classes.descriptionBox}
-                value={descripcionText}
-                onChange={handleChange}
-              />
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Descripción"
+                  multiline
+                  rows={4}
+                  defaultValue=""
+                  variant="outlined"
+                  className={classes.descriptionBox}
+                  value={descripcionText}
+                  onChange={handleChange}
+                />
             </div>
           </div>
             <Button

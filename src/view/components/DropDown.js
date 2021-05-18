@@ -5,7 +5,7 @@ import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 function DropDown({
   title,
   items = [],
-  multiSelect: multiSelect = false,
+  multiSelect = false,
   selection,
   setSelection,
 }) {
