@@ -3,10 +3,10 @@ import DropDown from "./components/DropDown";
 import "./css/programmeResults.css";
 import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaBars } from "react-icons/all";
-import Slide from "react-reveal/Slide";
 import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
+
 
 const programmeName = "mater";
 
@@ -122,36 +122,29 @@ function ProgrammeResults({ match }) {
     );
   };
 
+  let principalMenu = (title, items) => {
+    return (
+        <DropDown
+            title={title}
+            items={items}
+            selection={selection}
+            setSelection={setSelection}
+            multiSelect
+        />
+    )
+  }
+
   return (
     <div className={"general"}>
       <NavBar />
-      {open && (
-        <Slide left>
-          <div className={"principal-menu-bar"}>
-            <DropDown
-              title="Categoría"
-              items={categories}
-              selection={selection}
-              setSelection={setSelection}
-              multiSelect
-            />
-            <DropDown
-              title="Profesor"
-              items={professors}
-              selection={selection}
-              setSelection={setSelection}
-              multiSelect
-            />
-            <DropDown
-              title="Semestre"
-              items={semesters}
-              selection={selection}
-              setSelection={setSelection}
-              multiSelect
-            />
+      {open
+          ? <div className={"principal-menu-bar principal-menu-bar-non-clicked"}>
+            {principalMenu("Categoría", categories)}
+            {principalMenu("Profesor", professors)}
+            {principalMenu("Semestre", semesters)}
           </div>
-        </Slide>
-      )}
+          : <div className={"principal-menu-bar hide-principal-menu-bar"}/>
+      }
       {open
         ? programme(
             "files-section-non-clicked",
