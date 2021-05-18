@@ -3,9 +3,10 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   textField: {
     backgroundColor: "white",
+    fontSize: "7px"
   },
   container: {
     marginTop: "1em",
