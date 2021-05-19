@@ -4,15 +4,21 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Admin from './view/Admin';
 import Home from './view/Home';
 import ProgrammeResults from "./view/ProgrammeResults";
-import { createContext } from 'react';
+import {createContext, useEffect} from 'react';
 import ContextProvider from './view/ContextProvider';
 import { AuthProvider } from "./model/firebaseAuthPersistence/AuthProvider";
 import PrivateRoute from "./model/firebaseAuthPersistence/PrivateRoute";
+import { firebaseAnalytics } from "./model/firebaseSelf/firebaseConfig";
 
 
 export const contextProvider = createContext(undefined)
 
 function App() {
+
+    /*Google analytics*/
+    useEffect(() => {
+        firebaseAnalytics.logEvent("homepage_visited")
+    })
 
     return (
         <Router>

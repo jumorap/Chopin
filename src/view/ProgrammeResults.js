@@ -10,8 +10,6 @@ import Materias from "../model/Materias";
 
 
 function ProgrammeResults({ match }) {
-    
-
 
   /* const firstRender = useRef(true); */  
   const [firstRender, setfirstRender] = useState(true)
@@ -19,7 +17,6 @@ function ProgrammeResults({ match }) {
   useEffect(() => {    
     setfirstRender(true)
   }, [match])
-
   
 
   const [materiaValues, setMateriaValues] = useState({

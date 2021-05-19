@@ -1,15 +1,21 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { Route, Redirect } from "react-router-dom"
 import { AuthContext } from "./AuthProvider"
-import { firebaseAppAuth } from "../firebaseSelf/firebaseConfig";
+import { firebaseAnalytics, firebaseAppAuth } from "../firebaseSelf/firebaseConfig"
 
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
-    const {currentUser} = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext)
 
-    var user = firebaseAppAuth.currentUser;
-    let isUnalUser;
+    var user = firebaseAppAuth.currentUser
+    let isUnalUser
     if (user) isUnalUser = !!user.email.toString().split('@')[1].includes('unal.edu.co')
+
+    /*Google analytics*/
+    useEffect(() => {
+        if (!isUnalUser) firebaseAnalytics.logEvent(`UnalUser_false`)
+        else if (isUnalUser) firebaseAnalytics.logEvent(`UnalUser_true`)
+    })
 
     return (
         <Route

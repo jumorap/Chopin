@@ -1,6 +1,7 @@
 import firebase from "firebase/app"
 import "firebase/storage"
 import "firebase/firestore"
+import "firebase/analytics"
 
 
 var firebaseConfig = {
@@ -32,6 +33,9 @@ export const providers = {
 // DB firestorage
 export const db = firebase.firestore();
 export const storage = firebase.storage();
+
+// Google Analytics
+export const firebaseAnalytics = firebase.analytics();
 
 export default firebaseConfig;
 
