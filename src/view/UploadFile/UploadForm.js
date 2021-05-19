@@ -160,6 +160,19 @@ const UploadForm = ({handleClose}) => {
     }
   };
 
+  function setInputText(label, options, optionLabel, setOption, errorState, setError) {
+    return (
+        <InputText
+            label={label}
+            options={options}
+            optionLabel={optionLabel}
+            setOption={setOption}
+            errorState={errorState}
+            setError={setError}
+        />
+    )
+  }
+
   return (
   
     <div className="container">  
@@ -172,39 +185,13 @@ const UploadForm = ({handleClose}) => {
 
         <div className="upload-form">
           <div className="subContainer"> 
-            <div className={classes.leftDiv}>     
-              <InputText
-                label={"Materias"}
-                options={materias}
-                optionLabel={"materia"}
-                setOption={setmateriaText}
-                errorState={materiaError}
-                setError={setmateriaError}
-              />
-              <InputText
-                label={"Profesor"}
-                options={profesores}
-                optionLabel={"profesor"}
-                setOption={setProfesorText}
-                errorState={profesorError}
-                setError={setProfesorError}
-              />
-              <InputText
-                label={"Semestre"}
-                options={semestres}
-                optionLabel={"semestre"}
-                setOption={setSemestreText}
-                errorState={semestreError}
-                setError={setSemestreError}
-              />
-              <InputText
-                label={"Categoria"}
-                options={categorias}
-                optionLabel={"categoria"}
-                setOption={setcategoriaText}
-                errorState={categoriaError}
-                setError={setcategoriaError}
-              />
+            <div className={classes.leftDiv}>
+
+              {setInputText("Materias", materias, "materia", setmateriaText, materiaError, setmateriaError)}
+              {setInputText("Profesor", profesores, "profesor", setProfesorText, profesorError, setProfesorError)}
+              {setInputText("Semestre", semestres, "semestre", setSemestreText, semestreError, setSemestreError)}
+              {setInputText("Categoria", categorias, "categoria", setcategoriaText, categoriaError, setcategoriaError)}
+
             </div>  
             <div className={classes.rightDiv}> 
 
