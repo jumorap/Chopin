@@ -57,7 +57,7 @@ const useStyles = makeStyles(() => ({
     fontFamily: "inherit",
     fontSize: "20px",
   },
-  
+
   descriptionBox: {
     width: "105%",
     backgroundColor:"#fff",
@@ -95,7 +95,7 @@ const UploadForm = ({handleClose}) => {
   };
 
   const handleSubmit = () => {
-    
+
     let errors = false;
 
     if (materiaText === null || materiaText.length === 0) {
@@ -122,13 +122,13 @@ const UploadForm = ({handleClose}) => {
 
     if (!errors) {
       Archivos.crearArchivos(
-        materiaText.id,
-        descripcionText,
-        profesorText.profesor,
-        semestreText.semestre,
-        "usuario",
-        categoriaText.categoria,
-        file
+          materiaText.id,
+          descripcionText,
+          profesorText.profesor,
+          semestreText.semestre,
+          "usuario",
+          categoriaText.categoria,
+          file
       );
       handleClose()
     }
@@ -148,8 +148,8 @@ const UploadForm = ({handleClose}) => {
   }
 
   return (
-  
-    <div className="container">  
+
+      <div className="container">
         <div className = {classes.sharemessage}>
           Compartir
         </div>
@@ -158,7 +158,7 @@ const UploadForm = ({handleClose}) => {
         </IconButton>
 
         <div className="upload-form">
-          <div className="subContainer"> 
+          <div className="subContainer">
             <div className={classes.leftDiv}>
 
               {setInputText("Materias", materias, "materia", setmateriaText, materiaError, setmateriaError)}
@@ -166,21 +166,21 @@ const UploadForm = ({handleClose}) => {
               {setInputText("Semestre", semestres, "semestre", setSemestreText, semestreError, setSemestreError)}
               {setInputText("Categoria", categorias, "categoria", setcategoriaText, categoriaError, setcategoriaError)}
 
-            </div>  
-            <div className={classes.rightDiv}> 
+            </div>
+            <div className={classes.rightDiv}>
 
               <div>
                 {file === null ? (
-                  <MyDropzone setFile={setfile} />
+                    <MyDropzone setFile={setfile} />
                 ) : (
-                  <UploadedFile file={file} setFile={setfile} />
+                    <UploadedFile file={file} setFile={setfile} />
                 )}
                 {fileError === true ? (<p
-                  className={classes.warningDropText}
+                    className={classes.warningDropText}
                 >Parce, coloque un archivo</p> ) : ("")}
               </div>
 
-                <TextField
+              <TextField
                   id="outlined-multiline-static"
                   label="Descripción"
                   multiline
@@ -190,18 +190,18 @@ const UploadForm = ({handleClose}) => {
                   className={classes.descriptionBox}
                   value={descripcionText}
                   onChange={handleChange}
-                />
+              />
             </div>
           </div>
-            <Button
-                  variant="contained"
-                  className={classes.uploadButton}
-                  onClick={handleSubmit}
-                >
-                  Compartir
-                </Button>
+          <Button
+              variant="contained"
+              className={classes.uploadButton}
+              onClick={handleSubmit}
+          >
+            Compartir
+          </Button>
         </div>
-    </div>  
+      </div>
   );
 };
 

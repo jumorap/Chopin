@@ -23,7 +23,6 @@ export function FilesByProgramme({ items = [] }) {
               type="application/pdf"
               width="100%"
               height="100%"
-              
             />
           </Suspense>
         </div>
@@ -34,25 +33,25 @@ export function FilesByProgramme({ items = [] }) {
   let cards = items.map(
     (item) =>
       item && (
-        <div className={"card-container"} key = {Date.now()}>
-          <div className={"files-programme"} onClick={() => openAndClose(item)}>
-            <div className={"file-by-type"}>{item.tipo}</div>
-            <div className={"file-by-description"}>{item.comentarios}</div>
-            <div className={"file-by-teacher"}>
-              <b>{item.semestre}</b> - {item.profesor}
-            </div>
+          <div className={"card-container"}>
+              <div className={"files-programme"} onClick={() => openAndClose(item)}>
+                <div className={"file-by-type"}>{item.tipo}</div>
+                <div className={"file-by-description"}>{item.comentarios}</div>
+                <div className={"file-by-teacher"}>
+                  <b>{item.semestre}</b> - {item.profesor}
+                </div>
 
-            <div className={"like"} />
+                <div className={"like"} />
 
-            <div className={"star"}>
-              <FaStar className={"star-component"} />
-            </div>
+                <div className={"star"}>
+                  <FaStar className={"star-component"} />
+                </div>
+              </div>
+
+              <Modal open={modal} onClose={openAndClose}>
+                {body()}
+              </Modal>
           </div>
-
-          <Modal open={modal} onClose={openAndClose}>
-            {body()}
-          </Modal>
-        </div>
       )
   );
 
