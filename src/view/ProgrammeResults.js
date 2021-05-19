@@ -1,135 +1,111 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DropDown from "./components/DropDown";
 import "./css/programmeResults.css";
 import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaBars } from "react-icons/all";
-import Slide from "react-reveal/Slide";
 import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
+import Materias from "../model/Materias";
 
-const categories = [
-  {
-    id: 11,
-    value: "Parcial 1",
-    type: "category",
-  },
-  {
-    id: 12,
-    value: "Parcial 2",
-    type: "category",
-  },
-  {
-    id: 13,
-    value: "Parcial 3",
-    type: "category",
-  },
-  {
-    id: 14,
-    value: "Parcial 4",
-    type: "category",
-  },
-];
 
-const professors = [
-  {
-    id: 21,
-    value: "Ovidio Almanza",
-    type: "prof",
-  },
-  {
-    id: 22,
-    value: "Pepito perez",
-    type: "prof",
-  },
-  {
-    id: 23,
-    value: "Ovidio Almanza de la rosa castañeda",
-    type: "prof",
-  },
-  {
-    id: 24,
-    value: "Joselito Carnaval",
-    type: "prof",
-  },
-  {
-    id: 25,
-    value: "Joselito Carnaval 2.0",
-    type: "prof",
-  },
-];
+const programmeName = "mater";
 
-const semester = [
-  {
-    id: 31,
-    value: "2019-1",
-    type: "semester",
-  },
-  {
-    id: 32,
-    value: "2019-2",
-    type: "semester",
-  },
-  {
-    id: 33,
-    value: "2020-1",
-    type: "semester",
-  },
-  {
-    id: 34,
-    value: "2020-2",
-    type: "semester",
-  },
-];
+function ProgrammeResults({ match }) {
+  const firstRender = useRef(true);
 
-const itemsFiles = [
-  {
-    url: "https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce",
-    name: "Parcial 1",
-    description:
-      "El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio",
-    teacher: "Ovidio Almanza",
-    semester: "2019-1",
-  },
-  {
-    url: "https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce",
-    name: "Parcial 2",
-    description:
-      "El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio",
-    teacher: "Ovidio Almanza",
-    semester: "2019-2",
-  },
-  {
-    url: "https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce",
-    name: "Parcial 2",
-    description:
-      "El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio",
-    teacher: "Ovidio Almanza",
-    semester: "2019-1",
-  },
-  {
-    url: "https://firebasestorage.googleapis.com/v0/b/red-board-70d99.appspot.com/o/UNIVERSIDAD_NACIONAL%2FMaterias%2Fse8yVWYItrnikDgWXYW8%2FTaller1%20métodos%20numéricos.pdf?alt=media&token=ae6d8747-8e13-4a5b-a6f6-4f4922a1bfce",
-    name: "Parcial 2",
-    description:
-      "El ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudioEl ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudioEl ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudioEl ilustrísimo maestro, doctor san Ovidio, nos compartió esta increíble guía de estudio",
-    teacher: "Ovidio Almanza de la rosa castañeda",
-    semester: "2019-2",
-  },
-];
+  const [materiaValues, setMateriaValues] = useState({
+    nombre: "Dificultades Tecnicas",
+    profesores: {},
+    semestres: {},
+    tipos: {},
+    trabajos: [
+      {
+        ID_archivo: "IVwrevYsTiCKMPJrTohW",
+        comentarios: "Lamentablemente no hay archivos, sube alguno!",
+        profesor: "",
+        semestre: "",
+        tipo: "No hay archivos disponibles",
+        url: "",
+      },
+    ],
+  });
 
-const programmeName = "Fundamentos de Electricidad y Magnetísmo";
+  /**Muestra las materia actual segun la pagina web en la que se encuentre */
 
-function ProgrammeResults() {
-  const [open, setOpen] = useState(false);
-  const [filtering, setFiltering] = useState(false);
-  const [selection, setSelection] = useState([]);
+  function getArrayFromObject(object) {
+    const objectArray = [];
+    Object.keys(object).map((key) => {
+      objectArray.push(object[key]);
+    });
+    //console.log(objectArray);
+    return objectArray;
+  }
+
+  let fetchFiles = () => {
+    Materias._getFilesList(match.params.idMateria).then((value) => {
+      console.log(value.data());
+      setMateriaValues({
+        ...value.data(),
+        trabajos: getArrayFromObject(value.data().trabajos),
+      });
+      console.log("foo2: ", getArrayFromObject(value.data().trabajos));
+    });
+  };
 
   useEffect(() => {
-    if (selection.length !== 0) setFiltering(true);
-    else setFiltering(false);
-    /* selection.forEach((el) => console.log(el)); */
-  }, [selection]);
+    if (firstRender.current === true) {
+      fetchFiles();
+      firstRender.current = false;
+    }
+  });
 
-  function programme(properties, propertiesHamburger, redBar) {
+  const [open, setOpen] = useState(false);
+  const [selection, setSelection] = useState([]);
+
+  let filteredFiles = materiaValues.trabajos.map((file) => {
+    let check = 0;
+    ["category", "prof", "semester"].forEach((type) => {
+      let choosen = selection.filter((filt) => filt.type === type);
+      /* console.log(type, "foo", choosen); */
+      if (choosen.length) {
+        if (
+          type === "category" &&
+          choosen.find((elem) => elem.value === file.tipo)
+        )
+          check++;
+        if (
+          type === "prof" &&
+          choosen.find((elem) => elem.value === file.profesor)
+        )
+          check++;
+        if (
+          type === "semester" &&
+          choosen.find((elem) => elem.value === file.semestre)
+        )
+          check++;
+      } else {
+        check++;
+      }
+    });
+    if (check === 3) return file;
+  });
+
+  const categories = Object.keys(materiaValues.tipos).map((cat, index) => {
+    return { id: `cat-${index}`, value: cat, type: "category" };
+  });
+  const professors = Object.keys(materiaValues.profesores).map(
+    (professor, index) => {
+      return { id: `professor-${index}`, value: professor, type: "prof" };
+    }
+  );
+
+  let semesters = Object.keys(materiaValues.semestres).map(
+    (semester, index) => {
+      return { id: `semester-${index}`, value: semester, type: "semester" };
+    }
+  );
+
+  let programme = (properties, propertiesHamburger, redBar) => {
     return (
       <div className={`files-section ${properties}`}>
         <div className={`title-programme ${redBar}`}>
@@ -137,77 +113,38 @@ function ProgrammeResults() {
             className={propertiesHamburger}
             onClick={() => setOpen(!open)}
           />
-          {programmeName}
+          {materiaValues.nombre}
         </div>
         <div className={"for-each-programme"}>
-          {filtering ? (
-            <FilesByProgramme
-              items={itemsFiles.map((file) => {
-                let check = 0;
-                ["category", "prof", "semester"].forEach((type) => {
-                  let choosen = selection.filter((filt) => filt.type == type);
-                  console.log(type, "foo", choosen);
-                  if (choosen.length) {
-                    if (
-                      type === "category" &&
-                      choosen.find((elem) => elem.value === file.name)
-                    )
-                      check++;
-                    if (
-                      type === "prof" &&
-                      choosen.find((elem) => elem.value === file.teacher)
-                    )
-                      check++;
-                    if (
-                      type === "semester" &&
-                      choosen.find((elem) => elem.value === file.semester)
-                    )
-                      check++;
-                  } else {
-                    check++;
-                  }
-                });
-                if (check === 3) return file;
-              })}
-            />
-          ) : (
-            <FilesByProgramme items={itemsFiles} />
-          )}
+          <FilesByProgramme items={filteredFiles} />
         </div>
       </div>
     );
+  };
+
+  let principalMenu = (title, items) => {
+    return (
+        <DropDown
+            title={title}
+            items={items}
+            selection={selection}
+            setSelection={setSelection}
+            multiSelect
+        />
+    )
   }
 
   return (
     <div className={"general"}>
       <NavBar />
-      {open && (
-        <Slide left>
-          <div className={"principal-menu-bar"}>
-            <DropDown
-              title="Categoría"
-              items={categories}
-              selection={selection}
-              setSelection={setSelection}
-              multiSelect
-            />
-            <DropDown
-              title="Profesor"
-              items={professors}
-              selection={selection}
-              setSelection={setSelection}
-              multiSelect
-            />
-            <DropDown
-              title="Semestre"
-              items={semester}
-              selection={selection}
-              setSelection={setSelection}
-              multiSelect
-            />
+      {open
+          ? <div className={"principal-menu-bar principal-menu-bar-non-clicked"}>
+            {principalMenu("Categoría", categories)}
+            {principalMenu("Profesor", professors)}
+            {principalMenu("Semestre", semesters)}
           </div>
-        </Slide>
-      )}
+          : <div className={"principal-menu-bar hide-principal-menu-bar"}/>
+      }
       {open
         ? programme(
             "files-section-non-clicked",
@@ -215,7 +152,7 @@ function ProgrammeResults() {
             "red-bar"
           )
         : programme("files-section-clicked", "hamburger-menu")}
-      <UploadFile />
+      <UploadFile onClick={fetchFiles} />
     </div>
   );
 }

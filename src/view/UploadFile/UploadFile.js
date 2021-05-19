@@ -34,7 +34,7 @@ const UploadFile = () => {
   return (
     <div>
       <Modal open={open} onClose={handleClose} className={"ModalWindow"}>
-        <UploadForm />
+        <UploadForm handleClose = {handleClose}/>
       </Modal>
 
       <IconButton
