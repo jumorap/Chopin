@@ -3,9 +3,10 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   textField: {
     backgroundColor: "white",
+    fontSize: "7px"
   },
   container: {
     marginTop: "1em",
@@ -39,7 +40,7 @@ const InputText = ({
       id={`combo-box-${String(optionLabel)}`}
       options={options}
       getOptionLabel={(option) => option[optionLabel]}
-      style={{ width: 300 }}
+      style={{ width: "100%" }}
       renderInput={(params) => (
         <TextField
           className={classes.textField}

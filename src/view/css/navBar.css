@@ -1,5 +1,5 @@
 .main-navbar{
-    background-color: #15202B;
+    background-color: var(--principalBlue);
     width: 100%;
     padding: 0 2px 4px;
     position: absolute;

@@ -3,7 +3,7 @@ import "../css/filesByProgramme.css";
 import { Modal } from "@material-ui/core";
 import Zoom from "react-reveal/Zoom";
 import { CgSpinner, FaStar } from "react-icons/all";
-import { SelectAllRounded } from "@material-ui/icons";
+
 
 export function FilesByProgramme({ items = [] }) {
   const [modal, setModal] = useState(false);
@@ -12,7 +12,7 @@ export function FilesByProgramme({ items = [] }) {
     setModal(!modal);
     setClicked(item);
   };
-  //console.log(items);
+
   let body = () => (
     <div className="modal">
       <Zoom>
@@ -23,7 +23,7 @@ export function FilesByProgramme({ items = [] }) {
               type="application/pdf"
               width="100%"
               height="100%"
-            ></object>
+            />
           </Suspense>
         </div>
       </Zoom>
