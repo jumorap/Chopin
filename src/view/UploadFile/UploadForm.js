@@ -9,17 +9,6 @@ import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from '@material-ui/icons/Close';
 
-const materiasProv = [
-  { title: "Ingnieria de software", ID: "19283y" },
-  { title: "Arquitectura de software", ID: "19283y" },
-  { title: "Ingnieria de software 2", ID: "19283y" },
-  { title: "Ingnieria economica", ID: "19283y" },
-  { title: "Ingnieria de gatos", ID: "19283y" },
-  {
-    title: "Introduccion a los estudios de genero y anatomicos de personas",
-    ID: "19283y",
-  },
-];
 
 const semestres = [
   { semestre: "2021-2" },
@@ -172,6 +161,8 @@ const UploadForm = ({handleClose}) => {
           errorState={categoriaError}
           setError={setcategoriaError}
         />
+
+        
 
         <Button
           variant="contained"
