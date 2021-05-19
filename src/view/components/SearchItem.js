@@ -1,12 +1,11 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/searchItem.css";
 
-function SearchItem({ nombre, link }) {
-  let history = useHistory()
+function SearchItem({ nombre, link, click }) {  
   
   return (    
-    <Link to={`/materias/${link}`} className="search-item-link">
+    <Link to={`/materias/${link}`} className="search-item-link" onClick = {click}>
       <div className="search-item-container">{nombre}</div>
     </Link>
   );

@@ -1,6 +1,6 @@
 import './App.css';
 import Login from "./view/Login";
-import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Admin from './view/Admin';
 import Home from './view/Home';
 import ProgrammeResults from "./view/ProgrammeResults";
@@ -18,6 +18,7 @@ function App() {
         <Router>
             <AuthProvider>
             <ContextProvider>
+                
                 <Switch>
                             <PrivateRoute exact path="/materias/:idMateria" component={ ProgrammeResults} />
                             <PrivateRoute exact path="/results" component={ProgrammeResults} />
@@ -25,6 +26,7 @@ function App() {
                             <PrivateRoute exact path="/home" component={Home} />
                             <Route exact path="/" component={Login} />
                 </Switch>
+                
             </ContextProvider>
             </AuthProvider>
         </Router>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import DropDown from "./components/DropDown";
 import "./css/programmeResults.css";
 import { FilesByProgramme } from "./components/FilesByProgramme";
@@ -8,10 +8,19 @@ import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 
 
-const programmeName = "mater";
 
 function ProgrammeResults({ match }) {
-  const firstRender = useRef(true);
+    
+
+
+  /* const firstRender = useRef(true); */  
+  const [firstRender, setfirstRender] = useState(true)
+  
+  useEffect(() => {    
+    setfirstRender(true)
+  }, [match])
+
+  
 
   const [materiaValues, setMateriaValues] = useState({
     nombre: "Dificultades Tecnicas",
@@ -34,7 +43,7 @@ function ProgrammeResults({ match }) {
 
   function getArrayFromObject(object) {
     const objectArray = [];
-    Object.keys(object).map((key) => {
+    Object.keys(object).forEach((key) => {
       objectArray.push(object[key]);
     });
     //console.log(objectArray);
@@ -53,11 +62,13 @@ function ProgrammeResults({ match }) {
   };
 
   useEffect(() => {
-    if (firstRender.current === true) {
-      fetchFiles();
-      firstRender.current = false;
+    if (firstRender === true) {      
+      fetchFiles();      
+      setfirstRender(false)
     }
-  });
+  }, [firstRender]);
+
+
 
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
@@ -136,6 +147,7 @@ function ProgrammeResults({ match }) {
 
   return (
     <div className={"general"}>
+      
       <NavBar />
       {open
           ? <div className={"principal-menu-bar principal-menu-bar-non-clicked"}>

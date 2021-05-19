@@ -6,7 +6,7 @@ import "../css/searcher.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
-import { useFullTextSearch, useMaterias } from "../ContextProvider";
+import { useFullTextSearch } from "../ContextProvider";
 
 function Searcher() {
   /**Texto de la barra del buscador */
@@ -17,8 +17,7 @@ function Searcher() {
 
   const firstRender = useRef(true);
 
-  /**Traemos la lista de materias de el context */
-  const listaMaterias = useMaterias();
+  
 
   /**Traemos el full textSearch del context*/
   const searcherEngine = useFullTextSearch();
@@ -53,7 +52,7 @@ function Searcher() {
           placeholder="Escribe el nombre de la materia"
           value={searchText}
           onChange={handleInputTextChange}
-          autocomplete="off"
+          autoComplete="off"
         />
         <div className="faic">
           <IconButton
@@ -72,7 +71,7 @@ function Searcher() {
 
       {/* Diplay search results */}
       {searchResults.map((val) => (
-        <SearchItem nombre={val.data} link={val.id} key={val.id} />
+        <SearchItem nombre={val.data} link={val.id} key={val.id} click = {handleCloseButton}/>
       ))}
     </div>
   );

@@ -14,6 +14,7 @@
 .search-item-link{
     color: inherit;
     text-decoration: inherit;
+    z-index: 2;
 }
 
 .search-item-container:hover{
