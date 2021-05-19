@@ -41,8 +41,7 @@ const Admin = () => {
     //full text search materias
     const [materiaSearch, setmateriaSearch] = useState("")
     
-    //getMateria
-    const [materiaClass, setmateriaClass] = useState(new Materias("xmLGdb0H239zeZGezOje"))
+    
 
 
     //Crea una materia en la base de datos

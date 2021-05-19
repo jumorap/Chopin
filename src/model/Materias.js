@@ -103,7 +103,7 @@ class Materias {
 
   _getArrayFromObject(object) {
     const objectArray = [];
-    Object.keys(object).map((key) => {
+    Object.keys(object).forEach((key) => {
       objectArray.push(object[key]);
     });
     console.log(objectArray);

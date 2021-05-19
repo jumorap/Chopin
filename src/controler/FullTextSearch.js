@@ -20,7 +20,9 @@ class FullTextSearch {
   _createReverseIndex(data) {
     this.index.addField("materia");
     this.index.setRef("id");
-    data.map((materia) => {
+    
+    
+    data.forEach((materia) => {
       this.index.addDoc(materia);
       this.idMateriaMap.set(materia.id, materia.materia);
     });
