@@ -9,9 +9,10 @@ import { useMaterias, useProfesores } from "../ContextProvider";
 import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from '@material-ui/icons/Close';
+import {firebaseAppAuth} from "../../model/firebaseSelf/firebaseConfig";
 
 
-
+var user = firebaseAppAuth.currentUser
 
 const useStyles = makeStyles(() => ({
   uploadButton: {
@@ -120,13 +121,14 @@ const UploadForm = ({handleClose}) => {
       alert("Ponga un arhcivo parce");
     }
 
+
     if (!errors) {
       Archivos.crearArchivos(
           materiaText.id,
           descripcionText,
           profesorText.profesor,
           semestreText.semestre,
-          "usuario",
+          user.uid,
           categoriaText.categoria,
           file
       );
