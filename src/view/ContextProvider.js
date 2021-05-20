@@ -13,6 +13,16 @@ import Profesores from '../model/Profesores'
 const materiasContext = createContext()
 const profesoresContext = createContext()
 const fullTextSearchContext = createContext()
+const materiaContext = createContext()
+
+/**
+ * Retorns an Map with key the id of the materia and value an Object with The atributs of Materia
+ * @returns Map(IdMateria<String>, Materia<Obj>)
+ */
+export function useMateriaMap(){
+    return useContext(materiaContext)
+}
+
 
 /**Returns a list with al the "Materias"
  * @returns Array[{id: <string>, materias: <string>}]
@@ -44,6 +54,7 @@ const ContextProvider = ({ children }) => {
     const [listaMaterias, setlistaMaterias] = useState([])
     const [listProfesores, setlistProfesores] = useState([])
     const [fullTextSearchMaterias, setfullTextSearchMaterias] = useState()
+    const [mapMaterias, setmapMaterias] = useState(new Map())
 
             
     const firstRender = useRef(true)
@@ -59,14 +70,17 @@ const ContextProvider = ({ children }) => {
             Profesores.getProfesoresList()
             .then(value=>{
                 setlistProfesores(value)
-            })
+            })            
             firstRender.current = false            
         }
         
     }, [])
+
+
         
         
     return (
+        <materiaContext.Provider value = {mapMaterias}>
         <fullTextSearchContext.Provider value = {fullTextSearchMaterias}>        
         <profesoresContext.Provider value = {listProfesores}>
         <materiasContext.Provider value = {listaMaterias}>
@@ -74,6 +88,7 @@ const ContextProvider = ({ children }) => {
         </materiasContext.Provider>
         </profesoresContext.Provider>
         </fullTextSearchContext.Provider>
+        </materiaContext.Provider>
     )
 }
 

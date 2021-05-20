@@ -6,16 +6,32 @@ import { FaBars } from "react-icons/all";
 import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
-
+import {useMateriaMap} from "./ContextProvider"
 
 
 function ProgrammeResults({ match }) {
-
+  
   /* const firstRender = useRef(true); */  
   const [firstRender, setfirstRender] = useState(true)
   
+  /**The conection with the provider to check the existence of the subject */
+  const materiaMap =  useMateriaMap()
+  
+
+  /**The Id bring by the context that has the id of the materia to be displayed */
+  const idCurrentMateria = match.params.idMateria
+  
   useEffect(() => {    
-    setfirstRender(true)
+       
+    console.log("hola")
+    if(materiaMap.has(idCurrentMateria)){
+      console.log("EL archivo ya se encuentra en el context")
+      setMateriaValues(materiaMap.get(idCurrentMateria))
+    }else{
+      fetchFiles();        
+    }
+    setfirstRender(false)
+    
   }, [match])
   
 
@@ -36,6 +52,8 @@ function ProgrammeResults({ match }) {
     ],
   });
 
+
+
   /**Muestra las materia actual segun la pagina web en la que se encuentre */
 
   function getArrayFromObject(object) {
@@ -53,17 +71,19 @@ function ProgrammeResults({ match }) {
       setMateriaValues({
         ...value.data(),
         trabajos: getArrayFromObject(value.data().trabajos),
-      });
-      console.log("foo2: ", getArrayFromObject(value.data().trabajos));
+      });      
     });
   };
 
+  //when the Materia is featched form the DB, it updates the materiaMap context value
   useEffect(() => {
-    if (firstRender === true) {      
-      fetchFiles();      
-      setfirstRender(false)
+    if(firstRender === false){
+      if(! materiaMap.has(idCurrentMateria)){
+        materiaMap.set(idCurrentMateria, {...materiaValues})
+        console.log("Se acaba de actualizar el valor de el map Materia")
+      }
     }
-  }, [firstRender]);
+  }, [materiaValues])
 
 
 
