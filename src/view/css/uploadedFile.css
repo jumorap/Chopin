@@ -1,9 +1,9 @@
 .pdf-circle{
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 3rem;    
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5rem;
     border: 1px solid brown;
-    margin-right: 1rem;    
+    margin-right: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +25,7 @@
 .text-max-pdf {
     text-overflow: ellipsis;
     overflow: hidden;
-    max-width: 200px;
+    max-width: 70px;
     max-height: 20px;
 
 }
