@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import DropDown from "./components/DropDown";
 import "./css/programmeResults.css";
 import { FilesByProgramme } from "./components/FilesByProgramme";
@@ -6,34 +6,28 @@ import { FaBars } from "react-icons/all";
 import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
-import {useMateriaMap} from "./ContextProvider"
-
+import { useMateriaMap } from "./ContextProvider";
 
 function ProgrammeResults({ match }) {
-  
-  /* const firstRender = useRef(true); */  
-  const [firstRender, setfirstRender] = useState(true)
-  
+  /* const firstRender = useRef(true); */
+  const [firstRender, setfirstRender] = useState(true);
+
   /**The conection with the provider to check the existence of the subject */
-  const materiaMap =  useMateriaMap()
-  
+  const materiaMap = useMateriaMap();
 
   /**The Id bring by the context that has the id of the materia to be displayed */
-  const idCurrentMateria = match.params.idMateria
-  
-  useEffect(() => {    
-       
-    console.log("hola")
-    if(materiaMap.has(idCurrentMateria)){
-      console.log("EL archivo ya se encuentra en el context")
-      setMateriaValues(materiaMap.get(idCurrentMateria))
-    }else{
-      fetchFiles();        
+  const idCurrentMateria = match.params.idMateria;
+
+  useEffect(() => {
+    console.log("hola");
+    if (materiaMap.has(idCurrentMateria)) {
+      console.log("EL archivo ya se encuentra en el context");
+      setMateriaValues(materiaMap.get(idCurrentMateria));
+    } else {
+      fetchFiles();
     }
-    setfirstRender(false)
-    
-  }, [match])
-  
+    setfirstRender(false);
+  }, [match]);
 
   const [materiaValues, setMateriaValues] = useState({
     nombre: "Dificultades Tecnicas",
@@ -52,8 +46,6 @@ function ProgrammeResults({ match }) {
     ],
   });
 
-
-
   /**Muestra las materia actual segun la pagina web en la que se encuentre */
 
   function getArrayFromObject(object) {
@@ -71,21 +63,19 @@ function ProgrammeResults({ match }) {
       setMateriaValues({
         ...value.data(),
         trabajos: getArrayFromObject(value.data().trabajos),
-      });      
+      });
     });
   };
 
   //when the Materia is featched form the DB, it updates the materiaMap context value
   useEffect(() => {
-    if(firstRender === false){
-      if(! materiaMap.has(idCurrentMateria)){
-        materiaMap.set(idCurrentMateria, {...materiaValues})
-        console.log("Se acaba de actualizar el valor de el map Materia")
+    if (firstRender === false) {
+      if (!materiaMap.has(idCurrentMateria)) {
+        materiaMap.set(idCurrentMateria, { ...materiaValues });
+        console.log("Se acaba de actualizar el valor de el map Materia");
       }
     }
-  }, [materiaValues])
-
-
+  }, [materiaValues]);
 
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
@@ -118,20 +108,23 @@ function ProgrammeResults({ match }) {
     if (check === 3) return file;
   });
 
-  const categories = Object.keys(materiaValues.tipos).map((cat, index) => {
-    return { id: `cat-${index}`, value: cat, type: "category" };
-  });
-  const professors = Object.keys(materiaValues.profesores).map(
-    (professor, index) => {
-      return { id: `professor-${index}`, value: professor, type: "prof" };
-    }
-  );
+  const categories = Object.keys(materiaValues.tipos)
+    .sort()
+    .map((cat, index) => {
+      return { id: `cat-${index}`, value: cat, type: "category" };
+    });
 
-  let semesters = Object.keys(materiaValues.semestres).map(
-    (semester, index) => {
+  const professors = Object.keys(materiaValues.profesores)
+    .sort()
+    .map((professor, index) => {
+      return { id: `professor-${index}`, value: professor, type: "prof" };
+    });
+
+  let semesters = Object.keys(materiaValues.semestres)
+    .sort()
+    .map((semester, index) => {
       return { id: `semester-${index}`, value: semester, type: "semester" };
-    }
-  );
+    });
 
   let programme = (properties, propertiesHamburger, redBar) => {
     return (
@@ -152,28 +145,28 @@ function ProgrammeResults({ match }) {
 
   let principalMenu = (title, items) => {
     return (
-        <DropDown
-            title={title}
-            items={items}
-            selection={selection}
-            setSelection={setSelection}
-            multiSelect
-        />
-    )
-  }
+      <DropDown
+        title={title}
+        items={items}
+        selection={selection}
+        setSelection={setSelection}
+        multiSelect
+      />
+    );
+  };
 
   return (
     <div className={"general"}>
-      
       <NavBar />
-      {open
-          ? <div className={"principal-menu-bar principal-menu-bar-non-clicked"}>
-            {principalMenu("Categoría", categories)}
-            {principalMenu("Profesor", professors)}
-            {principalMenu("Semestre", semesters)}
-          </div>
-          : <div className={"principal-menu-bar hide-principal-menu-bar"}/>
-      }
+      {open ? (
+        <div className={"principal-menu-bar principal-menu-bar-non-clicked"}>
+          {principalMenu("Categoría", categories)}
+          {principalMenu("Profesor", professors)}
+          {principalMenu("Semestre", semesters)}
+        </div>
+      ) : (
+        <div className={"principal-menu-bar hide-principal-menu-bar"} />
+      )}
       {open
         ? programme(
             "files-section-non-clicked",
