@@ -10223,6 +10223,11 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-loading-icons@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-loading-icons/-/react-loading-icons-1.0.4.tgz#6cf2b431e060eba10c65bb94f2aa6331b152401c"
+  integrity sha512-iVNcQq9b+2uJaaXAK1jvK2A+SH89RVvHMRlnl4QJxGMONJBZpJucCYwU+ZG6pXdtGGL0M6ejmu+jtKGvEqW9PQ==
+
 react-onclickoutside@^6.10.0:
   version "6.10.0"
   resolved "https://registry.npmjs.org/react-onclickoutside/-/react-onclickoutside-6.10.0.tgz"

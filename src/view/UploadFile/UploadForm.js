@@ -9,10 +9,8 @@ import { useMaterias, useProfesores } from "../ContextProvider";
 import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from '@material-ui/icons/Close';
-import {firebaseAppAuth} from "../../model/firebaseSelf/firebaseConfig";
+import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 
-
-var user = firebaseAppAuth.currentUser
 
 const useStyles = makeStyles(() => ({
   uploadButton: {
@@ -73,6 +71,8 @@ const useStyles = makeStyles(() => ({
 
 
 const UploadForm = ({handleClose}) => {
+  let user = firebaseAppAuth.currentUser
+
   const materias = useMaterias();
   const profesores = useProfesores();
 
@@ -118,7 +118,7 @@ const UploadForm = ({handleClose}) => {
     if (file === null) {
       setfileError(true);
       errors = true;
-      alert("Ponga un arhcivo parce");
+      alert("Ponga un arhcivo parcero");
     }
 
 
