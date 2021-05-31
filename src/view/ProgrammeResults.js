@@ -27,7 +27,8 @@ function ProgrammeResults({ match }) {
       fetchFiles();
     }
     setfirstRender(false);
-  }, [match]);
+    setSelection([]);
+  }, [idCurrentMateria]);
 
   const [materiaValues, setMateriaValues] = useState({
     nombre: "Dificultades Tecnicas",
