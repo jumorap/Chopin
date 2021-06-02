@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react'
 import FullTextSearch from '../controler/FullTextSearch'
+import MateriasView from '../controler/MateriasView'
 import Materias from '../model/Materias'
 import Profesores from '../model/Profesores'
 
 
 //create the context object 
 //read the subjects and create the list with those
-
 
 
 
@@ -49,12 +49,14 @@ export function useFullTextSearch(){
 }
 
 
+
 const ContextProvider = ({ children }) => {
 
     const [listaMaterias, setlistaMaterias] = useState([])
     const [listProfesores, setlistProfesores] = useState([])
     const [fullTextSearchMaterias, setfullTextSearchMaterias] = useState()
-    const [mapMaterias, setmapMaterias] = useState(new Map())
+    const [mapMaterias, setmapMaterias] = useState(new MateriasView())
+
 
             
     const firstRender = useRef(true)
@@ -75,12 +77,10 @@ const ContextProvider = ({ children }) => {
         }
         
     }, [])
-
-
-        
+            
         
     return (
-        <materiaContext.Provider value = {mapMaterias}>
+        <materiaContext.Provider value = {mapMaterias.mapMaterias}>
         <fullTextSearchContext.Provider value = {fullTextSearchMaterias}>        
         <profesoresContext.Provider value = {listProfesores}>
         <materiasContext.Provider value = {listaMaterias}>

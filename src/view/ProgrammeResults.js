@@ -46,6 +46,8 @@ function ProgrammeResults({ match }) {
     ],
   });
 
+  
+
   /**Muestra las materia actual segun la pagina web en la que se encuentre */
 
   function getArrayFromObject(object) {

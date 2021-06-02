@@ -73,7 +73,7 @@ const useStyles = makeStyles(() => ({
 const UploadForm = ({handleClose}) => {
   let user = firebaseAppAuth.currentUser
 
-  const materias = useMaterias();
+  const materias  = useMaterias();
   const profesores = useProfesores();
 
   const classes = useStyles();
@@ -95,7 +95,7 @@ const UploadForm = ({handleClose}) => {
     setDescripcionText(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
 
     let errors = false;
 
@@ -123,7 +123,7 @@ const UploadForm = ({handleClose}) => {
 
 
     if (!errors) {
-      Archivos.crearArchivos(
+      const new_materia = await Archivos.crearArchivos(
           materiaText.id,
           descripcionText,
           profesorText.profesor,
@@ -132,6 +132,7 @@ const UploadForm = ({handleClose}) => {
           categoriaText.categoria,
           file
       );
+      console.log(new_materia)
       handleClose()
     }
   };

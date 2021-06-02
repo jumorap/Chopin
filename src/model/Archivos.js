@@ -16,7 +16,7 @@ class Archivos {
    * @param  {String} id_usuario ID del usuario que suibio el documeno
    * @param  {String} categorias categorias del documento
    */
-  static crearArchivos(
+  static async crearArchivos(
     id_materia,
     descripcion,
     profesor,
@@ -25,7 +25,9 @@ class Archivos {
     categorias,
     file
   ) {
-    this._DBmateriasDisplay
+
+    
+    const docRef = await this._DBmateriasDisplay
       .doc(id_materia)
       .collection("TRABAJOS")
       .add({
@@ -34,39 +36,48 @@ class Archivos {
         semestre: semestre,
         categorias: categorias,
         id_usuario: id_usuario,
-      })
-      .then((docRef) => {
-        Archivos._uploadFile(id_materia, docRef.id, file);
-        Archivos._updateMateriasTrabajos(
-          id_materia,
-          docRef.id,
-          profesor,
-          categorias,
-          semestre,
-          descripcion
-        );
-        Archivos._updateMateriasFiltro(
-          id_materia,
-          docRef.id,
-          "profesores",
-          profesor
-        );
-        Archivos._updateMateriasFiltro(
-          id_materia,
-          docRef.id,
-          "semestres",
-          semestre
-        );
-        Archivos._updateMateriasFiltro(
-          id_materia,
-          docRef.id,
-          "tipos",
-          categorias
-        );
-      })
-      .catch((err) => {
-        console.log(`error in crear archivo: ${err}`);
-      });
+      })      
+
+  
+    Archivos._uploadFile(id_materia, docRef.id, file);
+
+    Archivos._updateMateriasTrabajos(
+      id_materia,
+      docRef.id,
+      profesor,
+      categorias,
+      semestre,
+      descripcion
+    );
+
+    Archivos._updateMateriasFiltro(
+      id_materia,
+      docRef.id,
+      "profesores",
+      profesor
+    );
+    Archivos._updateMateriasFiltro(
+      id_materia,
+      docRef.id,
+      "semestres",
+      semestre
+    );
+    Archivos._updateMateriasFiltro(
+      id_materia,
+      docRef.id,
+      "tipos",
+      categorias
+    );
+    
+    return  {
+      id_materia: id_materia,
+      id_archivo : docRef.id,
+      profesores: profesor,
+      semestres: semestre,
+      tipo: categorias,
+      comentarios: descripcion,
+      url : ""                
+    }         
   }
 
   /**
@@ -157,76 +168,7 @@ class Archivos {
       });
   }
 
-  //_________________________________________________________________________________________________________
-
-  static async crearArchivo2(
-    id_materia,
-    descripcion,
-    profesor,
-    semestre,
-    id_usuario,
-    categorias,
-    file
-  ) {
-    //upload the data of the file in the subcolection Archivos
-    const idArchivo = await this._addArchivo(
-      id_materia,
-      descripcion,
-      profesor,
-      semestre,
-      id_usuario,
-      categorias,
-      "hvyuvyurl"
-    );
-    //upload file to the storage service and get the URL
-    const url = await this._uploadFile2(id_materia, idArchivo, file);
-    //update the materias doc with all the data
-    this._updateMateriasTrabajos(
-      id_materia,
-      idArchivo,
-      url,
-      profesor,
-      categorias,
-      semestre,
-      descripcion
-    );
-    //update the filters
-    this._updateMateriasFiltro(id_materia, idArchivo, "profesores", profesor);
-    this._updateMateriasFiltro(id_materia, idArchivo, "semestres", semestre);
-    this._updateMateriasFiltro(id_materia, idArchivo, "tipos", categorias);
-  }
-
-  static async _uploadFile2(id_materia, id_archivo, file) {
-    const fileRef = this._storageRef.child(
-      `/Materias/${id_materia}/${id_archivo}`
-    );
-    const snapshot = await fileRef.put(file);
-    return snapshot.ref.getDownloadURL();
-  }
-
-  static async _addArchivo(
-    id_materia,
-    descripcion,
-    profesor,
-    semestre,
-    id_usuario,
-    categorias,
-    url
-  ) {
-    const doc = await this._DBmateriasDisplay
-      .doc(id_materia)
-      .collection("TRABAJOS")
-      .add({
-        descripcion: descripcion,
-        profesor: profesor,
-        semestre: semestre,
-        categorias: categorias,
-        id_usuario: id_usuario,
-        url: url,
-      });
-
-    return doc.id;
-  }
+  
 }
 
 export default Archivos;
