@@ -1,4 +1,5 @@
-import {db, storage} from "./firebaseSelf/firebaseConfig";
+import { db, firebaseAppAuth, storage } from "./firebaseSelf/firebaseConfig";
+
 
 class Archivos {
   static _storageRef = storage.ref().child("/UNIVERSIDAD_NACIONAL");
@@ -112,23 +113,28 @@ class Archivos {
     semestre,
     comentarios
   ) {
-    this._DBmateriasDisplay
-      .doc(id_materia)
-      .update({
-        [`trabajos.${id_archivo}`]: {
-          profesor: nombreProfesor,
-          tipo: tipoDocumento,
-          semestre: semestre,
-          comentarios: comentarios,
-          ID_archivo: id_archivo,
-        },
-      })
-      .then(() => {
-        console.log("Documento actualizado con exito");
-      })
-      .catch((err) => {
-        console.log(`error en la actualizacion de archivo ${err}`);
-      });
+    var user = firebaseAppAuth.currentUser;
+
+    if (user != null) {
+      this._DBmateriasDisplay
+          .doc(id_materia)
+          .update({
+            [`trabajos.${id_archivo}`]: {
+              profesor: nombreProfesor,
+              tipo: tipoDocumento,
+              semestre: semestre,
+              comentarios: comentarios,
+              ID_archivo: id_archivo,
+              usuario: firebaseAppAuth.currentUser.uid,
+            },
+          })
+          .then(() => {
+            console.log("Documento actualizado con exito");
+          })
+          .catch((err) => {
+            console.log(`error en la actualizacion de archivo ${err}`);
+          });
+    }
   }
 
   /**

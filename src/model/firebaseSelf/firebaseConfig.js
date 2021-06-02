@@ -15,7 +15,7 @@ var firebaseConfig = {
     measurementId: "G-TXX9Q3017X"
 };
 
-let firebaseInitApp;
+export let firebaseInitApp;
 
 // Initialize firebaseSelf
 if (!firebase.apps.length) firebaseInitApp = firebase.initializeApp(firebaseConfig);
