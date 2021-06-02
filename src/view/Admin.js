@@ -43,8 +43,12 @@ const Admin = () => {
     const [materiaSearch, setmateriaSearch] = useState("")
 
 
-    const handleDeleteFile = (id_archivo, id_materia) => {
-        Archivos.DeleteFromMaterias(id_materia, id_archivo)
+    const handleDeleteFile = () => {
+        
+        //Archivos._deleteMateriasTrabajos(id_materia, id_archivo)
+        //Archivos._deleteFile(id_materia, id_archivo)
+        Archivos._deleteMateriasFiltro(id_materia, id_archivo, "profesores", "profesorPrueba")
+        console.log("despues de borrar")
 
     }
 
@@ -83,7 +87,9 @@ const Admin = () => {
 
     const handleTypeSearch = (e) => {
         setmateriaSearch(e.target.value)
-
+            
+        
+        Archivos.deleteArchivos()
     }
 
     return (
@@ -152,9 +158,9 @@ const Admin = () => {
                 <input type="button" value="Buscar materia" onClick = {handleSubitProfesor}/>
             </form>
 
-            <h2>Full Text Search Materias</h2>
+            <h2>Delete archivos de materias</h2>
             <form action="">
-                <input type="text" placeholder = "ID Materia" value = {materiaSearch} onChange = {handleTypeSearch}/>
+                <input type="text" placeholder = "ID Materia" value = {id_materia} onChange = {(e)=>{setid_materia(e.target.value)}}/>
                 <input type="text" placeholder = "ID Archivo" value = {id_archivo} onChange = {(e)=>{setId_archivo( e.target.value)}}/>
                 
                 <input type="button" value="Eliminar archivo" onClick = {handleDeleteFile}/>

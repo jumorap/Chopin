@@ -1,6 +1,6 @@
 .search-item-container{
     background-color: var(--secondaryColor);
-    height: 2rem;
+    height: fit-content;
     color: rgb(230, 223, 223);
     display: flex;
     align-items: center;
