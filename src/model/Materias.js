@@ -106,6 +106,9 @@ class Materias {
       });
   }
 
+
+  
+
   _getArrayFromObject(object) {
     const objectArray = [];
     Object.keys(object).forEach((key) => {

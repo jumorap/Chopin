@@ -4,6 +4,7 @@ import "firebase/firestore"
 import "firebase/analytics"
 
 
+
 var firebaseConfig = {
     apiKey: "AIzaSyD8TsjByeLBm65H3RyrJ11gyiucmceI0YE",
     authDomain: "red-board-70d99.firebaseapp.com",

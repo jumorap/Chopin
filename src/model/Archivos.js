@@ -1,4 +1,5 @@
 import { db, firebaseAppAuth, storage } from "./firebaseSelf/firebaseConfig";
+import firebase from "firebase/app";
 
 
 class Archivos {
@@ -27,7 +28,7 @@ class Archivos {
     file
   ) {
 
-    
+    //add arvhico to Archivos collections
     const docRef = await this._DBmateriasDisplay
       .doc(id_materia)
       .collection("TRABAJOS")
@@ -39,9 +40,10 @@ class Archivos {
         id_usuario: id_usuario,
       })      
 
-  
+    
     Archivos._uploadFile(id_materia, docRef.id, file);
 
+    //update filters
     Archivos._updateMateriasTrabajos(
       id_materia,
       docRef.id,
@@ -51,6 +53,7 @@ class Archivos {
       descripcion
     );
 
+    //update filters
     Archivos._updateMateriasFiltro(
       id_materia,
       docRef.id,
@@ -172,6 +175,31 @@ class Archivos {
       .catch(() => {
         console.log(`Error actualizando el documento en ${nombreFiltro}`);
       });
+  }
+
+  static deleteArchivo(id_materia, id_archivo){
+   //delete record from archivos
+
+   //delete record from filters
+
+   //delete file from storage
+  }
+
+  static deleteFromFilters(){
+
+  }
+
+  /**
+   * Elimina el archivo del objeto materias 
+   * @param {str} id_materia 
+   * @param {str} id_archivo 
+   */
+  static DeleteFromMaterias(id_materia, id_archivo){
+    this._DBmateriasDisplay
+          .doc(id_materia)
+          .update({
+            [`trabajos.${id_archivo}`]: firebase.firestore.FieldValue.delete()
+          })    
   }
 
   

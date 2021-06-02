@@ -10,6 +10,10 @@ import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from '@material-ui/icons/Close';
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import SuccesMessage from "./SuccesMessage";
+
 
 
 const useStyles = makeStyles(() => ({
@@ -91,6 +95,10 @@ const UploadForm = ({handleClose}) => {
   const [categoriaError, setcategoriaError] = useState(false);
   const [fileError, setfileError] = useState(false);
 
+  const [openSuccesMessage, setOpenSuccesMessage] = useState(false)
+
+
+
   const handleChange = (event) => {
     setDescripcionText(event.target.value);
   };
@@ -134,6 +142,7 @@ const UploadForm = ({handleClose}) => {
       );
       console.log(new_materia)
       handleClose()
+      setOpenSuccesMessage(true)
     }
   };
 
@@ -152,7 +161,7 @@ const UploadForm = ({handleClose}) => {
 
   return (
 
-      <div className="container">
+      <div className="container">                
         <div className = {classes.sharemessage}>
           Compartir
         </div>
