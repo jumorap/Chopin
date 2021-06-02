@@ -75,8 +75,8 @@ function DropDown({
             width: "100%",
           }}
         >
-          {items.map((item) => (
-            <span>
+          {items.map((item, index) => (
+            <span key={index}>
               {optionsSelected(
                 `options ${
                   !isItemInSelection(item) ? "hover-options" : "selected"

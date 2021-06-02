@@ -4,7 +4,6 @@ import { Modal } from "@material-ui/core";
 import Zoom from "react-reveal/Zoom";
 import { CgSpinner, FaStar } from "react-icons/all";
 
-
 export function FilesByProgramme({ items = [] }) {
   const [modal, setModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
@@ -31,27 +30,27 @@ export function FilesByProgramme({ items = [] }) {
   );
 
   let cards = items.map(
-    (item) =>
+    (item, index) =>
       item && (
-          <div className={"card-container"}>
-              <div className={"files-programme"} onClick={() => openAndClose(item)}>
-                <div className={"file-by-type"}>{item.tipo}</div>
-                <div className={"file-by-description"}>{item.comentarios}</div>
-                <div className={"file-by-teacher"}>
-                  <b>{item.semestre}</b> - {item.profesor}
-                </div>
+        <div className={"card-container"} key={index}>
+          <div className={"files-programme"} onClick={() => openAndClose(item)}>
+            <div className={"file-by-type"}>{item.tipo}</div>
+            <div className={"file-by-description"}>{item.comentarios}</div>
+            <div className={"file-by-teacher"}>
+              <b>{item.semestre}</b> - {item.profesor}
+            </div>
 
-                <div className={"like"} />
+            <div className={"like"} />
 
-                <div className={"star"}>
-                  <FaStar className={"star-component"} />
-                </div>
-              </div>
-
-              <Modal open={modal} onClose={openAndClose}>
-                {body()}
-              </Modal>
+            <div className={"star"}>
+              <FaStar className={"star-component"} />
+            </div>
           </div>
+
+          <Modal open={modal} onClose={openAndClose}>
+            {body()}
+          </Modal>
+        </div>
       )
   );
 
