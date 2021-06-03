@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import DropDown from "./components/DropDown";
 import "./css/programmeResults.css";
 import { FilesByProgramme } from "./components/FilesByProgramme";
-import { FaBars } from "react-icons/all";
+import { FaBars, IoMdClose } from "react-icons/all";
 import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
+
 
 function ProgrammeResults({ match }) {
   /* const firstRender = useRef(true); */
@@ -133,10 +134,14 @@ function ProgrammeResults({ match }) {
     return (
       <div className={`files-section ${properties}`}>
         <div className={`title-programme ${redBar}`}>
-          <FaBars
+          {open ? <IoMdClose
             className={propertiesHamburger}
             onClick={() => setOpen(!open)}
+          /> : <FaBars
+              className={propertiesHamburger}
+              onClick={() => setOpen(!open)}
           />
+          }
           {materiaValues.nombre}
         </div>
         <div className={"for-each-programme"}>
@@ -174,7 +179,7 @@ function ProgrammeResults({ match }) {
         ? programme(
             "files-section-non-clicked",
             "hamburger-menu hamburger-menu-clicked",
-            "red-bar"
+            "red-bar",
           )
         : programme("files-section-clicked", "hamburger-menu")}
       <UploadFile onClick={fetchFiles} />

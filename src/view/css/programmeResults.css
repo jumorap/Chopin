@@ -121,6 +121,12 @@ body {
     margin-right: 15px;
     box-sizing: border-box;
     cursor: pointer;
+    transition: 700ms;
+}
+
+
+.hamburger-menu:active {
+    transform: rotate(-270deg);
 }
 
 
