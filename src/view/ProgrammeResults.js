@@ -8,7 +8,6 @@ import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
 
-
 function ProgrammeResults({ match }) {
   /* const firstRender = useRef(true); */
   const [firstRender, setfirstRender] = useState(true);
@@ -47,8 +46,6 @@ function ProgrammeResults({ match }) {
       },
     ],
   });
-
-  
 
   /**Muestra las materia actual segun la pagina web en la que se encuentre */
 
@@ -130,18 +127,25 @@ function ProgrammeResults({ match }) {
       return { id: `semester-${index}`, value: semester, type: "semester" };
     });
 
+  useEffect(() => {
+    console.log("trabajos: ", materiaValues.trabajos);
+  }, []);
+
   let programme = (properties, propertiesHamburger, redBar) => {
     return (
       <div className={`files-section ${properties}`}>
         <div className={`title-programme ${redBar}`}>
-          {open ? <IoMdClose
-            className={propertiesHamburger}
-            onClick={() => setOpen(!open)}
-          /> : <FaBars
+          {open ? (
+            <IoMdClose
               className={propertiesHamburger}
               onClick={() => setOpen(!open)}
-          />
-          }
+            />
+          ) : (
+            <FaBars
+              className={propertiesHamburger}
+              onClick={() => setOpen(!open)}
+            />
+          )}
           {materiaValues.nombre}
         </div>
         <div className={"for-each-programme"}>
@@ -179,7 +183,7 @@ function ProgrammeResults({ match }) {
         ? programme(
             "files-section-non-clicked",
             "hamburger-menu hamburger-menu-clicked",
-            "red-bar",
+            "red-bar"
           )
         : programme("files-section-clicked", "hamburger-menu")}
       <UploadFile onClick={fetchFiles} />
