@@ -21,6 +21,10 @@ export function FilesByProgramme({ items = [] }) {
     console.log("current user", currentUserID);
   }, []);
 
+  let deleteFile = () => {};
+
+  let editFile = () => {};
+
   let body = () => (
     <>
       <div className={"top-modal"}>
@@ -66,12 +70,14 @@ export function FilesByProgramme({ items = [] }) {
               <>
                 <div className={"delete"}>
                   <AiFillCloseCircle
+                    onClick={deleteFile}
                     className={"delete-component"}
                     style={{ padding: "3px 0px" }}
                   />
                 </div>
                 <div className={"edit"}>
                   <AiFillEdit
+                    onClick={editFile}
                     className={"edit-component"}
                     style={{ padding: "3px 0px" }}
                   />
