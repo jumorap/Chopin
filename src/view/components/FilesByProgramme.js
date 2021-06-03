@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/filesByProgramme.css";
-import { Modal } from "@material-ui/core";
+import { Modal, Tooltip } from "@material-ui/core";
 import {
   FaExternalLinkAlt,
   AiFillCloseCircle,
@@ -68,20 +68,24 @@ export function FilesByProgramme({ items = [] }) {
 
             {currentUserID == item.usuario && (
               <>
-                <div className={"delete"}>
-                  <AiFillCloseCircle
-                    onClick={deleteFile}
-                    className={"delete-component"}
-                    style={{ padding: "3px 0px" }}
-                  />
-                </div>
-                <div className={"edit"}>
-                  <AiFillEdit
-                    onClick={editFile}
-                    className={"edit-component"}
-                    style={{ padding: "3px 0px" }}
-                  />
-                </div>
+                <Tooltip title={"Eliminar archivo"}>
+                  <div className={"delete"}>
+                    <AiFillCloseCircle
+                      onClick={deleteFile}
+                      className={"delete-component"}
+                      style={{ padding: "3px 0px" }}
+                    />
+                  </div>
+                </Tooltip>
+                <Tooltip title={"Editar archivo"}>
+                  <div className={"edit"}>
+                    <AiFillEdit
+                      onClick={editFile}
+                      className={"edit-component"}
+                      style={{ padding: "3px 0px" }}
+                    />
+                  </div>
+                </Tooltip>
               </>
             )}
           </div>
