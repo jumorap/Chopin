@@ -75,22 +75,12 @@ export function FilesByProgramme({ items = [] }) {
       onClose={() => setDelModal(false)}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
+      className="delete-modal-container"
     >
       <div className="delete-modal">
         <h1>Eliminar!</h1>
         <span>¿Seguro deseas eliminar el archivo?</span>
         <div>
-          <button
-            style={{
-              background: "green",
-              border: "none",
-              borderRadius: "5px",
-              color: "white",
-            }}
-            onClick={() => setDelModal(false)}
-          >
-            Cancelar
-          </button>
           <button
             style={{
               background: "red",
@@ -104,6 +94,17 @@ export function FilesByProgramme({ items = [] }) {
             }}
           >
             Eliminar
+          </button>
+          <button
+            style={{
+              background: "green",
+              border: "none",
+              borderRadius: "5px",
+              color: "white",
+            }}
+            onClick={() => setDelModal(false)}
+          >
+            Cancelar
           </button>
         </div>
       </div>
