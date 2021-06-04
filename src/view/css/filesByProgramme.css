@@ -120,6 +120,52 @@
   color: #aa0000;
 }
 
+.delete-modal {
+  position: absolute;
+  right: 40vw;
+  top: 40vh;
+  width: 20vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: whitesmoke;
+  box-shadow: 10px -10px var(--principalBlue), 20px -20px whitesmoke;
+}
+
+.delete-modal > h1 {
+  text-align: center;
+}
+
+.delete-modal > span {
+  margin: 10px 10px;
+}
+
+.delete-modal > div {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 3%;
+  margin-bottom: 3%;
+}
+
+.delete-modal > div > button {
+  margin: 5px 5px;
+  width: 4vw;
+  height: 1.5vw;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.delete-modal-delete {
+  margin: 10px solid green;
+}
+
 .edit {
   width: 20px;
   height: 20px;
