@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import DropDown from "./components/DropDown";
 import "./css/programmeResults.css";
+import Modal from "@material-ui/core/Modal";
 import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaBars, IoMdClose } from "react-icons/all";
 import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
+import UploadForm from "./UploadFile/UploadForm";
 
 function ProgrammeResults({ match }) {
   /* const firstRender = useRef(true); */
@@ -17,6 +19,12 @@ function ProgrammeResults({ match }) {
 
   /**The Id bring by the context that has the id of the materia to be displayed */
   const idCurrentMateria = match.params.idMateria;
+
+  /* upload file modal status */
+  const [uploadFileModalOpen, setUploadFileModalOpen] = useState(false);
+
+  /* file to edit */
+  const [fileToEdit, setFileToEdit] = useState(undefined);
 
   useEffect(() => {
     console.log("hola");
@@ -149,7 +157,11 @@ function ProgrammeResults({ match }) {
           {materiaValues.nombre}
         </div>
         <div className={"for-each-programme"}>
-          <FilesByProgramme items={filteredFiles} />
+          <FilesByProgramme
+            items={filteredFiles}
+            handleEdit={toggleUploadFileModal}
+            setFileToEdit={(file) => setFileToEdit(file)}
+          />
         </div>
       </div>
     );
@@ -166,6 +178,23 @@ function ProgrammeResults({ match }) {
       />
     );
   };
+
+  let toggleUploadFileModal = () => {
+    setUploadFileModalOpen(!uploadFileModalOpen);
+    fileToEdit && setFileToEdit(undefined);
+  };
+
+  let UploadFileModal = ({ open, toggle, file }) => (
+    <Modal
+      open={open}
+      onClose={toggleUploadFileModal}
+      className={"ModalWindow"}
+    >
+      <div>
+        <UploadForm handleClose={toggle} fileToEdit={file} />
+      </div>
+    </Modal>
+  );
 
   return (
     <div className={"general"}>
@@ -186,7 +215,12 @@ function ProgrammeResults({ match }) {
             "red-bar"
           )
         : programme("files-section-clicked", "hamburger-menu")}
-      <UploadFile onClick={fetchFiles} />
+      <UploadFile onClick={fetchFiles} handleOpen={toggleUploadFileModal} />
+      <UploadFileModal
+        open={uploadFileModalOpen}
+        toggle={toggleUploadFileModal}
+        file={fileToEdit}
+      />
     </div>
   );
 }

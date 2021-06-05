@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import Modal from "@material-ui/core/Modal";
+import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { IconButton } from "@material-ui/core";
 import "../css/uploadFile.css";
-import UploadForm from "./UploadForm";
 
-const UploadFile = () => {
+const UploadFile = ({ handleOpen }) => {
   const styles = {
     openButton: {
       position: "fixed",
@@ -21,24 +19,8 @@ const UploadFile = () => {
     },
   };
 
-  const [open, setopen] = useState(false);
-
-  const handleOpen = () => {
-    setopen(true);
-  };
-
-  const handleClose = () => {
-    setopen(false);
-  };
-
   return (
     <div>
-      <Modal open={open} onClose={handleClose} className={"ModalWindow"}>
-        <div>
-          <UploadForm handleClose = {handleClose}/>
-        </div>
-      </Modal>
-
       <IconButton
         style={styles.openButton}
         className={"openButton"}

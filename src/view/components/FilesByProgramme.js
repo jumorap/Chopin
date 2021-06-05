@@ -8,7 +8,7 @@ import {
 } from "react-icons/all";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 
-export function FilesByProgramme({ items = [] }) {
+export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   const [modal, setModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
   const [delModal, setDelModal] = useState(false);
@@ -24,7 +24,10 @@ export function FilesByProgramme({ items = [] }) {
 
   let deleteFile = () => {};
 
-  let editFile = () => {};
+  let editFile = (item) => {
+    handleEdit();
+    setFileToEdit(item);
+  };
 
   let body = () => (
     <>
@@ -128,7 +131,7 @@ export function FilesByProgramme({ items = [] }) {
           <Tooltip title={"Editar archivo"}>
             <div className={"edit"}>
               <AiFillEdit
-                onClick={editFile}
+                onClick={() => editFile(item)}
                 className={"edit-component"}
                 style={{ padding: "3px 0px" }}
               />
