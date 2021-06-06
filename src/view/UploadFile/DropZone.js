@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import AlertMessage from "../components/AlertMessage";
 import DropFieldActive from "./DropFieldActive";
 import DropFIeldDesactive from "./DropFIeldDesactive";
 
@@ -21,13 +22,16 @@ const useStyles = makeStyles(() => ({
 
 function MyDropzone({ setFile }) {
   const classes = useStyles();
+  
+  const [openPDFerrorMessage, setopenPDFerrorMessage] = useState(false) //boolena to display the error mesagge if the file is not PDF
+  
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file.type === "application/pdf") {
       setFile(file);
     } else {
-      alert("Solo se acepta pdf parcero");
+      setopenPDFerrorMessage(true)
     }
   }, [setFile]);
 
@@ -37,6 +41,9 @@ function MyDropzone({ setFile }) {
     <div {...getRootProps()} className={classes.container}>
       <input {...getInputProps()} />
       {isDragActive ? <DropFIeldDesactive /> : <DropFieldActive />}
+      <AlertMessage open = {openPDFerrorMessage} setOpen = {setopenPDFerrorMessage} kind = {"error"}>
+        Solo Aceptamos PDF
+      </AlertMessage>
     </div>
   );
 }
