@@ -3,7 +3,7 @@ import "../css/uploadedFile.css";
 import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
 
-const UploadedFile = ({ fileName, setFile }) => {
+const UploadedFile = ({ file, setFile }) => {
   const handleClose = () => {
     setFile(null);
   };
@@ -12,7 +12,7 @@ const UploadedFile = ({ fileName, setFile }) => {
     <div className={"uploaded-container"}>
       <div className="pdf-circle">PDF</div>
 
-      <span className={"text-max-pdf"}>{fileName}</span>
+      <span className={"text-max-pdf"}>{file.name}</span>
 
       <IconButton onClick={handleClose}>
         <CloseIcon className="close-icon" />

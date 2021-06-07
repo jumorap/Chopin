@@ -7,16 +7,12 @@ import {
   AiFillEdit,
 } from "react-icons/all";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
-import Archivos from "../../model/Archivos";
 
-export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materia }) {
-
+export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   const [modal, setModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
-  const [OpneDelModal, setOpenDelModal] = useState(false); //si el modal esta abierto o no
-
+  const [delModal, setDelModal] = useState(false);
   const currentUserID = firebaseAppAuth.currentUser.uid;
-
   const openAndClose = (item) => {
     setModal(!modal);
     setClicked(item);
@@ -26,14 +22,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materi
     console.log("current user", currentUserID);
   }, []);
 
-  
-  //**Funcion que elimina el archivo tanto de la base de datos como del contexto */
-  let deleteFile = () => {
-    //delete from data base
-    Archivos.deleteArchivos()
-    //delete from context
-
-  };
+  let deleteFile = () => {};
 
   let editFile = (item) => {
     handleEdit();
@@ -68,7 +57,6 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materi
     </>
   );
 
-  //**Carta que se va a mostrar */
   let CardContent = ({ item }) => (
     <div className={"files-programme"} onClick={() => openAndClose(item)}>
       <div className={"file-by-type"}>{item.tipo}</div>
@@ -86,8 +74,8 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materi
       disableEscapeKeyDown
       disableBackdropClick
       onEscapeKeyDown={(e) => console.log(e.target)}
-      open={OpneDelModal}
-      onClose={() => setOpenDelModal(false)}
+      open={delModal}
+      onClose={() => setDelModal(false)}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
       className="delete-modal-container"
@@ -104,7 +92,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materi
               color: "white",
             }}
             onClick={() => {
-              setOpenDelModal(false);
+              setDelModal(false);
               deleteFile(item);
             }}
           >
@@ -117,7 +105,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materi
               borderRadius: "5px",
               color: "white",
             }}
-            onClick={() => setOpenDelModal(false)}
+            onClick={() => setDelModal(false)}
           >
             Cancelar
           </button>
@@ -133,7 +121,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit, materi
           <Tooltip title={"Eliminar archivo"}>
             <div className={"delete"}>
               <AiFillCloseCircle
-                onClick={() => setOpenDelModal(true)}
+                onClick={() => setDelModal(true)}
                 className={"delete-component"}
                 style={{ padding: "3px 0px" }}
               />

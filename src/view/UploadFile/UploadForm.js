@@ -10,7 +10,9 @@ import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
-
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import SuccesMessage from "./SuccesMessage";
 
 const useStyles = makeStyles(() => ({
   uploadButton: {
@@ -69,8 +71,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-//**Funcion que crea el formulario para subir el archivo con todos sus campos de texto*/
 const UploadForm = ({ handleClose, fileToEdit }) => {
   let user = firebaseAppAuth.currentUser;
 
@@ -80,10 +80,10 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const classes = useStyles();
 
   const [materiaText, setmateriaText] = useState("");
-  const [profesorText, setProfesorText] = useState(fileToEdit ? fileToEdit.profesor : "");
-  const [semestreText, setSemestreText] = useState(fileToEdit ? fileToEdit.semestre : "");
-  const [categoriaText, setcategoriaText] = useState(fileToEdit ? fileToEdit.tipo : "");
-  const [descripcionText, setDescripcionText] = useState(fileToEdit ? fileToEdit.comentarios : "");
+  const [profesorText, setProfesorText] = useState("");
+  const [semestreText, setSemestreText] = useState("");
+  const [categoriaText, setcategoriaText] = useState("");
+  const [descripcionText, setDescripcionText] = useState("");
   const [file, setfile] = useState(null);
 
   const [materiaError, setmateriaError] = useState(false);
@@ -119,7 +119,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
     }
     if (file === null) {
       setfileError(true);
-      errors = true;      
+      errors = true;
+      alert("Ponga un arhcivo parcero");
     }
 
     if (!errors) {
@@ -138,6 +139,25 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
     }
   };
 
+  function setInputText(
+    label,
+    options,
+    optionLabel,
+    setOption,
+    errorState,
+    setError
+  ) {
+    return (
+      <InputText
+        label={label}
+        options={options}
+        optionLabel={optionLabel}
+        setOption={setOption}
+        errorState={errorState}
+        setError={setError}
+      />
+    );
+  }
 
   return (
     <div className="container">
@@ -151,53 +171,49 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       <div className="upload-form">
         <div className="subContainer">
           <div className={classes.leftDiv}>
-            <InputText            
-              label={"Materias"}
-              options={materias}
-              optionLabel={"materia"}
-              defaultValue = {materiaText}
-              setOption={setmateriaText}
-              errorState={materiaError}
-              setError={setmateriaError}
-            />
-            <InputText
-              label={"Profesor"}
-              options={profesores}
-              optionLabel={"profesor"}
-              defaultValue = {profesorText}
-              setOption={setProfesorText}
-              errorState={profesorError}
-              setError={setProfesorError}
-            />
-            <InputText
-              label={"Semestre"}
-              options={semestres}
-              optionLabel={"semestre"}
-              defaultValue = {semestreText}
-              setOption={setSemestreText}
-              errorState={semestreError}
-              setError={setSemestreError}
-            />
-            <InputText
-              label={"Categoria"}
-              options={categorias}
-              optionLabel={"categoria"}
-              defaultValue = {categoriaText}
-              setOption={setcategoriaText}
-              errorState={categoriaError}
-              setError={setcategoriaError}
-            />            
+            {setInputText(
+              "Materias",
+              materias,
+              "materia",
+              setmateriaText,
+              materiaError,
+              setmateriaError
+            )}
+            {setInputText(
+              "Profesor",
+              profesores,
+              "profesor",
+              setProfesorText,
+              profesorError,
+              setProfesorError
+            )}
+            {setInputText(
+              "Semestre",
+              semestres,
+              "semestre",
+              setSemestreText,
+              semestreError,
+              setSemestreError
+            )}
+            {setInputText(
+              "Categoria",
+              categorias,
+              "categoria",
+              setcategoriaText,
+              categoriaError,
+              setcategoriaError
+            )}
           </div>
           <div className={classes.rightDiv}>
             <div>
               {file === null ? (
                 <MyDropzone setFile={setfile} />
               ) : (
-                <UploadedFile fileName={file.name} setFile={setfile} />
+                <UploadedFile file={file} setFile={setfile} />
               )}
               {fileError === true ? (
                 <p className={classes.warningDropText}>
-                  Porfavor coloque un archivo
+                  Parce, coloque un archivo
                 </p>
               ) : (
                 ""
@@ -208,7 +224,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               id="outlined-multiline-static"
               label="Descripción"
               multiline
-              rows={4}              
+              rows={4}
+              defaultValue=""
               variant="outlined"
               className={classes.descriptionBox}
               value={descripcionText}
@@ -246,6 +263,10 @@ const categorias = [
   { categoria: "Parcial 2" },
   { categoria: "Parcial 3" },
   { categoria: "Parcial 4" },
+  { categoria: "Parcial 5" },
+  { categoria: "Parcial 7" },
+  { categoria: "Parcial 8" },
+  { categoria: "Parcial 9" },
   { categoria: "Taller 1" },
   { categoria: "Taller 2" },
   { categoria: "Taller 3" },
