@@ -4,20 +4,25 @@ class MateriasView {
   }
 
   delete(trabajoToDelete, currentMateria) {
+    /* get desired materia obj*/
     let materia = this.mapMaterias.get(currentMateria);
+    /* removes specific trabajo from materia.trabajos */
     materia.trabajos = materia.trabajos.filter(
       (trabajo) => trabajo.ID_archivo !== trabajoToDelete.ID_archivo
-    ); //elimina trabajo dentro de materia
+    );
+    /* Removes trabajo from materia.profesores */
     let profesores = materia.profesores;
     Object.keys(profesores).forEach((prof) => {
       let filesProfe = profesores[prof];
       delete filesProfe[trabajoToDelete.ID_archivo];
     });
+    /* Removes trabajo from materia.semestres */
     let semestres = materia.semestres;
     Object.keys(semestres).forEach((sem) => {
       let filesSem = semestres[sem];
       delete filesSem[trabajoToDelete.ID_archivo];
     });
+    /* Removes trabajo from materia.tipos */
     let tipos = materia.tipos;
     Object.keys(tipos).forEach((type) => {
       let filesType = tipos[type];
@@ -26,9 +31,8 @@ class MateriasView {
   }
 
   update(trabajoToDelete, currentMateria) {
-    // FALTA LLAMAR FUNC ADD 
-
     this.delete(trabajoToDelete, currentMateria);
+    /* Call Add function  */
   }
 }
 
