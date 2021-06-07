@@ -161,6 +161,7 @@ function ProgrammeResults({ match }) {
             items={filteredFiles}
             handleEdit={toggleUploadFileModal}
             setFileToEdit={(file) => setFileToEdit(file)}
+            materia = {materiaValues}
           />
         </div>
       </div>

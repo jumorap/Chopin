@@ -10,10 +10,10 @@ import Profesores from '../model/Profesores'
 
 
 
-const materiasContext = createContext()
+const materiasContext = createContext() //lista de materias para la nav bar y el añadir archivo
 const profesoresContext = createContext()
 const fullTextSearchContext = createContext()
-const materiaContext = createContext()
+const materiaContext = createContext() //Objeto con todas las materias
 
 /**
  * Retorns an Map with key the id of the materia and value an Object with The atributs of Materia
