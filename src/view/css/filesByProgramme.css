@@ -37,10 +37,11 @@
 
 .card-container {
   text-align: center;
-  width: 22%;
-  margin: 5px;
-  height: 185px;
+  width: 25%;
+  padding: 8px;
+  height: 195px;
   box-sizing: border-box;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 1000px) {
@@ -108,7 +109,7 @@
   height: 20px;
   position: absolute;
   top: 2px;
-  right: 2px;
+  right: 10px;
   cursor: pointer;
 }
 
@@ -124,6 +125,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+  line-height: 1;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .delete-modal {
@@ -145,8 +150,7 @@
 }
 
 .delete-modal > span {
-  margin: 0 30px;
-  margin-bottom: 30px;
+  margin: 0 30px 30px;
 }
 
 .delete-modal > div {
@@ -164,7 +168,7 @@
 }
 
 .delete-modal-delete {
-  margin: 10px solid green;
+  margin: 10px;
 }
 
 .edit {
@@ -172,7 +176,7 @@
   height: 20px;
   position: absolute;
   top: 2px;
-  right: 24px;
+  right: 32px;
   cursor: pointer;
 }
 

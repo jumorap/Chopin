@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/filesByProgramme.css";
-import { Modal, Tooltip, Popover, CardContent } from "@material-ui/core";
+import { Modal, Tooltip } from "@material-ui/core";
 import {
   FaExternalLinkAlt,
   AiFillCloseCircle,
@@ -71,8 +71,6 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   let DeleteModal = ({ item }) => (
     <Modal
       disableAutoFocus
-      disableEscapeKeyDown
-      disableBackdropClick
       onEscapeKeyDown={(e) => console.log(e.target)}
       open={delModal}
       onClose={() => setDelModal(false)}
@@ -86,7 +84,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
         <div>
           <button
             style={{
-              background: "red",
+              backgroundColor: "red",
               border: "none",
               borderRadius: "5px",
               color: "white",
@@ -100,7 +98,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
           </button>
           <button
             style={{
-              background: "green",
+              backgroundColor: "green",
               border: "none",
               borderRadius: "5px",
               color: "white",
@@ -116,14 +114,14 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
 
   let CardBtns = ({ item }) => {
     return (
-      currentUserID == item.usuario && (
+      currentUserID === item.usuario && (
         <>
           <Tooltip title={"Eliminar archivo"}>
             <div className={"delete"}>
               <AiFillCloseCircle
                 onClick={() => setDelModal(true)}
                 className={"delete-component"}
-                style={{ padding: "3px 0px" }}
+                style={{ padding: "11px 0px" }}
               />
             </div>
           </Tooltip>
@@ -133,7 +131,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
               <AiFillEdit
                 onClick={() => editFile(item)}
                 className={"edit-component"}
-                style={{ padding: "3px 0px" }}
+                style={{ padding: "11px 0px" }}
               />
             </div>
           </Tooltip>
@@ -141,6 +139,17 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
       )
     );
   };
+
+  let filesModal = () => (
+      <Modal
+          disableAutoFocus
+          open={modal}
+          onClose={openAndClose}
+          style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
+      >
+          {body()}
+      </Modal>
+  )
 
   let cards = items.map(
     (item, index) =>
@@ -150,11 +159,9 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
           key={index}
           style={{ position: "relative" }}
         >
-          <CardContent item={item} />
-          <CardBtns item={item} />
-          <Modal open={modal} onClose={openAndClose}>
-            {body()}
-          </Modal>
+            <CardContent item={item} />
+            <CardBtns item={item} />
+            {openAndClose && filesModal()}
         </div>
       )
   );

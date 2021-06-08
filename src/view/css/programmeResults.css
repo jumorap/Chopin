@@ -89,15 +89,19 @@ body {
     width: 100%;
     float: right;
     transition: width 300ms linear;
+    box-sizing: border-box;
 }
 
 .for-each-programme {
     width: 100%;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
 
     /*add flexbox style*/
     display: flex;
     flex-direction : row;
-    justify-content : space-around;
+    justify-content : left;
     flex-flow : wrap;
 }
 
