@@ -18,6 +18,5 @@
     align-items: center;
     justify-content: center;
     padding: 10%;
-    backdrop-filter: blur(5px);    
-    
+    backdrop-filter: blur(5px);
 }

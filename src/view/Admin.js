@@ -95,10 +95,10 @@ const Admin = () => {
     return (
         <div style = {{backgroundColor : "white"}}>
             <h2>Crear materia</h2>
-            <form action="submit">
+            <form action={"submit"}>
                 <label htmlFor="materia"/>
                 <input type="text" name="" id="materia" placeholder ="Nombre de la materia" onChange = {e=>{setmateria(e.target.value)}}/>
-                <input type="button" value="Crear materia" on onClick = {handleSumbitMateria}/>
+                <input type="button" value="Crear materia" onClick = {handleSumbitMateria}/>
             </form>
             <br/>
 
