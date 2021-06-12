@@ -31,24 +31,7 @@ const useStyles = makeStyles(() => ({
     top: "-5px",
     padding: 0,
   },
-
-  leftDiv: {
-    paddingRight: "10px",
-    width: "50%",
-    display: "flex",
-    flexFlow: "column wrap",
-    marginBlockEnd: "15px",
-    justifyContent: "space-between",
-  },
-
-  rightDiv: {
-    paddingRight: "10px",
-    width: "50%",
-    display: "flex",
-    flexDirection: "column",
-    padding: "15px",
-  },
-
+  
   sharemessage: {
     position: "relative",
     textAlign: "center",
@@ -58,8 +41,8 @@ const useStyles = makeStyles(() => ({
   },
 
   descriptionBox: {
-    width: "105%",
-    backgroundColor: "#fff",
+    width: "100%",
+    backgroundColor: "white",
     marginTop: "15px",
   },
 
@@ -148,7 +131,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
       <div className="upload-form">
         <div className="subContainer">
-          <div className={classes.leftDiv}>
+          <div className = "leftDiv">
             <InputText            
               label={"Materias"}
               options={materias}
@@ -167,27 +150,38 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               errorState={profesorError}
               setError={setProfesorError}
             />
-            <InputText
-              label={"Semestre"}
-              options={semestres}
-              optionLabel={"semestre"}
-              defaultValue = {semestreText}
-              setOption={setSemestreText}
-              errorState={semestreError}
-              setError={setSemestreError}
+            <div className = "semetre-categoria">
+              <InputText
+                label={"Semestre"}
+                options={semestres}
+                optionLabel={"semestre"}
+                defaultValue = {semestreText}
+                setOption={setSemestreText}
+                errorState={semestreError}
+                setError={setSemestreError}
+              />
+              <InputText
+                label={"Categoria"}
+                options={categorias}
+                optionLabel={"categoria"}
+                defaultValue = {categoriaText}
+                setOption={setcategoriaText}
+                errorState={categoriaError}
+                setError={setcategoriaError}
+              />            
+            </div>
+            <TextField
+              id="outlined-multiline-static"
+              label="Descripción"
+              multiline
+              rows={4}              
+              variant="outlined"
+              className={classes.descriptionBox}
+              value={descripcionText}
+              onChange={handleChange}
             />
-            <InputText
-              label={"Categoria"}
-              options={categorias}
-              optionLabel={"categoria"}
-              defaultValue = {categoriaText}
-              setOption={setcategoriaText}
-              errorState={categoriaError}
-              setError={setcategoriaError}
-            />            
           </div>
-          <div className={classes.rightDiv}>
-            <div>
+          <div className="rightDiv">            
               {file === null ? (
                 <MyDropzone setFile={setfile} />
               ) : (
@@ -199,19 +193,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
                 </p>
               ) : (
                 ""
-              )}
-            </div>
-
-            <TextField
-              id="outlined-multiline-static"
-              label="Descripción"
-              multiline
-              rows={4}              
-              variant="outlined"
-              className={classes.descriptionBox}
-              value={descripcionText}
-              onChange={handleChange}
-            />
+              )}                        
           </div>
         </div>
         <Button

@@ -11,8 +11,9 @@
 
 .uploaded-container{
     display: flex;
+    max-width: fit-content;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     font-weight: 500;
     background-color: white;
     border-radius: 1rem;
@@ -24,9 +25,8 @@
 
 .text-max-pdf {
     text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 70px;
-    max-height: 20px;
+    overflow: hidden;    
+    height: 20px;
 }
 
 .close-icon{
