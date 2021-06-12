@@ -3,6 +3,8 @@ class MateriasView {
     this.mapMaterias = new Map();
   }
 
+     
+  /** */
   delete(trabajoToDelete, currentMateria) {
     /* get desired materia obj*/
     let materia = this.mapMaterias.get(currentMateria);

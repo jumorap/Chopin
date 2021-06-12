@@ -80,10 +80,10 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const classes = useStyles();
 
   const [materiaText, setmateriaText] = useState("");
-  const [profesorText, setProfesorText] = useState(fileToEdit ? fileToEdit.profesor : "");
-  const [semestreText, setSemestreText] = useState(fileToEdit ? fileToEdit.semestre : "");
-  const [categoriaText, setcategoriaText] = useState(fileToEdit ? fileToEdit.tipo : "");
-  const [descripcionText, setDescripcionText] = useState(fileToEdit ? fileToEdit.comentarios : "");
+  const [profesorText, setProfesorText] = useState("");
+  const [semestreText, setSemestreText] = useState("");
+  const [categoriaText, setcategoriaText] = useState("");
+  const [descripcionText, setDescripcionText] = useState( "");
   const [file, setfile] = useState(null);
 
   const [materiaError, setmateriaError] = useState(false);
@@ -92,7 +92,6 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const [categoriaError, setcategoriaError] = useState(false);
   const [fileError, setfileError] = useState(false);
 
-  const [openSuccesMessage, setOpenSuccesMessage] = useState(false);
 
   const handleChange = (event) => {
     setDescripcionText(event.target.value);
@@ -133,8 +132,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         file
       );
       console.log(new_materia);
-      handleClose();
-      setOpenSuccesMessage(true);
+      handleClose();      
     }
   };
 

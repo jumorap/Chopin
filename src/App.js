@@ -19,6 +19,7 @@ function App() {
         firebaseAnalytics.logEvent("homepage_visited")
     })
 
+
     return (
         <Router>
             <AuthProvider>
