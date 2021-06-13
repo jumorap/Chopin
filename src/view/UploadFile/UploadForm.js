@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
     top: "-5px",
     padding: 0,
   },
-  
+
   sharemessage: {
     position: "relative",
     textAlign: "center",
@@ -66,7 +66,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const [profesorText, setProfesorText] = useState("");
   const [semestreText, setSemestreText] = useState("");
   const [categoriaText, setcategoriaText] = useState("");
-  const [descripcionText, setDescripcionText] = useState( "");
+  const [descripcionText, setDescripcionText] = useState("");
   const [file, setfile] = useState(null);
 
   const [materiaError, setmateriaError] = useState(false);
@@ -101,7 +101,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
     }
     if (file === null) {
       setfileError(true);
-      errors = true;      
+      errors = true;
     }
 
     if (!errors) {
@@ -115,7 +115,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         file
       );
       console.log(new_materia);
-      handleClose();      
+      handleClose();
     }
   };
 
@@ -131,12 +131,12 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
       <div className="upload-form">
         <div className="subContainer">
-          <div className = "leftDiv">
-            <InputText            
+          <div className="leftDiv">
+            <InputText
               label={"Materias"}
               options={materias}
               optionLabel={"materia"}
-              defaultValue = {materiaText}
+              defaultValue={materiaText}
               setOption={setmateriaText}
               errorState={materiaError}
               setError={setmateriaError}
@@ -145,17 +145,17 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               label={"Profesor"}
               options={profesores}
               optionLabel={"profesor"}
-              defaultValue = {profesorText}
+              defaultValue={profesorText}
               setOption={setProfesorText}
               errorState={profesorError}
               setError={setProfesorError}
             />
-            <div className = "semetre-categoria">
+            <div className="semetre-categoria">
               <InputText
                 label={"Semestre"}
                 options={semestres}
                 optionLabel={"semestre"}
-                defaultValue = {semestreText}
+                defaultValue={semestreText}
                 setOption={setSemestreText}
                 errorState={semestreError}
                 setError={setSemestreError}
@@ -164,36 +164,36 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
                 label={"Categoria"}
                 options={categorias}
                 optionLabel={"categoria"}
-                defaultValue = {categoriaText}
+                defaultValue={categoriaText}
                 setOption={setcategoriaText}
                 errorState={categoriaError}
                 setError={setcategoriaError}
-              />            
+              />
             </div>
             <TextField
               id="outlined-multiline-static"
               label="Descripción"
               multiline
-              rows={4}              
+              rows={4}
               variant="outlined"
               className={classes.descriptionBox}
               value={descripcionText}
               onChange={handleChange}
             />
           </div>
-          <div className="rightDiv">            
-              {file === null ? (
-                <MyDropzone setFile={setfile} />
-              ) : (
-                <UploadedFile fileName={file.name} setFile={setfile} />
-              )}
-              {fileError === true ? (
-                <p className={classes.warningDropText}>
-                  Porfavor coloque un archivo
-                </p>
-              ) : (
-                ""
-              )}                        
+          <div className="rightDiv">
+            {file === null ? (
+              <MyDropzone setFile={setfile} />
+            ) : (
+              <UploadedFile fileName={file.name} setFile={setfile} />
+            )}
+            {fileError === true ? (
+              <p className={classes.warningDropText}>
+                Porfavor coloque un archivo
+              </p>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <Button

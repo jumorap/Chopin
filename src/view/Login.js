@@ -18,6 +18,7 @@ class Login extends Component {
             user,
             signOut,
             signInWithGoogle,
+            toggleUploadFileModal
         } = this.props
 
         let isUnalUser
@@ -32,7 +33,7 @@ class Login extends Component {
                 border: 0,
                 padding: 0,
                 position: "absolute",
-                },
+            },
             signIn: {
                 background: 'linear-gradient(45deg, #FFF 30%, #FFF 90%)',
                 borderRadius: 30,
@@ -45,12 +46,12 @@ class Login extends Component {
         function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text) {
             return (
                 <Button onClick={clickUse}
-                        className={classNameStyles}
-                        style={funcStyle}
-                        startIcon={
-                            <FontAwesomeIcon icon={iconToUse} />
-                        }
-                        aria-label="sign in and sign out"
+                    className={classNameStyles}
+                    style={funcStyle}
+                    startIcon={
+                        <FontAwesomeIcon icon={iconToUse} />
+                    }
+                    aria-label="sign in and sign out"
                 >{text}</Button>
             )
         }
@@ -61,7 +62,7 @@ class Login extends Component {
                 <div className={'div-right div-half-screen'}>
                     <div className={'container-div-right'}>
                         <center>
-                            <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'}/></p>
+                            <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'} /></p>
 
                             {
                                 isUnalUser && user
@@ -71,11 +72,11 @@ class Login extends Component {
                             {
                                 !isUnalUser && user
                                     ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas institucionales UNAL</p>
-                                    : <p/>
+                                    : <p />
                             }
                             {
                                 isUnalUser && user
-                                    ? <><Searcher/><UploadFile/></>
+                                    ? <><Searcher /><UploadFile handleOpen={toggleUploadFileModal} /></>
                                     : <center>
                                         <span className={'legal'}>
                                             AL INGRESAR ESTÁS ACEPTANDO NUESTROS
