@@ -108,7 +108,7 @@ class Archivos {
   static async  _updateArchivoUrl(id_materia, id_archivo, url) {
     this._DBmateriasDisplay
       .doc(id_materia)
-      .set({
+      .update({
         [`trabajos.${id_archivo}.url`]: url,
       })
       .catch(() => console.log("error subiendo url"));

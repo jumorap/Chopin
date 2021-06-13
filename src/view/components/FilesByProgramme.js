@@ -7,11 +7,13 @@ import {
   AiFillEdit,
 } from "react-icons/all";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
-import Archivos from "../../model/Archivos";
+import { useParams } from "react-router-dom";
+import Archivos from "../../model/Archivos"
 
 
 export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
-
+  
+  const idCurrentMateria = useParams().idMateria;    
   const [modal, setModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
   const [delModal, setDelModal] = useState(false);
@@ -28,9 +30,10 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
 
   //**Funcion que elimina el archivo tanto de la base de datos como del contexto */
   let deleteFile = (item) => {
-    /* //delete from data base
-    Archivos.deleteArchivos()
-    //delete from context */
+    console.log(item)
+    //delete from data base
+    Archivos.deleteArchivos(idCurrentMateria, item.ID_archivo, item.profesor, item.semestre, item.tipo)
+    //delete from context
     console.log(item)
 
   };
@@ -101,7 +104,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
               borderRadius: "5px",
               color: "white",
             }}
-            onClick={(ev, item) => {
+            onClick={() => {
               setDelModal(false);
               deleteFile(item);
             }}
