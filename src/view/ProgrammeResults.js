@@ -10,28 +10,9 @@ import { useMateriaMap } from "./ContextProvider";
 import { useParams } from "react-router-dom";
 
 function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
-  /* const firstRender = useRef(true); */
-  const [firstRender, setfirstRender] = useState(true);
 
-  /**The conection with the provider to check the existence of the subject */
-  const materiaMap = useMateriaMap();
-
-  /**The Id bring by the context that has the id of the materia to be displayed */
-  const idCurrentMateria = useParams().idMateria;
-
-  useEffect(() => {
-    console.log("hola" , idCurrentMateria);
-    if (materiaMap.has(idCurrentMateria)) {
-      console.log("EL archivo ya se encuentra en el context");
-      setMateriaValues(materiaMap.get(idCurrentMateria));
-    } else {
-      fetchFiles();
-    }
-    setfirstRender(false);
-    setSelection([]);
-  }, [idCurrentMateria]);
-
-  const [materiaValues, setMateriaValues] = useState({
+  /**Initial materia value, changes when the Materia obj is fetched from the db or the map */
+  const initialMateriaValue = {
     nombre: "Dificultades Tecnicas",
     profesores: {},
     semestres: {},
@@ -46,28 +27,41 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
         url: "",
       },
     ],
-  });
-
-  /**Muestra las materia actual segun la pagina web en la que se encuentre */
-
-  function getArrayFromObject(object) {
-    const objectArray = [];
-    Object.keys(object).forEach((key) => {
-      objectArray.push(object[key]);
-    });
-    //console.log(objectArray);
-    return objectArray;
-  }
-
-  let fetchFiles = () => {
-    Materias._getFilesList(idCurrentMateria).then((value) => {
-      console.log(value.data());
-      setMateriaValues({
-        ...value.data(),
-        trabajos: getArrayFromObject(value.data().trabajos),
-      });
-    });
   };
+
+  /**The conection with the provider to check the existence of the subject */
+  const materiaMap = useMateriaMap();
+
+  /**The Id bring by the context that has the id of the materia to be displayed */
+  const idCurrentMateria = useParams().idMateria;
+
+  /* ----------- State hooks ----------- */
+  /* const firstRender = useRef(true); */
+  const [firstRender, setfirstRender] = useState(true);
+
+  /* current materia (obj) */
+  const [materiaValues, setMateriaValues] = useState(initialMateriaValue);
+
+  /* File display modal status (mover modalss!!!!) */
+  const [open, setOpen] = useState(false);
+
+  /* Array with selected filters */
+  const [selection, setSelection] = useState([]);
+
+  /* ----------- Effect hooks ----------- */
+  /* Asigna la materia actual al estado */
+  useEffect(() => {
+    /* si el map ya tiene la materia lo asigna a materiaValues */
+    if (materiaMap.has(idCurrentMateria)) {
+      console.log("EL archivo ya se encuentra en el context");
+      setMateriaValues(materiaMap.get(idCurrentMateria));
+    } else {
+      /* si no busca la materia en la db y la asigna */
+      fetchFiles();
+    }
+    setfirstRender(false);
+    setSelection([]);
+  }, [idCurrentMateria]);
 
   //when the Materia is featched form the DB, it updates the materiaMap context value
   useEffect(() => {
@@ -79,8 +73,26 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
     }
   }, [materiaValues]);
 
-  const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState([]);
+  /* Función que convierte un Obj en un array (itentar sacar) */
+  function getArrayFromObject(object) {
+    const objectArray = [];
+    Object.keys(object).forEach((key) => {
+      objectArray.push(object[key]);
+    });
+    //console.log(objectArray);
+    return objectArray;
+  }
+
+  /* Obtiene la materia de la db y la asigna a materiaValues (cambiar nombre a fetchMateria o fetchSubject) */
+  let fetchFiles = () => {
+    Materias._getFilesList(idCurrentMateria).then((value) => {
+      console.log(value.data());
+      setMateriaValues({
+        ...value.data(),
+        trabajos: getArrayFromObject(value.data().trabajos),
+      });
+    });
+  };
 
   let filteredFiles = materiaValues.trabajos.map((file) => {
     let check = 0;
@@ -110,28 +122,28 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
     if (check === 3) return file;
   });
 
+  /* Array of categories in curr materia (used in filters) */
   const categories = Object.keys(materiaValues.tipos)
     .sort()
     .map((cat, index) => {
       return { id: `cat-${index}`, value: cat, type: "category" };
     });
 
+  /* Array of profs in curr materia (used in filters) */
   const professors = Object.keys(materiaValues.profesores)
     .sort()
     .map((professor, index) => {
       return { id: `professor-${index}`, value: professor, type: "prof" };
     });
 
+  /* Array of semesters in curr materia (used in filters) */
   let semesters = Object.keys(materiaValues.semestres)
     .sort()
     .map((semester, index) => {
       return { id: `semester-${index}`, value: semester, type: "semester" };
     });
 
-  useEffect(() => {
-    console.log("trabajos: ", materiaValues.trabajos);
-  }, []);
-
+  /** Programme component, contains files and upper red bar (cambiar nombre? sacar?) */
   let programme = (properties, propertiesHamburger, redBar) => {
     return (
       <div className={`files-section ${properties}`}>
@@ -154,13 +166,13 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
             items={filteredFiles}
             handleEdit={toggleUploadFileModal}
             setFileToEdit={(file) => setFileToEdit(file)}
-          /*materia={materiaValues}*/
           />
         </div>
       </div>
     );
   };
 
+  /** Function to render filters */
   let principalMenu = (title, items) => {
     return (
       <DropDown
@@ -172,8 +184,6 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
       />
     );
   };
-
-
 
   return (
     <div className={"general"}>
