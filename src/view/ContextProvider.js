@@ -77,7 +77,10 @@ const ContextProvider = ({ children }) => {
         }
         
     }, [])
-            
+      
+    useEffect(() => {
+        console.log(mapMaterias.mapMaterias)
+    }, [mapMaterias])
         
     return (
         <materiaContext.Provider value = {mapMaterias.mapMaterias}>

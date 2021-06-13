@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import SearchItem from "./SearchItem";
 import "../css/searcher.css";
+import { useFullTextSearch } from "../ContextProvider";
 
 //icons
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
-import { useFullTextSearch } from "../ContextProvider";
+
 
 function Searcher() {
   /**Texto de la barra del buscador */
@@ -62,10 +63,11 @@ function Searcher() {
               padding: 0,
               marginRight: "5px",
             }}
+            aria-label="button delete search input"
           >
-            <ClearIcon className="icon" />
+            <ClearIcon className="icon" aria-label="delete search input"/>
           </IconButton>
-          <SearchIcon className="icon" />
+          <SearchIcon className="icon" aria-label="search icon"/>
         </div>
       </div>
 

@@ -42,7 +42,7 @@ const InputText = ({
       options={options}
       getOptionLabel={(option) => option[optionLabel]}
       style={{ width: "100%" }}
-      inputValue = {defaultValue}            
+                 
       renderInput={(params) => (
         <TextField
           className={classes.textField}

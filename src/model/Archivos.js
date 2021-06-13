@@ -41,7 +41,11 @@ class Archivos {
       })      
 
     
-    Archivos._uploadFile(id_materia, docRef.id, file);
+    const url = await Archivos._uploadFile(id_materia, docRef.id, file);
+
+    Archivos._updateArchivoUrl(id_materia, docRef.id, url);
+
+    console.log(url)
 
     //update filters
     Archivos._updateMateriasTrabajos(
@@ -80,7 +84,7 @@ class Archivos {
       semestres: semestre,
       tipo: categorias,
       comentarios: descripcion,
-      url : ""                
+      url : url                
     }         
   }
 
@@ -90,24 +94,21 @@ class Archivos {
    * @param  {String} id_archivo ID unico del archivo que se va a subir, debe coincidir con el que se encuentra en la db
    * @param  {File} file Archivo que se va a subir
    */
-  static _uploadFile(id_materia, id_archivo, file) {
+  static async _uploadFile(id_materia, id_archivo, file) {
     const fileRef = this._storageRef.child(
       `/Materias/${id_materia}/${id_archivo}`
     );
-    fileRef
-      .put(file)
-      .then((snpaShot) => {
-        snpaShot.ref.getDownloadURL().then((url) => {
-          Archivos._updateArchivoUrl(id_materia, id_archivo, url);
-        });
-      })
-      .catch((err) => "error ading the file " + err);
+    
+    let snpaShot = await fileRef.put(file)      
+    let url = snpaShot.ref.getDownloadURL()    
+    
+    return url                  
   }
 
-  static _updateArchivoUrl(id_materia, id_archivo, url) {
+  static async  _updateArchivoUrl(id_materia, id_archivo, url) {
     this._DBmateriasDisplay
       .doc(id_materia)
-      .update({
+      .set({
         [`trabajos.${id_archivo}.url`]: url,
       })
       .catch(() => console.log("error subiendo url"));

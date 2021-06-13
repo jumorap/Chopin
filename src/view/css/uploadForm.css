@@ -4,11 +4,66 @@
     border-radius: 1rem;
     padding-bottom: 15px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px;    
 }
 
 .subContainer{
     display: flex;
+    align-items: center;
+}
+
+.leftDiv {
+    padding-right: 10px;
+    width: 450px;
+    display: flex;
+    flex-flow: column wrap;
+    margin-block-end: 15px;    
+    
+}
+
+.rightDiv {
+    padding-right: 10px;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+
+
+.semetre-categoria{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 800px){        
+    .subContainer{
+        flex-direction: column;
+    }
+    .leftDiv{
+        width: 450px;
+    }       
+
+    .rightDiv{
+        width: 90%;
+    }
+}
+@media only screen and (max-width: 540px){        
+    .container{
+        width: 100vw;
+    }
+    
+    .subContainer{
+        width: 90%;        
+    }
+        
+    .leftDiv {   
+        width: 90%;
+    }       
+    
 }
 
 .upload-form {

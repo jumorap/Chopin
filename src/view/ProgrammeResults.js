@@ -10,6 +10,7 @@ import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
 import UploadForm from "./UploadFile/UploadForm";
 
+
 function ProgrammeResults({ match }) {
   /* const firstRender = useRef(true); */
   const [firstRender, setfirstRender] = useState(true);
@@ -216,7 +217,7 @@ function ProgrammeResults({ match }) {
             "red-bar"
           )
         : programme("files-section-clicked", "hamburger-menu")}
-      <UploadFile onClick={fetchFiles} handleOpen={toggleUploadFileModal} />
+      <UploadFile onClick={fetchFiles} handleOpen={toggleUploadFileModal}/>
       <UploadFileModal
         open={uploadFileModalOpen}
         toggle={toggleUploadFileModal}

@@ -49,7 +49,9 @@ class Login extends Component {
                         style={funcStyle}
                         startIcon={
                             <FontAwesomeIcon icon={iconToUse} />
-                        }>{text}</Button>
+                        }
+                        aria-label="sign in and sign out"
+                >{text}</Button>
             )
         }
 
@@ -73,7 +75,7 @@ class Login extends Component {
                             }
                             {
                                 isUnalUser && user
-                                    ? <center><Searcher/><UploadFile/></center>
+                                    ? <><Searcher/><UploadFile/></>
                                     : <center>
                                         <span className={'legal'}>
                                             AL INGRESAR ESTÁS ACEPTANDO NUESTROS
