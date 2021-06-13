@@ -3,18 +3,12 @@ class MateriasView {
     this.mapMaterias = new Map();
   }
 
-<<<<<<< HEAD
   /** Delete desired archive from context 
    * 
    * @param {Obj} trabajoToDelete  gets the desired trabajo (archive in context- for ex: Parcial 3 ) to delete
    * @param {Map} currentMateria  gets the current materia of the context 
    */
    delete_archivo(trabajoToDelete, currentMateria) {
-=======
-     
-  /** */
-  delete(trabajoToDelete, currentMateria) {
->>>>>>> 1aba9d035e2d93607eb7b4d7600c07421664de26
     /* get desired materia obj*/
     let materia = this.mapMaterias.get(currentMateria);
     /* removes specific trabajo from materia.trabajos */
