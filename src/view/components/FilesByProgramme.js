@@ -27,10 +27,11 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
 
   
   //**Funcion que elimina el archivo tanto de la base de datos como del contexto */
-  let deleteFile = () => {
-    //delete from data base
+  let deleteFile = (item) => {
+    /* //delete from data base
     Archivos.deleteArchivos()
-    //delete from context
+    //delete from context */
+    console.log(item)
 
   };
 
