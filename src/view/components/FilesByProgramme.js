@@ -25,7 +25,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     console.log("current user", currentUserID);
   }, []);
 
-  
+
   //**Funcion que elimina el archivo tanto de la base de datos como del contexto */
   let deleteFile = (item) => {
     /* //delete from data base
@@ -36,8 +36,8 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   };
 
   let editFile = (item) => {
-    handleEdit();
     setFileToEdit(item);
+    handleEdit();
   };
 
   let body = () => (
@@ -81,102 +81,102 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   );
 
   let DeleteModal = ({ item }) => (
-      <Modal
-          disableAutoFocus
-          onEscapeKeyDown={(e) => console.log(e.target)}
-          open={delModal}
-          onClose={() => setDelModal(false)}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          className="delete-modal-container"
-      >
-          <div className="delete-modal">
-              <h1>Eliminar!</h1>
-              <span>¿Seguro deseas eliminar el archivo?</span>
-              <div>
-                  <button
-                      style={{
-                          backgroundColor: "red",
-                          border: "none",
-                          borderRadius: "5px",
-                          color: "white",
-                      }}
-                      onClick={() => {
-                          setDelModal(false);
-                          deleteFile(item);
-                      }}
-                  >
-                      Eliminar
+    <Modal
+      disableAutoFocus
+      onEscapeKeyDown={(e) => console.log(e.target)}
+      open={delModal}
+      onClose={() => setDelModal(false)}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      className="delete-modal-container"
+    >
+      <div className="delete-modal">
+        <h1>Eliminar!</h1>
+        <span>¿Seguro deseas eliminar el archivo?</span>
+        <div>
+          <button
+            style={{
+              backgroundColor: "red",
+              border: "none",
+              borderRadius: "5px",
+              color: "white",
+            }}
+            onClick={(ev, item) => {
+              setDelModal(false);
+              deleteFile(item);
+            }}
+          >
+            Eliminar
                   </button>
-                  <button
-                      style={{
-                          backgroundColor: "green",
-                          border: "none",
-                          borderRadius: "5px",
-                          color: "white",
-                      }}
-                      onClick={() => setDelModal(false)}
-                  >
-                      Cancelar
+          <button
+            style={{
+              backgroundColor: "green",
+              border: "none",
+              borderRadius: "5px",
+              color: "white",
+            }}
+            onClick={() => setDelModal(false)}
+          >
+            Cancelar
                   </button>
-              </div>
-          </div>
-      </Modal>
+        </div>
+      </div>
+    </Modal>
   );
 
-    let CardBtns = ({ item }) => {
-        return (
-            currentUserID === item.usuario && (
-                <>
-                    <Tooltip title={"Eliminar archivo"}>
-                        <div className={"delete"}>
-                            <AiFillCloseCircle
-                                onClick={() => setDelModal(true)}
-                                className={"delete-component"}
-                                style={{ padding: "11px 0px" }}
-                            />
-                        </div>
-                    </Tooltip>
-                    <DeleteModal item={item} />
-                    <Tooltip title={"Editar archivo"}>
-                        <div className={"edit"}>
-                            <AiFillEdit
-                                onClick={() => editFile(item)}
-                                className={"edit-component"}
-                                style={{ padding: "11px 0px" }}
-                            />
-                        </div>
-                    </Tooltip>
-                </>
-            )
-        );
-    };
-
-    let filesModal = () => (
-        <Modal
-            disableAutoFocus
-            open={modal}
-            onClose={openAndClose}
-            style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
-        >
-            {body()}
-        </Modal>
-    )
-
-    let cards = items.map(
-        (item, index) =>
-            item && (
-                <div
-                    className={"card-container"}
-                    key={index}
-                    style={{ position: "relative" }}
-                >
-                    <CardContent item={item} />
-                    <CardBtns item={item} />
-                    {openAndClose && filesModal()}
-                </div>
-            )
+  let CardBtns = ({ item }) => {
+    return (
+      currentUserID === item.usuario && (
+        <>
+          <Tooltip title={"Eliminar archivo"}>
+            <div className={"delete"}>
+              <AiFillCloseCircle
+                onClick={() => setDelModal(true)}
+                className={"delete-component"}
+                style={{ padding: "11px 0px" }}
+              />
+            </div>
+          </Tooltip>
+          <DeleteModal item={item} />
+          <Tooltip title={"Editar archivo"}>
+            <div className={"edit"}>
+              <AiFillEdit
+                onClick={(item) => editFile(item)}
+                className={"edit-component"}
+                style={{ padding: "11px 0px" }}
+              />
+            </div>
+          </Tooltip>
+        </>
+      )
     );
+  };
 
-    return <>{cards}</>;
+  let filesModal = () => (
+    <Modal
+      disableAutoFocus
+      open={modal}
+      onClose={openAndClose}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+    >
+      {body()}
+    </Modal>
+  )
+
+  let cards = items.map(
+    (item, index) =>
+      item && (
+        <div
+          className={"card-container"}
+          key={index}
+          style={{ position: "relative" }}
+        >
+          <CardContent item={item} />
+          <CardBtns item={item} />
+          {openAndClose && filesModal()}
+        </div>
+      )
+  );
+
+  return <>{cards}</>;
 }
