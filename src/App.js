@@ -8,8 +8,9 @@ import { createContext, useEffect } from 'react';
 import ContextProvider from './view/ContextProvider';
 import { AuthProvider } from "./model/firebaseAuthPersistence/AuthProvider";
 import PrivateRoute from "./model/firebaseAuthPersistence/PrivateRoute";
-import { firebaseAnalytics } from "./model/firebaseSelf/firebaseConfig";
 import UploadFileModal from './view/UploadFile/UploadFileModal';
+import { firebaseAnalytics } from "./model/firebaseSelf/firebaseConfig";
+
 
 export const contextProvider = createContext(undefined)
 

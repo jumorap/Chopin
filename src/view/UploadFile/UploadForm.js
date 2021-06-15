@@ -189,7 +189,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             )}
             {fileError === true ? (
               <p className={classes.warningDropText}>
-                Porfavor coloque un archivo
+                Porfavor anexe un archivo
               </p>
             ) : (
               ""

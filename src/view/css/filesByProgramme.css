@@ -39,20 +39,20 @@
   text-align: center;
   width: 25%;
   padding: 8px;
-  height: 195px;
+  height: 200px;
   box-sizing: border-box;
   background-color: transparent;
 }
 
 @media screen and (max-width: 1000px) {
   .card-container {
-    width: 45%;
+    width: 50%;
   }
 }
 
 @media screen and (max-width: 600px) {
   .card-container {
-    width: 90%;
+    width: 100%;
   }
 }
 

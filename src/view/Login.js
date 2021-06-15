@@ -10,6 +10,7 @@ import "./css/login.css";
 import principalNameLogo from "./assets/principal-slogan-logo.png";
 import Searcher from "./components/Searcher";
 import UploadFile from "./UploadFile/UploadFile";
+import CookieConsent from "react-cookie-consent";
 
 
 class Login extends Component {
@@ -57,6 +58,7 @@ class Login extends Component {
         }
 
         return (
+            <>
             <div className={'div-general'}>
                 <div className={'div-left div-half-screen'} />
                 <div className={'div-right div-half-screen'}>
@@ -90,6 +92,17 @@ class Login extends Component {
                     </div>
                 </div>
             </div>
+        <CookieConsent
+            debug={true}
+            location={"top"}
+            buttonText={"Listo, parce"}
+            declineButtonText={"Después"}
+            style={{}}
+            buttonStyle={{backgroundColor: "rgb(170, 0, 0)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 700,}}
+        >
+            Red Board utiliza cookies
+        </CookieConsent>
+        </>
         );
     }
 }
