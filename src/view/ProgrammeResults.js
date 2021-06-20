@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
 import { useParams } from "react-router-dom";
+import { getArrayFromObject, getFilterCategory, getFilteredFIles } from "../controler/FilesByProgrammeControler";
 
 function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
 
@@ -78,15 +79,8 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
 
   
 
-  /* Función que convierte un Obj en un array (itentar sacar) */
-  function getArrayFromObject(object) {
-    const objectArray = [];
-    Object.keys(object).forEach((key) => {
-      objectArray.push(object[key]);
-    });
-    //console.log(objectArray);
-    return objectArray;
-  }
+  
+  
 
   /* Obtiene la materia de la db y la asigna a materiaValues (cambiar nombre a fetchMateria o fetchSubject) */
   let fetchFiles = () => {
@@ -101,54 +95,17 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
 
   
   
-  let filteredFiles = materiaValues.trabajos.map((file) => {
-    let check = 0;
-    ["category", "prof", "semester"].forEach((type) => {
-      let choosen = selection.filter((filt) => filt.type === type);
-      /* console.log(type, "foo", choosen); */
-      if (choosen.length) {
-        if (
-          type === "category" &&
-          choosen.find((elem) => elem.value === file.tipo)
-        )
-          check++;
-        if (
-          type === "prof" &&
-          choosen.find((elem) => elem.value === file.profesor)
-        )
-          check++;
-        if (
-          type === "semester" &&
-          choosen.find((elem) => elem.value === file.semestre)
-        )
-          check++;
-      } else {
-        check++;
-      }
-    });
-    if (check === 3) return file;
-  });
+  let filteredFiles = getFilteredFIles(materiaValues, selection)
 
   /* Array of categories in curr materia (used in filters) */
-  const categories = Object.keys(materiaValues.tipos)
-    .sort()
-    .map((cat, index) => {
-      return { id: `cat-${index}`, value: cat, type: "category" };
-    });
-
+  let categories = getFilterCategory(materiaValues, "tipos", "category")
+  
   /* Array of profs in curr materia (used in filters) */
-  const professors = Object.keys(materiaValues.profesores)
-    .sort()
-    .map((professor, index) => {
-      return { id: `professor-${index}`, value: professor, type: "prof" };
-    });
+  let professors = getFilterCategory(materiaValues, "profesores", "prof")  
 
   /* Array of semesters in curr materia (used in filters) */
-  let semesters = Object.keys(materiaValues.semestres)
-    .sort()
-    .map((semester, index) => {
-      return { id: `semester-${index}`, value: semester, type: "semester" };
-    });
+  let semesters = getFilterCategory(materiaValues, "semestres", "semester")
+    
 
   /** Programme component, contains files and upper red bar (cambiar nombre? sacar?) */
   let programme = (properties, propertiesHamburger, redBar) => {

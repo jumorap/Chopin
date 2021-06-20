@@ -1,4 +1,10 @@
-export const getFilteredFIles = (materiaValues) =>{
+/**
+ * 
+ * @param {Obj} materiaValues object with profesores, trabajos, categorias and archivos
+ * @param {Array} selection arry with selected filters
+ * @returns 
+ */
+export const getFilteredFIles = (materiaValues, selection) =>{
     let filteredFiles = materiaValues.trabajos.map((file) => {
         let check = 0;
         ["category", "prof", "semester"].forEach((type) => {
@@ -28,4 +34,30 @@ export const getFilteredFIles = (materiaValues) =>{
       });
 
       return filteredFiles
+}
+
+/**
+ * Function cast an object to array
+ * @param {Obj} object object to be casted
+ * @returns Array with the objects
+ */
+export const getArrayFromObject = (object)=>{
+    const objectArray = [];
+    Object.keys(object).forEach((key) => {
+      objectArray.push(object[key]);
+    });
+    //console.log(objectArray);
+    return objectArray;
+}
+
+export const getFilterCategory = (materiasValue, atribute, type)=>{
+    return Object.keys(materiasValue[atribute])
+    .sort()
+    .map((elem, index)=>{
+        return {
+            id : `${atribute}-${index}`,
+            value : elem,
+            "type" : type
+        }
+    })
 }
