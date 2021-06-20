@@ -11,16 +11,15 @@ class MateriasView {
     }
     /**
      * Validates existence, creates/uses and adds file id as value on a specific key of materiaContext.
-     * @param {Map} map1 - materiaContext's Map.
-     * @param {String} map2 - file's key.
-     * @param {String} id - file's id.
+     * @param {Object} contextFilters - filtro que se encuentra en el context de la forma "nombreFiltro : {...,id_archivo : 1},..."
+     * @param {String} filterName - nombre del atributo que se va a añadir, ej Profesor pato, 
+     * @param {String} idArchivo - id del archivo que se añade
      */
-    validate_attribute(map1, map2, id) {
-        if (!(map2 in map1)) {
-        map1[map2] = new Map([[id, 1]]);
-        } else {
-        let ma = map1[map2];
-        ma.set(id, 1);
+    validate_attribute(contextFilters, filterName, idArchivo) {
+        if (!(filterName in contextFilters)){
+          contextFilters[filterName] = {idArchivo: 1}
+        } else {          
+          contextFilters[filterName] = {idArchivo: 1}          
         }
     }
 

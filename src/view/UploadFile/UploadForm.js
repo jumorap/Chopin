@@ -117,8 +117,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         file
       );
       console.log(new_archivo);
-      //esta funcion no funiciona, arreglarla
-      //materiaMap.add_archivo(new_archivo)
+      
+      materiaMap.add_archivo(new_archivo)
       handleClose();
     }
   };

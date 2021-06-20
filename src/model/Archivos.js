@@ -84,7 +84,8 @@ class Archivos {
       semestres: semestre,
       tipo: categorias,
       comentarios: descripcion,
-      url : url                
+      url : url,
+      usuario : id_usuario                
     }         
   }
 
