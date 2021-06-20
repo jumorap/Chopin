@@ -52,7 +52,7 @@ class MateriasView {
     /** Delete desired archive from context
      *
      * @param {Obj} trabajoToDelete  gets the desired trabajo (archive in context- for ex: Parcial 3 ) to delete
-     * @param {Obj} currentMateria  gets the current materia of the context
+     * @param {String} currentMateria  gets the current materia of the context
      */
      delete_archivo(trabajoToDelete, currentMateria) {
       /* get desired materia obj*/
@@ -76,8 +76,10 @@ class MateriasView {
       /* Removes trabajo from materia.tipos */
       let tipos = materia.tipos;
       this.delete_types(trabajoToDelete, tipos);
-  
-      console.log("DESPUES  ", materia.profesores["Profesor Pato"]);
+
+      console.log("Despues  ", materia);
+        
+      
     }
   
     /** This one executes inside delete_archivo(); - deletes the materia's info which is
@@ -95,12 +97,7 @@ class MateriasView {
       });
     
     }
-  
-      
-    update(trabajoToDelete, currentMateria) {
-      this.delete(trabajoToDelete, currentMateria);
-      /* Call Add function  */
-    }
+        
   }
   
   export default MateriasView;

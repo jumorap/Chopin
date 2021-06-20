@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MyDropzone from "./DropZone";
 import InputText from "./InputText";
-import { useMaterias, useProfesores } from "../ContextProvider";
+import { useMaterias, useProfesores, useMateriaMap } from "../ContextProvider";
 import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
@@ -59,6 +59,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
   const materias = useMaterias();
   const profesores = useProfesores();
+  /**The conection with the provider to check the existence of the subject */
+  const [materiaMap, setMateriaMap] = useMateriaMap();
 
   const classes = useStyles();
 
@@ -103,9 +105,9 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       setfileError(true);
       errors = true;
     }
-
-    if (!errors) {
-      const new_materia = await Archivos.crearArchivos(
+    console.log(materiaMap.mapMaterias)
+    if (!errors) {      
+      const new_archivo = await Archivos.crearArchivos(
         materiaText.id,
         descripcionText,
         profesorText.profesor,
@@ -114,7 +116,9 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         categoriaText.categoria,
         file
       );
-      console.log(new_materia);
+      console.log(new_archivo);
+      //esta funcion no funiciona, arreglarla
+      //materiaMap.add_archivo(new_archivo)
       handleClose();
     }
   };

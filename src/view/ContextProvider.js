@@ -79,11 +79,11 @@ const ContextProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        console.log(mapMaterias.mapMaterias)
+        console.log("se actualizo el context desde el COntext provider")
     }, [mapMaterias])
 
     return (
-        <materiaContext.Provider value={mapMaterias.mapMaterias}>
+        <materiaContext.Provider value={[mapMaterias, setmapMaterias]}>
             <fullTextSearchContext.Provider value={fullTextSearchMaterias}>
                 <profesoresContext.Provider value={listProfesores}>
                     <materiasContext.Provider value={listaMaterias}>

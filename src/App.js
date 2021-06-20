@@ -34,9 +34,9 @@ function App() {
 
     return (
         <>
+        <ContextProvider>
             <Router>
                 <AuthProvider>
-                    <ContextProvider>
                         <PrivateRoute exact path="/materias/:idMateria">
                             <ProgrammeResults toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
                         </PrivateRoute>
@@ -44,10 +44,10 @@ function App() {
                         <Route exact path="/" >
                             <Login toggleUploadFileModal={toggleUploadFileModal} />
                         </Route>
-                    </ContextProvider>
                 </AuthProvider>
             </Router>
             <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />
+        </ContextProvider>
         </>
     )
 }

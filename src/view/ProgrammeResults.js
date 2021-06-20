@@ -30,7 +30,7 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   };
 
   /**The conection with the provider to check the existence of the subject */
-  const materiaMap = useMateriaMap();
+  const [materiaMap, setmapMaterias] = useMateriaMap();
 
   /**The Id bring by the context that has the id of the materia to be displayed */
   const idCurrentMateria = useParams().idMateria;
@@ -52,9 +52,10 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   /* Asigna la materia actual al estado */
   useEffect(() => {
     /* si el map ya tiene la materia lo asigna a materiaValues */
-    if (materiaMap.has(idCurrentMateria)) {
+    if (materiaMap.mapMaterias.has(idCurrentMateria)) {
       console.log("EL archivo ya se encuentra en el context");
-      setMateriaValues(materiaMap.get(idCurrentMateria));
+      console.log(materiaMap.mapMaterias)
+      setMateriaValues(materiaMap.mapMaterias.get(idCurrentMateria));
     } else {
       /* si no busca la materia en la db y la asigna */
       fetchFiles();
@@ -66,12 +67,16 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   //when the Materia is featched form the DB, it updates the materiaMap context value
   useEffect(() => {
     if (firstRender === false) {
-      if (!materiaMap.has(idCurrentMateria)) {
-        materiaMap.set(idCurrentMateria, { ...materiaValues });
+      if (!materiaMap.mapMaterias.has(idCurrentMateria)) {
+        materiaMap.mapMaterias.set(idCurrentMateria, { ...materiaValues });
         console.log("Se acaba de actualizar el valor de el map Materia");
+        setmapMaterias(materiaMap => materiaMap)
+        console.log(materiaMap.mapMaterias)
       }
     }
   }, [materiaValues]);
+
+  
 
   /* Función que convierte un Obj en un array (itentar sacar) */
   function getArrayFromObject(object) {
@@ -94,6 +99,8 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
     });
   };
 
+  
+  
   let filteredFiles = materiaValues.trabajos.map((file) => {
     let check = 0;
     ["category", "prof", "semester"].forEach((type) => {

@@ -9,10 +9,12 @@ import {
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 import { useParams } from "react-router-dom";
 import Archivos from "../../model/Archivos"
+import { useMateriaMap } from "../ContextProvider";
 
 
 export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   
+  const [materiaMap, setMateriaMap] = useMateriaMap();
   const idCurrentMateria = useParams().idMateria;    
   const [modal, setModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
@@ -24,18 +26,20 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   };
 
   useEffect(() => {
-    console.log("current user", currentUserID);
-  }, []);
+    console.log("se actualizo el map materia desde delete")
+  }, [materiaMap]);
 
 
   //**Funcion que elimina el archivo tanto de la base de datos como del contexto */
-  let deleteFile = (item) => {
-    console.log(item)
+  let deleteFile = (item) => {    
     //delete from data base
-    Archivos.deleteArchivos(idCurrentMateria, item.ID_archivo, item.profesor, item.semestre, item.tipo)
+    //Archivos.deleteArchivos(idCurrentMateria, item.ID_archivo, item.profesor, item.semestre, item.tipo)
     //delete from context
     console.log(item)
-
+    console.log(idCurrentMateria)
+    console.log(materiaMap)
+    materiaMap.delete_archivo(item, idCurrentMateria)       
+    setMateriaMap({...materiaMap})
   };
 
   let editFile = (item) => {
@@ -83,6 +87,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     </div>
   );
 
+  /**Modal mostrado al oprimir el boton de eliminar un archivo */
   let DeleteModal = ({ item }) => (
     <Modal
       disableAutoFocus
@@ -127,6 +132,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     </Modal>
   );
 
+  /**Los botones de eliminar y editar que son mostrados en las cards */
   let CardBtns = ({ item }) => {
     return (
       currentUserID === item.usuario && (
@@ -155,6 +161,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     );
   };
 
+  /** */
   let filesModal = () => (
     <Modal
       disableAutoFocus
@@ -166,6 +173,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     </Modal>
   )
 
+  /**Las cartas que se muestran */
   let cards = items.map(
     (item, index) =>
       item && (
@@ -174,7 +182,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
           key={index}
           style={{ position: "relative" }}
         >
-          <CardContent item={item} />
+          <CardContent item={item} /> 
           <CardBtns item={item} />
           {openAndClose && filesModal()}
         </div>
