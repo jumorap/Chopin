@@ -2,6 +2,13 @@ class MateriasView {
     constructor() {
       this.mapMaterias = new Map();
     }
+
+    /**return a copy of the object */
+    copy(){
+      const newMateriasView = new MateriasView()
+      newMateriasView.mapMaterias = this.mapMaterias
+      return newMateriasView
+    }
     /**
      * Validates existence, creates/uses and adds file id as value on a specific key of materiaContext.
      * @param {Map} map1 - materiaContext's Map.
@@ -57,7 +64,7 @@ class MateriasView {
      delete_archivo(trabajoToDelete, currentMateria) {
       /* get desired materia obj*/
   
-      console.log("INPUT -----");
+      
       let materia = this.mapMaterias.get(currentMateria);
       console.log("ANTES  ", materia);
       /* removes specific trabajo from materia.trabajos */

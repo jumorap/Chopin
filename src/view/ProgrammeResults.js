@@ -8,27 +8,9 @@ import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
 import { useParams } from "react-router-dom";
-import { getArrayFromObject, getFilterCategory, getFilteredFIles } from "../controler/FilesByProgrammeControler";
+import { getArrayFromObject, getFilterCategory, getFilteredFIles, initialMateriaValue } from "../controler/ProgrammeResultsController";
 
-function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
-
-  /**Initial materia value, changes when the Materia obj is fetched from the db or the map */
-  const initialMateriaValue = {
-    nombre: "Dificultades Tecnicas",
-    profesores: {},
-    semestres: {},
-    tipos: {},
-    trabajos: [
-      {
-        ID_archivo: "IVwrevYsTiCKMPJrTohW",
-        comentarios: "Lamentablemente no hay archivos, sube alguno!",
-        profesor: "",
-        semestre: "",
-        tipo: "No hay archivos disponibles",
-        url: "",
-      },
-    ],
-  };
+function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {  
 
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setmapMaterias] = useMateriaMap();
@@ -66,22 +48,21 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   }, [idCurrentMateria]);
 
   //when the Materia is featched form the DB, it updates the materiaMap context value
-  useEffect(() => {
+  useEffect(() => {    
     if (firstRender === false) {
       if (!materiaMap.mapMaterias.has(idCurrentMateria)) {
-        materiaMap.mapMaterias.set(idCurrentMateria, { ...materiaValues });
-        console.log("Se acaba de actualizar el valor de el map Materia");
-        setmapMaterias(materiaMap => materiaMap)
-        console.log(materiaMap.mapMaterias)
-      }
-    }
+        materiaMap.mapMaterias.set(idCurrentMateria, { ...materiaValues });        
+      }      
+    }    
   }, [materiaValues]);
 
-  
+  useEffect(() => {
+    if(firstRender === false){
+      setMateriaValues(materiaMap.mapMaterias.get(idCurrentMateria));      
+    }
+  }, [materiaMap])
 
   
-  
-
   /* Obtiene la materia de la db y la asigna a materiaValues (cambiar nombre a fetchMateria o fetchSubject) */
   let fetchFiles = () => {
     Materias._getFilesList(idCurrentMateria).then((value) => {
@@ -92,7 +73,6 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
       });
     });
   };
-
   
   
   let filteredFiles = getFilteredFIles(materiaValues, selection)

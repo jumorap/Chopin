@@ -61,3 +61,21 @@ export const getFilterCategory = (materiasValue, atribute, type)=>{
         }
     })
 }
+
+/**The inital value to show in programme results */
+export const initialMateriaValue = {
+  nombre: "Dificultades Tecnicas",
+  profesores: {},
+  semestres: {},
+  tipos: {},
+  trabajos: [
+    {
+      ID_archivo: "IVwrevYsTiCKMPJrTohW",
+      comentarios: "Lamentablemente no hay archivos, sube alguno!",
+      profesor: "",
+      semestre: "",
+      tipo: "No hay archivos disponibles",
+      url: "",
+    },
+  ],
+};

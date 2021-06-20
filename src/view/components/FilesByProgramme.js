@@ -24,22 +24,15 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     setModal(!modal);
     setClicked(item);
   };
-
-  useEffect(() => {
-    console.log("se actualizo el map materia desde delete")
-  }, [materiaMap]);
-
+  
 
   //**Funcion que elimina el archivo tanto de la base de datos como del contexto */
   let deleteFile = (item) => {    
     //delete from data base
-    //Archivos.deleteArchivos(idCurrentMateria, item.ID_archivo, item.profesor, item.semestre, item.tipo)
-    //delete from context
-    console.log(item)
-    console.log(idCurrentMateria)
-    console.log(materiaMap)
-    materiaMap.delete_archivo(item, idCurrentMateria)       
-    setMateriaMap({...materiaMap})
+    Archivos.deleteArchivos(idCurrentMateria, item.ID_archivo, item.profesor, item.semestre, item.tipo)
+    //delete from context            
+    materiaMap.delete_archivo(item, idCurrentMateria)           
+    setMateriaMap(materiaMap.copy())
   };
 
   let editFile = (item) => {
