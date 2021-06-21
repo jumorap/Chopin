@@ -34,20 +34,21 @@ function App() {
 
     return (
         <>
-        <ContextProvider>
-            <Router>
-                <AuthProvider>
-                        <PrivateRoute exact path="/materias/:idMateria">
+            <ContextProvider>
+                <Router>
+                    <AuthProvider>
+                        <PrivateRoute exact path="/materias/:idMateria" component={
                             <ProgrammeResults toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
-                        </PrivateRoute>
+                        }
+                        />
                         <PrivateRoute exact path="/admin" component={Admin} />
                         <Route exact path="/" >
                             <Login toggleUploadFileModal={toggleUploadFileModal} />
                         </Route>
-                </AuthProvider>
-            </Router>
-            <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />
-        </ContextProvider>
+                    </AuthProvider>
+                </Router>
+                <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />
+            </ContextProvider>
         </>
     )
 }

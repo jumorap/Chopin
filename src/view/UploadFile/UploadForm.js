@@ -62,6 +62,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setMateriaMap] = useMateriaMap();
 
+  const [buttonShareActive, setButtonShare] = useState(false)
+
   const classes = useStyles();
 
   const [materiaText, setmateriaText] = useState("");
@@ -76,7 +78,6 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const [semestreError, setSemestreError] = useState(false);
   const [categoriaError, setcategoriaError] = useState(false);
   const [fileError, setfileError] = useState(false);
-
 
   const handleChange = (event) => {
     setDescripcionText(event.target.value);
@@ -105,8 +106,12 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       setfileError(true);
       errors = true;
     }
+
     console.log(materiaMap.mapMaterias)
-    if (!errors) {      
+
+    if (!errors) {
+      setButtonShare(true)
+
       const new_archivo = await Archivos.crearArchivos(
         materiaText.id,
         descripcionText,
@@ -193,7 +198,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             )}
             {fileError === true ? (
               <p className={classes.warningDropText}>
-                Porfavor anexe un archivo
+                Por favor anexe un archivo
               </p>
             ) : (
               ""
@@ -204,6 +209,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
           variant="contained"
           className={classes.uploadButton}
           onClick={handleSubmit}
+          disabled={buttonShareActive}
         >
           {fileToEdit ? "Editar" : "Compartir"}
         </Button>

@@ -20,7 +20,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   const [clicked, setClicked] = useState(undefined);
   const [openDelModal, setOpenDelModal] = useState(false);
   const currentUserID = firebaseAppAuth.currentUser.uid;
-  
+
   
   const handleOpenFilesModal = (item) => {
     setOpenFileModal(prev => !prev);
@@ -153,7 +153,9 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
       disableAutoFocus
       open={openFileModal}
       onClose={handleOpenFilesModal}
-      style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0)",
+          lineHeight: 1,
+          backdropFilter: "blur(3px)" }}
     >
       {PdfFile()}
     </Modal>

@@ -93,14 +93,14 @@ class Login extends Component {
                 </div>
             </div>
         <CookieConsent
-            debug={true}
             location={"top"}
             buttonText={"Listo, parce"}
             declineButtonText={"Después"}
             style={{}}
+            expires={365}
             buttonStyle={{backgroundColor: "rgb(170, 0, 0)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 700,}}
         >
-            Red Board utiliza cookies
+            Al navegar en este sitio aceptas las cookies que utilizamos para mejorar tu experiencia
         </CookieConsent>
         </>
         );

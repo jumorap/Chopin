@@ -48,7 +48,7 @@ const InputText = ({
           className={classes.textField}
           {...params}
           error={errorState}
-          helperText={errorState ? "Este campo no puede estar vacio" : ""}
+          helperText={errorState ? "Este campo no puede estar vacío" : ""}
           label={label}
           variant="outlined"                   
         />
