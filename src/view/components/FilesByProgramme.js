@@ -16,12 +16,14 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   
   const [materiaMap, setMateriaMap] = useMateriaMap();
   const idCurrentMateria = useParams().idMateria;    
-  const [modal, setModal] = useState(false);
+  const [openFileModal, setOpenFileModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
-  const [delModal, setDelModal] = useState(false);
+  const [openDelModal, setOpenDelModal] = useState(false);
   const currentUserID = firebaseAppAuth.currentUser.uid;
-  const openAndClose = (item) => {
-    setModal(!modal);
+  
+  
+  const handleOpenFilesModal = (item) => {
+    setOpenFileModal(prev => !prev);
     setClicked(item);
   };
   
@@ -40,7 +42,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     handleEdit();
   };
 
-  let body = () => (
+  let PdfFile = () => (
     <>
       <div className={"top-modal"}>
         <a
@@ -70,7 +72,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
 
   //**Carta que se va a mostrar */
   let CardContent = ({ item }) => (
-    <div className={"files-programme"} onClick={() => openAndClose(item)}>
+    <div className={"files-programme"} onClick={() => handleOpenFilesModal(item)}>
       <div className={"file-by-type"}>{item.tipo}</div>
       <div className={"file-by-description"}>{item.comentarios}</div>
       <div className={"file-by-teacher"}>
@@ -85,8 +87,8 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     <Modal
       disableAutoFocus
       onEscapeKeyDown={(e) => console.log(e.target)}
-      open={delModal}
-      onClose={() => setDelModal(false)}
+      open={openDelModal}
+      onClose={() => setOpenDelModal(false)}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
       className="delete-modal-container"
@@ -103,7 +105,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
               color: "white",
             }}
             onClick={() => {
-              setDelModal(false);
+              setOpenDelModal(false);
               deleteFile(item);
             }}
           >
@@ -116,7 +118,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
               borderRadius: "5px",
               color: "white",
             }}
-            onClick={() => setDelModal(false)}
+            onClick={() => setOpenDelModal(false)}
           >
             Cancelar
                   </button>
@@ -133,22 +135,13 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
           <Tooltip title={"Eliminar archivo"}>
             <div className={"delete"}>
               <AiFillCloseCircle
-                onClick={() => setDelModal(true)}
+                onClick={() => setOpenDelModal(true)}
                 className={"delete-component"}
                 style={{ padding: "11px 0px" }}
               />
             </div>
           </Tooltip>
           <DeleteModal item={item} />
-          <Tooltip title={"Editar archivo"}>
-            <div className={"edit"}>
-              <AiFillEdit
-                onClick={(item) => editFile(item)}
-                className={"edit-component"}
-                style={{ padding: "11px 0px" }}
-              />
-            </div>
-          </Tooltip>
         </>
       )
     );
@@ -158,11 +151,11 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   let filesModal = () => (
     <Modal
       disableAutoFocus
-      open={modal}
-      onClose={openAndClose}
+      open={openFileModal}
+      onClose={handleOpenFilesModal}
       style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
     >
-      {body()}
+      {PdfFile()}
     </Modal>
   )
 
@@ -176,11 +169,14 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
           style={{ position: "relative" }}
         >
           <CardContent item={item} /> 
-          <CardBtns item={item} />
-          {openAndClose && filesModal()}
+          <CardBtns item={item} />          
         </div>
       )
   );
 
-  return <>{cards}</>;
+  return (
+  <>
+  {cards}
+  {filesModal()}
+  </>);
 }

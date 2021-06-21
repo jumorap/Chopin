@@ -43,10 +43,9 @@ class Archivos {
     
     const url = await Archivos._uploadFile(id_materia, docRef.id, file);
 
-    Archivos._updateArchivoUrl(id_materia, docRef.id, url);
-
+    
     console.log(url)
-
+    
     //update filters
     Archivos._updateMateriasTrabajos(
       id_materia,
@@ -54,9 +53,10 @@ class Archivos {
       profesor,
       categorias,
       semestre,
-      descripcion
-    );
-
+      descripcion,
+      url
+      );
+            
     //update filters
     Archivos._updateMateriasFiltro(
       id_materia,
@@ -106,14 +106,6 @@ class Archivos {
     return url                  
   }
 
-  static async  _updateArchivoUrl(id_materia, id_archivo, url) {
-    this._DBmateriasDisplay
-      .doc(id_materia)
-      .update({
-        [`trabajos.${id_archivo}.url`]: url,
-      })
-      .catch(() => console.log("error subiendo url"));
-  }
 
   /**
    * Sube el archivo a el map trabajos de la coleccion materias display
@@ -127,7 +119,8 @@ class Archivos {
     nombreProfesor,
     tipoDocumento,
     semestre,
-    comentarios
+    comentarios,
+    url
   ) {
     var user = firebaseAppAuth.currentUser;
 
@@ -142,6 +135,7 @@ class Archivos {
               comentarios: comentarios,
               ID_archivo: id_archivo,
               usuario: firebaseAppAuth.currentUser.uid,
+              url : url
             },
           })
           .then(() => {
