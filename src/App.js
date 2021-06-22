@@ -41,7 +41,7 @@ function App() {
                             <ProgrammeResults toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
                         }
                         />
-                        <PrivateRoute exact path="/admin" component={Admin} />
+                        <PrivateRoute exact path="/admin" component={<Admin />} />
                         <Route exact path="/" >
                             <Login toggleUploadFileModal={toggleUploadFileModal} />
                         </Route>
