@@ -33,7 +33,12 @@ function Searcher() {
     if (firstRender.current === true) {
       firstRender.current = false;
     } else {
-      setsearchResults(searcherEngine.queryData(searchText));
+      try{
+        setsearchResults(searcherEngine.queryData(searchText))
+      }catch(e){
+        setsearchResults([])
+        console.log(e)
+      }
     }
   }, [searchText, searcherEngine]);
 

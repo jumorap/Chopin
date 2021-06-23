@@ -1,3 +1,5 @@
+import ProgrammeResults from "../view/ProgrammeResults";
+
 /**
  * 
  * @param {Obj} materiaValues object with profesores, trabajos, categorias and archivos
@@ -51,15 +53,26 @@ export const getArrayFromObject = (object)=>{
 }
 
 export const getFilterCategory = (materiasValue, atribute, type)=>{
-    return Object.keys(materiasValue[atribute])
-    .sort()
-    .map((elem, index)=>{
-        return {
-            id : `${atribute}-${index}`,
-            value : elem,
-            "type" : type
-        }
-    })
+  
+  let filtersObj = materiasValue[atribute]
+  let filtersList = Object.keys(materiasValue[atribute]).sort()  
+  let results = []
+
+  for(let i = 0; i < filtersList.length ; i++){
+    let elem = filtersList[i]      
+    if(Object.keys(filtersObj[elem]).length === 0){ //if the element is empty ex "profesor pato" : {}, then skip
+      continue
+    }
+    results.push({
+      id : `${atribute}-${i}`,
+      value : elem,
+      "type" : type
+    })    
+    
+  }
+
+  return results
+    
 }
 
 /**The inital value to show in programme results */
