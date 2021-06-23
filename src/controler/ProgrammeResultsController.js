@@ -77,7 +77,7 @@ export const getFilterCategory = (materiasValue, atribute, type)=>{
 
 /**The inital value to show in programme results */
 export const initialMateriaValue = {
-  nombre: "Dificultades Tecnicas",
+  nombre: "Cargando...",
   profesores: {},
   semestres: {},
   tipos: {},
