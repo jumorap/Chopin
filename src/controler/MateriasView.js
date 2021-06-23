@@ -31,8 +31,8 @@ class MateriasView {
     add_archivo_context(materiaMap, archivoMap) {
         materiaMap.trabajos.push(archivoMap);
         let id = archivoMap.id_archivo;
-        this.validate_attribute(materiaMap.profesores, archivoMap.profesores, id);
-        this.validate_attribute(materiaMap.semestres, archivoMap.semestres, id);
+        this.validate_attribute(materiaMap.profesores, archivoMap.profesor, id);
+        this.validate_attribute(materiaMap.semestres, archivoMap.semestre, id);
         this.validate_attribute(materiaMap.tipos, archivoMap.tipo, id);
     }
 
