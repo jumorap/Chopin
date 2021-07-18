@@ -10,6 +10,7 @@ import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
+import CheckBoxZone from "./CheckBoxZone";
 
 
 const useStyles = makeStyles(() => ({
@@ -72,13 +73,15 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const [categoriaText, setcategoriaText] = useState("");
   const [descripcionText, setDescripcionText] = useState("");
   const [file, setfile] = useState(null);
+  const [grade, setgrade] = useState("") //text to save the grade if is necessary
 
   const [materiaError, setmateriaError] = useState(false);
   const [profesorError, setProfesorError] = useState(false);
   const [semestreError, setSemestreError] = useState(false);
   const [categoriaError, setcategoriaError] = useState(false);
   const [fileError, setfileError] = useState(false);
-
+  const [gradeError, setgradeError] = useState(false)
+  
   const handleChange = (event) => {
     setDescripcionText(event.target.value);
   };
@@ -106,6 +109,10 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       setfileError(true);
       errors = true;
     }
+    if(gradeError){
+      errors = true;
+    }
+
 
     console.log(materiaMap.mapMaterias)
 
@@ -119,7 +126,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         semestreText.semestre,
         user.uid,
         categoriaText.categoria,
-        file
+        file,
+        grade
       );
       console.log(new_archivo);
       
@@ -203,6 +211,15 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             ) : (
               ""
             )}
+            
+            {/* para colocar si esta resulto o no y la nota */}
+            <CheckBoxZone 
+              grade = {grade}
+              setgrade = {setgrade} 
+              gradeError = {gradeError} 
+              setgradeError = {setgradeError}
+            />
+
           </div>
         </div>
         <Button

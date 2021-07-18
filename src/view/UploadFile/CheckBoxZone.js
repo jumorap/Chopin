@@ -3,25 +3,44 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 
-function validateGrade(grade){
-    grade = parseInt(grade)
-    if(grade > 50 | 0 > grade){
-        return "revise la nota"
-    }    
-    if(grade > 5){
-        grade /= 10
+
+//Muestra un check box saber si tiene la nota y si este es activado muestra la opcio para colocarla
+const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError}) => {
+    //to know if the check box is active     
+    const [checked, setchecked] = useState(false)    
+
+    //handle when the checkbox is pressed
+    const handleCheckBox = ()=>{
+        setchecked(prev => !prev)
+        setgradeError(false)
+        setgrade("")
     }
+    
+    return (
+        <div>            
+            <center>
+            <FormControlLabel
+                control={
+                <Checkbox
+                    checked={checked}
+                    onChange={handleCheckBox}
+                    name="Resuleto"
+                    color="primary"
+                />
+                }
+                label="¿Esta resuleto?"
+            />
 
-
-
+            {checked && <Grade grade = {grade} setGrade = {setgrade} error = {gradeError} setError = {setgradeError}/>}
+            </center>
+        </div>
+    )
 }
 
 
 //To write the grade if is necessary
-const Grade = ({grade, setGrade}) => {
-    const [error, setError] = useState(false)
-
-    
+const Grade = ({grade, setGrade, error, setError}) => {
+                
     useEffect(() => {
         if(grade > 5 | 0 > grade){ //notificar valores errados
             setError(true)
@@ -33,9 +52,10 @@ const Grade = ({grade, setGrade}) => {
         }
     }, [grade])
     
+    //when is written ovet the grade field text
     const handleChange = (e)=>{
         const value = e.target.value        
-        if(isNaN(value)){ //solo admintir valores numericos
+        if(isNaN(value)){ //only accept numerical values
             return
         }                 
         setGrade(e.target.value)
@@ -53,34 +73,6 @@ const Grade = ({grade, setGrade}) => {
           helperText= {error && "La nota maxima es 5"}
           variant= "outlined"
         />
-    )
-}
-
-
-//Muestra un check box saber si tiene la nota y si este es activado muestra la opcio para colocarla
-const CheckBoxZone = () => {
-    
-    const [checked, setchecked] = useState(false)
-    const [grade, setgrade] = useState("")
-
-    return (
-        <div>            
-            <center>
-            <FormControlLabel
-                control={
-                <Checkbox
-                    checked={checked}
-                    onChange={()=>{setchecked(prev => !prev)}}
-                    name="Resuleto"
-                    color="primary"
-                />
-                }
-                label="¿Esta resuleto?"
-            />
-
-            {checked && <Grade grade = {grade} setGrade = {setgrade}/>}
-            </center>
-        </div>
     )
 }
 

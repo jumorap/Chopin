@@ -24,7 +24,8 @@ class Archivos {
     semestre,
     id_usuario,
     categorias,
-    file
+    file,
+    nota
   ) {
     //add arvhico to Archivos collections
     const docRef = await this._DBmateriasDisplay
@@ -36,6 +37,7 @@ class Archivos {
         semestre: semestre,
         categorias: categorias,
         id_usuario: id_usuario,
+        nota: nota,
       });
 
     const url = await Archivos._uploadFile(id_materia, docRef.id, file);
@@ -50,22 +52,13 @@ class Archivos {
       categorias,
       semestre,
       descripcion,
-      url
+      url,
+      nota
     );
 
     //update filters
-    Archivos._updateMateriasFiltro(
-      id_materia,
-      docRef.id,
-      "profesores",
-      profesor
-    );
-    Archivos._updateMateriasFiltro(
-      id_materia,
-      docRef.id,
-      "semestres",
-      semestre
-    );
+    Archivos._updateMateriasFiltro(id_materia,docRef.id,"profesores",profesor);
+    Archivos._updateMateriasFiltro(id_materia,docRef.id,"semestres",semestre);
     Archivos._updateMateriasFiltro(id_materia, docRef.id, "tipos", categorias);
 
     return {
@@ -77,6 +70,7 @@ class Archivos {
       comentarios: descripcion,
       url: url,
       usuario: id_usuario,
+      nota: nota
     };
   }
 
@@ -110,7 +104,8 @@ class Archivos {
     tipoDocumento,
     semestre,
     comentarios,
-    url
+    url,
+    nota
   ) {
     var user = firebaseAppAuth.currentUser;
 
@@ -126,6 +121,7 @@ class Archivos {
             ID_archivo: id_archivo,
             usuario: firebaseAppAuth.currentUser.uid,
             url: url,
+            nota : nota
           },
         })
         .then(() => {
