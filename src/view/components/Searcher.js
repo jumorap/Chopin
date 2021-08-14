@@ -55,6 +55,19 @@ function Searcher() {
     setsearchText("");
   };
 
+  /**
+   * Takes the current selected materia and search for it with the url
+   * @returns 
+   */
+  const searchMateria = () =>{
+    if(searchResults.length === 0){
+      return
+    } 
+    const idMateria =  searchResults[currentResultIndex].id
+    history.push("/materias/" + idMateria)        
+    handleCloseButton()
+  }
+
   const handleKeyUp = (e) => {
     const keyPressed = e.key
     if(keyPressed === "Escape"){
@@ -62,11 +75,7 @@ function Searcher() {
       return
     }
     if(keyPressed === "Enter"){
-      if(searchResults.length > 0){
-        const idMateria =  searchResults[currentResultIndex].id
-        history.push("/materias/" + idMateria)        
-        handleCloseButton()
-      }
+      searchMateria()
       return
     }    
     
@@ -81,14 +90,9 @@ function Searcher() {
     if(keyPressed === "ArrowUp"){            
       setcurrentResultIndex(Math.max(0, currentResultIndex - 1))
       return
-    }
-    console.log("hola")
-    
+    }        
   }
 
-  useEffect(() => {
-    console.log(currentResultIndex)
-  }, [currentResultIndex])
 
 
 
@@ -120,7 +124,9 @@ function Searcher() {
           >
             <ClearIcon className="icon" aria-label="delete search input"/>
           </IconButton>
-          <SearchIcon className="icon" aria-label="search icon"/>
+          <IconButton onClick = {searchMateria}>
+            <SearchIcon className="icon" aria-label="search icon"/>
+          </IconButton>
         </div>
       </div>
 
