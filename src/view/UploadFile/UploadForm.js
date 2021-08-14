@@ -61,7 +61,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const materias = useMaterias();
   const profesores = useProfesores();
   /**The conection with the provider to check the existence of the subject */
-  const [materiaMap, setMateriaMap] = useMateriaMap();
+  const materiaMap = useMateriaMap();
 
   const [buttonShareActive, setButtonShare] = useState(false)
 

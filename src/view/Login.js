@@ -33,8 +33,7 @@ class Login extends Component {
                 borderRadius: 30,
                 border: 0,
                 padding: 0,
-                position: "absolute",
-                bottom : "33px"
+                width: "20px",                 
             },
             signIn: {
                 background: 'linear-gradient(45deg, #FFF 30%, #FFF 90%)',
@@ -45,18 +44,20 @@ class Login extends Component {
         }
 
 
-        function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text, title="") {
+        function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text, title="", containerClassName) {
             return (
-                <Tooltip title = {title}>
-                <Button onClick={clickUse}
-                    className={classNameStyles}
-                    style={funcStyle}
-                    startIcon={
-                        <FontAwesomeIcon icon={iconToUse} />
-                    }
-                    aria-label="sign in and sign out"
-                >{text}</Button>
-                </Tooltip>
+                <div className = {containerClassName}>                
+                    <Tooltip title = {title}>
+                    <Button onClick={clickUse}
+                        className={classNameStyles}
+                        style={funcStyle}
+                        startIcon={
+                            <FontAwesomeIcon icon={iconToUse} />
+                        }
+                        aria-label="sign in and sign out"
+                    >{text}</Button>
+                    </Tooltip>
+                </div>
             )
         }
 
@@ -71,15 +72,14 @@ class Login extends Component {
                 <div className={'div-right'}>
                     <div className={'container-input-logo'}>                        
                             <img src={principalNameLogo} className={'slogan-img'} alt={'logo'} />
-
                             {
                                 isUnalUser && user
-                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '', "Sign Out")
-                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL', )
+                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '', "Sign Out", "signOut-container")
+                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL', "" ,"signIn-container")
                             }
                             {
                                 !isUnalUser && user
-                                    ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas institucionales UNAL</p>
+                                    ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas <br/> institucionales UNAL</p>
                                     : <p />
                             }
                             {

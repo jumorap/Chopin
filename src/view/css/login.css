@@ -33,11 +33,10 @@
     display: flex; 
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
 .container-input-logo {
-    width: 90%;
+    width: 90%;    
     display: flex;
     flex-direction: column;
 }
@@ -50,9 +49,19 @@
 }
 
 .google-out {
-    position: absolute;
+    position: absfiolute;
     bottom: 5vh;
     left: 5vh;
+}
+
+.signOut-container{
+    position: fixed;
+    bottom: 1vh;
+}
+
+.signIn-container{
+    display: flex;
+    justify-content: center;
 }
 
 .slogan-img {
@@ -98,6 +107,7 @@
     margin-block-end: 0.5em;
     margin-inline-start: 0;
     margin-inline-end: 0;
+    text-align: center;        
 }
 
 

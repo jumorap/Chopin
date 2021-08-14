@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../css/filesByProgramme.css";
 import { Modal, Tooltip } from "@material-ui/core";
 import {
   FaExternalLinkAlt,
-  AiFillCloseCircle,
-  AiFillEdit,
+  AiFillCloseCircle,  
 } from "react-icons/all";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 import { useParams } from "react-router-dom";
@@ -36,11 +35,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     materiaMap.delete_archivo(item, idCurrentMateria)           
     setMateriaMap(materiaMap.copy())
   };
-
-  let editFile = (item) => {
-    setFileToEdit(item);
-    handleEdit();
-  };
+  
 
   let PdfFile = () => (
     <>
