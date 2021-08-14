@@ -7,9 +7,9 @@ import {useHistory} from "react-router-dom"
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
-
 //for detect clicks outside the componens
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 
 function Searcher() {
   /**Texto de la barra del buscador */
@@ -31,6 +31,9 @@ function Searcher() {
   //for redirect the current page
   const history = useHistory()
 
+  // para poder navegar con las flechas por los resultados  
+  const [currentResultIndex, setcurrentResultIndex] = useState(0)
+
   /**side effect que actualiza la searchResults cada vez que cambia la input */
   useEffect(() => {
     if (firstRender.current === true) {
@@ -38,8 +41,10 @@ function Searcher() {
     } else {
       try{
         setsearchResults(searcherEngine.queryData(searchText).slice(0,5)) //slice is used to set the max possible result
+        setcurrentResultIndex(0)
       }catch(e){
         setsearchResults([])
+        setcurrentResultIndex(0)
         console.log(e)
       }
     }
@@ -58,14 +63,32 @@ function Searcher() {
     }
     if(keyPressed === "Enter"){
       if(searchResults.length > 0){
-        const idMateria =  searchResults[0].id
+        const idMateria =  searchResults[currentResultIndex].id
         history.push("/materias/" + idMateria)        
         handleCloseButton()
       }
       return
+    }    
+    
+    if(searchResults.length === 0){
+      return
     }
-
+    
+    if(keyPressed === "ArrowDown"){                  
+      setcurrentResultIndex(Math.min(searchResults.length - 1 , currentResultIndex + 1))
+      return
+    }
+    if(keyPressed === "ArrowUp"){            
+      setcurrentResultIndex(Math.max(0, currentResultIndex - 1))
+      return
+    }
+    console.log("hola")
+    
   }
+
+  useEffect(() => {
+    console.log(currentResultIndex)
+  }, [currentResultIndex])
 
 
 
@@ -102,9 +125,9 @@ function Searcher() {
       </div>
 
       {/* Diplay search results */}
-      {searchResults.map((val) => (
-        <SearchItem nombre={val.data} link={val.id} key={val.id} click = {handleCloseButton}/>
-      ))}
+      {searchResults.map((val, index) => {        
+        return  <SearchItem nombre={val.data} link={val.id} key={val.id} click = {handleCloseButton} selected = {index === currentResultIndex}/>
+      })}
     </div>
     </ClickAwayListener>
   );
