@@ -63,6 +63,7 @@ const Grade = ({grade, setGrade, error, setError}) => {
 
 
     return (
+        <><br/>
         <TextField
           error = {error}
           id="grade-text"
@@ -73,6 +74,7 @@ const Grade = ({grade, setGrade, error, setError}) => {
           helperText= {error && "La nota maxima es 5"}
           variant= "outlined"
         />
+        </>
     )
 }
 

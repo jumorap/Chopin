@@ -17,6 +17,10 @@ code {
     monospace;
 }
 
+a {
+  color: #EEE;
+}
+
 .icon{
   color: rgb(245, 69, 69);
 }

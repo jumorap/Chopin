@@ -1,19 +1,31 @@
-.div-general{
+.div-general {
     background-color: var(--principalBlue);
     width: 100%;
     height: 100vh;
     display: flex;
 }
 
-.div-left{
+.div-left {
     background-image: url("../assets/principal-logo-gray.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 103%;
     flex: 1;
+    color: #DDD;
+    font-size: 0.8rem;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    display: flex;
+    padding-bottom: 1.5em;
 }
 
-.div-right{
+.text-div-left {
+    width: 70%;
+}
+
+.div-right {
     background-color: #fff;
     color: #555;
     flex: 1;
@@ -23,15 +35,15 @@
     align-items: center;
 }
 
-.container-input-logo{
+.container-input-logo {
     width: 90%;
     display: flex;
     flex-direction: column;
 }
 
 
-@media only screen and (max-width: 800px){
-    .div-left{
+@media only screen and (max-width: 800px) {
+    .div-left {
         display: none;
     }
 }
@@ -42,14 +54,14 @@
     left: 5vh;
 }
 
-.slogan-img{
+.slogan-img {
     max-width: 70%;
     min-width: 30%;
     align-self: center;     
     margin-bottom: 2rem;    
 }
 
-.legal{
+.legal {
     align-content: center;
     align-items: center;
     alignment: center;
@@ -63,20 +75,20 @@
     min-width: 30%;
 }
 
-.politics{
+.politics {
     display: block;
     text-decoration: blink;
     color: #000;
     font-weight: bold;
 }
 
-.google-sign{
+.google-sign {
     color: rgb(0, 0, 0);
     height: 48px;
     box-shadow: rgba(0, 0, 0, 0.3) 0 3px 5px 2px;
 }
 
-.non-unal-msg{
+.non-unal-msg {
     color: #f30000;
     font-weight: bold;
     font-size: 20px;

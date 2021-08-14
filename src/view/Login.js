@@ -60,7 +60,11 @@ class Login extends Component {
         return (
             <>
             <div className={'div-general'}>
-                <div className={'div-left'} />
+                <div className={'div-left'} >
+                    <span className={"text-div-left"}>
+                        ¿Necesitas ayuda, encontraste un fallo, tienes sugerencias o te gustaría ayudarnos a mejorar Red Board? Contáctanos: <a href={"mailto:redboardunal@protonmail.com"}>redboardunal@protonmail.com</a>
+                    </span>
+                </div>
                 <div className={'div-right'}>
                     <div className={'container-input-logo'}>                        
                             <img src={principalNameLogo} className={'slogan-img'} alt={'logo'} />
