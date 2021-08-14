@@ -2,8 +2,13 @@ import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { IconButton } from "@material-ui/core";
 import "../css/uploadFile.css";
+import Tooltip from '@material-ui/core/Tooltip';
 
-
+/**
+ * Button with the + symbol used to add a new pdf
+ * @param {handleOpen} bool pone and close de uploadFile
+ * @returns 
+ */
 const UploadFile = ({ handleOpen }) => {
   const styles = {
     openButton: {
@@ -23,6 +28,7 @@ const UploadFile = ({ handleOpen }) => {
 
   return (
     <div>
+      <Tooltip title = "Sube archivo">
       <IconButton
         style={styles.openButton}
         className={"openButton"}
@@ -31,6 +37,7 @@ const UploadFile = ({ handleOpen }) => {
       >
         <AddIcon fontSize={"large"} className={"openIcon"} />
       </IconButton>
+      </Tooltip>
     </div>
   );
 };

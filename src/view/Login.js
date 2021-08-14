@@ -11,7 +11,7 @@ import principalNameLogo from "./assets/principal-slogan-logo.png";
 import Searcher from "./components/Searcher";
 import UploadFile from "./UploadFile/UploadFile";
 import CookieConsent from "react-cookie-consent";
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 class Login extends Component {
     render() {
@@ -34,6 +34,7 @@ class Login extends Component {
                 border: 0,
                 padding: 0,
                 position: "absolute",
+                bottom : "33px"
             },
             signIn: {
                 background: 'linear-gradient(45deg, #FFF 30%, #FFF 90%)',
@@ -44,8 +45,9 @@ class Login extends Component {
         }
 
 
-        function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text) {
+        function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text, title="") {
             return (
+                <Tooltip title = {title}>
                 <Button onClick={clickUse}
                     className={classNameStyles}
                     style={funcStyle}
@@ -54,6 +56,7 @@ class Login extends Component {
                     }
                     aria-label="sign in and sign out"
                 >{text}</Button>
+                </Tooltip>
             )
         }
 
@@ -71,8 +74,8 @@ class Login extends Component {
 
                             {
                                 isUnalUser && user
-                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '')
-                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL')
+                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '', "Sign Out")
+                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL', )
                             }
                             {
                                 !isUnalUser && user

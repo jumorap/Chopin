@@ -68,6 +68,7 @@ const ContextProvider = ({ children }) => {
                 .then(value => {
                     setlistaMaterias(value)
                     setfullTextSearchMaterias(new FullTextSearch(value))
+                    console.log(value)
                 })
             Profesores.getProfesoresList()
                 .then(value => {
