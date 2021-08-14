@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import SearchItem from "./SearchItem";
 import "../css/searcher.css";
 import { useFullTextSearch } from "../ContextProvider";
-
+import {useHistory} from "react-router-dom"
 //icons
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 
+//for detect clicks outside the componens
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 function Searcher() {
   /**Texto de la barra del buscador */
@@ -16,9 +18,7 @@ function Searcher() {
   /**Usado para  mostrar las materias dado una busqueda*/
   const [searchResults, setsearchResults] = useState([]);
 
-  const firstRender = useRef(true);
-
-  
+  const firstRender = useRef(true);  
 
   /**Traemos el full textSearch del context*/
   const searcherEngine = useFullTextSearch();
@@ -28,13 +28,16 @@ function Searcher() {
     setsearchText(e.target.value);
   };
 
+  //for redirect the current page
+  const history = useHistory()
+
   /**side effect que actualiza la searchResults cada vez que cambia la input */
   useEffect(() => {
     if (firstRender.current === true) {
       firstRender.current = false;
     } else {
       try{
-        setsearchResults(searcherEngine.queryData(searchText))
+        setsearchResults(searcherEngine.queryData(searchText).slice(0,5)) //slice is used to set the max possible result
       }catch(e){
         setsearchResults([])
         console.log(e)
@@ -47,7 +50,28 @@ function Searcher() {
     setsearchText("");
   };
 
+  const handleKeyUp = (e) => {
+    const keyPressed = e.key
+    if(keyPressed === "Escape"){
+      handleCloseButton()
+      return
+    }
+    if(keyPressed === "Enter"){
+      if(searchResults.length > 0){
+        const idMateria =  searchResults[0].id
+        history.push("/materias/" + idMateria)        
+        handleCloseButton()
+      }
+      return
+    }
+
+  }
+
+
+
   return (
+    <ClickAwayListener onClickAway = {handleKeyUp}>
+    
     <div className="searcher-container">
       <div className="searcher-container-input ">
         <input
@@ -58,7 +82,8 @@ function Searcher() {
           placeholder="Escribe el nombre de la materia"
           value={searchText}
           onChange={handleInputTextChange}
-          autoComplete="off"
+          autoComplete="off"                   
+          onKeyUp = {handleKeyUp}   
         />
         <div className="faic">
           <IconButton
@@ -81,6 +106,7 @@ function Searcher() {
         <SearchItem nombre={val.data} link={val.id} key={val.id} click = {handleCloseButton}/>
       ))}
     </div>
+    </ClickAwayListener>
   );
 }
 

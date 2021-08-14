@@ -2,11 +2,7 @@
     background-color: var(--principalBlue);
     width: 100%;
     height: 100vh;
-    -webkit-box-direction: reverse;
-    -webkit-box-orient: horizontal;
-    flex-direction: row-reverse;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
 }
 
 .div-left{
@@ -20,34 +16,23 @@
 .div-right{
     background-color: #fff;
     color: #555;
-}
-
-.div-half-screen{
-    float: left;
-    display: flex;
-    -webkit-box-pack: center;
+    flex: 1;
+    position: relative;   
+    display: flex; 
     justify-content: center;
-    align-content: center;
-    height: 100vh;
     align-items: center;
-    vertical-align: middle;
-    position: relative;
 }
 
-@media only screen and (max-width: 500px){
-    .container-div-right{
-        width: 50vh;
-    }
+.container-input-logo{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
 
+
+@media only screen and (max-width: 800px){
     .div-left{
-        width: 100vw;
-        height: 20vh;
-        display: table;
-    }
-
-    .div-general{
-        display: flex;
-        flex-direction: column;
+        display: none;
     }
 }
 
@@ -60,6 +45,8 @@
 .slogan-img{
     max-width: 70%;
     min-width: 30%;
+    align-self: center;     
+    margin-bottom: 2rem;    
 }
 
 .legal{
@@ -99,6 +86,7 @@
     margin-inline-start: 0;
     margin-inline-end: 0;
 }
+
 
 
 

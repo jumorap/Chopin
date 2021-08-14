@@ -60,11 +60,10 @@ class Login extends Component {
         return (
             <>
             <div className={'div-general'}>
-                <div className={'div-left div-half-screen'} />
-                <div className={'div-right div-half-screen'}>
-                    <div className={'container-div-right'}>
-                        <center>
-                            <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'} /></p>
+                <div className={'div-left'} />
+                <div className={'div-right'}>
+                    <div className={'container-input-logo'}>                        
+                            <img src={principalNameLogo} className={'slogan-img'} alt={'logo'} />
 
                             {
                                 isUnalUser && user
@@ -87,8 +86,7 @@ class Login extends Component {
                                             </a>
                                         </span>
                                     </center>
-                            }
-                        </center>
+                            }                        
                     </div>
                 </div>
             </div>
