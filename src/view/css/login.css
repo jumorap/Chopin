@@ -48,10 +48,8 @@
     }
 }
 
-.google-out {
-    position: absfiolute;
-    bottom: 5vh;
-    left: 5vh;
+.google-out {    
+    bottom: 5vh;    
 }
 
 .signOut-container{
