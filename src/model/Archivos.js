@@ -42,8 +42,6 @@ class Archivos {
 
     const url = await Archivos._uploadFile(id_materia, docRef.id, file);
 
-    console.log(url);
-
     //update filters
     Archivos._updateMateriasTrabajos(
       id_materia,

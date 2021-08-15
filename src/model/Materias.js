@@ -114,7 +114,6 @@ class Materias {
     Object.keys(object).forEach((key) => {
       objectArray.push(object[key]);
     });
-    console.log(objectArray);
     return objectArray;
   }
 }

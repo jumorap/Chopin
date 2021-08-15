@@ -46,10 +46,14 @@
     .div-left {
         display: none;
     }
+
+    .signOut-container{
+        left: 5vh;
+    }
 }
 
 .google-out {    
-    bottom: 5vh;    
+    bottom: 5vh;
 }
 
 .signOut-container{

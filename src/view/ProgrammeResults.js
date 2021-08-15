@@ -36,8 +36,6 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   useEffect(() => {
     /* si el map ya tiene la materia lo asigna a materiaValues */
     if (materiaMap.mapMaterias.has(idCurrentMateria)) {
-      console.log("EL archivo ya se encuentra en el context");
-      console.log(materiaMap.mapMaterias)
       setMateriaValues(materiaMap.mapMaterias.get(idCurrentMateria));
     } else {
       /* si no busca la materia en la db y la asigna */
@@ -66,7 +64,6 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   /* Obtiene la materia de la db y la asigna a materiaValues (cambiar nombre a fetchMateria o fetchSubject) */
   let fetchFiles = () => {
     Materias._getFilesList(idCurrentMateria).then((value) => {
-      console.log(value.data());
       setMateriaValues({
         ...value.data(),
         trabajos: getArrayFromObject(value.data().trabajos),

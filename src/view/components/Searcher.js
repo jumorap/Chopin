@@ -124,7 +124,12 @@ function Searcher() {
           >
             <ClearIcon className="icon" aria-label="delete search input"/>
           </IconButton>
-          <IconButton onClick = {searchMateria}>
+          <IconButton onClick = {searchMateria}
+            style={{
+              margin: 0,
+              padding: 0,
+              marginRight: "5px",
+            }}>
             <SearchIcon className="icon" aria-label="search icon"/>
           </IconButton>
         </div>

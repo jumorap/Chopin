@@ -114,8 +114,6 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
     }
 
 
-    console.log(materiaMap.mapMaterias)
-
     if (!errors) {
       setButtonShare(true)
 
@@ -129,7 +127,6 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         file,
         grade
       );
-      console.log(new_archivo);
       
       materiaMap.add_archivo(new_archivo)
       handleClose();
@@ -261,4 +258,8 @@ const categorias = [
   { categoria: "Taller 6" },
   { categoria: "Taller 7" },
   { categoria: "Taller 8" },
+  { categoria: "Quíz 1" },
+  { categoria: "Quíz 2" },
+  { categoria: "Quíz 3" },
+  { categoria: "Quíz 4" },
 ];

@@ -9,7 +9,6 @@ import Profesores from '../model/Profesores'
 //read the subjects and create the list with those
 
 
-
 const materiasContext = createContext() //lista de materias para la nav bar y el añadir archivo
 const profesoresContext = createContext()
 const fullTextSearchContext = createContext()
@@ -49,14 +48,12 @@ export function useFullTextSearch() {
 }
 
 
-
 const ContextProvider = ({ children }) => {
 
     const [listaMaterias, setlistaMaterias] = useState([])
     const [listProfesores, setlistProfesores] = useState([])
     const [fullTextSearchMaterias, setfullTextSearchMaterias] = useState()
     const [mapMaterias, setmapMaterias] = useState(new MateriasView())
-
 
 
     const firstRender = useRef(true)
@@ -68,7 +65,6 @@ const ContextProvider = ({ children }) => {
                 .then(value => {
                     setlistaMaterias(value)
                     setfullTextSearchMaterias(new FullTextSearch(value))
-                    console.log(value)
                 })
             Profesores.getProfesoresList()
                 .then(value => {
@@ -80,7 +76,7 @@ const ContextProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        console.log("se actualizo el context desde el COntext provider")
+        console.log("UPDATED")
     }, [mapMaterias])
 
     return (

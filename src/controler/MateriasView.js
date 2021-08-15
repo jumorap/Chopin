@@ -43,7 +43,6 @@ class MateriasView {
     add_archivo(archivo) {
         //check if the materia exists
         if (!this.mapMaterias.has(archivo.id_materia)) {
-          console.log("la materia no se encuentra en el map");
           return;
         }
         // get the materia to be modifed
@@ -65,7 +64,6 @@ class MateriasView {
   
       
       let materia = this.mapMaterias.get(currentMateria);
-      console.log("ANTES  ", materia);
       /* removes specific trabajo from materia.trabajos */
       materia.trabajos = materia.trabajos.filter(
         (trabajo) => trabajo.ID_archivo !== trabajoToDelete.ID_archivo
@@ -82,10 +80,6 @@ class MateriasView {
       /* Removes trabajo from materia.tipos */
       let tipos = materia.tipos;
       this.delete_types(trabajoToDelete, tipos);
-
-      console.log("Despues  ", materia);
-        
-      
     }
   
     /** This one executes inside delete_archivo(); - deletes the materia's info which is

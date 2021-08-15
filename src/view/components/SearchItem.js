@@ -9,7 +9,6 @@ function SearchItem({ nombre, link, click, selected = false }) {
     useEffect(() => {
         firebaseAnalytics.logEvent(`searched_/materias/${link}`)
     })
-  console.log()
     
   return (        
     <Link to={`/materias/${link}`} className="search-item-link" onClick = {click}>                

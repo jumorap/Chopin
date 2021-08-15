@@ -102,11 +102,6 @@ const Admin = () => {
             </form>
             <br/>
 
-            <h2>Materias disponibles</h2>
-            {Object.entries(listaMaterias).map((val) => {
-                return <pre>{`${val} `}</pre>
-            })}
-
             <h2>Subir archivo</h2>
             <form>
                 <label htmlFor="Materia"/>
