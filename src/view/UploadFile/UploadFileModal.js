@@ -6,7 +6,7 @@ let UploadFileModal = ({ open, toggle, file }) => (
         <Modal
             open={open}
             onClose={toggle}
-            className={"ModalWindow"}
+            className={"modal-window"}
         >
             <div>
                 <UploadForm handleClose={toggle} fileToEdit={file} />
