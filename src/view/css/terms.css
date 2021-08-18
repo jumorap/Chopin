@@ -1,9 +1,9 @@
 .general-terms {
     width: 80%;
-    background-color: #EEE;
+    background-color: var(--blueWhite);
     border-radius: 1em;
-    padding: 2em;
-    margin: 2em auto 3em;
+    padding: 0 2em 2em;
+    margin: 1.8em auto 3em;
     text-align: justify;
     color: #333;
     height: 92%;
@@ -69,6 +69,23 @@
 
 .link-terms {
     color: #333;
+}
+
+.link-go-home {
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.link-home-terms {
+    box-sizing: border-box;
+    width: 100%;
+    position: sticky;
+    background-color: var(--blueWhite);
+    display: block;
+    top: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px #AAA solid;
 }
 
 @media only screen and (max-width: 600px) {

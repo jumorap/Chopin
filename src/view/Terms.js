@@ -1,24 +1,34 @@
 import React from "react";
 import "./css/terms.css"
+import { FaHome } from "react-icons/all";
+import {Link} from "react-router-dom";
 
 
 const Terms = () => {
 
     return(
         <div className={"general-terms"}>
+            <span className={"link-home-terms "}>
+                <Link to={"/"} className={"link-go-home link-terms"}>
+                    <FaHome/> Inicio
+                </Link>
+            </span>
+            <p className={"blank-space"}/>
+
             <b>
                 Red Board no se encuentra vinculado ni asociado de ninguna manera con alguna institución educativa.
             </b>
+
             <h2 className={"subtitle-terms"}>¿Qué es Red Board?</h2>
             Red Board es una plataforma web...
 
 
             <h2 className={"subtitle-terms"} id={"terms"}>Términos y Condiciones</h2>
             Este documento establece los derechos, obligaciones y responsabilidades legales y vinculantes a los cuales
-            usted, en su condición de usuario de la Página Web estará sometido. Por lo tanto, Red Board
+            usted, en su condición de usuario de la página web estará sometido. Por lo tanto, Red Board
             le recomienda leer cuidadosamente este texto y comportarse de conformidad con el mismo siempre que utilice
-            la Página Web. Al utilizar la Página Web de cualquier manera, incluyendo, pero no limitado a registrarse;
-            obtener un perfil de usuario; proporcionar información; y visitar o navegar por la Página Web; USTED DECLARA
+            la página web. Al utilizar la página web de cualquier manera, incluyendo, pero no limitado a registrarse;
+            obtener un perfil de usuario; proporcionar información; y visitar o navegar por la página web; USTED DECLARA
             CONOCER ESTOS T&C Y SE OBLIGA LIBREMENTE AL CUMPLIMIENTO DE LOS MISMOS EN SU INTEGRIDAD.
             <p className={"blank-space"}/>
 
@@ -34,7 +44,7 @@ const Terms = () => {
 
             <h4>Uso de la Página Web:</h4>
             La Página Web es para el uso personal y académico de los usuarios únicamente. En consecuencia, la página
-            web permite al usuario 1. Conocer calificaciones, opiniones, descripciones,
+            web permite al usuario 1. conocer calificaciones, opiniones, descripciones,
             evaluaciones, fotos, gráficos, archivos, documentos y otra información creada, publicada y/o revelada por
             los usuarios en relación con los profesores, materias de las carreras y universidades incluidas dentro
             de Red Board, y cualquier contenido creado, generado y publicado por Red Board; y/o 2. proporcionar
@@ -63,7 +73,7 @@ const Terms = () => {
             ofensiva, vulgar u obscena. Red Board se reserva el derecho, sujeto a su absoluta discreción, de negar el
             registro o cancelar el perfil y/o el acceso a la Página Web de un usuario. El usuario es el único
             responsable de la actividad que, con o sin intención, conocimiento o consentimiento, se realice con su
-            información personal y perfil de Usuario en la Página Web y será responsable de mantener la confidencialidad
+            información personal y perfil de usuario en la Página Web y será responsable de mantener la confidencialidad
             de la misma y de cerrar su perfil al final de cada sesión. El usuario notificará inmediatamente a Red Board
             de cualquier uso no autorizado de su información personal u otra infracción de seguridad relacionada con
             esta, con el fin de tomar las medidas que sean necesarias. El usuario podrá contactar a Red Board a
@@ -73,12 +83,12 @@ const Terms = () => {
 
             <h4>Contenido de Usuarios:</h4>
             El usuario es el único responsable por los contenidos que pueda crear, publicar y revelar en la página web.
-            Red Board no avala, no tiene control y no se hace responsable por los Contenidos que publiquen los
+            Red Board no avala, no tiene control y no se hace responsable por los contenidos que publiquen los
             usuarios. Red Board no asume responsabilidad alguna de monitoreo ni revisa los contenidos previo a su
             publicación en la página web, y estos no reflejan su opinión o las políticas de Red Board. Si en cualquier
             momento Red Board revisa los contenidos para monitorear el servicio ofrecido, lo hace bajo su entera
             discreción, y no asume responsabilidad alguna de modificar o remover contenido inapropiado, ni sobre la
-            conducta del usuario que ha proporcionado tal Contenido.
+            conducta del usuario que ha proporcionado tal contenido.
             <p className={"blank-space"}/>
 
             Red Board se reserva el derecho, sujeto a su absoluta discreción, a rechazar, negar la publicación o remover
@@ -89,7 +99,7 @@ const Terms = () => {
             publicación de los contenidos por el usuario a través de la página web.
             <p className={"blank-space"}/>
 
-            Al proporcionar y/o publicar los Contenidos en la página web, el Usuario concede automáticamente a Red Board
+            Al proporcionar y/o publicar los contenidos en la página web, el usuario concede automáticamente a Red Board
             una licencia irrevocable, indefinida, transferible, gratuita y para cualquier territorio en el que la página
             web funcione, para usar, modificar, copiar, publicar, reformatear, traducir, resumir y distribuir dicha
             información y contenidos, y para crear obras derivadas o incorporarla en otras obras, y para conceder
@@ -99,16 +109,16 @@ const Terms = () => {
             <p className={"blank-space"}/>
 
             <h4>Conducta de los Usuarios:</h4>
-            El uso de la Página Web se sujeta a todas la legislación y regulación que le sea aplicable. Red Board se
-            reserva el derecho, sujeto a su absoluta discreción, de negar o cancelar el acceso a la Página Web, en caso
+            El uso de la página web se sujeta a todas la legislación y regulación que le sea aplicable. Red Board se
+            reserva el derecho, sujeto a su absoluta discreción, de negar o cancelar el acceso a la página web, en caso
             de detectar conductas o actividades que, a su juicio, puedan ser contrarias a estos T&C. El usuario es el
             único responsable de todas las actividades, actos u omisiones que ocurran bajo o con ocasión del uso de su
             perfil o identificación de usuario.
             <p className={"blank-space"}/>
 
             <h4>Derechos Propiedad y Derechos de Propiedad Intelectual de Red Board y de Terceros:</h4>
-            Excepto 1. los Contenidos posteados por el usuario o 2. cualquier propiedad intelectual del usuario,
-            todos los elementos y la información que se encuentra en esta Página Web, incluyendo las Calificaciones,
+            Excepto 1. los contenidos posteados por el usuario o 2. cualquier propiedad intelectual del usuario,
+            todos los elementos y la información que se encuentra en esta página web, incluyendo las Calificaciones,
             textos, gráficos, videos, animación, información académica, formatos, imágenes, música, marcas, logotipos,
             enseñas, nombres comerciales, sonidos, y demás materiales y herramientas susceptibles de protección mediante
             propiedad intelectual (los “Contenidos de Red Board”), son y seguirán siendo propiedad de Red Board, sus
@@ -119,7 +129,7 @@ const Terms = () => {
             de los titulares de tales derechos.
             <p className={"blank-space"}/>
 
-            El acceso y uso de la Página Web no implica en manera alguna la concesión o negación de licencia, concesión
+            El acceso y uso de la página web no implica en manera alguna la concesión o negación de licencia, concesión
             o derecho de uso sobre cualesquiera textos, procesos, métodos, secretos empresariales, know-how, técnicas,
             formatos, imágenes, música, marcas, logotipos, enseñas, nombres comerciales, sonidos, gráficos, videos,
             animación y demás materiales y herramientas susceptibles de protección mediante propiedad intelectual,
@@ -141,7 +151,7 @@ const Terms = () => {
             <p className={"blank-space"}/>
 
             <h4>Liberación de Responsabilidad y No Declaraciones ni Garantías:</h4>
-            La información, y cualquier contenido que se publique en la Página Web, puede contener errores o
+            La información, y cualquier contenido que se publique en la página web, puede contener errores o
             inexactitudes. Red Board no garantiza la exactitud o confiabilidad de los contenidos. No asume responsabilidad
             alguna por las omisiones, inexactitudes o errores relacionados con los contenidos y no se hace responsable
             por cualquier daño derivado de su publicación en la página web o su propagación de cualquier otra manera.
@@ -150,7 +160,7 @@ const Terms = () => {
             <h4>Cargos y Costos:</h4>
             El acceso y uso de la página web es gratuito. No obstante, puede contener enlaces a otros
             sitios web que pueden generar costos. Red Board no se hace responsable por el acceso a dichos sitios
-            ni por las políticas de cargos y costos que en ellos se apliquen. El Usuario será el único responsable por
+            ni por las políticas de cargos y costos que en ellos se apliquen. El usuario será el único responsable por
             el acceso a Internet necesario para la correcta operación de la página web. Todos los cargos de acceso a
             internet serán por cuenta del usuario.
             <p className={"blank-space"}/>
@@ -158,7 +168,7 @@ const Terms = () => {
             Por ningún motivo y en ningún caso, Red Board, sus directores, funcionarios y filiales, serán
             responsables por daños directos, indirectos, punitivos, incidentales, especiales, consecuenciales,
             compensatorios, resarcitorios o de cualquier otro tipo, derivados de o en relación con el ingreso o uso que
-            el usuario haga de la Página Web, sin importar la teoría de responsabilidad en la que los alegatos se
+            el usuario haga de la página web, sin importar la teoría de responsabilidad en la que los alegatos se
             sustenten.
             <p className={"blank-space"}/>
 
@@ -171,20 +181,20 @@ const Terms = () => {
             El acceso a y el uso de la página web significa que el usuario ha aceptado mantener indemne a Red Board por
             o respecto de cualquier reclamo, queja, investigación administrativa o judicial, acción legal o
             responsabilidad probada basada en o relativa a la violación de estos T&C por parte de Red Board. En
-            consecuencia, el Usuario no podrá demandar o instaurar acciones de ningún tipo, ni recobrar ni intentar
+            consecuencia, el usuario no podrá demandar o instaurar acciones de ningún tipo, ni recobrar ni intentar
             recobrar ningún tipo de indemnización por daños o perjuicios de ningún tipo de parte de Red Board como
             resultado de cualquier decisión o acción de Red Board en la administración, manejo, operación y ejecución
             de la página web. Esta indemnidad aplica a cualquier violación por parte de Red Board de estos T&C.
             <p className={"blank-space"}/>
 
-            El Usuario deberá defender, indemnizar y mantener indemne a Red Board, sus afiliados, y cada uno de
+            El usuario deberá defender, indemnizar y mantener indemne a Red Board, sus afiliados, y cada uno de
             sus empleados, contratistas, directores, proveedores y representantes, de todas las responsabilidades,
             reclamaciones y gastos, incluyendo todos los costos relacionados, y honorarios de abogados, que surjan de
-            o se relacionen con el uso o uso inapropiado de, o el acceso a, la Página Web, o del uso que el Usuario
-            haga de su información como Usuario, o la violación de los T&C, o la infracción por el Usuario o cualquier
+            o se relacionen con el uso o uso inapropiado de, o el acceso a, la página web, o del uso que el usuario
+            haga de su información como usuario, o la violación de los T&C, o la infracción por el usuario o cualquier
             tercero que use su información personal,  cualquier propiedad intelectual u otro derecho de cualquier
             persona o entidad. Red Board se reserva el derecho de asumir la defensa exclusiva y control de
-            cualquier asunto sujeto a indemnización por el Usuario, en cuyo caso el Usuario ayudará y cooperará con
+            cualquier asunto sujeto a indemnización por el usuario, en cuyo caso el usuario ayudará y cooperará con
             Red Board en su defensa.
             <p className={"blank-space"}/>
 
@@ -192,15 +202,15 @@ const Terms = () => {
             Cualquier violación de los T&C, o cualquier queja o información que Red Board reciba sobre la infracción,
             abuso o uso inapropiado de estos T&C, y/o de la página web, podrá ser investigada por Red Board o por
             terceros, y se tomarán las medidas que sean necesarias para iniciar todas las acciones legales y extra
-            legales en contra de los Usuarios, entre otros propósitos, para obtener la cesación de las conductas e
+            legales en contra de los usuarios, entre otros propósitos, para obtener la cesación de las conductas e
             indemnizaciones a que haya lugar bajo la ley que le sea aplicable. La violación de estos T&C puede resultar
-            en la suspensión o cancelación definitiva de su perfil de Usuario y/o de su acceso a la página web y en
+            en la suspensión o cancelación definitiva de su perfil de usuario y/o de su acceso a la página web y en
             la responsabilidad civil o penal que corresponda.
             <p className={"blank-space"}/>
 
             <h4>Terminación:</h4>
             Estos T&C, con sus modificaciones, cambios y eliminaciones, serán aplicables hasta el momento en que Red
-            Board decida terminarlos, o hasta cuando el Usuario decida no utilizar más la Página Web y solicite por
+            Board decida terminarlos, o hasta cuando el usuario decida no utilizar más la página web y solicite por
             medio de los mecanismos establecidos en la Política de Privacidad, la eliminación de su perfil de
             usuario y de sus datos personales de la base de datos de Red Board. Red Board podrá terminar
             estos T&C de manera absolutamente discrecional, en cualquier momento y sin previo aviso. No obstante lo
@@ -211,7 +221,7 @@ const Terms = () => {
 
             Red Board se reserva el derecho a eliminar la página web, de manera total o parcial, de manera
             absolutamente discrecional, en cualquier momento y sin previo aviso. La eliminación puede resultar
-            en la destrucción de toda la información asociada al Usuario.
+            en la destrucción de toda la información asociada al usuario.
             <p className={"blank-space"}/>
 
             Se excluye expresamente cualquier tipo de responsabilidad que los usuarios le pudieran atribuir a Red Board
@@ -219,11 +229,11 @@ const Terms = () => {
             <p className={"blank-space"}/>
 
             <h4>Cambios en la Página Web:</h4>
-            Red Board se reserva el derecho a limitar ciertos usos y características de la Página Web y de las
+            Red Board se reserva el derecho a limitar ciertos usos y características de la página web y de las
             funcionalidades y herramientas provistas en ésta, y de restringir el acceso parcial o total a la misma,
             sin obligación de dar aviso previo o presentar justificación alguna. Se excluye expresamente cualquier
             tipo de responsabilidad que se le pudiera atribuir a Red Board como consecuencia de las
-            modificaciones, suspensiones o interrupciones, permanentes o temporales, que sufra la Página Web. Los
+            modificaciones, suspensiones o interrupciones, permanentes o temporales, que sufra la página web. Los
             derechos otorgados y las restricciones indicadas en estos T&C se extienden a toda actualización de la
             página web que sustituya parcial o complemente la página web original.
             <p className={"blank-space"}/>

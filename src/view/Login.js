@@ -70,7 +70,7 @@ class Login extends Component {
                         ¿Necesitas ayuda, encontraste un fallo, tienes sugerencias o te gustaría ayudarnos a mejorar Red Board? Contáctanos: <a href={"mailto:redboardunal@protonmail.com"}>redboardunal@protonmail.com</a>
                         <p className={'link-privacy'}>
                             <Link to={`/legal`} className={'link-privacy'}>
-                                TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
+                                Términos, Condiciones Y Políticas de Privacidad
                             </Link>
                         </p>
                     </span>
@@ -93,8 +93,8 @@ class Login extends Component {
                                     ? <><Searcher /><UploadFile handleOpen={toggleUploadFileModal} /></>
                                     : <center>
                                         <span className={'legal'}>
-                                            AL INGRESAR ESTÁS ACEPTANDO NUESTROS
-                                            <Link to={`/terms`} className={'politics'}>
+                                            AL INGRESAR ESTÁS ACEPTANDO NUESTROS&nbsp;
+                                            <Link to={`/legal`} className={'politics'}>
                                                 TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
                                             </Link>
                                         </span>

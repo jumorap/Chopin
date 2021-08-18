@@ -246,20 +246,9 @@ const semestres = [
 ];
 
 const categorias = [
-  { categoria: "Parcial 1" },
-  { categoria: "Parcial 2" },
-  { categoria: "Parcial 3" },
-  { categoria: "Parcial 4" },
-  { categoria: "Taller 1" },
-  { categoria: "Taller 2" },
-  { categoria: "Taller 3" },
-  { categoria: "Taller 4" },
-  { categoria: "Taller 5" },
-  { categoria: "Taller 6" },
-  { categoria: "Taller 7" },
-  { categoria: "Taller 8" },
-  { categoria: "Quíz 1" },
-  { categoria: "Quíz 2" },
-  { categoria: "Quíz 3" },
-  { categoria: "Quíz 4" },
+  { categoria: "Parcial" },
+  { categoria: "Taller" },
+  { categoria: "Quíz" },
+  { categoria: "Laboratorio" },
+  { categoria: "Guía" },
 ];

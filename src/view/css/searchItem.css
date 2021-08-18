@@ -1,5 +1,5 @@
 .search-item-container{
-    background-color: var(--secondaryColor);
+    background-color: transparent;
     height: fit-content;
     color: rgb(230, 223, 223);
     display: flex;
@@ -7,7 +7,7 @@
     cursor: pointer;
     border-radius:  150px ;
     padding: 0 1rem 3px;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .search-item-link{
