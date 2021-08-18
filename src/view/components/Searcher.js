@@ -9,6 +9,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 //for detect clicks outside the componens
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import useWindowDimensions from "./useWindowDimensions";
 
 
 function Searcher() {
@@ -94,20 +95,21 @@ function Searcher() {
     }        
   }
 
-
-
+  //windows dimensions
+  const { width } = useWindowDimensions()
+  
 
   return (
     <ClickAwayListener onClickAway = {handleKeyUp}>
-        
-    <div className="searcher-container">
+      
+    <div className="searcher-container">    
       <div className="searcher-container-input ">
         <input
           type="text"
           name="search"
           id="search"
           className="searcher-input"
-          placeholder="Escribe el nombre de la materia"
+          placeholder= { 410 < width ? "Escribe el nombre de la materia":"Materia..."}
           value={searchText}
           onChange={handleInputTextChange}
           autoComplete="off"                   
