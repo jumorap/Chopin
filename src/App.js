@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Login from "./view/Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Admin from './view/Admin';
+import Terms from './view/Terms'
 import ProgrammeResults from "./view/ProgrammeResults";
 import { createContext, useEffect } from 'react';
 import ContextProvider from './view/ContextProvider';
@@ -46,6 +47,9 @@ function App() {
                             <Login toggleUploadFileModal={toggleUploadFileModal} />
                         </Route>
                     </AuthProvider>
+                    <Route exact path="/legal">
+                        <Terms/>
+                    </Route>
                 </Router>
                 <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />
             </ContextProvider>

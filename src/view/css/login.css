@@ -35,6 +35,10 @@
     align-items: center;
 }
 
+.link-privacy {
+    margin-top: 1em;
+}
+
 .container-input-logo {
     width: 90%;    
     display: flex;

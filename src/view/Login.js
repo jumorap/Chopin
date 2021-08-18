@@ -12,6 +12,7 @@ import Searcher from "./components/Searcher";
 import UploadFile from "./UploadFile/UploadFile";
 import CookieConsent from "react-cookie-consent";
 import Tooltip from '@material-ui/core/Tooltip';
+import {Link} from "react-router-dom";
 
 class Login extends Component {
     render() {
@@ -67,6 +68,11 @@ class Login extends Component {
                 <div className={'div-left'} >
                     <span className={"text-div-left"}>
                         ¿Necesitas ayuda, encontraste un fallo, tienes sugerencias o te gustaría ayudarnos a mejorar Red Board? Contáctanos: <a href={"mailto:redboardunal@protonmail.com"}>redboardunal@protonmail.com</a>
+                        <p className={'link-privacy'}>
+                            <Link to={`/legal`} className={'link-privacy'}>
+                                TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
+                            </Link>
+                        </p>
                     </span>
                 </div>
                 <div className={'div-right'}>
@@ -88,9 +94,9 @@ class Login extends Component {
                                     : <center>
                                         <span className={'legal'}>
                                             AL INGRESAR ESTÁS ACEPTANDO NUESTROS
-                                            <a className={'politics'} href={'https://www.github.com'} target={"_blank"} rel="noreferrer">
+                                            <Link to={`/terms`} className={'politics'}>
                                                 TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
-                                            </a>
+                                            </Link>
                                         </span>
                                     </center>
                             }                        
@@ -103,9 +109,12 @@ class Login extends Component {
             declineButtonText={"Después"}
             style={{}}
             expires={365}
-            buttonStyle={{backgroundColor: "rgb(170, 0, 0)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 700,}}
+            buttonStyle={{backgroundColor: "rgb(170, 0, 0)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 650,}}
         >
-            Al navegar en este sitio aceptas las cookies que utilizamos para mejorar tu experiencia
+            Al navegar en este sitio aceptas la Política de Cookies que usamos para mejorar tu experiencia.&nbsp;
+            <Link to={`/legal#cookies`}>
+                Más información
+            </Link>
         </CookieConsent>
         </>
         );

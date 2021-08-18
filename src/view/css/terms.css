@@ -1,0 +1,79 @@
+.general-terms {
+    width: 80%;
+    background-color: #EEE;
+    border-radius: 1em;
+    padding: 2em;
+    margin: 2em auto 3em;
+    text-align: justify;
+    color: #333;
+    height: 92%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    box-sizing: border-box;
+    transform: translate(10%);
+}
+
+.general-terms::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.general-terms::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+.general-terms::-webkit-scrollbar-button {
+    display: none;
+}
+
+.general-terms::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.general-terms::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 1em;
+    border: none;
+}
+
+.general-terms::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1em;
+    border: none;
+}
+
+.general-terms::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 1em;
+    border: none;
+}
+
+.general-terms::-webkit-scrollbar-track {
+    border-radius: 1em;
+}
+
+.subtitle-terms {
+    color: var(--principalBlue);
+    margin-top: 1em;
+    margin-bottom: 0.15em;
+}
+
+.list-terms {
+    margin-left: 2.2em;
+    color: #333;
+}
+
+.blank-space {
+    padding: 0.3em;
+}
+
+.link-terms {
+    color: #333;
+}
+
+@media only screen and (max-width: 600px) {
+    .general-terms {
+        width: 100%;
+        transform: translate(0%);
+    }
+}
