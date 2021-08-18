@@ -13,7 +13,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 function Searcher() {
   /**Texto de la barra del buscador */
-  const [searchText, setsearchText] = useState("");
+  const [searchText, setsearchText] = useState("");  
+  
 
   /**Usado para  mostrar las materias dado una busqueda*/
   const [searchResults, setsearchResults] = useState([]);
@@ -98,7 +99,7 @@ function Searcher() {
 
   return (
     <ClickAwayListener onClickAway = {handleKeyUp}>
-    
+        
     <div className="searcher-container">
       <div className="searcher-container-input ">
         <input

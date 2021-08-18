@@ -77,6 +77,7 @@ class Login extends Component {
                 </div>
                 <div className={'div-right'}>
                     <div className={'container-input-logo'}>                        
+                            s
                             <img src={principalNameLogo} className={'slogan-img'} alt={'logo'} />
                             {
                                 isUnalUser && user

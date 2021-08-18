@@ -20,19 +20,31 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+//limite in bites for the maximum possible value that a file could have in megaBytes
+const maxFileSize = 5
+
 function MyDropzone({ setFile }) {
   const classes = useStyles();
   
   const [openPDFerrorMessage, setopenPDFerrorMessage] = useState(false) //boolena to display the error mesagge if the file is not PDF
-  
+  const [errorMessage, setErrorMessage] = useState("")
 
   const onDrop = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0];
-    if (file.type === "application/pdf") {
-      setFile(file);
-    } else {
+    const file = acceptedFiles[0];    
+    if (file.type !== "application/pdf") {
+      setErrorMessage("De momento solo admitimos PDF")
       setopenPDFerrorMessage(true)
+      return
     }
+    if (maxFileSize*10^6 < file.size){
+      setErrorMessage("El limite es " + maxFileSize + " megabytes")
+      setopenPDFerrorMessage(true)      
+      return
+    }
+      
+    
+    setFile(file);        
+    
   }, [setFile]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -42,7 +54,7 @@ function MyDropzone({ setFile }) {
       <input {...getInputProps()} />
       {isDragActive ? <DropFIeldDesactive /> : <DropFieldActive />}
       <AlertMessage open = {openPDFerrorMessage} setOpen = {setopenPDFerrorMessage} kind = {"error"}>
-        Solo Aceptamos PDF
+        {errorMessage}
       </AlertMessage>
     </div>
   );
