@@ -12,6 +12,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+*/
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -30,10 +40,6 @@ a {
   align-items: center;
   justify-content: center;
 }
-
-
-
-
 
 :root{
   --secondaryColor : #303134;

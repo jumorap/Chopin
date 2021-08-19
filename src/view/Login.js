@@ -89,7 +89,7 @@ class Login extends Component {
                                     : <p />
                             }
                             {
-                                isUnalUser && user
+                                !user
                                     ? <><Searcher /><UploadFile handleOpen={toggleUploadFileModal} /></>
                                     : <center>
                                         <span className={'legal'}>

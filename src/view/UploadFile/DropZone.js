@@ -32,17 +32,18 @@ function MyDropzone({ setFile }) {
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];    
     if (file.type !== "application/pdf") {
-      setErrorMessage("De momento solo admitimos PDF")
+      setErrorMessage("De momento, solo admitimos PDF")
       setopenPDFerrorMessage(true)
       return
     }
-    if (maxFileSize*10^6 < file.size){
+
+    if (maxFileSize * Math.pow(10, 6) < file.size){
       setErrorMessage("El limite es " + maxFileSize + " megabytes")
       setopenPDFerrorMessage(true)      
       return
     }
-      
-    
+
+
     setFile(file);        
     
   }, [setFile]);

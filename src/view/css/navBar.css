@@ -2,7 +2,7 @@
     background-color: var(--principalBlue);
     width: 100%;
     padding: 0 2px 4px;
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
     height: 52px;
     top: 0;
