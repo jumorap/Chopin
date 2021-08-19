@@ -26,12 +26,6 @@ const useStyles = makeStyles(() => ({
     width: "80%",
     marginTop: "20px",
   },
-  closeButton: {
-    position: "relative",
-    left: "90%",
-    top: "-5px",
-    padding: 0,
-  },
 
   sharemessage: {
     position: "relative",
@@ -39,6 +33,10 @@ const useStyles = makeStyles(() => ({
     top: "20px",
     fontFamily: "inherit",
     fontSize: "20px",
+  },
+
+  closeButton: {
+    padding: 0,
   },
 
   descriptionBox: {
@@ -139,7 +137,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       <div className={classes.sharemessage}>
         {fileToEdit ? "Editar" : "Compartir"}
       </div>
-      <IconButton className={classes.closeButton} onClick={handleClose}>
+      <IconButton className={`${classes.closeButton} close-button`} onClick={handleClose}>
         <CloseIcon />
       </IconButton>
 

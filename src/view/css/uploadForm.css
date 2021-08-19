@@ -5,11 +5,13 @@
     padding-bottom: 15px;
     padding-left: 20px;
     padding-right: 20px;
+    box-sizing: border-box;
 }
 
 .subContainer{
     display: flex;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .leftDiv {
@@ -18,10 +20,10 @@
     display: flex;
     flex-flow: column wrap;
     margin-block-end: 15px;
+    box-sizing: border-box;
 }
 
 .rightDiv {
-    padding-right: 10px;
     width: 50%;
     height: 100%;
     display: flex;
@@ -29,11 +31,17 @@
     align-items: center;
     flex-direction: column;
     padding: 15px;
+    box-sizing: border-box;
 }
 
 .semetre-categoria{
     display: flex;
     justify-content: space-between;
+}
+
+.close-button {
+    position: relative;
+    left: 0;
 }
 
 @media only screen and (max-width: 800px){        
@@ -43,7 +51,7 @@
 
     .leftDiv{
         width: 450px;
-    }       
+    }
 
     .rightDiv{
         width: 90%;
@@ -60,13 +68,21 @@
     .container {
         width: 100vw;
         position: absolute;
-        top: 1%;
-        left: -5%;
+        top: 5%;
+        left: 0;
         transform: translate(0%);
+        border-radius: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .close-button {
+        position: relative;
+        left: 5%;
     }
 
     .subContainer {
-        width: 90%;
+        width: 100%;
     }
 
     .leftDiv {   
@@ -78,5 +94,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
