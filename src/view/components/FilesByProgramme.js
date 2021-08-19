@@ -18,7 +18,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   const [openFileModal, setOpenFileModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
   const [openDelModal, setOpenDelModal] = useState(false);
-  const currentUserID = "firebaseAppAuth.currentUser.uid";
+  const currentUserID = firebaseAppAuth.currentUser.uid;
 
   
   const handleOpenFilesModal = (item) => {
