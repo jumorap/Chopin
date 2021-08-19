@@ -190,9 +190,9 @@ body {
         z-index: 5;
         position: absolute;
         transition-duration: 300ms;
-        width: 12%;
+        width: fit-content;
         height: 100%;
-        padding: 20px 40px 20px 0;
+        padding: 20px 40px 20px 10px;
         align-content: center;
         align-self: center;
         align-items: center;
@@ -205,6 +205,10 @@ body {
 @media screen and (max-width: 420px) {
     .hamburger-menu-clicked {
         font-size: 25px;
+    }
+
+    .red-bar {
+        padding: 20px 40px 20px 0;
     }
 }
 
