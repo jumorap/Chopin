@@ -29,7 +29,8 @@ class Archivos {
     file,
     nota,
     calificado
-  ) {
+  ) {            
+    
     //add arvhico to Archivos collections
     const docRef = await this._DBmateriasDisplay
       .doc(id_materia)

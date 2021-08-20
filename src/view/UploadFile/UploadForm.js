@@ -117,6 +117,13 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
     if (!errors) {
       setButtonShare(true)
 
+    
+    let nota = grade
+    if(nota.length === 1){      
+      nota += ".0" 
+      setgrade(nota)
+    }
+
       const new_archivo = await Archivos.crearArchivos(
         materiaText.id,
         descripcionText,
@@ -125,7 +132,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         user.uid,
         categoriaText.categoria,
         file,
-        grade,
+        nota,
         calificado
       );
       

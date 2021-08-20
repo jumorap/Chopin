@@ -100,22 +100,27 @@
   background-color: rgb(63, 74, 85);
 }
 
-.like {
-  background-image: url("../assets/min-logo-likes-gray.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50%;
-  width: 30px;
-  height: 30px;
+
+.like {    
+  padding: 0.2rem;
   position: absolute;
-  bottom: 2px;
-  left: 2px;
+  bottom: 0.3rem;  
+  left: 0.3rem;  
+  text-decoration: underline;
+  border-radius: 100px;  
   cursor: pointer;
+  font-weight: 900;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
+
+
 
 .like:hover {
   background-image: url("../assets/min-logo-likes.png");
   transition-duration: 300ms;
+  color: black;
 }
 
 .delete {

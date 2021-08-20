@@ -52,11 +52,11 @@ const Grade = ({grade, setGrade, error, setError}) => {
     
     //when is written ovet the grade field text
     const handleChange = (e)=>{
-        const value = e.target.value        
-        if(isNaN(value)){ //only accept numerical values
+        const value = e.target.value           
+        if(isNaN(value) || 3 < value.length ){ //only accept numerical values
             return
         }                 
-        setGrade(e.target.value)
+        setGrade(value)
     } 
 
 

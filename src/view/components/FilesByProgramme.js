@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/filesByProgramme.css";
-import { Modal, Tooltip } from "@material-ui/core";
+import { Modal, Popover, Tooltip } from "@material-ui/core";
 import {
   FaExternalLinkAlt,
   AiFillCloseCircle,  
@@ -66,16 +66,25 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   );
 
   //**Carta que se va a mostrar */
-  let CardContent = ({ item }) => (
+  let CardContent = ({ item }) => {
+    const hasNote = item.nota !== ""     
+  console.log(item)
+    return(    
     <div className={"files-programme"} onClick={() => handleOpenFilesModal(item)}>
       <div className={"file-by-type"}>{item.tipo}</div>
       <div className={"file-by-description"}>{item.comentarios}</div>
       <div className={"file-by-teacher"}>
         <b>{item.semestre}</b> - {item.profesor}
-      </div>
-      <div className={"like"} />
+      </div>            
+      {hasNote &&
+        <Tooltip title = {"Nota"} className={"like"}>
+        <div >
+          {item.nota}
+        </div>      
+        </Tooltip>
+      }
     </div>
-  );
+  )};
 
   /**Modal mostrado al oprimir el boton de eliminar un archivo */
   let DeleteModal = ({ item, openModal, setopenModal }) => {    
