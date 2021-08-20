@@ -24,7 +24,8 @@ class Materias {
    * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
    */
   static async getMateriasList() {    
-    return (await this._DBmateriasSeach.get()).data().MATERIAS_LIST;
+    const data = (await this._DBmateriasSeach.get()).data().MATERIAS_LIST    
+    return data;
   }
 
   /**
