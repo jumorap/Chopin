@@ -17,9 +17,9 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   const idCurrentMateria = useParams().idMateria;    
   const [openFileModal, setOpenFileModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
-  const [openDelModal, setOpenDelModal] = useState(false);
   const currentUserID = firebaseAppAuth.currentUser.uid;
 
+  console.log(items)
   
   const handleOpenFilesModal = (item) => {
     setOpenFileModal(prev => !prev);
@@ -78,65 +78,68 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   );
 
   /**Modal mostrado al oprimir el boton de eliminar un archivo */
-  let DeleteModal = ({ item }) => (
-    <Modal
-      disableAutoFocus
-      onEscapeKeyDown={(e) => console.log(e.target)}
-      open={openDelModal}
-      onClose={() => setOpenDelModal(false)}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-      className="delete-modal-container"
-    >
-      <div className="delete-modal">
-        <h1>Eliminar!</h1>
-        <span>¿Seguro deseas eliminar el archivo?</span>
-        <div>
-          <button
-            style={{
-              backgroundColor: "red",
-              border: "none",
-              borderRadius: "5px",
-              color: "white",
-            }}
-            onClick={() => {
-              setOpenDelModal(false);
-              deleteFile(item);
-            }}
-          >
-            Eliminar
-                  </button>
-          <button
-            style={{
-              backgroundColor: "green",
-              border: "none",
-              borderRadius: "5px",
-              color: "white",
-            }}
-            onClick={() => setOpenDelModal(false)}
-          >
-            Cancelar
-                  </button>
+  let DeleteModal = ({ item, openModal, setopenModal }) => {    
+    return (
+      <Modal
+        disableAutoFocus
+        onEscapeKeyDown={(e) => console.log(e.target)}
+        open={openModal}
+        onClose={() => setopenModal(false)}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        className="delete-modal-container"
+      >
+        <div className="delete-modal">
+          <h1>Eliminar!</h1>
+          <span>¿Seguro deseas eliminar el archivo?</span>
+          <div>
+            <button
+              style={{
+                backgroundColor: "red",
+                border: "none",
+                borderRadius: "5px",
+                color: "white",
+              }}
+              onClick={() => {
+                setopenModal(false);
+                deleteFile(item);
+              }}
+            >
+              Eliminar
+                    </button>
+            <button
+              style={{
+                backgroundColor: "green",
+                border: "none",
+                borderRadius: "5px",
+                color: "white",
+              }}
+              onClick={() => setopenModal(false)}
+            >
+              Cancelar
+                    </button>
+          </div>
         </div>
-      </div>
-    </Modal>
-  );
+      </Modal>
+    )
+  };
 
   /**Los botones de eliminar y editar que son mostrados en las cards */
   let CardBtns = ({ item }) => {
+    const [openModal, setopenModal] = useState(false)
     return (
       currentUserID === item.usuario && (
         <>
           <Tooltip title={"Eliminar archivo"}>
             <div className={"delete"}>
               <AiFillCloseCircle
-                onClick={() => setOpenDelModal(true)}
+                onClick={() => setopenModal(true)}
                 className={"delete-component"}
                 style={{ padding: "11px 0px" }}
               />
             </div>
           </Tooltip>
-          <DeleteModal item={item} />
+          <DeleteModal item={item} openModal = {openModal} setopenModal = {setopenModal}/>
         </>
       )
     );
@@ -164,7 +167,8 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
           className={"card-container"}
           key={index}
           style={{ position: "relative" }}
-        >
+        >           
+          {item.calificado && <span className="calificado">Resuelto</span>}
           <CardContent item={item} /> 
           <CardBtns item={item} />          
         </div>

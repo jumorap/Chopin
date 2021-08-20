@@ -5,14 +5,12 @@ import TextField from '@material-ui/core/TextField';
 
 
 //Muestra un check box saber si tiene la nota y si este es activado muestra la opcio para colocarla
-const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError}) => {
-    //to know if the check box is active     
-    const [checked, setchecked] = useState(false)    
+const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, setCalificado}) => {        
 
     //handle when the checkbox is pressed
-    const handleCheckBox = ()=>{
-        setchecked(prev => !prev)
-        setgradeError(false)
+    const handleCheckBox = ()=>{        
+        setCalificado(prev => !prev)
+        setgradeError(false)        
         setgrade("")
     }
     
@@ -22,7 +20,7 @@ const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError}) => {
             <FormControlLabel
                 control={
                 <Checkbox
-                    checked={checked}
+                    checked={calificado}
                     onChange={handleCheckBox}
                     name="Resuleto"
                     color="primary"
@@ -31,7 +29,7 @@ const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError}) => {
                 label="¿Está resuelto?"
             />
 
-            {checked && <Grade grade = {grade} setGrade = {setgrade} error = {gradeError} setError = {setgradeError}/>}
+            {calificado && <Grade grade = {grade} setGrade = {setgrade} error = {gradeError} setError = {setgradeError}/>}
             </center>
         </div>
     )

@@ -80,6 +80,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const [categoriaError, setcategoriaError] = useState(false);
   const [fileError, setfileError] = useState(false);
   const [gradeError, setgradeError] = useState(false)
+  const [calificado, setCalificado] = useState(false)
   
   const handleChange = (event) => {
     setDescripcionText(event.target.value);
@@ -124,7 +125,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         user.uid,
         categoriaText.categoria,
         file,
-        grade
+        grade,
+        calificado
       );
       
       materiaMap.add_archivo(new_archivo)
@@ -214,6 +216,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               setgrade = {setgrade} 
               gradeError = {gradeError} 
               setgradeError = {setgradeError}
+              calificado = {calificado}
+              setCalificado = {setCalificado}
             />
 
           </div>

@@ -16,6 +16,8 @@ class Archivos {
    * @param  {String} semestre semestre en el que se vio la materia
    * @param  {String} id_usuario ID del usuario que suibio el documeno
    * @param  {String} categorias categorias del documento
+   * @param  {Float} Nota Nota obtenida
+   * @param  {Bool} Calificado si esta o no calificado
    */
   static async crearArchivos(
     id_materia,
@@ -25,7 +27,8 @@ class Archivos {
     id_usuario,
     categorias,
     file,
-    nota
+    nota,
+    calificado
   ) {
     //add arvhico to Archivos collections
     const docRef = await this._DBmateriasDisplay
@@ -38,6 +41,7 @@ class Archivos {
         categorias: categorias,
         id_usuario: id_usuario,
         nota: nota,
+        calificado: calificado,
       });
 
     const url = await Archivos._uploadFile(id_materia, docRef.id, file);
@@ -51,7 +55,8 @@ class Archivos {
       semestre,
       descripcion,
       url,
-      nota
+      nota,
+      calificado
     );
 
     //update filters
@@ -68,7 +73,8 @@ class Archivos {
       comentarios: descripcion,
       url: url,
       usuario: id_usuario,
-      nota: nota
+      nota: nota,
+      calificado: calificado
     };
   }
 
@@ -103,7 +109,8 @@ class Archivos {
     semestre,
     comentarios,
     url,
-    nota
+    nota,
+    calificado
   ) {
     var user = firebaseAppAuth.currentUser;
 
@@ -119,7 +126,8 @@ class Archivos {
             ID_archivo: id_archivo,
             usuario: firebaseAppAuth.currentUser.uid,
             url: url,
-            nota : nota
+            nota : nota,
+            calificado: calificado
           },
         })
         .then(() => {

@@ -15,6 +15,22 @@
   text-align: right;
 }
 
+.calificado {
+  color: #d41616;
+  font-weight: 700;
+  border-top:  2px #d41616 solid;  
+  border-bottom:  2px #d41616 solid;   
+  font-size: 1.1rem; 
+  line-height: 1.3rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  position: absolute;
+  z-index: 2;
+  left: 5%;
+  top: 9%;
+  transform: rotate(-13deg);
+}
+
 .modal-links {
   text-decoration: none;
   color: #aa0000;

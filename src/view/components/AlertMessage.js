@@ -6,19 +6,14 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-
-
 /**
- * 
+ * For creating an alert when the file has an error or is correctly uploaded
  * @param {Boolean} open open the alert message 
  * @param {Function} setOpen to change the open status
  * @param {String} kind one of  ("error", "warning", "info", "success")
  * @param {String} Childrens texto to show up
  * @returns 
  */
-
-
-
 export default function AlertMessage({open, setOpen, kind = "error", children}) {
   
 
