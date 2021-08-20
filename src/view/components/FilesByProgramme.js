@@ -73,19 +73,17 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     <div className={"files-programme"} onClick={() => handleOpenFilesModal(item)}>
       <div className={"file-by-type"}>{item.tipo}</div>
       <div className={"file-by-description"}>{item.comentarios}</div>
-      <div className="file-by-teacher-like">
-        <div className={"file-by-teacher"}>
-          <b>{item.semestre}</b> - {item.profesor}
-        </div>            
         {hasNote &&
-          <Tooltip title = {"Nota"} className={"like"}>
+          <Tooltip title={"Nota"} className={"like"}>
           <div >
             {item.nota}
           </div>      
           </Tooltip>
         }
+          <div className={"file-by-teacher"}>
+              <b>{item.semestre}</b> - {item.profesor}
+          </div>
       </div>
-    </div>
   )};
 
   /**Modal mostrado al oprimir el boton de eliminar un archivo */

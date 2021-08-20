@@ -118,9 +118,9 @@ body {
     display: block;
     align-items: center;
     position: sticky;
-    top: 0;
+    top: -1px;
     z-index: 2;
-    height: 57.2px;
+    height: 56px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap; 
