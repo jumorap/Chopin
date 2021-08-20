@@ -7,7 +7,7 @@ import UploadFile from "./UploadFile/UploadFile";
 import NavBar from "./components/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getArrayFromObject, getFilterCategory, getFilteredFIles, initialMateriaValue } from "../controler/ProgrammeResultsController";
 
 function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {  
@@ -30,6 +30,10 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
 
   /* Array with selected filters */
   const [selection, setSelection] = useState([]);
+
+  // Use history for changing the current url with a fucntion
+  const history = useHistory()
+  
 
   /* ----------- Effect hooks ----------- */
   /* Asigna la materia actual al estado */
@@ -64,6 +68,10 @@ function ProgrammeResults({ toggleUploadFileModal, setFileToEdit }) {
   /* Obtiene la materia de la db y la asigna a materiaValues (cambiar nombre a fetchMateria o fetchSubject) */
   let fetchFiles = () => {
     Materias._getFilesList(idCurrentMateria).then((value) => {
+      if(value.exists === false){
+        history.push("/")
+        return
+      }
       setMateriaValues({
         ...value.data(),
         trabajos: getArrayFromObject(value.data().trabajos),
