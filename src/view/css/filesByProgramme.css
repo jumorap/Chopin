@@ -100,19 +100,22 @@
   background-color: rgb(63, 74, 85);
 }
 
+.file-by-teacher-like{
+  display: flex;  
+}
+
+@media only screen and (max-width : 320px) {
+  .file-by-teacher-like{
+    flex-direction: column;
+  }
+  
+}
 
 .like {    
   padding: 0.2rem;
-  position: absolute;
-  bottom: 0.3rem;  
-  left: 0.3rem;  
   text-decoration: underline;
-  border-radius: 100px;  
-  cursor: pointer;
+  border-radius: 100px;    
   font-weight: 900;
-  align-items: center;
-  justify-content: center;
-  display: flex;
 }
 
 
@@ -237,14 +240,8 @@ ul {
   font-size: 12px;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: lighter;
-  width: 80%;
-  align-self: center;
-  align-items: center;
-  position: absolute;
-  bottom: 8px;
-  left: 10%;
-  height: 17px;
+  font-weight: lighter;    
+  white-space: nowrap; 
 }
 
 .load-spinner {
