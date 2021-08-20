@@ -20,15 +20,15 @@
   font-weight: 700;
   border-top:  2px #d41616 solid;  
   border-bottom:  2px #d41616 solid;   
-  font-size: 1.1rem; 
+  font-size: 1rem;
   line-height: 1.3rem;
   letter-spacing: -1px;
   text-transform: uppercase;
   position: absolute;
-  z-index: 2;
-  left: 5%;
-  top: 9%;
-  transform: rotate(-13deg);
+  z-index: 1;
+  left: 6%;
+  top: 12%;
+  transform: rotate(-22deg);
 }
 
 .modal-links {
@@ -82,7 +82,6 @@
   border-radius: 50px 5px;
   background-color: rgb(64, 75, 87);
   color: rgb(255, 255, 255);
-  width: 100%;
   height: 100%;
   padding: 10px 20px 30px;
   align-items: center;
@@ -100,30 +99,10 @@
   background-color: rgb(63, 74, 85);
 }
 
-.file-by-teacher-like{
-  display: flex;  
-}
-
-@media only screen and (max-width : 320px) {
+@media only screen and (max-width: 320px) {
   .file-by-teacher-like{
     flex-direction: column;
   }
-  
-}
-
-.like {    
-  padding: 0.2rem;
-  text-decoration: underline;
-  border-radius: 100px;    
-  font-weight: 900;
-}
-
-
-
-.like:hover {
-  background-image: url("../assets/min-logo-likes.png");
-  transition-duration: 300ms;
-  color: black;
 }
 
 .delete {
@@ -241,7 +220,31 @@ ul {
   text-overflow: ellipsis;
   overflow: hidden;
   font-weight: lighter;    
-  white-space: nowrap; 
+  white-space: nowrap;
+  box-sizing: border-box;
+  width: 75%;
+  align-self: center;
+  align-items: center;
+  position: absolute;
+  bottom: 8px;
+  left: 16%;
+  height: 17px;
+}
+
+.like {
+  padding: 0.2rem;
+  text-decoration: underline;
+  border-radius: 100px;
+  font-weight: 900;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+}
+
+.like:hover {
+  background-image: url("../assets/min-logo-likes.png");
+  transition-duration: 300ms;
+  color: black;
 }
 
 .load-spinner {

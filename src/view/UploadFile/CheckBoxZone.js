@@ -26,7 +26,7 @@ const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, s
                     color="primary"
                 />
                 }
-                label="¿Está resuelto?"
+                label="¿Está resuleto?"
             />
 
             {calificado && <Grade grade = {grade} setGrade = {setgrade} error = {gradeError} setError = {setgradeError}/>}
