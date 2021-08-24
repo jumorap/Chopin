@@ -6,7 +6,7 @@ It is a collaboration of 7 enginners leded by
 
 [@jumorap](https://jumorap-dev.web.app/)
 
-[@jahelsantiago](jahel-santiago.web.app)
+[@jahelsantiago](https://jahel-santiago.web.app/)
 
 You can find the oficial page here: [Red Board](https://redboardun.com/) 
 
