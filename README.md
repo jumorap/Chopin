@@ -2,7 +2,7 @@
 
 Red board is a web platform where university students can share their test, activities and homeworks to facilitate the life to other students.
 
-It is a collaboration of 7 enginners leded by
+It is a collaboration of 7 enginners led by
 
 [@jumorap](https://jumorap-dev.web.app/)
 
