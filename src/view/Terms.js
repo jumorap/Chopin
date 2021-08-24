@@ -78,7 +78,7 @@ const Terms = () => {
             de cualquier uso no autorizado de su información personal u otra infracción de seguridad relacionada con
             esta, con el fin de tomar las medidas que sean necesarias. El usuario podrá contactar a Red Board a
             través del correo electrónico&nbsp;
-            <a className={"link-terms"} href={"mailto:redboardunal@protonmail.com"}>redboardunal@protonmail.com</a>
+            <a className={"link-terms"} href={"mailto:redboardun@protonmail.com"}>redboardun@protonmail.com</a>
             <p className={"blank-space"}/>
 
             <h4>Contenido de Usuarios:</h4>
@@ -248,7 +248,7 @@ const Terms = () => {
             Se ha designado un delegado para la protección de datos del usuario, si deseas realizar
             una consulta en relación al tratamiento de tus datos personales, puedes ponerte en contacto con él
             mediante la dirección de correo&nbsp;
-            <a className={"link-terms"} href={"mailto:redboardunal@protonmail.com"}>redboardunal@protonmail.com</a>
+            <a className={"link-terms"} href={"mailto:redboardun@protonmail.com"}>redboardun@protonmail.com</a>
             <p className={"blank-space"}/>
 
             Se recolectarán tus datos personales con las siguientes finalidades:

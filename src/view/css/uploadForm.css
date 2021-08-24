@@ -8,23 +8,23 @@
     box-sizing: border-box;
 }
 
-.subContainer{
+.modal-sub-container{
     display: flex;
     align-items: center;
     box-sizing: border-box;
 }
 
-.leftDiv {
+.modal-left-div {
     padding-right: 10px;
-    width: 450px;
+    width: 400px;
     display: flex;
     flex-flow: column wrap;
     margin-block-end: 15px;
     box-sizing: border-box;
 }
 
-.rightDiv {
-    width: 50%;
+.modal-right-div {
+    width: 250px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -45,15 +45,15 @@
 }
 
 @media only screen and (max-width: 800px){        
-    .subContainer{
+    .modal-sub-container{
         flex-direction: column;
     }
 
-    .leftDiv{
+    .modal-left-div{
         width: 450px;
     }
 
-    .rightDiv{
+    .modal-right-div{
         width: 90%;
     }
 
@@ -81,11 +81,11 @@
         left: 5%;
     }
 
-    .subContainer {
+    .modal-sub-container {
         width: 100%;
     }
 
-    .leftDiv {   
+    .modal-left-div {
         width: 90%;
     }
 }

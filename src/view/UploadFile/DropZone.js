@@ -8,7 +8,7 @@ import DropFIeldDesactive from "./DropFIeldDesactive";
 
 const useStyles = makeStyles(() => ({
   container: {
-    width: "100%",
+    width: "var(--widthDragAndDrop)",
     height: "150px",
     backgroundColor: "withe",
     borderRadius: "25px",
@@ -17,11 +17,12 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
+    boxSizing: "border-box",
   },
 }));
 
 //limite in bites for the maximum possible value that a file could have in megaBytes
-const maxFileSize = 5
+const maxFileSize = 8
 
 function MyDropzone({ setFile }) {
   const classes = useStyles();
@@ -38,7 +39,7 @@ function MyDropzone({ setFile }) {
     }
 
     if (maxFileSize * Math.pow(10, 6) < file.size){
-      setErrorMessage("El limite es " + maxFileSize + " megabytes")
+      setErrorMessage("El limite es " + maxFileSize + " megabytes. No subas libros.")
       setopenPDFerrorMessage(true)      
       return
     }

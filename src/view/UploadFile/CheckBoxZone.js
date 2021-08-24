@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
@@ -63,14 +63,15 @@ const Grade = ({grade, setGrade, error, setError}) => {
     return (
         <><br/>
         <TextField
-          error = {error}
+          error={error}
           id="grade-text"
-          label="Nota obtenida"
+          label="Calificación (opcional)"
           defaultValue={""}
-          value = {grade}
-          onChange = {handleChange}
-          helperText= {error && "La nota maxima es 5"}
-          variant= "outlined"
+          value={grade}
+          onChange={handleChange}
+          helperText={error && "La nota maxima es 5.0"}
+          variant="outlined"
+          style={{backgroundColor: "#FFF",}}
         />
         </>
     )

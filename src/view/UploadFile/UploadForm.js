@@ -152,8 +152,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       </IconButton>
 
       <div className="upload-form">
-        <div className="subContainer">
-          <div className="leftDiv">
+        <div className="modal-sub-container">
+          <div className="modal-left-div">
             <InputText
               label={"Materias"}
               options={materias}
@@ -194,7 +194,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             </div>
             <TextField
               id="outlined-multiline-static"
-              label="Descripción"
+              label="Descripción (opcional)"
               multiline
               rows={4}
               variant="outlined"
@@ -203,7 +203,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="rightDiv">
+          <div className="modal-right-div">
             {file === null ? (
               <MyDropzone setFile={setfile} />
             ) : (

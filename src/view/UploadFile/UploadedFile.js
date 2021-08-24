@@ -14,7 +14,7 @@ const UploadedFile = ({ fileName, setFile }) => {
 
       <span className={"text-max-pdf"}>{fileName}</span>
 
-      <IconButton onClick={handleClose}>
+      <IconButton onClick={handleClose} style={{boxSizing: "border-box", padding: 0,}}>
         <CloseIcon className="close-icon" />
       </IconButton>
     </div>

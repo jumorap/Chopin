@@ -6,25 +6,29 @@ const useStyles = makeStyles(() => ({
   text: {
     color: "#959595",
     fontWeight: "bold",
+    paddingTop: "0.3rem",
   },
   container: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
+    margin: "none",
+    width: "var(--widthDragAndDrop)",
+    padding: 0,
   },
   icon: {
     fontSize: "60px",
   },
   searchFile: {
-    background: "#AA0000",
+    background: "var(--redBoard)",
     "&:hover": {
-      backgroundColor: "#800000",
+      backgroundColor: "var(--hoverRedBoard)",
     },
     color: "#FFF",
     borderRadius: 30,
     border: 0,
-    padding: "5px 20px",
+    padding: "4px 18px",
   },
 }));
 const DropFieldActive = () => {
@@ -38,9 +42,9 @@ const DropFieldActive = () => {
         color="primary"
         className={classes.searchFile}
       >
-        Búscalo
+        Cargar
       </Button>
-      <p className={classes.text}>O suelta tu archivo aquí</p>
+      <p className={classes.text}>Pon tu archivo aquí</p>
     </div>
   );
 };

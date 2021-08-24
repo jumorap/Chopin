@@ -1,8 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import Login from "./view/Login";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Admin from './view/Admin';
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import Terms from './view/Terms'
 import ProgrammeResults from "./view/ProgrammeResults";
 import { createContext, useEffect } from 'react';
@@ -40,17 +39,18 @@ function App() {
                     <AuthProvider>
                         <PrivateRoute exact path="/materias/:idMateria" component={
                             <ProgrammeResults toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
-                        }
-                        />
-                        <PrivateRoute exact path="/admin" component={<Admin />} />
+                        }/>
+
                         <Route exact path="/" >
                             <Login toggleUploadFileModal={toggleUploadFileModal} />
                         </Route>
                     </AuthProvider>
+
                     <Route exact path="/legal">
                         <Terms/>
                     </Route>
                 </Router>
+
                 <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />
             </ContextProvider>
         </>

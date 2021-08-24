@@ -12,7 +12,8 @@ import Searcher from "./components/Searcher";
 import UploadFile from "./UploadFile/UploadFile";
 import CookieConsent from "react-cookie-consent";
 import Tooltip from '@material-ui/core/Tooltip';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 class Login extends Component {
     render() {
@@ -67,7 +68,7 @@ class Login extends Component {
             <div className={'div-general'}>
                 <div className={'div-left'} >
                     <span className={"text-div-left"}>
-                        ¿Necesitas ayuda, encontraste un fallo, tienes sugerencias o te gustaría ayudarnos a mejorar Red Board? Contáctanos: <a href={"mailto:redboardunal@protonmail.com"}>redboardunal@protonmail.com</a>
+                        ¿Necesitas ayuda, encontraste un fallo, tienes sugerencias o te gustaría ayudarnos a mejorar Red Board? Contáctanos: <a href={"mailto:redboardun@protonmail.com"}>redboardun@protonmail.com</a>
                         <p className={'link-privacy'}>
                             <Link to={`/legal`} className={'link-privacy'}>
                                 Términos, Condiciones Y Políticas de Privacidad

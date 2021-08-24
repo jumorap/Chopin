@@ -47,4 +47,7 @@ a {
   --sideBar : #232331;
   --principalBlue : #15202B;
   --blueWhite: #F0F4F6;
+  --redBoard: #a00;
+  --hoverRedBoard: #800000;
+  --widthDragAndDrop: 220px;
 }
