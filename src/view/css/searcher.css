@@ -1,15 +1,9 @@
 .searcher-container{
     background-color: var(--secondaryColor);
     min-height: 2.5rem;
-    display: flex;
-    justify-content: center;    
-    flex-direction: column;
-    min-width: fit-content;
     border-radius: 20px;  
     margin: 5px;
-    padding-bottom: 0;
-    position: relative;
-    max-width: 100%;
+    z-index: 10;
 }
 
 .searcher-container:hover{

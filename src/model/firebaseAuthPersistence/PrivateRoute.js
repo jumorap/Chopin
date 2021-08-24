@@ -22,7 +22,8 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
             {...rest}
             render={routeProps =>
                 !!currentUser && isUnalUser ? (
-                    <RouteComponent {...routeProps} />
+                    /*<RouteComponent {...routeProps} />*/
+                    RouteComponent
                 ) : (
                     <Redirect to={"/"} />
                 )

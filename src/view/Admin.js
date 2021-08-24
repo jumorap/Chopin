@@ -35,6 +35,7 @@ const Admin = () => {
     const [categorias, setcategorias] = useState("")
     const [usuario, setusuario] = useState("")
     const [file, setfile] = useState()
+    const [id_archivo, setId_archivo] = useState("")
 
 
 
@@ -42,7 +43,14 @@ const Admin = () => {
     const [materiaSearch, setmateriaSearch] = useState("")
 
 
+    const handleDeleteFile = () => {
+        
+        //Archivos._deleteMateriasTrabajos(id_materia, id_archivo)
+        //Archivos._deleteFile(id_materia, id_archivo)
+        Archivos._deleteMateriasFiltro(id_materia, id_archivo, "profesores", "profesorPrueba")
+        console.log("despues de borrar")
 
+    }
 
     //Crea una materia en la base de datos
     const handleSumbitMateria = () =>{
@@ -79,23 +87,20 @@ const Admin = () => {
 
     const handleTypeSearch = (e) => {
         setmateriaSearch(e.target.value)
-
+            
+        
+        Archivos.deleteArchivos()
     }
 
     return (
-        <div>
+        <div style = {{backgroundColor : "white"}}>
             <h2>Crear materia</h2>
-            <form action="submit">
+            <form action={"submit"}>
                 <label htmlFor="materia"/>
                 <input type="text" name="" id="materia" placeholder ="Nombre de la materia" onChange = {e=>{setmateria(e.target.value)}}/>
-                <input type="button" value="Crear materia" on onClick = {handleSumbitMateria}/>
+                <input type="button" value="Crear materia" onClick = {handleSumbitMateria}/>
             </form>
             <br/>
-
-            <h2>Materias disponibles</h2>
-            {Object.entries(listaMaterias).map((val) => {
-                return <pre>{`${val} `}</pre>
-            })}
 
             <h2>Subir archivo</h2>
             <form>
@@ -146,6 +151,14 @@ const Admin = () => {
             <form>
                 <input type="text" name="" id="Profesor" placeholder = "Profesor" onChange = {e=>{setprofesor(e.target.value)}}/>
                 <input type="button" value="Buscar materia" onClick = {handleSubitProfesor}/>
+            </form>
+
+            <h2>Delete archivos de materias</h2>
+            <form action="">
+                <input type="text" placeholder = "ID Materia" value = {id_materia} onChange = {(e)=>{setid_materia(e.target.value)}}/>
+                <input type="text" placeholder = "ID Archivo" value = {id_archivo} onChange = {(e)=>{setId_archivo( e.target.value)}}/>
+                
+                <input type="button" value="Eliminar archivo" onClick = {handleDeleteFile}/>
             </form>
         </div>
     )

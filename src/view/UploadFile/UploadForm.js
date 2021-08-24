@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import "../css/uploadForm.css";
 import { Button, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import MyDropzone from "./DropZone";
 import InputText from "./InputText";
-import { useMaterias, useProfesores } from "../ContextProvider";
+import { useMaterias, useProfesores, useMateriaMap } from "../ContextProvider";
 import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
-import CloseIcon from '@material-ui/icons/Close';
-import {firebaseAppAuth} from "../../model/firebaseSelf/firebaseConfig";
+import CloseIcon from "@material-ui/icons/Close";
+import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
+import CheckBoxZone from "./CheckBoxZone";
 
-
-var user = firebaseAppAuth.currentUser
 
 const useStyles = makeStyles(() => ({
   uploadButton: {
@@ -25,30 +24,7 @@ const useStyles = makeStyles(() => ({
     border: 0,
     padding: "5px 20px",
     width: "80%",
-    marginTop: "20px"
-  },
-  closeButton: {
-    position: "relative",
-    left:"90%",
-    top: "-5px",
-    padding: 0,
-  },
-
-  leftDiv:{
-    paddingRight: "10px",
-    width: "50%",
-    display: "flex",
-    flexFlow: "column wrap",
-    marginBlockEnd: "15px",
-    justifyContent: "space-between",
-  },
-
-  rightDiv:{
-    paddingRight: "10px",
-    width: "50%",
-    display: "flex",
-    flexDirection: "column",
-    padding: "15px",
+    marginTop: "20px",
   },
 
   sharemessage: {
@@ -59,22 +35,34 @@ const useStyles = makeStyles(() => ({
     fontSize: "20px",
   },
 
+  closeButton: {
+    padding: 0,
+  },
+
   descriptionBox: {
-    width: "105%",
-    backgroundColor:"#fff",
+    width: "100%",
+    backgroundColor: "white",
     marginTop: "15px",
   },
 
-  warningDropText:{
+  warningDropText: {
     color: "#f44336",
-    fontSize: "0.75rem"
-  }
+    fontSize: "0.75rem",
+  },
 }));
 
 
-const UploadForm = ({handleClose}) => {
+//**Funcion que crea el formulario para subir el archivo con todos sus campos de texto*/
+const UploadForm = ({ handleClose, fileToEdit }) => {
+  let user = firebaseAppAuth.currentUser;
+
   const materias = useMaterias();
   const profesores = useProfesores();
+  /**The conection with the provider to check the existence of the subject */
+  const [materiaMap, setMateriaMap] = useMateriaMap();
+  
+
+  const [buttonShareActive, setButtonShare] = useState(false)
 
   const classes = useStyles();
 
@@ -84,19 +72,21 @@ const UploadForm = ({handleClose}) => {
   const [categoriaText, setcategoriaText] = useState("");
   const [descripcionText, setDescripcionText] = useState("");
   const [file, setfile] = useState(null);
+  const [grade, setgrade] = useState("") //text to save the grade if is necessary
 
   const [materiaError, setmateriaError] = useState(false);
   const [profesorError, setProfesorError] = useState(false);
   const [semestreError, setSemestreError] = useState(false);
   const [categoriaError, setcategoriaError] = useState(false);
   const [fileError, setfileError] = useState(false);
-
+  const [gradeError, setgradeError] = useState(false)
+  const [calificado, setCalificado] = useState(false)
+  
   const handleChange = (event) => {
     setDescripcionText(event.target.value);
   };
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async () => {
     let errors = false;
 
     if (materiaText === null || materiaText.length === 0) {
@@ -118,97 +108,141 @@ const UploadForm = ({handleClose}) => {
     if (file === null) {
       setfileError(true);
       errors = true;
-      alert("Ponga un arhcivo parce");
+    }
+    if(gradeError){
+      errors = true;
     }
 
 
     if (!errors) {
-      Archivos.crearArchivos(
-          materiaText.id,
-          descripcionText,
-          profesorText.profesor,
-          semestreText.semestre,
-          user.uid,
-          categoriaText.categoria,
-          file
+      setButtonShare(true)
+
+    
+    let nota = grade
+    if(nota.length === 1){      
+      nota += ".0" 
+      setgrade(nota)
+    }
+
+      const new_archivo = await Archivos.crearArchivos(
+        materiaText.id,
+        descripcionText,
+        profesorText.profesor,
+        semestreText.semestre,
+        user.uid,
+        categoriaText.categoria,
+        file,
+        nota,
+        calificado
       );
-      handleClose()
+      
+      materiaMap.add_archivo(new_archivo)
+      handleClose();
     }
   };
 
-  function setInputText(label, options, optionLabel, setOption, errorState, setError) {
-    return (
-        <InputText
-            label={label}
-            options={options}
-            optionLabel={optionLabel}
-            setOption={setOption}
-            errorState={errorState}
-            setError={setError}
-        />
-    )
-  }
 
   return (
+    <div className="container">
+      <div className={classes.sharemessage}>
+        {fileToEdit ? "Editar" : "Compartir"}
+      </div>
+      <IconButton className={`${classes.closeButton} close-button`} onClick={handleClose}>
+        <CloseIcon />
+      </IconButton>
 
-      <div className="container">
-        <div className = {classes.sharemessage}>
-          Compartir
-        </div>
-        <IconButton className = {classes.closeButton} onClick = {handleClose}>
-          <CloseIcon/>
-        </IconButton>
-
-        <div className="upload-form">
-          <div className="subContainer">
-            <div className={classes.leftDiv}>
-
-              {setInputText("Materias", materias, "materia", setmateriaText, materiaError, setmateriaError)}
-              {setInputText("Profesor", profesores, "profesor", setProfesorText, profesorError, setProfesorError)}
-              {setInputText("Semestre", semestres, "semestre", setSemestreText, semestreError, setSemestreError)}
-              {setInputText("Categoria", categorias, "categoria", setcategoriaText, categoriaError, setcategoriaError)}
-
-            </div>
-            <div className={classes.rightDiv}>
-
-              <div>
-                {file === null ? (
-                    <MyDropzone setFile={setfile} />
-                ) : (
-                    <UploadedFile file={file} setFile={setfile} />
-                )}
-                {fileError === true ? (<p
-                    className={classes.warningDropText}
-                >Parce, coloque un archivo</p> ) : ("")}
-              </div>
-
-              <TextField
-                  id="outlined-multiline-static"
-                  label="Descripción"
-                  multiline
-                  rows={4}
-                  defaultValue=""
-                  variant="outlined"
-                  className={classes.descriptionBox}
-                  value={descripcionText}
-                  onChange={handleChange}
+      <div className="upload-form">
+        <div className="modal-sub-container">
+          <div className="modal-left-div">
+            <InputText
+              label={"Materias"}
+              options={materias}
+              optionLabel={"materia"}
+              defaultValue={materiaText}
+              setOption={setmateriaText}
+              errorState={materiaError}
+              setError={setmateriaError}
+            />
+            <InputText
+              label={"Profesor"}
+              options={profesores}
+              optionLabel={"profesor"}
+              defaultValue={profesorText}
+              setOption={setProfesorText}
+              errorState={profesorError}
+              setError={setProfesorError}
+            />
+            <div className="semetre-categoria">
+              <InputText
+                label={"Semestre"}
+                options={semestres}
+                optionLabel={"semestre"}
+                defaultValue={semestreText}
+                setOption={setSemestreText}
+                errorState={semestreError}
+                setError={setSemestreError}
+              />
+              <InputText
+                label={"Categoria"}
+                options={categorias}
+                optionLabel={"categoria"}
+                defaultValue={categoriaText}
+                setOption={setcategoriaText}
+                errorState={categoriaError}
+                setError={setcategoriaError}
               />
             </div>
+            <TextField
+              id="outlined-multiline-static"
+              label="Descripción (opcional)"
+              multiline
+              rows={4}
+              variant="outlined"
+              className={classes.descriptionBox}
+              value={descripcionText}
+              onChange={handleChange}
+            />
           </div>
-          <Button
-              variant="contained"
-              className={classes.uploadButton}
-              onClick={handleSubmit}
-          >
-            Compartir
-          </Button>
+          <div className="modal-right-div">
+            {file === null ? (
+              <MyDropzone setFile={setfile} />
+            ) : (
+              <UploadedFile fileName={file.name} setFile={setfile} />
+            )}
+            {fileError === true ? (
+              <p className={classes.warningDropText}>
+                Por favor anexe un archivo
+              </p>
+            ) : (
+              ""
+            )}
+            
+            {/* para colocar si esta resulto o no y la nota */}
+            <CheckBoxZone 
+              grade = {grade}
+              setgrade = {setgrade} 
+              gradeError = {gradeError} 
+              setgradeError = {setgradeError}
+              calificado = {calificado}
+              setCalificado = {setCalificado}
+            />
+
+          </div>
         </div>
+        <Button
+          variant="contained"
+          className={classes.uploadButton}
+          onClick={handleSubmit}
+          disabled={buttonShareActive}
+        >
+          {fileToEdit ? "Editar" : "Compartir"}
+        </Button>
       </div>
+    </div>
   );
 };
 
 export default UploadForm;
-
 
 const semestres = [
   { semestre: "2021-2" },
@@ -222,20 +256,9 @@ const semestres = [
 ];
 
 const categorias = [
-  { categoria: "Parcial 1" },
-  { categoria: "Parcial 2" },
-  { categoria: "Parcial 3" },
-  { categoria: "Parcial 4" },
-  { categoria: "Parcial 5" },
-  { categoria: "Parcial 7" },
-  { categoria: "Parcial 8" },
-  { categoria: "Parcial 9" },
-  { categoria: "Taller 1" },
-  { categoria: "Taller 2" },
-  { categoria: "Taller 3" },
-  { categoria: "Taller 4" },
-  { categoria: "Taller 5" },
-  { categoria: "Taller 6" },
-  { categoria: "Taller 7" },
-  { categoria: "Taller 8" },
+  { categoria: "Parcial" },
+  { categoria: "Taller" },
+  { categoria: "Quíz" },
+  { categoria: "Laboratorio" },
+  { categoria: "Guía" },
 ];

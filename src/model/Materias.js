@@ -23,9 +23,9 @@ class Materias {
    * @async
    * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
    */
-  static async getMateriasList() {
-    console.log("materia render");
-    return (await this._DBmateriasSeach.get()).data().MATERIAS_LIST;
+  static async getMateriasList() {    
+    const data = (await this._DBmateriasSeach.get()).data().MATERIAS_LIST    
+    return data;
   }
 
   /**
@@ -56,7 +56,13 @@ class Materias {
       .catch((e) => `error leyendo la materia: ${e}`);
   }
 
+  /**
+   * 
+   * @param {String} id ID of the materia to get the data
+   * @returns promise with the materia 
+   */
   static async _getFilesList(id) {
+    console.log("Se a realizado una lectura de una Materia en la DB");
     return Materias._DBmateriasDisplay.doc(id).get();
   }
 
@@ -101,12 +107,14 @@ class Materias {
       });
   }
 
+
+  
+
   _getArrayFromObject(object) {
     const objectArray = [];
     Object.keys(object).forEach((key) => {
       objectArray.push(object[key]);
     });
-    console.log(objectArray);
     return objectArray;
   }
 }

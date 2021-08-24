@@ -10,6 +10,9 @@ import "./css/login.css";
 import principalNameLogo from "./assets/principal-slogan-logo.png";
 import Searcher from "./components/Searcher";
 import UploadFile from "./UploadFile/UploadFile";
+import CookieConsent from "react-cookie-consent";
+import Tooltip from '@material-ui/core/Tooltip';
+import { Link } from "react-router-dom";
 
 
 class Login extends Component {
@@ -18,6 +21,7 @@ class Login extends Component {
             user,
             signOut,
             signInWithGoogle,
+            toggleUploadFileModal
         } = this.props
 
         let isUnalUser
@@ -31,8 +35,8 @@ class Login extends Component {
                 borderRadius: 30,
                 border: 0,
                 padding: 0,
-                position: "absolute",
-                },
+                width: "20px",                 
+            },
             signIn: {
                 background: 'linear-gradient(45deg, #FFF 30%, #FFF 90%)',
                 borderRadius: 30,
@@ -42,51 +46,78 @@ class Login extends Component {
         }
 
 
-        function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text) {
+        function logButtons(clickUse, funcStyle, classNameStyles, iconToUse, text, title="", containerClassName) {
             return (
-                <Button onClick={clickUse}
+                <div className = {containerClassName}>                
+                    <Tooltip title = {title}>
+                    <Button onClick={clickUse}
                         className={classNameStyles}
                         style={funcStyle}
                         startIcon={
                             <FontAwesomeIcon icon={iconToUse} />
-                        }>{text}</Button>
+                        }
+                        aria-label="sign in and sign out"
+                    >{text}</Button>
+                    </Tooltip>
+                </div>
             )
         }
 
         return (
+            <>
             <div className={'div-general'}>
-                <div className={'div-left div-half-screen'} />
-                <div className={'div-right div-half-screen'}>
-                    <div className={'container-div-right'}>
-                        <center>
-                            <p><img src={principalNameLogo} className={'slogan-img'} alt={'logo'}/></p>
-
+                <div className={'div-left'} >
+                    <span className={"text-div-left"}>
+                        ¿Necesitas ayuda, encontraste un fallo, tienes sugerencias o te gustaría ayudarnos a mejorar Red Board? Contáctanos: <a href={"mailto:redboardun@protonmail.com"}>redboardun@protonmail.com</a>
+                        <p className={'link-privacy'}>
+                            <Link to={`/legal`} className={'link-privacy'}>
+                                Términos, Condiciones Y Políticas de Privacidad
+                            </Link>
+                        </p>
+                    </span>
+                </div>
+                <div className={'div-right'}>
+                    <div className={'container-input-logo'}>                                                    
+                            <img src={principalNameLogo} className={'slogan-img'} alt={'logo'} />
                             {
                                 isUnalUser && user
-                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '')
-                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL')
+                                    ? logButtons(signOut, styles.signOut, 'google-sign google-out', faSignOutAlt, '', "Sign Out", "signOut-container")
+                                    : logButtons(signInWithGoogle, styles.signIn, 'google-sign', faGoogle, 'Sign in UNAL', "" ,"signIn-container")
                             }
                             {
                                 !isUnalUser && user
-                                    ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas institucionales UNAL</p>
-                                    : <p/>
+                                    ? <p className={'non-unal-msg'}>Por ahora, solo se vincularán cuentas <br/> institucionales UNAL</p>
+                                    : <p />
                             }
                             {
                                 isUnalUser && user
-                                    ? <center><Searcher/><UploadFile/></center>
+                                    ? <><Searcher /><UploadFile handleOpen={toggleUploadFileModal} /></>
                                     : <center>
                                         <span className={'legal'}>
-                                            AL INGRESAR ESTÁS ACEPTANDO NUESTROS
-                                            <a className={'politics'} href={'https://www.github.com'} target={"_blank"} rel="noreferrer">
+                                            AL INGRESAR ESTÁS ACEPTANDO NUESTROS&nbsp;
+                                            <Link to={`/legal`} className={'politics'}>
                                                 TÉRMINOS, CONDICIONES Y POLÍTICAS DE PRIVACIDAD
-                                            </a>
+                                            </Link>
                                         </span>
                                     </center>
-                            }
-                        </center>
+                            }                        
                     </div>
                 </div>
             </div>
+        <CookieConsent
+            location={"top"}
+            buttonText={"Listo, parce"}
+            declineButtonText={"Después"}
+            style={{}}
+            expires={365}
+            buttonStyle={{backgroundColor: "rgb(170, 0, 0)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 650,}}
+        >
+            Al navegar en este sitio aceptas la Política de Cookies que usamos para mejorar tu experiencia.&nbsp;
+            <Link to={`/legal#cookies`}>
+                Más información
+            </Link>
+        </CookieConsent>
+        </>
         );
     }
 }

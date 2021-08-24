@@ -2,10 +2,12 @@
     background-color: var(--principalBlue);
     width: 100%;
     padding: 0 2px 4px;
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
     height: 52px;
     top: 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .logo-image{
@@ -18,23 +20,19 @@
     float: left;
     height: 10%;
     padding: 0 20px 0 10px;
-    z-index: 2;
-    position: relative;
+    z-index: 3;    
 }
 
 .searcher-container-nav {
-    width: 50%;
-    position: absolute;
-    left: 25%;
+    width: 60%;    
+    z-index: 3;
 }
 
 .log-out-container-nav {
-    width: 54px;
-    float: right;
+    width: 54px;    
     height: 100%;
     padding: 0 5px 0 10px;
-    z-index: 2;
-    position: relative;
+    z-index: 3;    
 }
 
 .sign-out {
@@ -42,21 +40,15 @@
     color: rgb(255, 255, 255);
     border-radius: 30px;
     border: 0;
-    padding: 0 5px;
-    position: absolute;
+    padding: 0 5px;    
     height: 100%;
     cursor: pointer;
-    font-size: 21px;
-    float: right;
+    font-size: 21px;    
 }
 
-@media only screen and (max-width: 600px){
-    .logo-image{
-        display: none;
-    }
-
+@media only screen and (max-width: 600px){    
     .searcher-container-nav {
-        width: 85%;
+        width: 90%;
         left: 0;
     }
 

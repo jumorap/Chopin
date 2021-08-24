@@ -1,68 +1,115 @@
-.div-general{
+.div-general {
     background-color: var(--principalBlue);
     width: 100%;
-    height: 100vh;
-    -webkit-box-direction: reverse;
-    -webkit-box-orient: horizontal;
-    flex-direction: row-reverse;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* mobile viewport bug fix */
+    height: -webkit-fill-available;
+    /* height: -moz-available;
+    height: -webkit-fill-available;
+    height: fill-available;*/
+    display: flex;
 }
 
-.div-left{
+.div-left {
     background-image: url("../assets/principal-logo-gray.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 103%;
-    flex: 1;
-}
-
-.div-right{
-    background-color: #fff;
-    color: #555;
-}
-
-.div-half-screen{
-    float: left;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    align-content: center;
-    height: 100vh;
+    color: #DDD;
+    font-size: 0.8rem;
+    text-align: center;
     align-items: center;
-    vertical-align: middle;
-    position: relative;
-}
-
-@media only screen and (max-width: 500px){
-    .container-div-right{
-        width: 50vh;
-    }
-
-    .div-left{
-        width: 100vw;
-        height: 20vh;
-        display: table;
-    }
-
-    .div-general{
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-.google-out {
+    flex-direction: column;
+    justify-content: flex-end;
+    display: flex;
+    flex: 1;
+    padding: 1.5em 1em;
+    transition: 300ms;
+    height: 100%;
+    width: 50%;
+    box-sizing: border-box;
     position: absolute;
-    bottom: 5vh;
-    left: 5vh;
+    left: 0;
+    top: 0;
+    bottom: 0;
 }
 
-.slogan-img{
+.text-div-left {
+    width: 85%;
+}
+
+.div-right {
+    background-color: var(--blueWhite);
+    color: #555;
+    flex: 1;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.link-privacy {
+    margin-top: 1em;
+}
+
+.container-input-logo {
+    width: 90%;    
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .div-left {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: fit-content;
+        z-index: 1;
+        background-color: var(--principalBlue);
+        box-sizing: border-box;
+        padding-top: 1em;
+    }
+
+    .div-right {
+        width: 100%;
+    }
+
+    .signOut-container{
+        left: 5vh;
+    }
+}
+
+.google-out {    
+    bottom: 5vh;
+}
+
+.signOut-container{
+    position: fixed;
+    bottom: 1vh;
+}
+
+.signIn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.slogan-img {
     max-width: 70%;
     min-width: 30%;
+    align-self: center;     
+    margin-bottom: 2rem;    
 }
 
-.legal{
+.legal {
     align-content: center;
     align-items: center;
     alignment: center;
@@ -76,20 +123,19 @@
     min-width: 30%;
 }
 
-.politics{
-    display: block;
+.politics {
     text-decoration: blink;
     color: #000;
     font-weight: bold;
 }
 
-.google-sign{
+.google-sign {
     color: rgb(0, 0, 0);
     height: 48px;
     box-shadow: rgba(0, 0, 0, 0.3) 0 3px 5px 2px;
 }
 
-.non-unal-msg{
+.non-unal-msg {
     color: #f30000;
     font-weight: bold;
     font-size: 20px;
@@ -98,7 +144,9 @@
     margin-block-end: 0.5em;
     margin-inline-start: 0;
     margin-inline-end: 0;
+    text-align: center;        
 }
+
 
 
 

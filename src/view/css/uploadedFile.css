@@ -1,22 +1,28 @@
 .pdf-circle{
-    width: 2rem;
-    height: 2rem;
+    height: 32px;
+    padding: 0.1rem 0.2rem;
     border-radius: 5rem;
-    border: 1px solid brown;
+    border: 1px solid var(--redBoard);
     margin-right: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--redBoard);
+    color: #FFF;
+    font-weight: bold;
 }
 
 .uploaded-container{
     display: flex;
+    box-sizing: border-box;
+    max-width: var(--widthDragAndDrop);
+    height: 3em;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     font-weight: 500;
     background-color: white;
     border-radius: 1rem;
-    padding: 0 5px;
+    padding: 0 10px;
     -webkit-box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
     box-shadow: 0 0 10px -5px rgba(0,0,0,0.75);
@@ -25,9 +31,8 @@
 .text-max-pdf {
     text-overflow: ellipsis;
     overflow: hidden;
-    max-width: 70px;
-    max-height: 20px;
-
+    white-space: nowrap;
+    height: 18px;
 }
 
 .close-icon{

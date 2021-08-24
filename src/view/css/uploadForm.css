@@ -1,44 +1,99 @@
 .container {
     height: fit-content;
-    background-color: #F0F4F6;
+    background-color: var(--blueWhite);
     border-radius: 1rem;
     padding-bottom: 15px;
     padding-left: 20px;
     padding-right: 20px;
+    box-sizing: border-box;
 }
 
-.subContainer{
+.modal-sub-container{
     display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.modal-left-div {
+    padding-right: 10px;
+    width: 400px;
+    display: flex;
+    flex-flow: column wrap;
+    margin-block-end: 15px;
+    box-sizing: border-box;
+}
+
+.modal-right-div {
+    width: 250px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.semetre-categoria{
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-button {
+    position: relative;
+    left: 0;
+}
+
+@media only screen and (max-width: 800px){        
+    .modal-sub-container{
+        flex-direction: column;
+    }
+
+    .modal-left-div{
+        width: 450px;
+    }
+
+    .modal-right-div{
+        width: 90%;
+    }
+
+    .container {
+        position: absolute;
+        top: 1%;
+        transform: translate(-50%);
+    }
+}
+
+@media only screen and (max-width: 540px){
+    .container {
+        width: 100vw;
+        position: absolute;
+        top: 5%;
+        left: 0;
+        transform: translate(0%);
+        border-radius: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .close-button {
+        position: relative;
+        left: 5%;
+    }
+
+    .modal-sub-container {
+        width: 100%;
+    }
+
+    .modal-left-div {
+        width: 90%;
+    }
 }
 
 .upload-form {
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-
-.upload-form::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-
-.upload-form::-webkit-scrollbar:vertical {
-    width:10px;
-}
-
-.upload-form::-webkit-scrollbar-button:increment {
-    display: none;
-}
-
-.upload-form::-webkit-scrollbar  {
-    height: 10px;
-}
-.upload-form::-webkit-scrollbar-thumb {
-    background-color: rgb(80, 93, 106);
-    border-radius: 20px;
-    border: 1px solid rgb(80, 93, 106);
-}
-
-.upload-form::-webkit-scrollbar-track {
-    border-radius: 10px;
+    box-sizing: border-box;
 }
 

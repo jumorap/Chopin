@@ -36,8 +36,7 @@ class FullTextSearch {
   queryData(search) {
     let serch_results = this.index.search(search, {
       expand: true,
-    });
-    console.log(`Search reuslts${serch_results}`);
+    });    
     let results = [];
     serch_results.forEach((obj) => {
       results.push({ id: obj.ref, data: this.idMateriaMap.get(obj.ref) });

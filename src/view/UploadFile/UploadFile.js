@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import Modal from "@material-ui/core/Modal";
+import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { IconButton } from "@material-ui/core";
 import "../css/uploadFile.css";
-import UploadForm from "./UploadForm";
+import Tooltip from '@material-ui/core/Tooltip';
 
-const UploadFile = () => {
+/**
+ * Button with the + symbol used to add a new pdf
+ * @param {handleOpen} bool pone and close de uploadFile
+ * @returns 
+ */
+const UploadFile = ({ handleOpen }) => {
   const styles = {
     openButton: {
+      boxShadow: "rgb(0 0 0 / 30%) 0 3px 5px 2px",
       position: "fixed",
       bottom: "5vh",
       right: "5vh",
@@ -21,31 +26,18 @@ const UploadFile = () => {
     },
   };
 
-  const [open, setopen] = useState(false);
-
-  const handleOpen = () => {
-    setopen(true);
-  };
-
-  const handleClose = () => {
-    setopen(false);
-  };
-
   return (
     <div>
-      <Modal open={open} onClose={handleClose} className={"ModalWindow"}>
-        <div>
-          <UploadForm handleClose = {handleClose}/>
-        </div>
-      </Modal>
-
+      <Tooltip title = "Sube archivo">
       <IconButton
         style={styles.openButton}
         className={"openButton"}
         onClick={handleOpen}
+        aria-label="upload file"
       >
         <AddIcon fontSize={"large"} className={"openIcon"} />
       </IconButton>
+      </Tooltip>
     </div>
   );
 };

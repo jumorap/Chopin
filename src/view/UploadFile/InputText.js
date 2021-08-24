@@ -29,6 +29,7 @@ const InputText = ({
   label,
   options,
   optionLabel,
+  defaultValue,  
   setOption,
   errorState,
   setError,
@@ -37,25 +38,27 @@ const InputText = ({
 
   return (
     <Autocomplete
-      id={`combo-box-${String(optionLabel)}`}
+      id={`combo-box-${String(optionLabel)}`}      
       options={options}
       getOptionLabel={(option) => option[optionLabel]}
       style={{ width: "100%" }}
+                 
       renderInput={(params) => (
         <TextField
           className={classes.textField}
           {...params}
           error={errorState}
-          helperText={errorState ? "Este campo no puede estar vacio" : ""}
+          helperText={errorState ? "Este campo no puede estar vacío" : ""}
           label={label}
-          variant="outlined"
+          variant="outlined"                   
         />
       )}
       className={classes.container}
       onChange={(event, newValue) => {
-        setOption(newValue);
-        setError(false);
-      }}
+        setOption(newValue)
+        setError(false)
+      }}      
+      
     />
   );
 };

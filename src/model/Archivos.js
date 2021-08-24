@@ -1,4 +1,5 @@
-import {db, storage} from "./firebaseSelf/firebaseConfig";
+import { db, firebaseAppAuth, storage } from "./firebaseSelf/firebaseConfig";
+import firebase from "firebase/app";
 
 class Archivos {
   static _storageRef = storage.ref().child("/UNIVERSIDAD_NACIONAL");
@@ -15,17 +16,23 @@ class Archivos {
    * @param  {String} semestre semestre en el que se vio la materia
    * @param  {String} id_usuario ID del usuario que suibio el documeno
    * @param  {String} categorias categorias del documento
+   * @param  {Float} Nota Nota obtenida
+   * @param  {Bool} Calificado si esta o no calificado
    */
-  static crearArchivos(
+  static async crearArchivos(
     id_materia,
     descripcion,
     profesor,
     semestre,
     id_usuario,
     categorias,
-    file
-  ) {
-    this._DBmateriasDisplay
+    file,
+    nota,
+    calificado
+  ) {            
+    
+    //add arvhico to Archivos collections
+    const docRef = await this._DBmateriasDisplay
       .doc(id_materia)
       .collection("TRABAJOS")
       .add({
@@ -34,39 +41,42 @@ class Archivos {
         semestre: semestre,
         categorias: categorias,
         id_usuario: id_usuario,
-      })
-      .then((docRef) => {
-        Archivos._uploadFile(id_materia, docRef.id, file);
-        Archivos._updateMateriasTrabajos(
-          id_materia,
-          docRef.id,
-          profesor,
-          categorias,
-          semestre,
-          descripcion
-        );
-        Archivos._updateMateriasFiltro(
-          id_materia,
-          docRef.id,
-          "profesores",
-          profesor
-        );
-        Archivos._updateMateriasFiltro(
-          id_materia,
-          docRef.id,
-          "semestres",
-          semestre
-        );
-        Archivos._updateMateriasFiltro(
-          id_materia,
-          docRef.id,
-          "tipos",
-          categorias
-        );
-      })
-      .catch((err) => {
-        console.log(`error in crear archivo: ${err}`);
+        nota: nota,
+        calificado: calificado,
       });
+
+    const url = await Archivos._uploadFile(id_materia, docRef.id, file);
+
+    //update filters
+    Archivos._updateMateriasTrabajos(
+      id_materia,
+      docRef.id,
+      profesor,
+      categorias,
+      semestre,
+      descripcion,
+      url,
+      nota,
+      calificado
+    );
+
+    //update filters
+    Archivos._updateMateriasFiltro(id_materia,docRef.id,"profesores",profesor);
+    Archivos._updateMateriasFiltro(id_materia,docRef.id,"semestres",semestre);
+    Archivos._updateMateriasFiltro(id_materia, docRef.id, "tipos", categorias);
+
+    return {
+      id_materia: id_materia,
+      id_archivo: docRef.id,
+      profesor: profesor,
+      semestre: semestre,
+      tipo: categorias,
+      comentarios: descripcion,
+      url: url,
+      usuario: id_usuario,
+      nota: nota,
+      calificado: calificado
+    };
   }
 
   /**
@@ -75,27 +85,15 @@ class Archivos {
    * @param  {String} id_archivo ID unico del archivo que se va a subir, debe coincidir con el que se encuentra en la db
    * @param  {File} file Archivo que se va a subir
    */
-  static _uploadFile(id_materia, id_archivo, file) {
+  static async _uploadFile(id_materia, id_archivo, file) {
     const fileRef = this._storageRef.child(
       `/Materias/${id_materia}/${id_archivo}`
     );
-    fileRef
-      .put(file)
-      .then((snpaShot) => {
-        snpaShot.ref.getDownloadURL().then((url) => {
-          Archivos._updateArchivoUrl(id_materia, id_archivo, url);
-        });
-      })
-      .catch((err) => "error ading the file " + err);
-  }
 
-  static _updateArchivoUrl(id_materia, id_archivo, url) {
-    this._DBmateriasDisplay
-      .doc(id_materia)
-      .update({
-        [`trabajos.${id_archivo}.url`]: url,
-      })
-      .catch(() => console.log("error subiendo url"));
+    let snpaShot = await fileRef.put(file);
+    let url = snpaShot.ref.getDownloadURL();
+
+    return url;
   }
 
   /**
@@ -110,25 +108,36 @@ class Archivos {
     nombreProfesor,
     tipoDocumento,
     semestre,
-    comentarios
+    comentarios,
+    url,
+    nota,
+    calificado
   ) {
-    this._DBmateriasDisplay
-      .doc(id_materia)
-      .update({
-        [`trabajos.${id_archivo}`]: {
-          profesor: nombreProfesor,
-          tipo: tipoDocumento,
-          semestre: semestre,
-          comentarios: comentarios,
-          ID_archivo: id_archivo,
-        },
-      })
-      .then(() => {
-        console.log("Documento actualizado con exito");
-      })
-      .catch((err) => {
-        console.log(`error en la actualizacion de archivo ${err}`);
-      });
+    var user = firebaseAppAuth.currentUser;
+
+    if (user != null) {
+      this._DBmateriasDisplay
+        .doc(id_materia)
+        .update({
+          [`trabajos.${id_archivo}`]: {
+            profesor: nombreProfesor,
+            tipo: tipoDocumento,
+            semestre: semestre,
+            comentarios: comentarios,
+            ID_archivo: id_archivo,
+            usuario: firebaseAppAuth.currentUser.uid,
+            url: url,
+            nota : nota,
+            calificado: calificado
+          },
+        })
+        .then(() => {
+          console.log("Documento actualizado con exito");
+        })
+        .catch((err) => {
+          console.log(`error en la actualizacion de archivo ${err}`);
+        });
+    }
   }
 
   /**
@@ -157,75 +166,106 @@ class Archivos {
       });
   }
 
-  //_________________________________________________________________________________________________________
-
-  static async crearArchivo2(
+  /**
+   * Elimina el archivo de todas la colecciones de la base de datos
+   * @param {*} id_materia
+   * @param {*} id_archivo
+   * @param {*} profesor nombre del profesor que aparece en el archivo
+   * @param {*} semestre semestre que aparece en el archivo
+   * @param {*} categorias categoria que aparece en el archivo (ej parcial 1, parcial 2, etc)
+   */
+  static deleteArchivos(
     id_materia,
-    descripcion,
+    id_archivo,
     profesor,
     semestre,
-    id_usuario,
-    categorias,
-    file
+    categorias
   ) {
-    //upload the data of the file in the subcolection Archivos
-    const idArchivo = await this._addArchivo(
+    //delete record from materia filter
+    Archivos._deleteMateriasTrabajos(id_materia, id_archivo);
+
+    //delete record from filters
+    Archivos._deleteMateriasFiltro(
       id_materia,
-      descripcion,
-      profesor,
-      semestre,
-      id_usuario,
-      categorias,
-      "hvyuvyurl"
+      id_archivo,
+      "profesores",
+      profesor
     );
-    //upload file to the storage service and get the URL
-    const url = await this._uploadFile2(id_materia, idArchivo, file);
-    //update the materias doc with all the data
-    this._updateMateriasTrabajos(
+    Archivos._deleteMateriasFiltro(
       id_materia,
-      idArchivo,
-      url,
-      profesor,
-      categorias,
-      semestre,
-      descripcion
+      id_archivo,
+      "semestres",
+      semestre
     );
-    //update the filters
-    this._updateMateriasFiltro(id_materia, idArchivo, "profesores", profesor);
-    this._updateMateriasFiltro(id_materia, idArchivo, "semestres", semestre);
-    this._updateMateriasFiltro(id_materia, idArchivo, "tipos", categorias);
+    Archivos._deleteMateriasFiltro(id_materia, id_archivo, "tipos", categorias);
+
+    //delete file from storage
+    Archivos._deleteFile(id_materia, id_archivo);
   }
 
-  static async _uploadFile2(id_materia, id_archivo, file) {
+  /**
+   * Elimina el archivo de el FireStorage
+   * @param {Str} id_materia
+   * @param {Str} id_archivo
+   */
+  static _deleteFile(id_materia, id_archivo) {
     const fileRef = this._storageRef.child(
       `/Materias/${id_materia}/${id_archivo}`
     );
-    const snapshot = await fileRef.put(file);
-    return snapshot.ref.getDownloadURL();
+    fileRef
+      .delete()
+      .then(() => {
+        console.log("File eliminado correctamente del storage");
+      })
+      .catch(() => {
+        console.log("Error al eliminar el file del storage");
+      });
   }
 
-  static async _addArchivo(
+  /**
+   * elimina el registro en la materia con id_materia, con el parametro (profesor, semestre, categoria)
+   * @param  {String} id_materia ID de la materia a la cual pertenece el archivo
+   * @param  {String} id_archivo ID del archivo que se acaba de subir
+   * @param  {String} nombreFiltro nombre de la categoria del filtro que se le va a añadir el registro ("profesores, categorias, semestre")
+   * @param  {String} valorFiltro filtro que se le va a añadir ej ("NombreProfesor(Korgi), Semestre(2021-1), Categoria(parcial 1)"
+   */
+  static _deleteMateriasFiltro(
     id_materia,
-    descripcion,
-    profesor,
-    semestre,
-    id_usuario,
-    categorias,
-    url
+    id_archivo,
+    nombreFiltro,
+    valorFiltro
   ) {
-    const doc = await this._DBmateriasDisplay
+    this._DBmateriasDisplay
       .doc(id_materia)
-      .collection("TRABAJOS")
-      .add({
-        descripcion: descripcion,
-        profesor: profesor,
-        semestre: semestre,
-        categorias: categorias,
-        id_usuario: id_usuario,
-        url: url,
+      .update({
+        [`${nombreFiltro}.${valorFiltro}.${id_archivo}`]:
+          firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        console.log("Filtor eliminado con exito");
+      })
+      .catch(() => {
+        console.log(`Error actualizando el documento en ${nombreFiltro}`);
       });
+  }
 
-    return doc.id;
+  /**
+   * Elimina el archivo del objeto materias
+   * @param {str} id_materia
+   * @param {str} id_archivo
+   */
+  static _deleteMateriasTrabajos(id_materia, id_archivo) {
+    this._DBmateriasDisplay
+      .doc(id_materia)
+      .update({
+        [`trabajos.${id_archivo}`]: firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        console.log("archivo de materias borrado satisfactoriamente");
+      })
+      .catch(() => {
+        console.log("no se pudo borrar el archivo");
+      });
   }
 }
 

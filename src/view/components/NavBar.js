@@ -18,7 +18,7 @@ function NavBar() {
             <Link to="/">
                 <div className={"logo-container-nav"}>
                     <center>
-                        <input className={"logo-image"} type="image" src={logo} alt={""} />
+                        <input className={"logo-image"} type="image" src={logo} alt={"logo image"} />
                     </center>
                 </div>
             </Link>

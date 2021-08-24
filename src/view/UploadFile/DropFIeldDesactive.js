@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
   text: {
     color: "#FFF",
     fontWeight: "bold",
+    paddingTop: "0.3rem",
   },
   container: {
     display: "flex",
@@ -14,7 +15,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     flexDirection: "column",
     backgroundColor: "#B85454",
-    width: "100%",
+    width: "var(--widthDragAndDrop)",
     height: "100%",
     borderRadius: "22px",
     color: "#FFF",
