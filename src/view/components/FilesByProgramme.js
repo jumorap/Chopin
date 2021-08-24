@@ -134,8 +134,11 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   /**Los botones de eliminar y editar que son mostrados en las cards */
   let CardBtns = ({ item }) => {
     const [openModal, setopenModal] = useState(false)
+    const adminUsers = ["tr07jNQX7aY0ZJoW5zkUfpqM4OD2", "9QT5gfB9z3MruWCtlqXDAGfpG2I2"];
+    console.log(currentUserID)
+    const isAuthorizedToDelete = (currentUserID === item.usuario || currentUserID in adminUsers)
     return (
-      currentUserID === item.usuario && (
+      isAuthorizedToDelete && (
         <>
           <Tooltip title={"Eliminar archivo"}>
             <div className={"delete"}>
