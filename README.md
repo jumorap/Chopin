@@ -3,13 +3,17 @@
 Red board is a web platform where university students can share their test, activities and homeworks to facilitate the life to other students.
 
 It is a collaboration of 7 enginners leded by
+
 [@jumorap](https://jumorap-dev.web.app/)
+
 [@jahelsantiago](jahel-santiago.web.app)
 
 You can find the oficial page here: [Red Board](https://redboardun.com/) 
 
-Screenshots:
-![LogIn page](https://lh3.googleusercontent.com/tDlopMwE6zUJqAtl69EBZxypZyrnyUXpKK9Hfs5z9qIB2MkyRkoYYRM2JeEeaLjiBnl8SinnK_Z6eKYtpVIWKSH8D-Up7HFMLvado4FG4byNisJvuHPVejV9d6FHmGJk2B9qlwf-yg=w2400)
+Implementation:
+
+##Google auth
+![auth](https://lh3.googleusercontent.com/doSGY6b3bQol06q_p095SF2__dNoUt6fCV9S-Z3XKJxMbAfmWCWXA1yzTKZDvwacGiH0QgvUQjdxcSaIAt294wz6_w4EcDm7I58W5t603ycAR4vxUgruu2OrJb61wDTuxLrlWeEl4A=w2400)
 
 ![Main Page](https://lh3.googleusercontent.com/D3QC2gB9yKF5UCRUFSwZoYIdFPfMF2wQQyNyw3GxeJc4QUIKBLdr91edzSX-tsINZzOaENHpzAYD7K2KegoSdO-fVKK3B7nbm0C3uOzlYgbuAJIjBzXXWLSvKGsJnI06pj5net8kqQ=w2400)
 
