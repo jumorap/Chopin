@@ -11,7 +11,7 @@ You can find the oficial page here: [Red Board](https://redboardun.com/)
 Screenshots:
 ![LogIn page](https://lh3.googleusercontent.com/tDlopMwE6zUJqAtl69EBZxypZyrnyUXpKK9Hfs5z9qIB2MkyRkoYYRM2JeEeaLjiBnl8SinnK_Z6eKYtpVIWKSH8D-Up7HFMLvado4FG4byNisJvuHPVejV9d6FHmGJk2B9qlwf-yg=w2400)
 
-![Main Page](https://lh3.googleusercontent.com/tXNKTmI2kh2eAIX_MdG6rqC-EVMDZKQhmMJ3wXrY9JOOfp3C-kaP5zIJakzhxuOzc0PWd16NWfpBYb9ack_vQl4JtHfaA4a90BrNeAYUsdtYAUTMMaXX0q4PXklpK7BnR5lmBtIPUA=w2400)
+![Main Page](https://lh3.googleusercontent.com/D3QC2gB9yKF5UCRUFSwZoYIdFPfMF2wQQyNyw3GxeJc4QUIKBLdr91edzSX-tsINZzOaENHpzAYD7K2KegoSdO-fVKK3B7nbm0C3uOzlYgbuAJIjBzXXWLSvKGsJnI06pj5net8kqQ=w2400)
 
 ![Subject](https://lh3.googleusercontent.com/W-BAFu7nzY9Ctp1SfLrb6y0pNhdfP_YsAp0ZeWJlwLrJoVP-64n4rrXcmq7Y-ZMu_yFOLegXNqIMKUdslMyWQAzfSB0K5_J78rtBX4nR82ZyueIxQDY8pWC1lN_dAhPX1oKAT22B6w=w2400)
 
