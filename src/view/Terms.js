@@ -16,11 +16,20 @@ const Terms = () => {
             <p className={"blank-space"}/>
 
             <b>
-                Red Board no se encuentra vinculado ni asociado de ninguna manera con alguna institución educativa.
+                <h3>
+                    Red Board no se encuentra vinculado ni asociado de ninguna manera con alguna institución educativa.
+                </h3>
             </b>
 
             <h2 className={"subtitle-terms"}>¿Qué es Red Board?</h2>
-            Red Board es una plataforma web...
+            Red Board es una plataforma web colaborativa creada por estudiantes de la UNAL, para estudiantes de la UNAL:
+            Permite compartir y consultar <b>parciales, talleres, laboratorios</b> y demás actividades antiguas para
+            ayudar a otros estudiantes que cursen la misma asignatura en el futuro.
+            <p className={"blank-space"}/>
+
+            Aunque no lo parezca, al equipo de Red Board le tomó medio año desarrollar la plataforma completa. Además, se invirtió
+            dinero para la manutención de servidores y hosting. <b>Nos alegra apoyar a la comunidad universitaria y desarrollamos
+            este proyecto con mucho cariño, así que esperamos que les sea útil</b>.
 
 
             <h2 className={"subtitle-terms"} id={"terms"}>Términos y Condiciones</h2>
@@ -161,7 +170,7 @@ const Terms = () => {
             El acceso y uso de la página web es gratuito. No obstante, puede contener enlaces a otros
             sitios web que pueden generar costos. Red Board no se hace responsable por el acceso a dichos sitios
             ni por las políticas de cargos y costos que en ellos se apliquen. El usuario será el único responsable por
-            el acceso a Internet necesario para la correcta operación de la página web. Todos los cargos de acceso a
+            el acceso a internet necesario para la correcta operación de la página web. Todos los cargos de acceso a
             internet serán por cuenta del usuario.
             <p className={"blank-space"}/>
 

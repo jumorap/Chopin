@@ -159,7 +159,7 @@ body {
         float: right;
         right: 0;
         top: 0;
-        padding-left: 20%;
+        padding-left: 85px;
         transition-duration: 300ms;
         box-sizing: border-box;
     }
@@ -196,7 +196,7 @@ body {
         transition-duration: 300ms;
         width: fit-content;
         height: 100%;
-        padding: 20px 40px 20px 10px;
+        padding: 40px 30px;
         align-content: center;
         align-self: center;
         align-items: center;
@@ -213,6 +213,10 @@ body {
 
     .red-bar {
         padding: 20px 40px 20px 0;
+    }
+
+    .principal-menu-bar {
+        padding-left: 65px;
     }
 }
 
