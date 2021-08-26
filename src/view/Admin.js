@@ -44,10 +44,19 @@ const Admin = () => {
 
 
     const handleDeleteFile = () => {
-        
+
         //Archivos._deleteMateriasTrabajos(id_materia, id_archivo)
         //Archivos._deleteFile(id_materia, id_archivo)
         Archivos._deleteMateriasFiltro(id_materia, id_archivo, "profesores", "profesorPrueba")
+        console.log("despues de borrar")
+
+    }
+
+    const handleDeleteMateria = () => {
+
+        //Archivos._deleteMateriasTrabajos(id_materia, id_archivo)
+        //Archivos._deleteFile(id_materia, id_archivo)
+        Materias._delete._deleteMateriasFiltro(id_materia, id_archivo, "profesores", "profesorPrueba")
         console.log("despues de borrar")
 
     }
@@ -146,6 +155,9 @@ const Admin = () => {
 
             <h2>lista profesores</h2>
             <button onClick = {()=>{console.log(Profesores.getProfesoresList())}}>Obtener profesores</button>
+
+            <h2>lista materias</h2>
+            <button onClick = {()=>{console.log(Materias.getMateriasList())}}>Obtener materias</button>
 
             <h2>Añadir profesor</h2>
             <form>

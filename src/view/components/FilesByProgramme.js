@@ -65,8 +65,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
 
   //**Carta que se va a mostrar */
   let CardContent = ({ item }) => {
-    const hasNote = item.nota !== ""     
-  console.log(item)
+    const hasNote = item.nota !== ""
     return(    
     <div className={"files-programme"} onClick={() => handleOpenFilesModal(item)}>
       <div className={"file-by-type"}>{item.tipo}</div>
