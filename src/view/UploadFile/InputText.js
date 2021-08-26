@@ -40,7 +40,14 @@ const InputText = ({
     <Autocomplete
       id={`combo-box-${String(optionLabel)}`}      
       options={options}
-      getOptionLabel={(option) => option[optionLabel]}
+      getOptionLabel={
+        option => {
+          if(optionLabel === ""){
+            return option
+          }
+          return option[optionLabel]
+        }        
+      }
       style={{ width: "100%" }}
                  
       renderInput={(params) => (

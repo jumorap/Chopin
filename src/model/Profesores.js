@@ -28,22 +28,8 @@ class Profesores{
     * @param  {String} nombre name of the "Profesor" to be created
     */
    static CreateProfesor = (nombre)=>{
-       this._DBprofesoresDisplay.add({
-           nombre: nombre
-       }).then((doc)=>{
-           Profesores.__createProfesorList(doc.id, nombre)
-       })
-   }  
-
-
-       /**
-     * Creates the "Materia" in the collection "UNIVERSIDAD_NACIONAL" in the doc "MATERIAS" in the parameter "MATERIAS_LIST", for fast searching purpuses    
-     * @param  {String} id_materia id of the "materia" to be created
-     * @param  {String} nombre "nombre" of the "materia" to be created
-     */    
-    static __createProfesorList(id_profesor, nombre){                                            
         this._DBprofesoresSeach.update({
-            PROFESORES_LIST: firebase.firestore.FieldValue.arrayUnion({id: id_profesor, profesor:nombre})        
+            PROFESORES_LIST: firebase.firestore.FieldValue.arrayUnion(nombre)        
         })        
         .then(
             console.log(`profesor created correctly at materias search`)
@@ -51,7 +37,10 @@ class Profesores{
         .catch(function(err){
             console.log(`error with createProfesorSearch: ${err}`)
         })
-    }
+   }  
+
+
+
 }
 
 export default Profesores

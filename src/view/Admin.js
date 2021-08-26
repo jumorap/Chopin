@@ -16,8 +16,7 @@ const Admin = () => {
     useEffect(() => {
         Materias.getMateriasList()
             .then(value => {
-                setlistaMaterias(value)
-                console.log(value)
+                setlistaMaterias(value)                
             })
         ref.current = new FullTextSeachMaterias()
     }, [])
@@ -86,10 +85,14 @@ const Admin = () => {
     }
 
     const handleTypeSearch = (e) => {
-        setmateriaSearch(e.target.value)
-            
-        
+        setmateriaSearch(e.target.value)                    
         Archivos.deleteArchivos()
+    }
+
+    const handleSubitProfesoresList = () => {        
+        profes.forEach(nombre => {
+            Profesores.CreateProfesor(nombre)            
+        })         
     }
 
     return (
@@ -160,8 +163,16 @@ const Admin = () => {
                 
                 <input type="button" value="Eliminar archivo" onClick = {handleDeleteFile}/>
             </form>
+
+            <h2>Añdir lista de profesores</h2>
+            <form>                
+                <input type="button" value="AÑadir profesores " onClick = {handleSubitProfesoresList}/>
+            </form>
+
         </div>
     )
 }
 
 export default Admin
+
+const profes = []

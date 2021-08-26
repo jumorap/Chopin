@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import Login from "./view/Login";
+import Admin from "./view/Admin";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Terms from './view/Terms'
 import ProgrammeResults from "./view/ProgrammeResults";
@@ -48,7 +49,7 @@ function App() {
 
                     <Route exact path="/legal">
                         <Terms/>
-                    </Route>
+                    </Route>                    
                 </Router>
 
                 <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />

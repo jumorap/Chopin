@@ -56,7 +56,7 @@ const useStyles = makeStyles(() => ({
 const UploadForm = ({ handleClose, fileToEdit }) => {
   let user = firebaseAppAuth.currentUser;
 
-  const materias = useMaterias();
+  const materias = useMaterias();  
   const profesores = useProfesores();
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setMateriaMap] = useMateriaMap();
@@ -166,7 +166,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             <InputText
               label={"Profesor"}
               options={profesores}
-              optionLabel={"profesor"}
+              optionLabel={""}
               defaultValue={profesorText}
               setOption={setProfesorText}
               errorState={profesorError}
