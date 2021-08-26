@@ -170,7 +170,7 @@ const Terms = () => {
             El acceso y uso de la página web es gratuito. No obstante, puede contener enlaces a otros
             sitios web que pueden generar costos. Red Board no se hace responsable por el acceso a dichos sitios
             ni por las políticas de cargos y costos que en ellos se apliquen. El usuario será el único responsable por
-            el acceso a Internet necesario para la correcta operación de la página web. Todos los cargos de acceso a
+            el acceso a internet necesario para la correcta operación de la página web. Todos los cargos de acceso a
             internet serán por cuenta del usuario.
             <p className={"blank-space"}/>
 
