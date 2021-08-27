@@ -1,5 +1,33 @@
 import { db } from "./firebaseSelf/firebaseConfig";
 import firebase from "firebase/app";
+
+
+// Clean an array of strings 1 by 1, removing accents/diacritics
+export function cleanAccents(textToClean) {
+    return (textToClean.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+}
+
+// Order by attribute 'materia' the array with objects introduced
+function orderByMateria(arrayWithMaterias) {
+    let materiasInOrder = []
+    let fullMateriasResult = {}
+
+    // First order 'materias' in the array {materiasInOrder}
+    arrayWithMaterias.forEach(element => materiasInOrder.push(element.materia.toUpperCase()))
+    materiasInOrder = materiasInOrder.sort()
+
+    // Is generated a dictionary with the name of 'materia' and variable i
+    for (var i = 0; i < materiasInOrder.length; i++) {
+        fullMateriasResult[materiasInOrder[i]] = i
+    }
+
+    // Is returned the array sorted by 'materia'
+    return arrayWithMaterias.sort((
+        (a, b) => fullMateriasResult[a.materia.toUpperCase()] - fullMateriasResult[b.materia.toUpperCase()])
+    )
+}
+
+
 class Materias {
   /**
    * Used to create new "Materias" in the collection display as well as a retrive it, here it is the priamary location of the "materias"
@@ -23,9 +51,14 @@ class Materias {
    * @async
    * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
    */
-  static async getMateriasList() {    
-    const data = (await this._DBmateriasSeach.get()).data().MATERIAS_LIST    
-    return data;
+  static async getMateriasList() {
+      const fullMateriasList = (await this._DBmateriasSeach.get()).data().MATERIAS_LIST
+
+      // Call the function cleanAccents to remove accents/diacritics
+      for (var i = 0; i < fullMateriasList.length; i++) {
+          fullMateriasList[i].materia  = cleanAccents(fullMateriasList[i].materia)
+      }
+      return orderByMateria(fullMateriasList)
   }
 
   /**
