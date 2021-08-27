@@ -3,6 +3,7 @@ import SearchItem from "./SearchItem";
 import "../css/searcher.css";
 import { useFullTextSearch } from "../ContextProvider";
 import {useHistory} from "react-router-dom"
+import $ from 'jquery';
 //icons
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -97,7 +98,13 @@ function Searcher() {
 
   //windows dimensions
   const { width } = useWindowDimensions()
-  
+
+  // Through 'jquey' are rreplaced in real time the accents in id="search"
+  $("#search").keyup(function(){
+    var toReplace = $("#search");
+    var letters = toReplace.val().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    toReplace.val(letters)
+  });
 
   return (
     <ClickAwayListener onClickAway = {handleKeyUp}>

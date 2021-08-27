@@ -1,5 +1,7 @@
 import {db} from "./firebaseSelf/firebaseConfig"
 import firebase from "firebase/app"
+import { cleanAccents } from "./Materias";
+
 
 class Profesores{
     /**
@@ -19,8 +21,14 @@ class Profesores{
      * @async 
      * @return {Promise(Obj)}   Object with all the subjects in the university with shape: {id:materia}
      */
-    static  async getProfesoresList(){        
-        return (await this._DBprofesoresSeach.get()).data().PROFESORES_LIST                                
+    static  async getProfesoresList(){
+        var fullProfesoresList = (await this._DBprofesoresSeach.get()).data().PROFESORES_LIST
+
+        // Call the function cleanAccents to remove accents/diacritics
+        for (var i = 0; i < fullProfesoresList.length; i++) {
+            fullProfesoresList[i] = cleanAccents(fullProfesoresList[i])
+        }
+        return fullProfesoresList.sort()
     }
 
     /**
