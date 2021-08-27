@@ -127,7 +127,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       const new_archivo = await Archivos.crearArchivos(
         materiaText.id,
         descripcionText,
-        profesorText.profesor,
+        profesorText,
         semestreText.semestre,
         user.uid,
         categoriaText.categoria,
