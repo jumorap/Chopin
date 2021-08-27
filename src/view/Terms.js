@@ -22,8 +22,8 @@ const Terms = () => {
             </b>
 
             <h2 className={"subtitle-terms"}>¿Qué es Red Board?</h2>
-            Red Board es una plataforma web colaborativa creada por estudiantes de la UNAL, para estudiantes de la UNAL:
-            Permite compartir y consultar <b>parciales, talleres, laboratorios</b> y demás actividades antiguas para
+            Red Board es una plataforma web independiente, creada por estudiantes de la UNAL, para estudiantes de la UNAL:
+            Permite compartir y consultar <b>parciales, talleres, laboratorios</b> y demás materal de estudio, para
             ayudar a otros estudiantes que cursen la misma asignatura en el futuro.
             <p className={"blank-space"}/>
 
@@ -346,6 +346,7 @@ const Terms = () => {
 
             En el portal web se utilizan diferentes gestores y tipos de cookies con diferentes finalidades. Las
             empleadas el sitio web son:
+            <p className={"blank-space"}/>
             <li className={"list-terms"}>
                 Google Analytics
             </li>
