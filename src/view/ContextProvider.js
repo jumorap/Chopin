@@ -68,7 +68,6 @@ const ContextProvider = ({ children }) => {
                 })
             Profesores.getProfesoresList()
                 .then(value => {
-                    console.log(value)
                     setlistProfesores(value)
                 })
             firstRender.current = false

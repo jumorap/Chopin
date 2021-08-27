@@ -49,7 +49,7 @@ function App() {
 
                     <Route exact path="/legal">
                         <Terms/>
-                    </Route>                    
+                    </Route>
                 </Router>
 
                 <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />

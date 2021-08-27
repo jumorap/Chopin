@@ -56,7 +56,7 @@ const useStyles = makeStyles(() => ({
 const UploadForm = ({ handleClose, fileToEdit }) => {
   let user = firebaseAppAuth.currentUser;
 
-  const materias = useMaterias();  
+  const materias = useMaterias();
   const profesores = useProfesores();
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setMateriaMap] = useMateriaMap();
@@ -252,7 +252,13 @@ const semestres = [
   { semestre: "2018-2" },
   { semestre: "2017-1" },
   { semestre: "2016-2" },
+  { semestre: "2016-1" },
+  { semestre: "2015-2" },
   { semestre: "2015-1" },
+  { semestre: "2014-2" },
+  { semestre: "2014-1" },
+  { semestre: "2013-2" },
+  { semestre: "2013-1" },
 ];
 
 const categorias = [
