@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/filesByProgramme.css";
-import { Modal, Popover, Tooltip } from "@material-ui/core";
+import { IconButton, Modal, Tooltip } from "@material-ui/core";
 import {
   FaExternalLinkAlt,
   AiFillCloseCircle,  
@@ -9,6 +9,7 @@ import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 import { useParams } from "react-router-dom";
 import Archivos from "../../model/Archivos"
 import { useMateriaMap } from "../ContextProvider";
+import { styles } from "../UploadFile/UploadFile";
 
 
 export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
@@ -33,20 +34,10 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     materiaMap.delete_archivo(item, idCurrentMateria)           
     setMateriaMap(materiaMap.copy())
   };
-  
+
 
   let PdfFile = () => (
     <>
-      <div className={"top-modal"}>
-        <a
-          href={clicked && clicked.url}
-          target={"_blank"}
-          className={"modal-links"}
-          rel="noreferrer"
-        >
-          <FaExternalLinkAlt />
-        </a>
-      </div>
       <div className="modal">
         <div align="center" className={"pdf-container"}>
           <object
@@ -58,6 +49,18 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
             title={clicked && clicked.url}
             style={{ backgroundColor: "rgb(82, 86, 89)" }}
           />
+
+            <Tooltip title = "Abrir en otra pestaña">
+                <a href={clicked && clicked.url} target={"_blank"} rel={"noreferrer"}>
+                    <IconButton
+                        style={styles.openButton}
+                        className={"openButton"}
+                        aria-label={"open external file"}
+                    >
+                        <FaExternalLinkAlt fontSize={"large"} className={"openIcon"} style={{padding: "5px",}}/>
+                    </IconButton>
+                </a>
+            </Tooltip>
         </div>
       </div>
     </>
@@ -133,8 +136,9 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
   /**Los botones de eliminar y editar que son mostrados en las cards */
   let CardBtns = ({ item }) => {
     const [openModal, setopenModal] = useState(false)
-    const adminUsers = ["tr07jNQX7aY0ZJoW5zkUfpqM4OD2", "9QT5gfB9z3MruWCtlqXDAGfpG2I2"];
-    const isAuthorizedToDelete = (currentUserID === item.usuario || adminUsers.includes(currentUserID))
+    const isAdminUser = ["tr07jNQX7aY0ZJoW5zkUfpqM4OD2", "9QT5gfB9z3MruWCtlqXDAGfpG2I2"].includes(currentUserID)
+    const isSameUser = currentUserID === item.usuario
+    const isAuthorizedToDelete = (isSameUser || isAdminUser)
     return (
       isAuthorizedToDelete && (
         <>
@@ -142,8 +146,11 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
             <div className={"delete"}>
               <AiFillCloseCircle
                 onClick={() => setopenModal(true)}
-                className={"delete-component"}
-                style={{ padding: "11px 0px" }}
+                className={
+                    isSameUser
+                        ? "delete-component"
+                        : "delete-component delete-component-admin-user "
+                }
               />
             </div>
           </Tooltip>
