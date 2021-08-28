@@ -33,11 +33,13 @@ const InputText = ({
   setOption,
   errorState,
   setError,
+  disableInput,
 }) => {
   const classes = useStyles();
 
   return (
     <Autocomplete
+        disabled={disableInput}
       id={`combo-box-${String(optionLabel)}`}      
       options={options}
       getOptionLabel={
@@ -57,7 +59,8 @@ const InputText = ({
           error={errorState}
           helperText={errorState ? "Este campo no puede estar vacío" : ""}
           label={label}
-          variant="outlined"                   
+          variant="outlined"
+          disabled={disableInput}
         />
       )}
       className={classes.container}

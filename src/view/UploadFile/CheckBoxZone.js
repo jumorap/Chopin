@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 
 
 //Muestra un check box saber si tiene la nota y si este es activado muestra la opcio para colocarla
-const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, setCalificado}) => {        
+const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, setCalificado, disabledChek}) => {
 
     //handle when the checkbox is pressed
     const handleCheckBox = ()=>{        
@@ -22,14 +22,15 @@ const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, s
                 <Checkbox
                     checked={calificado}
                     onChange={handleCheckBox}
-                    name="Resuleto"
-                    color="primary"
+                    name={"Resuleto"}
+                    color={"primary"}
+                    disabled={disabledChek}
                 />
                 }
-                label="¿Está resuleto?"
+                label={"¿Está resuleto?"}
             />
 
-            {calificado && <Grade grade = {grade} setGrade = {setgrade} error = {gradeError} setError = {setgradeError}/>}
+            {calificado && <Grade grade={grade} setGrade={setgrade} error={gradeError} setError={setgradeError} disabledInput={disabledChek}/>}
             </center>
         </div>
     )
@@ -37,7 +38,7 @@ const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, s
 
 
 //To write the grade if is necessary
-const Grade = ({grade, setGrade, error, setError}) => {
+const Grade = ({grade, setGrade, error, setError, disabledInput}) => {
                 
     useEffect(() => {
         if(grade > 5 | 0 > grade){ //notificar valores errados
@@ -64,14 +65,16 @@ const Grade = ({grade, setGrade, error, setError}) => {
         <><br/>
         <TextField
           error={error}
-          id="grade-text"
-          label="Calificación (opcional)"
+          id={"grade-text"}
+          label={"Calificación (opcional)"}
           defaultValue={""}
+          autoComplete={"off"}
           value={grade}
           onChange={handleChange}
           helperText={error && "La nota maxima es 5.0"}
           variant="outlined"
           style={{backgroundColor: "#FFF",}}
+          disabled={disabledInput}
         />
         </>
     )

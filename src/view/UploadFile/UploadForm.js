@@ -15,7 +15,7 @@ import CheckBoxZone from "./CheckBoxZone";
 
 const useStyles = makeStyles(() => ({
   uploadButton: {
-    background: "#AA0000",
+    background: "var(--redBoard)",
     "&:hover": {
       backgroundColor: "#800000",
     },
@@ -62,7 +62,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const [materiaMap, setMateriaMap] = useMateriaMap();
   
 
-  const [buttonShareActive, setButtonShare] = useState(false)
+  const [formToUploadActive, setFormToShare] = useState(false)
 
   const classes = useStyles();
 
@@ -115,7 +115,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
 
     if (!errors) {
-      setButtonShare(true)
+      setFormToShare(true)
 
     
     let nota = grade
@@ -162,6 +162,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               setOption={setmateriaText}
               errorState={materiaError}
               setError={setmateriaError}
+              disableInput={formToUploadActive}
             />
             <InputText
               label={"Profesor"}
@@ -171,6 +172,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               setOption={setProfesorText}
               errorState={profesorError}
               setError={setProfesorError}
+              disableInput={formToUploadActive}
             />
             <div className="semetre-categoria">
               <InputText
@@ -181,6 +183,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
                 setOption={setSemestreText}
                 errorState={semestreError}
                 setError={setSemestreError}
+                disableInput={formToUploadActive}
               />
               <InputText
                 label={"Categoria"}
@@ -190,6 +193,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
                 setOption={setcategoriaText}
                 errorState={categoriaError}
                 setError={setcategoriaError}
+                disableInput={formToUploadActive}
               />
             </div>
             <TextField
@@ -201,13 +205,14 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               className={classes.descriptionBox}
               value={descripcionText}
               onChange={handleChange}
+              disabled={formToUploadActive}
             />
           </div>
           <div className="modal-right-div">
             {file === null ? (
               <MyDropzone setFile={setfile} />
             ) : (
-              <UploadedFile fileName={file.name} setFile={setfile} />
+              <UploadedFile fileName={file.name} setFile={setfile} disabledButton={formToUploadActive}/>
             )}
             {fileError === true ? (
               <p className={classes.warningDropText}>
@@ -219,12 +224,13 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             
             {/* para colocar si esta resulto o no y la nota */}
             <CheckBoxZone 
-              grade = {grade}
-              setgrade = {setgrade} 
-              gradeError = {gradeError} 
-              setgradeError = {setgradeError}
-              calificado = {calificado}
-              setCalificado = {setCalificado}
+              grade={grade}
+              setgrade={setgrade}
+              gradeError={gradeError}
+              setgradeError={setgradeError}
+              calificado={calificado}
+              setCalificado={setCalificado}
+              disabledChek={formToUploadActive}
             />
 
           </div>
@@ -233,7 +239,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
           variant="contained"
           className={classes.uploadButton}
           onClick={handleSubmit}
-          disabled={buttonShareActive}
+          disabled={formToUploadActive}
         >
           {fileToEdit ? "Editar" : "Compartir"}
         </Button>
