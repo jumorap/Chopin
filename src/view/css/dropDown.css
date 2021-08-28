@@ -45,7 +45,7 @@
 
 .selected {
     color: #fff;
-    background-color: #AA0000;
+    background-color: var(--redBoard);
 }
 
 .no-click {

@@ -112,14 +112,14 @@ function Searcher() {
     <div className="searcher-container">    
       <div className="searcher-container-input ">
         <input
-          type="text"
-          name="search"
-          id="search"
-          className="searcher-input"
+          type={"text"}
+          name={"search"}
+          id={"search"}
+          className={"searcher-input"}
           placeholder= { 410 < width ? "Escribe el nombre de la materia":"Materia..."}
           value={searchText}
           onChange={handleInputTextChange}
-          autoComplete="off"                   
+          autoComplete={"off"}
           onKeyUp = {handleKeyUp}   
         />
         <div className="faic">

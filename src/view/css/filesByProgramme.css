@@ -1,25 +1,8 @@
-.top-modal {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 80%;
-  max-height: 7%;
-  padding: 3px 15px 3px 3px;
-  background-color: #fff;
-  border: none;
-  color: #aa0000;
-  font-size: 21px;
-  transform: translate(-50%, 0%);
-  box-sizing: border-box;
-  justify-items: center;
-  text-align: right;
-}
-
 .calificado {
-  color: #d41616;
+  color: var(--calificado);
   font-weight: 700;
-  border-top:  2px #d41616 solid;  
-  border-bottom:  2px #d41616 solid;   
+  border-top:  2px var(--calificado) solid;
+  border-bottom:  2px var(--calificado) solid;
   font-size: 1rem;
   line-height: 1.3rem;
   letter-spacing: -1px;
@@ -31,16 +14,11 @@
   transform: rotate(-22deg);
 }
 
-.modal-links {
-  text-decoration: none;
-  color: #aa0000;
-  font-size: 21px;
-}
-
 .modal {
   position: absolute;
-  width: 80%;
-  height: 85%;
+  width: 80vw;
+  height: 90vh;
+  box-sizing: border-box;
   background-color: #fff;
   border: none;
   padding: 3px;
@@ -116,10 +94,19 @@
 
 .delete-component {
   color: #fff;
+  padding: 11px 0;
 }
 
 .delete-component:hover {
-  color: #aa0000;
+  color: var(--redBoard);
+}
+
+.delete-component-admin-user {
+  color: var(--adminColor);
+}
+
+.delete-component-admin-user:hover {
+  color: #000;
 }
 
 .delete-modal-container {

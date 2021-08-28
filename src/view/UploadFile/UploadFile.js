@@ -9,31 +9,32 @@ import Tooltip from '@material-ui/core/Tooltip';
  * @param {handleOpen} bool pone and close de uploadFile
  * @returns 
  */
-const UploadFile = ({ handleOpen }) => {
-  const styles = {
+
+export const styles = {
     openButton: {
-      boxShadow: "rgb(0 0 0 / 30%) 0 3px 5px 2px",
-      position: "fixed",
-      bottom: "5vh",
-      right: "5vh",
-      backgroundColor: "#AA0000",
-      "&:hover": {
-        backgroundColor: "#800000",
-      },
+        boxShadow: "rgb(0 0 0 / 30%) 0 3px 5px 2px",
+        position: "fixed",
+        bottom: "5vh",
+        right: "5vh",
+        backgroundColor: "var(--redBoard)",
+        "&:hover": {
+            backgroundColor: "#800000",
+        },
     },
     openIcon: {
-      color: "#FFF",
+        color: "#FFF",
     },
-  };
+};
 
+const UploadFile = ({ handleOpen }) => {
   return (
     <div>
-      <Tooltip title = "Sube archivo">
+      <Tooltip title={"Sube archivo"}>
       <IconButton
         style={styles.openButton}
         className={"openButton"}
         onClick={handleOpen}
-        aria-label="upload file"
+        aria-label={"upload file"}
       >
         <AddIcon fontSize={"large"} className={"openIcon"} />
       </IconButton>

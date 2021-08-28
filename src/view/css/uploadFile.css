@@ -2,11 +2,7 @@
     position:fixed;
     bottom: 5vh;
     right: 10vw;
-    background-color: #AA0000;
-}
-
-.openButton:hover {
-    background-color: #800000;
+    background-color: var(--redBoard);
 }
 
 .openIcon {

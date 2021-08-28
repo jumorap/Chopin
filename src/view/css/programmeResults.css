@@ -107,7 +107,7 @@ body {
 
 .title-programme {
     color: #FFF;
-    background-color: #AA0000;
+    background-color: var(--redBoard);
     border-radius: 0 0 150px 0;
     box-sizing: border-box;
     padding: 8px 60px 10px 20px;

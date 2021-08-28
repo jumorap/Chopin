@@ -110,7 +110,7 @@ class Login extends Component {
             declineButtonText={"Después"}
             style={{}}
             expires={365}
-            buttonStyle={{backgroundColor: "rgb(170, 0, 0)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 650,}}
+            buttonStyle={{backgroundColor: "var(--redBoard)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 650,}}
         >
             Al navegar en este sitio aceptas la Política de Cookies que usamos para mejorar tu experiencia.&nbsp;
             <Link to={`/legal#cookies`}>
