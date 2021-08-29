@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   uploadButton: {
     background: "var(--redBoard)",
     "&:hover": {
-      backgroundColor: "#800000",
+      backgroundColor: "var(--hoverRedBoard)",
     },
     color: "#FFF",
     borderRadius: 30,

@@ -1,31 +1,32 @@
-import ProgrammeResults from "../view/ProgrammeResults";
+import Loading from "../view/components/Loading";
+import React from "react";
 
 /**
  * 
- * @param {Obj} materiaValues object with profesores, trabajos, categorias and archivos
+ * @param {Object} materiaValues object with profesores, trabajos, categorias and archivos
  * @param {Array} selection arry with selected filters
  * @returns 
  */
 export const getFilteredFIles = (materiaValues, selection) =>{
-    let filteredFiles = materiaValues.trabajos.map((file) => {
+  return materiaValues.trabajos.map((file) => {
         let check = 0;
         ["category", "prof", "semester"].forEach((type) => {
           let choosen = selection.filter((filt) => filt.type === type);
           /* console.log(type, "foo", choosen); */
           if (choosen.length) {
             if (
-              type === "category" &&
-              choosen.find((elem) => elem.value === file.tipo)
+                type === "category" &&
+                choosen.find((elem) => elem.value === file.tipo)
             )
               check++;
             if (
-              type === "prof" &&
-              choosen.find((elem) => elem.value === file.profesor)
+                type === "prof" &&
+                choosen.find((elem) => elem.value === file.profesor)
             )
               check++;
             if (
-              type === "semester" &&
-              choosen.find((elem) => elem.value === file.semestre)
+                type === "semester" &&
+                choosen.find((elem) => elem.value === file.semestre)
             )
               check++;
           } else {
@@ -33,14 +34,12 @@ export const getFilteredFIles = (materiaValues, selection) =>{
           }
         });
         if (check === 3) return file;
-      });
-
-      return filteredFiles
+      })
 }
 
 /**
  * Function cast an object to array
- * @param {Obj} object object to be casted
+ * @param {Object} object object to be casted
  * @returns Array with the objects
  */
 export const getArrayFromObject = (object)=>{
@@ -84,10 +83,10 @@ export const initialMateriaValue = {
   trabajos: [
     {
       ID_archivo: "IVwrevYsTiCKMPJrTohW",
-      comentarios: "Lamentablemente no hay archivos, sube alguno!",
+      comentarios: <><Loading/></>,
       profesor: "",
       semestre: "",
-      tipo: "No hay archivos disponibles",
+      tipo: "Cargando...",
       url: "",
     },
   ],

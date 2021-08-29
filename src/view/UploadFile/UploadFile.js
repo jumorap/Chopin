@@ -18,7 +18,7 @@ export const styles = {
         right: "5vh",
         backgroundColor: "var(--redBoard)",
         "&:hover": {
-            backgroundColor: "#800000",
+            backgroundColor: "var(--hoverRedBoard)",
         },
     },
     openIcon: {
