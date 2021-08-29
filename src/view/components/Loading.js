@@ -13,8 +13,10 @@ export default function Loading() {
         loadingContainer: {
             position: "absolute",
             top: "45%",
+            right: "50%",
             width: "100%",
-            alignContent: "center"
+            alignContent: "center",
+            transform: "translate(50%,-50%)"
         }
     }))
 

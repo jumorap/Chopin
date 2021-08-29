@@ -112,10 +112,10 @@ class Login extends Component {
             expires={365}
             buttonStyle={{backgroundColor: "var(--redBoard)", color: "#FFF", padding: "8px 15px 8px 15px", borderRadius: "15px", fontWeight: 650,}}
         >
-            Al navegar en este sitio aceptas la Política de Cookies que usamos para mejorar tu experiencia.&nbsp;
-            <Link to={`/legal#cookies`}>
-                Más información
-            </Link>
+            Al navegar en este sitio aceptas la&nbsp;
+            <Link to={`/legal#cookies`}>Política de Cookies</Link>
+            &nbsp;usada para mejorar tu experiencia en el sitio web.
+
         </CookieConsent>
         </>
         );
