@@ -99,7 +99,7 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
         className="delete-modal-container"
       >
         <div className="delete-modal">
-          <h1>Eliminar!</h1>
+          <h1>¡Eliminar!</h1>
           <span>¿Seguro deseas eliminar el archivo?</span>
           <div>
             <button

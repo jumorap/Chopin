@@ -60,7 +60,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const profesores = useProfesores();
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setMateriaMap] = useMateriaMap();
-  
+
 
   const [formToUploadActive, setFormToShare] = useState(false)
 
@@ -124,7 +124,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       setgrade(nota)
     }
 
-      const new_archivo = await Archivos.crearArchivos(
+      const newArchivo = await Archivos.crearArchivos(
         materiaText.id,
         descripcionText,
         profesorText,
@@ -136,7 +136,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         calificado
       );
       
-      materiaMap.add_archivo(new_archivo)
+      materiaMap.add_archivo(newArchivo)
       handleClose();
     }
   };
@@ -209,17 +209,27 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             />
           </div>
           <div className="modal-right-div">
+            <p>
+              Puedes comprimir tus PDF en&nbsp;
+              <a href={"https://www.ilovepdf.com/compress_pdf"}
+                 rel={"noreferrer"}
+                 target={"_blank"}
+                 style={{color: "#000", fontWeight: "bold",}}
+              >
+                ilovepdf.com
+              </a>
+            </p><br/>
             {file === null ? (
               <MyDropzone setFile={setfile} />
             ) : (
               <UploadedFile fileName={file.name} setFile={setfile} disabledButton={formToUploadActive}/>
             )}
             {fileError === true ? (
-              <p className={classes.warningDropText}>
-                Por favor anexe un archivo
-              </p>
+                <p className={classes.warningDropText}>
+                  Por favor anexe un archivo
+                </p>
             ) : (
-              ""
+                <></>
             )}
             
             {/* para colocar si esta resulto o no y la nota */}
