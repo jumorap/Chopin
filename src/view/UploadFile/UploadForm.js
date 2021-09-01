@@ -11,6 +11,7 @@ import Archivos from "../../model/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 import CheckBoxZone from "./CheckBoxZone";
+import { DeleteForever } from "@material-ui/icons";
 
 
 const useStyles = makeStyles(() => ({
@@ -77,7 +78,14 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
   const deleteValues = () => {
     console.log("deleted all")
-    setFormValues(formValuesDefault)
+    const formValuesCopy = {...formValues}
+    formValuesCopy.file = null
+    formValuesCopy.categoria = null
+    formValuesCopy.descripcion = null
+    formValuesCopy.grade = ""
+    formValuesCopy.calificado = false
+
+    setFormValues(formValuesCopy)
   }
 
   const addValue = (setFormValues, newValue) => {
@@ -131,30 +139,28 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
     //disable the input fields
     setFormToShare(true)
     
-/*     let nota = grade
+    let nota = formValues.grade
     if(nota.length === 1){      
-      nota += ".0" 
-      setgrade(nota)
-    } */
+      nota += ".0"       
+    } 
 
     
-       const newArchivo = await Archivos.crearArchivos(
-        formValues.materia.id,
-        formValues.descripcion,
-        formValues.profesor,
-        formValues.semestre,
-        user.uid,
-        formValues.categoria,
-        formValues.file,
-        formValues.grade,
-        formValues.calificado
-      );
-      
-      materiaMap.add_archivo(newArchivo) 
-      deleteValues(); 
-      console.log(formValues)
-
-      handleClose();  
+    const newArchivo = await Archivos.crearArchivos(
+      formValues.materia.id,
+      formValues.descripcion,
+      formValues.profesor,
+      formValues.semestre,
+      user.uid,
+      formValues.categoria,
+      formValues.file,
+      formValues.grade,
+      formValues.calificado
+    );
+    
+    materiaMap.add_archivo(newArchivo) 
+    
+    deleteValues();       
+    handleClose();  
   };
 
   console.log(formValues)
@@ -167,7 +173,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       </div>
       <IconButton className={`${classes.closeButton} close-button`} onClick={handleClose}>
         <CloseIcon />
-      </IconButton>
+      </IconButton>      
 
       <div className="upload-form">
         <div className="modal-sub-container">
