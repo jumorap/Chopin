@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
 //limite in bites for the maximum possible value that a file could have in megaBytes
 const maxFileSize = 5
 
-function MyDropzone({ setFile }) {
+function MyDropzone({ setFile, setFileError }) {
   const classes = useStyles();
   
   const [openPDFerrorMessage, setopenPDFerrorMessage] = useState(false) //boolena to display the error mesagge if the file is not PDF
@@ -44,8 +44,9 @@ function MyDropzone({ setFile }) {
 
       return
     }
-
-    setFile(file);        
+        
+    setFile({file});        
+    setFileError({file:false})
     
   }, [setFile]);
 

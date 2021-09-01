@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react'
-import FullTextSearch from '../controler/FullTextSearch'
+import FullTextSearch from './SearchBar/FullTextSearch'
 import MateriasView from '../controler/MateriasView'
 import Materias from '../model/Materias'
 import Profesores from '../model/Profesores'
@@ -13,6 +13,16 @@ const materiasContext = createContext() //lista de materias para la nav bar y el
 const profesoresContext = createContext()
 const fullTextSearchContext = createContext()
 const materiaContext = createContext() //Objeto con todas las materias
+const uploadFormContextVariables = createContext()
+
+/**
+ * Retorns an object with the values of the upload form
+ * @returns Map(IdMateria<String>, Materia<Obj>)
+ */
+export function useUploadFormContextVariables() {
+    return useContext(uploadFormContextVariables)
+}
+
 
 /**
  * Retorns an Map with key the id of the materia and value an Object with The atributs of Materia
@@ -47,6 +57,16 @@ export function useFullTextSearch() {
     return useContext(fullTextSearchContext)
 }
 
+export const formValuesDefault = {
+    materia : null,
+    profesor : null,
+    semestre : null,
+    categoria : null,
+    descripcion : null,
+    file : null,
+    grade : "",
+    calificado : false,
+}
 
 const ContextProvider = ({ children }) => {
 
@@ -54,7 +74,9 @@ const ContextProvider = ({ children }) => {
     const [listProfesores, setlistProfesores] = useState([])
     const [fullTextSearchMaterias, setfullTextSearchMaterias] = useState()
     const [mapMaterias, setmapMaterias] = useState(new MateriasView())
-
+    
+    
+    const [formValues, setFormValues] = useState(formValuesDefault);
 
     const firstRender = useRef(true)
 
@@ -67,7 +89,7 @@ const ContextProvider = ({ children }) => {
                     setfullTextSearchMaterias(new FullTextSearch(value))
                 })
             Profesores.getProfesoresList()
-                .then(value => {
+                .then(value => {                    
                     setlistProfesores(value)
                 })
             firstRender.current = false
@@ -83,8 +105,10 @@ const ContextProvider = ({ children }) => {
         <materiaContext.Provider value={[mapMaterias, setmapMaterias]}>
             <fullTextSearchContext.Provider value={fullTextSearchMaterias}>
                 <profesoresContext.Provider value={listProfesores}>
-                    <materiasContext.Provider value={listaMaterias}>
-                        {children}
+                    <materiasContext.Provider value={listaMaterias}>                        
+                        <uploadFormContextVariables.Provider value={[formValues, setFormValues]}>
+                            {children}
+                        </uploadFormContextVariables.Provider>
                     </materiasContext.Provider>
                 </profesoresContext.Provider>
             </fullTextSearchContext.Provider>

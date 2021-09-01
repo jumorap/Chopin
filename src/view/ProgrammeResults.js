@@ -4,7 +4,7 @@ import "./css/programmeResults.css";
 import { FilesByProgramme } from "./components/FilesByProgramme";
 import { FaBars, IoMdClose } from "react-icons/all";
 import UploadFile from "./UploadFile/UploadFile";
-import NavBar from "./components/NavBar";
+import NavBar from "./SearchBar/NavBar";
 import Materias from "../model/Materias";
 import { useMateriaMap } from "./ContextProvider";
 import { useHistory, useParams } from "react-router-dom";

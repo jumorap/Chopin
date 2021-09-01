@@ -1,3 +1,5 @@
+//states for the drop file when some one has a file over the drop zone
+
 import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
 import { FaFolderPlus } from "react-icons/all";
@@ -31,6 +33,13 @@ const useStyles = makeStyles(() => ({
     padding: "4px 18px",
   },
 }));
+
+
+/**
+ * The component when some ones has a file over the drop zone
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DropFieldActive = () => {
   const classes = useStyles();
 

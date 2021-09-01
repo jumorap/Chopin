@@ -4,14 +4,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 
 
-//Muestra un check box saber si tiene la nota y si este es activado muestra la opcio para colocarla
+//Muestra un check box saber si tiene la nota y si este es activado muestra la opcion para colocarla
 const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, setCalificado, disabledChek}) => {
-
+    
     //handle when the checkbox is pressed
     const handleCheckBox = ()=>{        
-        setCalificado(prev => !prev)
-        setgradeError(false)        
-        setgrade("")
+        setCalificado({calificado: !calificado})        
+        setgradeError({grade : false})        
+        setgrade({grade : ""})
     }
     
     return (
@@ -37,18 +37,31 @@ const CheckBoxZone = ({grade, setgrade, gradeError, setgradeError, calificado, s
 }
 
 
-//To write the grade if is necessary
+/**
+ * Field zone para colocar la nota
+ * @param grade
+ * @param setGrade 
+ * @param setError
+ * @param disabledInput bool boolean value to disable the option of adding a grade
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Grade = ({grade, setGrade, error, setError, disabledInput}) => {
                 
-    useEffect(() => {
+    useEffect(() => {        
+        if(grade === ""){
+            setError({grade : false})
+            return
+        }        
+
         if(grade > 5 | 0 > grade){ //notificar valores errados
-            setError(true)
+            console.log("error here")
+            setError({grade : true})
             return
-        }
-        if( 5 >= grade >= 0 ){ //notificar valores errados
-            setError(false)
-            return
-        }
+        }        
+        
+        setError({grade : false})
+        
     }, [grade])
     
     //when is written ovet the grade field text
@@ -57,7 +70,7 @@ const Grade = ({grade, setGrade, error, setError, disabledInput}) => {
         if(isNaN(value) || 3 < value.length ){ //only accept numerical values
             return
         }                 
-        setGrade(value)
+        setGrade({grade : value})
     } 
 
 

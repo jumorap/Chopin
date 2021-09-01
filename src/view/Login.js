@@ -8,7 +8,7 @@ import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import "./css/login.css";
 import principalNameLogo from "./assets/short-principal-slogan-logo.png";
-import Searcher from "./components/Searcher";
+import Searcher from "./SearchBar/Searcher";
 import UploadFile from "./UploadFile/UploadFile";
 import CookieConsent from "react-cookie-consent";
 import Tooltip from '@material-ui/core/Tooltip';

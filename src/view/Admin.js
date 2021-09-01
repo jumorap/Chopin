@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import FullTextSeachMaterias from '../controler/FullTextSearchMaterias'
+import FullTextSeachMaterias from './SearchBar/FullTextSearchMaterias'
 import Archivos from '../model/Archivos'
 import Materias from "../model/Materias"
 import Profesores from "../model/Profesores"

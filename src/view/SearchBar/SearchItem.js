@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
-import "../css/searchItem.css";
+import "./searchItem.css";
 import {firebaseAnalytics} from "../../model/firebaseSelf/firebaseConfig";
 
 function SearchItem({ nombre, link, click, selected = false }) {

@@ -1,4 +1,4 @@
-import FullTextSearch from "../controler/FullTextSearch";
+import FullTextSearch from "../view/SearchBar/FullTextSearch";
 import Materias from "../model/Materias"
 //use the testSomething function for testing new functionalities.
 

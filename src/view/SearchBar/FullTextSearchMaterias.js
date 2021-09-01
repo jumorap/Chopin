@@ -1,4 +1,4 @@
-import Materias from "../model/Materias.js"
+import Materias from "../../model/Materias.js"
 import FullTextSearch from "./FullTextSearch"
 
 class FullTextSeachMaterias {

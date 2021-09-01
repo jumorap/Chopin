@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
  * @param {options} array[obj] arreglo con los obejetos que se van a mostrar en las opciones del input
  * @param {optionLabel} string valor del arreglo que contiene el label que se desea mostrar, ejemplo
  * [{materia: Ingesoft, codigo: dasodin21}, {materia: Ingesoft, codigo: dasodin21}], en este caso se
- * desea mostrar la materia por la tanto se debe pasar "materia"
+ * desea mostrar la materia por la tanto se debe pasar "materia" 
  * @param {setOption} React.setAction funcion que cambia el estado del state para almacenar el valor de ese textField
  * @param {errorState} bool identifica si hay algun error, de ser true indica que hay error, flase que no
  * @param {setError} React.setAction funcion que cambia el estado del error
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 const InputText = ({
   label,
   options,
-  optionLabel,
+  optionLabel = "",  
   defaultValue,  
   setOption,
   errorState,
@@ -39,9 +39,10 @@ const InputText = ({
 
   return (
     <Autocomplete
-        disabled={disableInput}
+      disabled={disableInput}
       id={`combo-box-${String(optionLabel)}`}      
       options={options}
+      defaultValue = {defaultValue}
       getOptionLabel={
         option => {
           if(optionLabel === ""){
@@ -50,23 +51,22 @@ const InputText = ({
           return option[optionLabel]
         }        
       }
-      style={{ width: "100%" }}
-                 
+      style={{ width: "100%" }}                 
       renderInput={(params) => (
         <TextField
-          className={classes.textField}
-          {...params}
-          error={errorState}
-          helperText={errorState ? "Este campo no puede estar vacío" : ""}
+          className={classes.textField}          
+          {...params}          
+          error={errorState[label]}
+          helperText={errorState[label] ? "Este campo no puede estar vacío" : ""}
           label={label}
           variant="outlined"
           disabled={disableInput}
         />
       )}
       className={classes.container}
-      onChange={(event, newValue) => {
-        setOption(newValue)
-        setError(false)
+      onChange={(event, newValue) => {        
+        setOption({[label] : newValue})
+        setError({[label] : false})
       }}      
       
     />

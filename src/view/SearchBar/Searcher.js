@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import SearchItem from "./SearchItem";
-import "../css/searcher.css";
+import "./searcher.css";
 import { useFullTextSearch } from "../ContextProvider";
 import {useHistory} from "react-router-dom"
 import $ from 'jquery';
@@ -10,7 +10,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 //for detect clicks outside the componens
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import useWindowDimensions from "./useWindowDimensions";
+import useWindowDimensions from "../components/useWindowDimensions";
 
 
 function Searcher() {

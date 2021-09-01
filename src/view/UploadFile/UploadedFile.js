@@ -1,13 +1,12 @@
 import React from "react";
-import "../css/uploadedFile.css";
+import "./uploadedFile.css";
 import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
 
 const UploadedFile = ({ fileName, setFile, disabledButton }) => {
   const handleClose = () => {
-    setFile(null);
-  };
-
+    setFile({file: null});
+  };  
   return (
     <div className={"uploaded-container"}>
       <div className="pdf-circle">PDF</div>

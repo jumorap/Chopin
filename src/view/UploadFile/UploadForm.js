@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "../css/uploadForm.css";
+import "./uploadForm.css";
 import { Button, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MyDropzone from "./DropZone";
 import InputText from "./InputText";
-import { useMaterias, useProfesores, useMateriaMap } from "../ContextProvider";
+import { useMaterias, useProfesores, useMateriaMap, useUploadFormContextVariables, formValuesDefault } from "../ContextProvider";
 import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
@@ -56,91 +56,109 @@ const useStyles = makeStyles(() => ({
 const UploadForm = ({ handleClose, fileToEdit }) => {
   let user = firebaseAppAuth.currentUser;
 
+  /**List with all the subjects for the Materias field */
   const materias = useMaterias();
+
+  /**List with all the profesors for the profesores field */
   const profesores = useProfesores();
+
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setMateriaMap] = useMateriaMap();
-
-
+  
+  /**boolean value that disable the input of the form when the file is been uploaded */
   const [formToUploadActive, setFormToShare] = useState(false)
 
   const classes = useStyles();
 
-  const [materiaText, setmateriaText] = useState("");
-  const [profesorText, setProfesorText] = useState("");
-  const [semestreText, setSemestreText] = useState("");
-  const [categoriaText, setcategoriaText] = useState("");
-  const [descripcionText, setDescripcionText] = useState("");
-  const [file, setfile] = useState(null);
-  const [grade, setgrade] = useState("") //text to save the grade if is necessary
+  /** React state that has the from values, like profesor, universidad, descripcion */
+  const [formValues, setFormValues] = useUploadFormContextVariables()  
 
-  const [materiaError, setmateriaError] = useState(false);
-  const [profesorError, setProfesorError] = useState(false);
-  const [semestreError, setSemestreError] = useState(false);
-  const [categoriaError, setcategoriaError] = useState(false);
-  const [fileError, setfileError] = useState(false);
-  const [gradeError, setgradeError] = useState(false)
-  const [calificado, setCalificado] = useState(false)
+
+
+  const deleteValues = () => {
+    console.log("deleted all")
+    setFormValues(formValuesDefault)
+  }
+
+  const addValue = (setFormValues, newValue) => {
+    setFormValues(prev => {
+      return({...prev, ...newValue})
+    })
+  }
   
-  const handleChange = (event) => {
-    setDescripcionText(event.target.value);
-  };
+  /**
+   * Add or edit a value in de form value, as profesor, materia, semestre etc while changing the state
+   * @param {{parameter : any}} newValue value to be added to the form data state. the key is is the parameter ex: "categotia", "parcial" etc and the value is any and represents the value to be used in the form
+   */
+  const addFormValue = (newValue) => {
+    addValue(setFormValues, newValue)
+  }
 
+  /**
+   * Add an error to the error state
+   * @param {{parameter : boolean}} newError the error to add to the erros state, it has the key is the parameter ex: "categotia", "parcial" etc and the value is an boolean value that indicates if there is an error
+   */
+  const addErrorValue = (newError) => {
+    addValue(setFormError, newError)
+  }
+  
+  const [formError, setFormError] = useState({
+    materia : false,
+    profesor : false,
+    semestre : false,
+    categoria : false,    
+    file : false,
+    grade : false    
+  });
+              
   const handleSubmit = async () => {
-    let errors = false;
-
-    if (materiaText === null || materiaText.length === 0) {
-      setmateriaError(true);
-      errors = true;
-    }
-    if (profesorText === null || profesorText.length === 0) {
-      setProfesorError(true);
-      errors = true;
-    }
-    if (semestreText === null || semestreText.length === 0) {
-      setSemestreError(true);
-      errors = true;
-    }
-    if (categoriaText === null || categoriaText.length === 0) {
-      setcategoriaError(true);
-      errors = true;
-    }
-    if (file === null) {
-      setfileError(true);
-      errors = true;
-    }
-    if(gradeError){
-      errors = true;
-    }
-
-
-    if (!errors) {
-      setFormToShare(true)
-
+    let errors = false; //if true then there are empty spaces in the form    
+    const categorias = ["file","materia", "profesor", "semestre", "categoria"]    
     
-    let nota = grade
+    //search wheater a form value is empty and add an error if is needed
+    categorias.forEach(categoria => {
+      if(formValues[categoria] === null || formValues[categoria].length === 0){ //check if is empty
+        addErrorValue({[categoria] : true}) 
+        errors = true
+      }
+    })        
+
+    //if a field is not complete cancels the operation
+    if(errors){
+      return
+    }
+    
+    //disable the input fields
+    setFormToShare(true)
+    
+/*     let nota = grade
     if(nota.length === 1){      
       nota += ".0" 
       setgrade(nota)
-    }
+    } */
 
-      const newArchivo = await Archivos.crearArchivos(
-        materiaText.id,
-        descripcionText,
-        profesorText,
-        semestreText.semestre,
+    
+       const newArchivo = await Archivos.crearArchivos(
+        formValues.materia.id,
+        formValues.descripcion,
+        formValues.profesor,
+        formValues.semestre,
         user.uid,
-        categoriaText.categoria,
-        file,
-        nota,
-        calificado
+        formValues.categoria,
+        formValues.file,
+        formValues.grade,
+        formValues.calificado
       );
       
-      materiaMap.add_archivo(newArchivo)
-      handleClose();
-    }
+      materiaMap.add_archivo(newArchivo) 
+      deleteValues(); 
+      console.log(formValues)
+
+      handleClose();  
   };
 
+  console.log(formValues)
+  console.log(formError)
 
   return (
     <div className="container">
@@ -155,44 +173,41 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
         <div className="modal-sub-container">
           <div className="modal-left-div">
             <InputText
-              label={"Materias"}
+              label={"materia"}
               options={materias}
-              optionLabel={"materia"}
-              defaultValue={materiaText}
-              setOption={setmateriaText}
-              errorState={materiaError}
-              setError={setmateriaError}
+              optionLabel={"materia"}              
+              defaultValue={formValues.materia}
+              setOption={addFormValue}
+              errorState={formError}
+              setError={addErrorValue}
               disableInput={formToUploadActive}
             />
             <InputText
-              label={"Profesor"}
-              options={profesores}
-              optionLabel={""}
-              defaultValue={profesorText}
-              setOption={setProfesorText}
-              errorState={profesorError}
-              setError={setProfesorError}
+              label={"profesor"}
+              options={profesores}              
+              defaultValue={formValues.profesor}
+              setOption={addFormValue}
+              errorState={formError}
+              setError={addErrorValue}
               disableInput={formToUploadActive}
             />
             <div className="semetre-categoria">
               <InputText
-                label={"Semestre"}
-                options={semestres}
-                optionLabel={"semestre"}
-                defaultValue={semestreText}
-                setOption={setSemestreText}
-                errorState={semestreError}
-                setError={setSemestreError}
+                label={"semestre"}
+                options={semestres}                
+                defaultValue={formValues.semestre}
+                setOption={addFormValue}
+                errorState={formError}
+                setError={addErrorValue}
                 disableInput={formToUploadActive}
               />
               <InputText
-                label={"Categoria"}
-                options={categorias}
-                optionLabel={"categoria"}
-                defaultValue={categoriaText}
-                setOption={setcategoriaText}
-                errorState={categoriaError}
-                setError={setcategoriaError}
+                label={"categoria"}
+                options={categorias}                
+                defaultValue={formValues.categoria}
+                setOption={addFormValue}
+                errorState={formError}
+                setError={addErrorValue}
                 disableInput={formToUploadActive}
               />
             </div>
@@ -203,8 +218,8 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               rows={4}
               variant="outlined"
               className={classes.descriptionBox}
-              value={descripcionText}
-              onChange={handleChange}
+              value={formValues.descripcion}
+              onChange={e => addFormValue({descripcion : e.target.value})}
               disabled={formToUploadActive}
             />
           </div>
@@ -219,12 +234,12 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
                 ilovepdf.com
               </a>
             </p><br/>
-            {file === null ? (
-              <MyDropzone setFile={setfile} />
+            {formValues.file === null ? (
+              <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/>
             ) : (
-              <UploadedFile fileName={file.name} setFile={setfile} disabledButton={formToUploadActive}/>
+              <UploadedFile fileName={formValues.file.name} setFile={addFormValue} disabledButton={formToUploadActive}/>
             )}
-            {fileError === true ? (
+            {formError.file === true ? (
                 <p className={classes.warningDropText}>
                   Por favor anexe un archivo
                 </p>
@@ -234,12 +249,12 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             
             {/* para colocar si esta resulto o no y la nota */}
             <CheckBoxZone 
-              grade={grade}
-              setgrade={setgrade}
-              gradeError={gradeError}
-              setgradeError={setgradeError}
-              calificado={calificado}
-              setCalificado={setCalificado}
+              calificado={formValues.calificado}
+              setCalificado={addFormValue}
+              grade={formValues.grade}
+              setgrade={addFormValue}
+              gradeError={formError.grade}
+              setgradeError={addErrorValue}
               disabledChek={formToUploadActive}
             />
 
@@ -261,26 +276,26 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 export default UploadForm;
 
 const semestres = [
-  { semestre: "2021-2" },
-  { semestre: "2021-1" },
-  { semestre: "2020-2" },
-  { semestre: "2019-1" },
-  { semestre: "2018-2" },
-  { semestre: "2017-1" },
-  { semestre: "2016-2" },
-  { semestre: "2016-1" },
-  { semestre: "2015-2" },
-  { semestre: "2015-1" },
-  { semestre: "2014-2" },
-  { semestre: "2014-1" },
-  { semestre: "2013-2" },
-  { semestre: "2013-1" },
+  "2021-2",
+  "2021-1",
+  "2020-2",
+  "2019-1",
+  "2018-2",
+  "2017-1",
+  "2016-2",
+  "2016-1",
+  "2015-2",
+  "2015-1",
+  "2014-2",
+  "2014-1",
+  "2013-2",
+  "2013-1",
 ];
 
 const categorias = [
-  { categoria: "Parcial" },
-  { categoria: "Taller" },
-  { categoria: "Quíz" },
-  { categoria: "Laboratorio" },
-  { categoria: "Guía" },
+  "Parcial",
+  "Taller",
+  "Quíz",
+  "Laboratorio",
+  "Guía",
 ];
