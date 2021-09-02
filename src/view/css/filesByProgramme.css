@@ -209,13 +209,14 @@ ul {
   font-weight: lighter;
   white-space: nowrap;
   box-sizing: border-box;
-  width: 75%;
+  width: 100%;
   align-self: center;
   align-items: center;
   position: absolute;
   bottom: 8px;
-  left: 16%;
+  left: 0;
   height: 17px;
+  padding: 0 18%;
 }
 
 .like {
