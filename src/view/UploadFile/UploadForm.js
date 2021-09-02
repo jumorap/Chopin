@@ -5,52 +5,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MyDropzone from "./DropZone";
 import InputText from "./InputText";
-import { useMaterias, useProfesores, useMateriaMap, useUploadFormContextVariables, formValuesDefault } from "../ContextProvider";
+import { useMaterias, useProfesores, useMateriaMap, useUploadFormContextVariables } from "../ContextProvider";
 import UploadedFile from "./UploadedFile";
 import Archivos from "../../model/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
 import { firebaseAppAuth } from "../../model/firebaseSelf/firebaseConfig";
 import CheckBoxZone from "./CheckBoxZone";
-import { DeleteForever } from "@material-ui/icons";
+import { addValue, categorias, deleteValues, errorsStateDefaultValue, semestres, stylesUploadFrom } from "./UploadFormUtils";
 
 
-const useStyles = makeStyles(() => ({
-  uploadButton: {
-    background: "var(--redBoard)",
-    "&:hover": {
-      backgroundColor: "var(--hoverRedBoard)",
-    },
-    color: "#FFF",
-    borderRadius: 30,
-    border: 0,
-    padding: "5px 20px",
-    width: "80%",
-    marginTop: "20px",
-  },
-
-  sharemessage: {
-    position: "relative",
-    textAlign: "center",
-    top: "20px",
-    fontFamily: "inherit",
-    fontSize: "20px",
-  },
-
-  closeButton: {
-    padding: 0,
-  },
-
-  descriptionBox: {
-    width: "100%",
-    backgroundColor: "white",
-    marginTop: "15px",
-  },
-
-  warningDropText: {
-    color: "#f44336",
-    fontSize: "0.75rem",
-  },
-}));
+//for editing the material ui components styles
+const useStyles = makeStyles(() => (stylesUploadFrom));
 
 
 //**Funcion que crea el formulario para subir el archivo con todos sus campos de texto*/
@@ -73,27 +38,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
   /** React state that has the from values, like profesor, universidad, descripcion */
   const [formValues, setFormValues] = useUploadFormContextVariables()  
-
-
-
-  const deleteValues = () => {
-    console.log("deleted all")
-    const formValuesCopy = {...formValues}
-    formValuesCopy.file = null
-    formValuesCopy.categoria = null
-    formValuesCopy.descripcion = null
-    formValuesCopy.grade = ""
-    formValuesCopy.calificado = false
-
-    setFormValues(formValuesCopy)
-  }
-
-  const addValue = (setFormValues, newValue) => {
-    setFormValues(prev => {
-      return({...prev, ...newValue})
-    })
-  }
-  
+      
   /**
    * Add or edit a value in de form value, as profesor, materia, semestre etc while changing the state
    * @param {{parameter : any}} newValue value to be added to the form data state. the key is is the parameter ex: "categotia", "parcial" etc and the value is any and represents the value to be used in the form
@@ -109,15 +54,10 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   const addErrorValue = (newError) => {
     addValue(setFormError, newError)
   }
+
+
   
-  const [formError, setFormError] = useState({
-    materia : false,
-    profesor : false,
-    semestre : false,
-    categoria : false,    
-    file : false,
-    grade : false    
-  });
+  const [formError, setFormError] = useState(errorsStateDefaultValue);
               
   const handleSubmit = async () => {
     let errors = false; //if true then there are empty spaces in the form    
@@ -157,14 +97,31 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       formValues.calificado
     );
     
-    materiaMap.add_archivo(newArchivo) 
-    
-    deleteValues();       
+    materiaMap.add_archivo(newArchivo)     
+    deleteValues(formValues, setFormValues);       
     handleClose();  
   };
 
-  console.log(formValues)
-  console.log(formError)
+  /**
+   * Funcion para generar inputText component
+   * @param {String} nombre nombre del parametro que tendra la funcion, ejemplo categoria, profesor, materia
+   * @param {*} options lista de opciones para desplegar en el text field
+   * @returns 
+   */
+  function getInputText(nombre, options){
+    return (
+      <InputText
+        label={nombre}
+        options={options}                
+        defaultValue={formValues[nombre]}
+        setOption={addFormValue}
+        errorState={formError}
+        setError={addErrorValue}
+        disableInput={formToUploadActive}
+    />
+    )
+  }
+
 
   return (
     <div className="container">
@@ -178,44 +135,12 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       <div className="upload-form">
         <div className="modal-sub-container">
           <div className="modal-left-div">
-            <InputText
-              label={"materia"}
-              options={materias}
-              optionLabel={"materia"}              
-              defaultValue={formValues.materia}
-              setOption={addFormValue}
-              errorState={formError}
-              setError={addErrorValue}
-              disableInput={formToUploadActive}
-            />
-            <InputText
-              label={"profesor"}
-              options={profesores}              
-              defaultValue={formValues.profesor}
-              setOption={addFormValue}
-              errorState={formError}
-              setError={addErrorValue}
-              disableInput={formToUploadActive}
-            />
+            {getInputText("materia", materias)}
+            {getInputText("profesor", profesores)}
+                        
             <div className="semetre-categoria">
-              <InputText
-                label={"semestre"}
-                options={semestres}                
-                defaultValue={formValues.semestre}
-                setOption={addFormValue}
-                errorState={formError}
-                setError={addErrorValue}
-                disableInput={formToUploadActive}
-              />
-              <InputText
-                label={"categoria"}
-                options={categorias}                
-                defaultValue={formValues.categoria}
-                setOption={addFormValue}
-                errorState={formError}
-                setError={addErrorValue}
-                disableInput={formToUploadActive}
-              />
+              {getInputText("semestre", semestres)}              
+              {getInputText("categoria", categorias)}                            
             </div>
             <TextField
               id="outlined-multiline-static"
@@ -241,7 +166,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
               </a>
             </p><br/>
             {formValues.file === null ? (
-              <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/>
+              <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/> 
             ) : (
               <UploadedFile fileName={formValues.file.name} setFile={addFormValue} disabledButton={formToUploadActive}/>
             )}
@@ -281,27 +206,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
 
 export default UploadForm;
 
-const semestres = [
-  "2021-2",
-  "2021-1",
-  "2020-2",
-  "2019-1",
-  "2018-2",
-  "2017-1",
-  "2016-2",
-  "2016-1",
-  "2015-2",
-  "2015-1",
-  "2014-2",
-  "2014-1",
-  "2013-2",
-  "2013-1",
-];
 
-const categorias = [
-  "Parcial",
-  "Taller",
-  "Quíz",
-  "Laboratorio",
-  "Guía",
-];
+
+
+
