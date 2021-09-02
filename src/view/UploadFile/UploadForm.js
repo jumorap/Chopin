@@ -93,7 +93,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       user.uid,
       formValues.categoria,
       formValues.file,
-      formValues.grade,
+      nota,
       formValues.calificado
     );
     
@@ -108,11 +108,12 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
    * @param {*} options lista de opciones para desplegar en el text field
    * @returns 
    */
-  function getInputText(nombre, options){
+  function getInputText(nombre, options, optionLabel = ""){
     return (
       <InputText
         label={nombre}
-        options={options}                
+        options={options}             
+        optionLabel = {optionLabel}   
         defaultValue={formValues[nombre]}
         setOption={addFormValue}
         errorState={formError}
@@ -135,7 +136,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
       <div className="upload-form">
         <div className="modal-sub-container">
           <div className="modal-left-div">
-            {getInputText("materia", materias)}
+            {getInputText("materia", materias, "materia")}
             {getInputText("profesor", profesores)}
                         
             <div className="semetre-categoria">
