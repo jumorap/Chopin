@@ -5,8 +5,10 @@ class MateriasView {
 
     /**return a copy of the object */
     copy(){
-      const newMateriasView = new MateriasView()
-      newMateriasView.mapMaterias = this.mapMaterias
+      const newMateriasView = new MateriasView()      
+      this.mapMaterias.forEach((value, key)=>{
+        newMateriasView.mapMaterias.set(key, value)
+      })
       return newMateriasView
     }
     /**
@@ -66,8 +68,9 @@ class MateriasView {
       let materia = this.mapMaterias.get(currentMateria);
       /* removes specific trabajo from materia.trabajos */
       materia.trabajos = materia.trabajos.filter(
-        (trabajo) => trabajo.ID_archivo !== trabajoToDelete.ID_archivo
-      );
+        (trabajo) => trabajo.ID_archivo !== trabajoToDelete.ID_archivo                              
+      )     
+      
   
       /* Removes trabajo from materia.profesores */
       let profesores = materia.profesores;

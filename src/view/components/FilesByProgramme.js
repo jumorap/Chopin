@@ -31,9 +31,11 @@ export function FilesByProgramme({ items = [], handleEdit, setFileToEdit }) {
     //delete from data base
     Archivos.deleteArchivos(idCurrentMateria, item.ID_archivo, item.profesor, item.semestre, item.tipo)
     //delete from context            
-    materiaMap.delete_archivo(item, idCurrentMateria)           
+    materiaMap.delete_archivo(item, idCurrentMateria)               
     setMateriaMap(materiaMap.copy())
+    console.log(materiaMap)
   };
+  console.log(materiaMap)
 
 
   let PdfFile = () => (

@@ -67,7 +67,7 @@ class Archivos {
 
     return {
       id_materia: id_materia,
-      id_archivo: docRef.id,
+      ID_archivo: docRef.id,
       profesor: profesor,
       semestre: semestre,
       tipo: categorias,
