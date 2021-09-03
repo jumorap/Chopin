@@ -1,5 +1,5 @@
 <center>
-<img src="https://raw.githubusercontent.com/jumorap/Chopin/master/src/view/assets/short-principal-slogan-logo.png"/>
+<img src="https://raw.githubusercontent.com/jumorap/Chopin/master/src/assets/short-principal-slogan-logo.png"/>
 </center>
 
 Red board is a web platform where university students can share their test, activities and homeworks to facilitate the life to other students.
