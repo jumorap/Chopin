@@ -1,14 +1,13 @@
-<center>
-<img src="https://raw.githubusercontent.com/jumorap/Chopin/master/src/assets/short-principal-slogan-logo.png"/>
-</center>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jumorap/Chopin/master/src/assets/short-principal-slogan-logo.png"/>
+</p>
 
 Red board is a web platform where university students can share their test, activities and homeworks to facilitate the life to other students.
 
 It is a collaboration of 7 enginners led by:
-<br/>
-[@jumorap](https://jumorap-dev.web.app/)
-<br/>
-[@jahelsantiago](https://jahel-santiago.web.app/)
+- [@jumorap](https://jumorap-dev.web.app/)
+
+- [@jahelsantiago](https://jahel-santiago.web.app/)
 
 You can find the oficial page here: [Red Board](https://redboardun.com/) 
 
