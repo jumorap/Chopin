@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import FullTextSeachMaterias from './SearchBar/FullTextSearchMaterias'
-import Archivos from '../model/Archivos'
-import Materias from "../model/Materias"
-import Profesores from "../model/Profesores"
+import FullTextSeachMaterias from '../components/SearchBar/FullTextSearchMaterias'
+import Archivos from '../firebase/Archivos'
+import Materias from "../firebase/Materias"
+import Profesores from "../firebase/Profesores"
 
 
 const Admin = () => {

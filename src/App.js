@@ -1,16 +1,15 @@
-import './App.css';
 import React, { useState } from 'react';
 import Login from "./view/Login";
 import Admin from "./view/Admin";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Terms from './view/Terms'
-import ProgrammeResults from "./view/ProgrammeResults";
+import Course from "./view/Course";
 import { createContext, useEffect } from 'react';
-import ContextProvider from './view/ContextProvider';
-import { AuthProvider } from "./model/firebaseAuthPersistence/AuthProvider";
-import PrivateRoute from "./model/firebaseAuthPersistence/PrivateRoute";
-import UploadFileModal from './view/UploadFile/UploadFileModal';
-import { firebaseAnalytics } from "./model/firebaseSelf/firebaseConfig";
+import ContextProvider from './contextProvider/ContextProvider';
+import { AuthProvider } from "./firebase/firebaseAuthPersistence/AuthProvider";
+import PrivateRoute from "./firebase/firebaseAuthPersistence/PrivateRoute";
+import UploadFileModal from './components/UploadFile/UploadFileModal';
+import { firebaseAnalytics } from "./firebase/firebaseConfig";
 
 
 export const contextProvider = createContext(undefined)
@@ -39,7 +38,7 @@ function App() {
                 <Router>
                     <AuthProvider>
                         <PrivateRoute exact path="/materias/:idMateria" component={
-                            <ProgrammeResults toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
+                            <Course toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
                         }/>
 
                         <Route exact path="/" >

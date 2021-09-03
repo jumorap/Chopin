@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/terms.css"
+import "../css/terms.css"
 import { FaHome } from "react-icons/all";
 import {Link} from "react-router-dom";
 
