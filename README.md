@@ -6,7 +6,6 @@ Red board is a web platform where university students can share their test, acti
 
 It is a collaboration of 7 enginners led by:
 - [@jumorap](https://jumorap-dev.web.app/)
-
 - [@jahelsantiago](https://jahel-santiago.web.app/)
 
 You can find the oficial page here: [Red Board](https://redboardun.com/) 
