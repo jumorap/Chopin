@@ -10,7 +10,7 @@ import { useMateriaMap } from "../contextProvider/ContextProvider";
 import { useHistory, useParams } from "react-router-dom";
 import { getArrayFromObject, getFilterCategory, getFilteredFIles, initialMateriaValue } from "../contextProvider/ProgrammeResultsController";
 
-function Course({ toggleUploadFileModal, setFileToEdit }) {
+function Course({ toggleUploadFileModal }) {
 
   /**The conection with the provider to check the existence of the subject */
   const [materiaMap, setmapMaterias] = useMateriaMap();
@@ -72,10 +72,12 @@ function Course({ toggleUploadFileModal, setFileToEdit }) {
         history.push("/")
         return
       }
+      console.log(value.data())
       setMateriaValues({
         ...value.data(),
         trabajos: getArrayFromObject(value.data().trabajos),
       });
+
     });
   };
   
@@ -111,11 +113,7 @@ function Course({ toggleUploadFileModal, setFileToEdit }) {
           {materiaValues.nombre}
         </div>
         <div className={"for-each-programme"}>
-          <CourseCards
-            items={filteredFiles}
-            handleEdit={toggleUploadFileModal}
-            setFileToEdit={(file) => setFileToEdit(file)}
-          />
+          <CourseCards items={filteredFiles} toggleUploadFileModal = {toggleUploadFileModal}/>
         </div>
       </div>
     );

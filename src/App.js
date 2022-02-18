@@ -22,14 +22,12 @@ function App() {
     })
 
     /* upload file modal status */
-    const [uploadFileModalOpen, setUploadFileModalOpen] = useState(false);
+    const [uploadFileModalOpen, setUploadFileModalOpen] = useState({open: false, isEditing: false});
     
-    /* file to edit */
-    const [fileToEdit, setFileToEdit] = useState(undefined);
     
-    let toggleUploadFileModal = () => {
-        setUploadFileModalOpen(!uploadFileModalOpen);
-        fileToEdit && setFileToEdit(undefined);
+    function toggleUploadFileModal(isEditing = false){
+        console.log(isEditing, "isEditing")
+        setUploadFileModalOpen({isEditing , open : !uploadFileModalOpen.open});
     };
 
     return (
@@ -38,7 +36,7 @@ function App() {
                 <Router>
                     <AuthProvider>
                         <PrivateRoute exact path="/materias/:idMateria" component={
-                            <Course toggleUploadFileModal={toggleUploadFileModal} setFileToEdit={setFileToEdit} />
+                            <Course toggleUploadFileModal={toggleUploadFileModal} />
                         }/>
 
                         <Route exact path="/" >
@@ -51,7 +49,7 @@ function App() {
                     </Route>
                 </Router>
 
-                <UploadFileModal open={uploadFileModalOpen} toggle={toggleUploadFileModal} file={fileToEdit} />
+                <UploadFileModal uploadFileModalOpen={uploadFileModalOpen} toggleUploadFileModal={toggleUploadFileModal} />
             </ContextProvider>
         </>
     )

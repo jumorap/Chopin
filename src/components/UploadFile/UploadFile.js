@@ -33,7 +33,7 @@ const UploadFile = ({ handleOpen }) => {
       <IconButton
         style={styles.openButton}
         className={"openButton"}
-        onClick={handleOpen}
+        onClick={()=> handleOpen(false)}
         aria-label={"upload file"}
       >
         <AddIcon fontSize={"large"} className={"openIcon"} />

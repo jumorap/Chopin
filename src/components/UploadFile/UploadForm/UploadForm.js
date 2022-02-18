@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => (stylesUploadFrom));
 
 
 //**Funcion que crea el formulario para subir el archivo con todos sus campos de texto*/
-const UploadForm = ({ handleClose, fileToEdit }) => {
+const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
   let user = firebaseAppAuth.currentUser;
 
   /**List with all the subjects for the Materias field */
@@ -127,7 +127,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
   return (
     <div className="container">
       <div className={classes.sharemessage}>
-        {fileToEdit ? "Editar" : "Compartir"}
+        {uploadFileModalOpen.isEditing ? "Editar" : "Compartir"}
       </div>
       <IconButton className={`${classes.closeButton} close-button`} onClick={handleClose}>
         <CloseIcon />
@@ -156,28 +156,32 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
             />
           </div>
           <div className="modal-right-div">
-            <p>
-              Puedes comprimir tus PDF en&nbsp;
-              <a href={"https://www.ilovepdf.com/compress_pdf"}
-                 rel={"noreferrer"}
-                 target={"_blank"}
-                 style={{color: "#000", fontWeight: "bold",}}
-              >
-                ilovepdf.com
-              </a>
-            </p><br/>
-            {formValues.file === null ? (
-              <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/> 
-            ) : (
-              <UploadedFile fileName={formValues.file.name} setFile={addFormValue} disabledButton={disableFormInputs}/>
-            )}
-            {formError.file === true ? (
-                <p className={classes.warningDropText}>
-                  Por favor anexe un archivo
-                </p>
-            ) : (
-                <></>
-            )}
+          
+          <div>
+              <p>
+                Puedes comprimir tus PDF en&nbsp;
+                <a href={"https://www.ilovepdf.com/compress_pdf"}
+                  rel={"noreferrer"}
+                  target={"_blank"}
+                  style={{color: "#000", fontWeight: "bold",}}
+                >
+                  ilovepdf.com
+                </a>
+              </p>
+              <br/>
+              {formValues.file === null ? (
+                <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/> 
+              ) : (
+                <UploadedFile fileName={formValues.file.name} setFile={addFormValue} disabledButton={disableFormInputs}/>
+              )}
+              {formError.file === true ? (
+                  <p className={classes.warningDropText}>
+                    Por favor anexe un archivo
+                  </p>
+              ) : (
+                  <></>
+              )}
+            </div>
             
             {/* para colocar si esta resulto o no y la nota */}
             <CheckBoxZone 
@@ -198,7 +202,7 @@ const UploadForm = ({ handleClose, fileToEdit }) => {
           onClick={handleSubmit}
           disabled={disableFormInputs}
         >
-          {fileToEdit ? "Editar" : "Compartir"}
+          {uploadFileModalOpen.isEditing ? "Editar" : "Compartir"}
         </Button>
       </div>
     </div>

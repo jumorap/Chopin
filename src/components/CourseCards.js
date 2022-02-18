@@ -3,22 +3,28 @@ import "../css/courseCards.css";
 import { IconButton, Modal, Tooltip } from "@material-ui/core";
 import {
   FaExternalLinkAlt,
-  AiFillCloseCircle,  
+  AiFillCloseCircle, 
+  AiFillEdit 
 } from "react-icons/all";
+
 import { firebaseAppAuth } from "../firebase/firebaseConfig";
 import { useParams } from "react-router-dom";
 import Archivos from "../firebase/Archivos"
 import { useMateriaMap } from "../contextProvider/ContextProvider";
 import { styles } from "./UploadFile/UploadFile";
+import UploadFileModal from "./UploadFile/UploadFileModal";
 
 
-export function CourseCards({ items = [], handleEdit, setFileToEdit }) {
+export function CourseCards({ items = [] , toggleUploadFileModal}) {
+
   
   const [materiaMap, setMateriaMap] = useMateriaMap();
   const idCurrentMateria = useParams().idMateria;    
   const [openFileModal, setOpenFileModal] = useState(false);
   const [clicked, setClicked] = useState(undefined);
   const currentUserID = firebaseAppAuth.currentUser.uid;
+
+  console.log(materiaMap)
   
   const handleOpenFilesModal = (item) => {
     setOpenFileModal(prev => !prev);
@@ -33,9 +39,7 @@ export function CourseCards({ items = [], handleEdit, setFileToEdit }) {
     //delete from context            
     materiaMap.delete_archivo(item, idCurrentMateria)               
     setMateriaMap(materiaMap.copy())
-    console.log(materiaMap)
-  };
-  console.log(materiaMap)
+    };
 
 
   let PdfFile = () => (
@@ -135,16 +139,22 @@ export function CourseCards({ items = [], handleEdit, setFileToEdit }) {
     )
   };
 
+
+
+
   /**Los botones de eliminar y editar que son mostrados en las cards */
   let CardBtns = ({ item }) => {
     const [openModal, setopenModal] = useState(false)
     const isAdminUser = ["tr07jNQX7aY0ZJoW5zkUfpqM4OD2", "9QT5gfB9z3MruWCtlqXDAGfpG2I2"].includes(currentUserID)
     const isSameUser = currentUserID === item.usuario
     const isAuthorizedToDelete = (isSameUser || isAdminUser)
+
+
+
     return (
       isAuthorizedToDelete && (
         <>
-          <Tooltip title={"Eliminar archivo"}>
+          <Tooltip title={"Eliminar"}>
             <div className={"delete"}>
               <AiFillCloseCircle
                 onClick={() => setopenModal(true)}
@@ -153,6 +163,20 @@ export function CourseCards({ items = [], handleEdit, setFileToEdit }) {
                         ? "delete-component"
                         : "delete-component delete-component-admin-user "
                 }
+              />              
+            </div>
+          </Tooltip>
+          <Tooltip title = "Editar">
+            <div className="edit">
+              <AiFillEdit
+                className={
+                  isSameUser
+                      ? "delete-component"
+                      : "delete-component delete-component-admin-user "
+                }
+                onClick={() => {
+                  toggleUploadFileModal(true);
+                }}
               />
             </div>
           </Tooltip>
