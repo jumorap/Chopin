@@ -11,7 +11,7 @@ import Archivos from "../../../firebase/Archivos";
 import CloseIcon from "@material-ui/icons/Close";
 import { firebaseAppAuth } from "../../../firebase/firebaseConfig";
 import CheckBoxZone from "../Inputs/CheckBoxZone";
-import { addValue, categorias, deleteValues, errorsStateDefaultValue, semestres, stylesUploadFrom } from "./UploadFormUtils";
+import { addValue, categorias, deleteValues, editValues, errorsStateDefaultValue, semestres, stylesUploadFrom, uploadValues } from "./UploadFormUtils";
 
 
 //for editing the material ui components styles
@@ -58,47 +58,20 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
 
   
   const [formError, setFormError] = useState(errorsStateDefaultValue);
+
+  
               
   const handleSubmit = async () => {
-    let errors = false; //if true then there are empty spaces in the form    
-    const categorias = ["file","materia", "profesor", "semestre", "categoria"]    
-    
-    //search wheater a form value is empty and add an error if is needed
-    categorias.forEach(categoria => {
-      if(formValues[categoria] === null || formValues[categoria].length === 0){ //check if is empty
-        addErrorValue({[categoria] : true}) 
-        errors = true
-      }
-    })        
+    if(uploadFileModalOpen.isEditing){
+      //edita los archivos de la DB
+      await editValues(formValues, setFormValues, setFormToShare, setMateriaMap, user, materiaMap)
 
-    //if a field is not complete cancels the operation
-    if(errors){
-      return
+    }else{
+      // sube los valores del formulario a la DB 
+      await uploadValues(formValues, setFormValues, addErrorValue, setFormToShare, user, materiaMap) 
     }
-    
-    //disable the input fields
-    setFormToShare(true)
-    
-    let nota = formValues.grade
-    if(nota.length === 1){      
-      nota += ".0"       
-    } 
 
-    
-    const newArchivo = await Archivos.crearArchivos(
-      formValues.materia.id,
-      formValues.descripcion,
-      formValues.profesor,
-      formValues.semestre,
-      user.uid,
-      formValues.categoria,
-      formValues.file,
-      nota,
-      formValues.calificado
-    );
-    
-    materiaMap.add_archivo(newArchivo)     
-    deleteValues(formValues, setFormValues);       
+    // cierra el modal
     handleClose();  
   };
 
@@ -124,6 +97,37 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
   }
 
 
+  function PdfZone(){
+    return(
+      <div>
+          <p>
+            Puedes comprimir tus PDF en&nbsp;
+            <a href={"https://www.ilovepdf.com/compress_pdf"}
+              rel={"noreferrer"}
+              target={"_blank"}
+              style={{color: "#000", fontWeight: "bold",}}
+            >
+              ilovepdf.com
+            </a>
+          </p>
+          <br/>
+          {formValues.file === null ? (
+            <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/> 
+          ) : (
+            <UploadedFile fileName={formValues.file.name} setFile={addFormValue} disabledButton={disableFormInputs}/>
+          )}
+          {formError.file === true ? (
+              <p className={classes.warningDropText}>
+                Por favor anexe un archivo
+              </p>
+          ) : (
+              <></>
+          )}
+      </div>
+    )
+  }
+
+
   return (
     <div className="container">
       <div className={classes.sharemessage}>
@@ -134,9 +138,10 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
       </IconButton>      
 
       <div className="upload-form">
-        <div className="modal-sub-container">
+        <div className={uploadFileModalOpen.isEditing ? "modal-sub-container column" : "modal-sub-container "}>
           <div className="modal-left-div">
-            {getInputText("materia", materias, "materia")}
+
+            {!uploadFileModalOpen.isEditing && getInputText("materia", materias, "materia")}
             {getInputText("profesor", profesores)}
                         
             <div className="semetre-categoria">
@@ -156,32 +161,8 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
             />
           </div>
           <div className="modal-right-div">
-          
-          <div>
-              <p>
-                Puedes comprimir tus PDF en&nbsp;
-                <a href={"https://www.ilovepdf.com/compress_pdf"}
-                  rel={"noreferrer"}
-                  target={"_blank"}
-                  style={{color: "#000", fontWeight: "bold",}}
-                >
-                  ilovepdf.com
-                </a>
-              </p>
-              <br/>
-              {formValues.file === null ? (
-                <MyDropzone setFile={addFormValue} setFileError = {addErrorValue}/> 
-              ) : (
-                <UploadedFile fileName={formValues.file.name} setFile={addFormValue} disabledButton={disableFormInputs}/>
-              )}
-              {formError.file === true ? (
-                  <p className={classes.warningDropText}>
-                    Por favor anexe un archivo
-                  </p>
-              ) : (
-                  <></>
-              )}
-            </div>
+            
+            {!uploadFileModalOpen.isEditing && <PdfZone/>}
             
             {/* para colocar si esta resulto o no y la nota */}
             <CheckBoxZone 
@@ -208,6 +189,8 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
     </div>
   );
 };
+
+
 
 export default UploadForm;
 

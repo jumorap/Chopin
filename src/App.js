@@ -26,7 +26,6 @@ function App() {
     
     
     function toggleUploadFileModal(isEditing = false){
-        console.log(isEditing, "isEditing")
         setUploadFileModalOpen({isEditing , open : !uploadFileModalOpen.open});
     };
 

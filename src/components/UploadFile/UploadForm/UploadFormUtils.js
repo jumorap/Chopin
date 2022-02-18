@@ -1,3 +1,6 @@
+import { useMateriaMap } from "../../../contextProvider/ContextProvider";
+import Archivos from "../../../firebase/Archivos";
+
 export const stylesUploadFrom = {
     uploadButton: {
       background: "var(--redBoard)",
@@ -34,6 +37,71 @@ export const stylesUploadFrom = {
       color: "#f44336",
       fontSize: "0.75rem",
     },
+  }
+
+  //funcion para procesar las ediciones del formulario en la DB
+  export async function editValues(formValues, setFormValues, setFormToShare, setMateriaMap, user, materiaMap){
+    console.log("editValues", formValues)
+    //verificar que ningun campo este vacio
+
+    //si no esta vacio, editar el archivo en la DB
+
+    //eliminar el archivo del contexto
+
+    //agregar el archivo al contexto
+    
+  }
+
+
+  /**
+   * Upload the values of the form to the database once the user clicks the upload button
+   * @param {*} formValues 
+   * @param {*} setFormValues 
+   * @param {*} addErrorValue 
+   * @param {*} setFormToShare 
+   * @param {*} user 
+   * @returns 
+   */
+  export const uploadValues = async (formValues, setFormValues, addErrorValue, setFormToShare, user, materiaMap) => {
+    let errors = false; //if true then there are empty spaces in the form    
+    const categorias = ["file","materia", "profesor", "semestre", "categoria"]    
+    
+    //search wheater a form value is empty and add an error if is needed
+    categorias.forEach(categoria => {
+      if(formValues[categoria] === null || formValues[categoria].length === 0){ //check if is empty
+        addErrorValue({[categoria] : true})
+        errors = true
+      }
+    })        
+
+    //if a field is not complete cancels the operation
+    if(errors){
+      return
+    }
+    
+    //disable the input fields
+    setFormToShare(true)
+    
+    let nota = formValues.grade
+    if(nota.length === 1){      
+      nota += ".0"       
+    } 
+
+    
+    const newArchivo = await Archivos.crearArchivos(
+      formValues.materia.id,
+      formValues.descripcion,
+      formValues.profesor,
+      formValues.semestre,
+      user.uid,
+      formValues.categoria,
+      formValues.file,
+      nota,
+      formValues.calificado
+    );
+    
+    materiaMap.add_archivo(newArchivo)     
+    deleteValues(formValues, setFormValues); 
   }
 
 

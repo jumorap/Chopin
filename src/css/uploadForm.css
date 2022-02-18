@@ -14,6 +14,10 @@
     box-sizing: border-box;
 }
 
+.column{
+    flex-direction: column;
+}
+
 .modal-left-div {
     padding-right: 10px;
     width: 400px;

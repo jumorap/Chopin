@@ -10,9 +10,8 @@ import {
 import { firebaseAppAuth } from "../firebase/firebaseConfig";
 import { useParams } from "react-router-dom";
 import Archivos from "../firebase/Archivos"
-import { useMateriaMap } from "../contextProvider/ContextProvider";
+import { useMateriaMap, useUploadFormContextVariables } from "../contextProvider/ContextProvider";
 import { styles } from "./UploadFile/UploadFile";
-import UploadFileModal from "./UploadFile/UploadFileModal";
 
 
 export function CourseCards({ items = [] , toggleUploadFileModal}) {
@@ -24,7 +23,10 @@ export function CourseCards({ items = [] , toggleUploadFileModal}) {
   const [clicked, setClicked] = useState(undefined);
   const currentUserID = firebaseAppAuth.currentUser.uid;
 
-  console.log(materiaMap)
+  /** React state that has the from values, like profesor, universidad, descripcion */
+  const [formValues, setFormValues] = useUploadFormContextVariables()  
+  
+
   
   const handleOpenFilesModal = (item) => {
     setOpenFileModal(prev => !prev);
@@ -148,8 +150,22 @@ export function CourseCards({ items = [] , toggleUploadFileModal}) {
     const isAdminUser = ["tr07jNQX7aY0ZJoW5zkUfpqM4OD2", "9QT5gfB9z3MruWCtlqXDAGfpG2I2"].includes(currentUserID)
     const isSameUser = currentUserID === item.usuario
     const isAuthorizedToDelete = (isSameUser || isAdminUser)
+    
 
-
+    function openEditModal(){
+      toggleUploadFileModal(true);
+      setFormValues({
+        "materia": idCurrentMateria,
+        "profesor": item.profesor,
+        "semestre": item.semestre,
+        "categoria": item.tipo,
+        "descripcion": item.comentarios,
+        "file": null,
+        "grade": item.nota,
+        "calificado": item.calificado,
+        ID_archivo: item.ID_archivo,
+      })
+    }
 
     return (
       isAuthorizedToDelete && (
@@ -174,9 +190,7 @@ export function CourseCards({ items = [] , toggleUploadFileModal}) {
                       ? "delete-component"
                       : "delete-component delete-component-admin-user "
                 }
-                onClick={() => {
-                  toggleUploadFileModal(true);
-                }}
+                onClick={openEditModal}
               />
             </div>
           </Tooltip>
