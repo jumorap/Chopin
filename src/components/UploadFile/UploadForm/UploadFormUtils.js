@@ -39,30 +39,82 @@ export const stylesUploadFrom = {
     },
   }
 
+/**
+ * @param formValues
+ * @param setFormValues
+ * @param addErrorValue
+ * @param setFormToShare
+ * @param setMateriaMap
+ * @param user
+ * @param materiaMap
+ * @param handleClose
+ */
   //funcion para procesar las ediciones del formulario en la DB
-  export async function editValues(formValues, setFormValues, setFormToShare, setMateriaMap, user, materiaMap){
-    console.log("editValues", formValues)
-    //verificar que ningun campo este vacio
+  export async function editValues(formValues, setFormValues, addErrorValue, setFormToShare, setMateriaMap, user, materiaMap, handleClose) {
+    let errors = false
+    const categorias = ["materia", "profesor", "semestre", "categoria"]
+
+    //search wheater a form value is empty and add an error if is needed
+    categorias.forEach(categoria => {
+        if(formValues[categoria] === null || formValues[categoria].length === 0){ //check if is empty
+            addErrorValue({[categoria] : true})
+            errors = true
+        }
+    })
+
+    //if a field is not complete cancels the operation
+    if(errors){
+        return
+    }
+
+    //disable the input fields
+    setFormToShare(true)
+
+    let nota = formValues.grade
+    if(nota.length === 1){
+        nota += ".0"
+    }
 
     //si no esta vacio, editar el archivo en la DB
+    const updateArchivo = await Archivos.editarArchivos(
+        formValues.materia,
+        formValues.ID_archivo,
+        formValues.descripcion,
+        formValues.profesor,
+        formValues.semestre,
+        formValues.categoria,
+        user.uid,
+        nota,
+        formValues.calificado,
+    )
+    const formValuesCopy = {...updateArchivo}
 
-    //eliminar el archivo del contexto
 
-    //agregar el archivo al contexto
-    
+    // delete the reference from context provider
+    materiaMap.delete_archivo(updateArchivo, formValues.materia)
+    setMateriaMap(materiaMap.copy())
+
+    //add the new form to context provider
+    materiaMap.add_archivo(formValuesCopy)
+    deleteValues(formValues, setFormValues);
+
+    //cerrar el modal
+    handleClose()
   }
 
 
   /**
    * Upload the values of the form to the database once the user clicks the upload button
-   * @param {*} formValues 
-   * @param {*} setFormValues 
-   * @param {*} addErrorValue 
-   * @param {*} setFormToShare 
-   * @param {*} user 
-   * @returns 
+   * @param {*} formValues
+   * @param {*} setFormValues
+   * @param {*} addErrorValue
+   * @param {*} setFormToShare
+   * @param {*} user
+   * @param materiaMap
+   * @param handleClose
+   * @returns
    */
-  export const uploadValues = async (formValues, setFormValues, addErrorValue, setFormToShare, user, materiaMap) => {
+  export const uploadValues = async (formValues, setFormValues, addErrorValue, setFormToShare, user, materiaMap, handleClose) => {
     let errors = false; //if true then there are empty spaces in the form    
     const categorias = ["file","materia", "profesor", "semestre", "categoria"]    
     
@@ -85,9 +137,9 @@ export const stylesUploadFrom = {
     let nota = formValues.grade
     if(nota.length === 1){      
       nota += ".0"       
-    } 
+    }
 
-    
+
     const newArchivo = await Archivos.crearArchivos(
       formValues.materia.id,
       formValues.descripcion,
@@ -101,7 +153,10 @@ export const stylesUploadFrom = {
     );
     
     materiaMap.add_archivo(newArchivo)     
-    deleteValues(formValues, setFormValues); 
+    deleteValues(formValues, setFormValues);
+
+    // Cierra el modal
+    handleClose()
   }
 
 

@@ -62,24 +62,21 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
   
               
   const handleSubmit = async () => {
-    if(uploadFileModalOpen.isEditing){
+    if (uploadFileModalOpen.isEditing) {
       //edita los archivos de la DB
-      await editValues(formValues, setFormValues, setFormToShare, setMateriaMap, user, materiaMap)
+      await editValues(formValues, setFormValues, addErrorValue, setFormToShare, setMateriaMap, user, materiaMap, handleClose)
 
-    }else{
+    } else {
       // sube los valores del formulario a la DB 
-      await uploadValues(formValues, setFormValues, addErrorValue, setFormToShare, user, materiaMap) 
+      await uploadValues(formValues, setFormValues, addErrorValue, setFormToShare, user, materiaMap, handleClose)
     }
-
-    // cierra el modal
-    handleClose();  
   };
 
   /**
    * Funcion para generar inputText component
    * @param {String} nombre nombre del parametro que tendra la funcion, ejemplo categoria, profesor, materia
    * @param {*} options lista de opciones para desplegar en el text field
-   * @returns 
+   * @returns
    */
   function getInputText(nombre, options, optionLabel = ""){
     return (

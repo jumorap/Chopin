@@ -167,6 +167,89 @@ class Archivos {
   }
 
   /**
+   * @param id_materia
+   * @param id_archivo
+   * @param descripcion
+   * @param profesor
+   * @param semestre
+   * @param categorias
+   * @param id_usuario
+   * @param nota
+   * @param calificado
+   */
+  static async editarArchivos(
+      id_materia,
+      id_archivo,
+      descripcion,
+      profesor,
+      semestre,
+      categorias,
+      id_usuario,
+      nota,
+      calificado
+  ) {
+
+    // Update the document with the new data
+    var user = firebaseAppAuth.currentUser;
+
+    if (user != null) {
+      const infoUpdated = {
+        descripcion: descripcion,
+        profesor: profesor,
+        semestre: semestre,
+        categorias: categorias,
+        id_usuario: id_usuario,
+        nota: nota,
+        calificado: calificado,
+      }
+
+      const fileRef = this._storageRef.child(
+          `/Materias/${id_materia}/${id_archivo}`
+      )
+
+      // get download url from fileRef
+      const url = await fileRef.getDownloadURL()
+
+      await this._DBmateriasDisplay
+          .doc(id_materia)
+          .collection("TRABAJOS")
+          .doc(id_archivo)
+          .update(infoUpdated)
+          .then(() => {
+            console.log("Documento actualizado con exito")
+          }).catch((err) => {
+        console.log(`error en la actualizacion de archivo ${err}`)
+      })
+
+      Archivos._updateMateriasTrabajos(
+          id_materia,
+          id_archivo,
+          profesor,
+          categorias,
+          semestre,
+          descripcion,
+          url,
+          nota,
+          calificado
+      )
+
+      return {
+        ID_archivo: id_archivo,
+        calificado: calificado,
+        comentarios: descripcion,
+        id_materia: id_materia,
+        nota: nota,
+        profesor: profesor,
+        semestre: semestre,
+        tipo: categorias,
+        url: url,
+        usuario: id_usuario,
+      };
+    }
+  }
+
+
+  /**
    * Elimina el archivo de todas la colecciones de la base de datos
    * @param {*} id_materia
    * @param {*} id_archivo
