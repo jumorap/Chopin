@@ -96,7 +96,7 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
 
   function PdfZone(){
     return(
-      <div>
+      <>
           <p>
             Puedes comprimir tus PDF en&nbsp;
             <a href={"https://www.ilovepdf.com/compress_pdf"}
@@ -120,7 +120,7 @@ const UploadForm = ({ handleClose, uploadFileModalOpen }) => {
           ) : (
               <></>
           )}
-      </div>
+      </>
     )
   }
 
